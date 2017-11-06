@@ -181,7 +181,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 9F7038261EA835EB00DA5564 /* Build configuration list for PBXProject "Shep2 Tandm" */;
+			buildConfigurationList = 9F7038261EA835EB00DA5564 /* Build configuration list for PBXProject "Shep Tandm" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -411,7 +411,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		9F7038261EA835EB00DA5564 /* Build configuration list for PBXProject "Shep2 Tandm" */ = {
+		9F7038261EA835EB00DA5564 /* Build configuration list for PBXProject "Shep Tandm" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9F70383B1EA835EB00DA5564 /* Debug */,
