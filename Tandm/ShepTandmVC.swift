@@ -6,9 +6,15 @@ The application's view controller, responsible for managing a map view with a se
 */
 import MapKit
 
+let THOMPSON_GPS = (latitude: 41.9360805, longitude: -71.7978248)
+// Hartford_GPS:  41.767603, -72.684036
+// Yankee Stadium:  40.830304, -73.926089
+
+
 class ViewController: UIViewController, MKMapViewDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
+
     
     // Create a location manager to trigger user tracking
     let locationManager: CLLocationManager = {
@@ -52,18 +58,61 @@ class ViewController: UIViewController, MKMapViewDelegate {
         mapView.register(ClusterView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier)
     }
     
+    
+
     func loadDataForMapRegionAndBikes() {
+        
         if let plist = NSDictionary(contentsOfFile: Bundle.main.path(forResource: "Data", ofType: "plist")!) {
             if let region = plist["region"] as? [NSNumber] {
                 let coordinate = CLLocationCoordinate2D(latitude: region[0].doubleValue, longitude: region[1].doubleValue)
                 let span = MKCoordinateSpanMake(region[2].doubleValue, region[3].doubleValue)
                 mapView.region = MKCoordinateRegionMake(coordinate, span)
+            
+                // create region for map
+//                let initialLocation = CLLocation(latitude: THOMPSON_GPS.latitude, longitude: THOMPSON_GPS.longitude)
+//                let initialDisplayRadius = CLLocationDistance(20000)
+//                let region1 = MKCoordinateRegionMakeWithDistance(initialLocation.coordinate, initialDisplayRadius, initialDisplayRadius)
+//                mapView.setRegion(region1, animated: true)
+                
             }
             if let bikes = plist["bikes"] as? [[String : NSNumber]] {
                 mapView.addAnnotations(Bike.bikes(fromDictionaries: bikes))
             }
         }
     }
+    
+    
+    /* ShepMap2 initial mapview setup
+     
+         let locationManager = CLLocationManager()
+         let initialLocation = CLLocation(latitude: THOMPSON_GPS.latitude, longitude: THOMPSON_GPS.longitude)
+         // search range?
+         let initialDisplayRadius = CLLocationDistance(20000)
+         var mySubtitleString: String = ""
+     
+         override func viewDidLoad() {
+             super.viewDidLoad()
+     
+             // create region for map
+             let region1 = MKCoordinateRegionMakeWithDistance(initialLocation.coordinate, initialDisplayRadius, initialDisplayRadius)
+             mapView.setRegion(region1, animated: true)
+     
+             searchMap("park")
+     
+             // create region
+             //        let region2 = MKCoordinateRegionMakeWithDistance(initialLocation.coordinate, initialDisplayRadius, initialDisplayRadius)
+             //        mapView.setRegion(region2, animated: true)
+     
+     
+             // Request for a user's authorization for location services
+             locationManager.delegate = self
+             locationManager.requestWhenInUseAuthorization()
+             let status = CLLocationManager.authorizationStatus()
+             if status == CLAuthorizationStatus.authorizedWhenInUse {
+                 mapView.showsUserLocation = true
+             }
+         }
+     */
     
     override func viewDidLoad() {
         super.viewDidLoad()
