@@ -58,20 +58,44 @@ class ViewController: UIViewController, MKMapViewDelegate {
         mapView.register(ClusterView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier)
     }
     
+    /* Returns the distance (in meters) from the receiver’s location to the specified location.
+     - (CLLocationDistance)distanceFromLocation:(const CLLocation *)location
+     
+     This will calculate the distance between two location by using the CLLocationDistance. By default it gives the values in meters. To convert to kilometers, divide the CLLocationDistance/1000.0. To get miles multiply the CLLocationDistance*0.62137.
+     1 mile = 1.60934 km
+ */
     
+    func miles2meters (miles: Double) -> Double {
+        let meters = miles * 1609.34
+        return meters
+    }
+    
+    func meters2miles (meters: Double) -> Double {
+        let miles = meters * 0.00062137
+        return miles
+    }
 
     func loadDataForMapRegionAndBikes() {
         
+       // let initialLocation = CLLocation(latitude: THOMPSON_GPS.latitude, longitude: THOMPSON_GPS.longitude)
+        
         if let plist = NSDictionary(contentsOfFile: Bundle.main.path(forResource: "Data", ofType: "plist")!) {
             if let region = plist["region"] as? [NSNumber] {
-                let coordinate = CLLocationCoordinate2D(latitude: region[0].doubleValue, longitude: region[1].doubleValue)
-                let span = MKCoordinateSpanMake(region[2].doubleValue, region[3].doubleValue)
-                mapView.region = MKCoordinateRegionMake(coordinate, span)
+//                let coordinate = CLLocationCoordinate2D(latitude: region[0].doubleValue, longitude: region[1].doubleValue)
+                // let span = MKCoordinateSpanMake(region[2].doubleValue, region[3].doubleValue)
+                let coordinate = CLLocationCoordinate2D(latitude: THOMPSON_GPS.latitude, longitude: THOMPSON_GPS.longitude)
+                let initialDistance = CLLocationDistance(miles2meters(miles: 55.2))
+                mapView.region = MKCoordinateRegionMakeWithDistance(coordinate, initialDistance, initialDistance)
+                
+                // mapView.region = MKCoordinateRegionMake(coordinate, span)
+                
+                // ??
+                // mapView.setRegion(mapView.region, animated: true)
+                
             
                 // create region for map
-//                let initialLocation = CLLocation(latitude: THOMPSON_GPS.latitude, longitude: THOMPSON_GPS.longitude)
-//                let initialDisplayRadius = CLLocationDistance(20000)
-//                let region1 = MKCoordinateRegionMakeWithDistance(initialLocation.coordinate, initialDisplayRadius, initialDisplayRadius)
+//                let initialDistance = CLLocationDistance(20000)
+//                let region1 = MKCoordinateRegionMakeWithDistance(initialLocation.coordinate, initialDistance, initialDistance)
 //                mapView.setRegion(region1, animated: true)
                 
             }
@@ -87,20 +111,20 @@ class ViewController: UIViewController, MKMapViewDelegate {
          let locationManager = CLLocationManager()
          let initialLocation = CLLocation(latitude: THOMPSON_GPS.latitude, longitude: THOMPSON_GPS.longitude)
          // search range?
-         let initialDisplayRadius = CLLocationDistance(20000)
+         let initialDistance = CLLocationDistance(20000)
          var mySubtitleString: String = ""
      
          override func viewDidLoad() {
              super.viewDidLoad()
      
              // create region for map
-             let region1 = MKCoordinateRegionMakeWithDistance(initialLocation.coordinate, initialDisplayRadius, initialDisplayRadius)
+             let region1 = MKCoordinateRegionMakeWithDistance(initialLocation.coordinate, initialDistance, initialDistance)
              mapView.setRegion(region1, animated: true)
      
              searchMap("park")
      
              // create region
-             //        let region2 = MKCoordinateRegionMakeWithDistance(initialLocation.coordinate, initialDisplayRadius, initialDisplayRadius)
+             //        let region2 = MKCoordinateRegionMakeWithDistance(initialLocation.coordinate, initialDistance, initialDistance)
              //        mapView.setRegion(region2, animated: true)
      
      

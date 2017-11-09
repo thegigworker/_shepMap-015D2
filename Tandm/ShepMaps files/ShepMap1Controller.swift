@@ -51,7 +51,7 @@ class ShepMap1ViewController: UIViewController, CLLocationManagerDelegate {
 //    let locationManager = CLLocationManager()
 //    let initialLocation = CLLocation(latitude: THOMPSON_GPS.latitude, longitude: THOMPSON_GPS.longitude)
 //    // search range
-//    let initialDisplayRadius = CLLocationDistance(20000)
+//    let initialDistance = CLLocationDistance(20000)
     
     @IBAction func btnMenuClick(_ sender: AnyObject) {
         
@@ -76,7 +76,7 @@ class ShepMap1ViewController: UIViewController, CLLocationManagerDelegate {
     let locationManager = CLLocationManager()
     let initialLocation = CLLocation(latitude: THOMPSON_GPS.latitude, longitude: THOMPSON_GPS.longitude)
     // search range?
-    let initialDisplayRadius = CLLocationDistance(20000)
+    let initialDistance = CLLocationDistance(20000)
     var mySubtitleString: String = ""
     
     override func viewDidLoad() {
@@ -100,13 +100,13 @@ class ShepMap1ViewController: UIViewController, CLLocationManagerDelegate {
         }, completion: nil)
         
         // create region for map
-        let region1 = MKCoordinateRegionMakeWithDistance(initialLocation.coordinate, initialDisplayRadius, initialDisplayRadius)
+        let region1 = MKCoordinateRegionMakeWithDistance(initialLocation.coordinate, initialDistance, initialDistance)
         mapView.setRegion(region1, animated: true)
 
         searchMap("park")
         
         // create region
-        //        let region2 = MKCoordinateRegionMakeWithDistance(initialLocation.coordinate, initialDisplayRadius, initialDisplayRadius)
+        //        let region2 = MKCoordinateRegionMakeWithDistance(initialLocation.coordinate, initialDistance, initialDistance)
         //        mapView.setRegion(region2, animated: true)
         
         
