@@ -17,7 +17,7 @@ class ShepMap1ViewController: UIViewController, CLLocationManagerDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var btnHospital: UIButton!
-    @IBOutlet weak var btnHotel: UIButton!
+    @IBOutlet weak var btnTarget: UIButton!
     @IBOutlet weak var btnMall: UIButton!
     @IBOutlet weak var btnSupermarket: UIButton!
     @IBOutlet weak var btnMenu: UIButton!
@@ -30,13 +30,13 @@ class ShepMap1ViewController: UIViewController, CLLocationManagerDelegate {
         reset()
     }
     
-    @IBAction func btnHotelClick(_ sender: AnyObject) {
+    @IBAction func btnTargetClick(_ sender: AnyObject) {
         mapView.removeAnnotations(mapView.annotations)
         searchMap("Target")
         reset()
     }
     
-    @IBAction func btmMallClick(_ sender: AnyObject) {
+    @IBAction func btnGasClick(_ sender: AnyObject) {
         mapView.removeAnnotations(mapView.annotations)
         searchMap("Walmart")
         reset()
@@ -58,8 +58,8 @@ class ShepMap1ViewController: UIViewController, CLLocationManagerDelegate {
         UIView.animate(withDuration: 0.1, delay: 0.05, options: UIViewAnimationOptions.curveEaseOut, animations: {
             self.btnMenu.transform = CGAffineTransform(rotationAngle: 0)
             
-            self.btnHotel.alpha = 0.8
-            self.btnHotel.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: -50, y: -25))
+            self.btnTarget.alpha = 0.8
+            self.btnTarget.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: -50, y: -25))
             
             self.btnHospital.alpha = 0.8
             self.btnHospital.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: -100, y: 30))
@@ -83,13 +83,13 @@ class ShepMap1ViewController: UIViewController, CLLocationManagerDelegate {
         super.viewDidLoad()
         
         self.btnMenu.alpha = 0
-        self.btnHotel.alpha = 0
+        self.btnTarget.alpha = 0
         self.btnHospital.alpha = 0
         self.btnSupermarket.alpha = 0
         self.btnMall.alpha = 0
         
         self.btnHospital.layer.cornerRadius = 10
-        self.btnHotel.layer.cornerRadius = 10
+        self.btnTarget.layer.cornerRadius = 10
         self.btnSupermarket.layer.cornerRadius = 10
         self.btnMall.layer.cornerRadius = 10
         self.btnMenu.layer.cornerRadius = 10
@@ -179,8 +179,8 @@ class ShepMap1ViewController: UIViewController, CLLocationManagerDelegate {
         UIView.animate(withDuration: 0.2, delay: 0.2, options: UIViewAnimationOptions.curveEaseOut, animations: {
             self.btnMenu.transform = CGAffineTransform(rotationAngle: 0.25*3.1415927)
             
-            self.btnHotel.alpha = 0
-            self.btnHotel.transform = CGAffineTransform(scaleX: 1, y: 1).concatenating(CGAffineTransform(translationX: 0, y: 0))
+            self.btnTarget.alpha = 0
+            self.btnTarget.transform = CGAffineTransform(scaleX: 1, y: 1).concatenating(CGAffineTransform(translationX: 0, y: 0))
             
             self.btnHospital.alpha = 0
             self.btnHospital.transform = CGAffineTransform(scaleX: 1, y: 1).concatenating(CGAffineTransform(translationX: 0, y: 0))

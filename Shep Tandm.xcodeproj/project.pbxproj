@@ -16,11 +16,9 @@
 		9F7038391EA835EB00DA5564 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F7038371EA835EB00DA5564 /* LaunchScreen.storyboard */; };
 		9FB957471ECF67850080CB0C /* Data.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9FB957461ECF67850080CB0C /* Data.plist */; };
 		9FC208D41EBA94A100DAD70E /* Bike.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC208D31EBA94A100DAD70E /* Bike.swift */; };
-		A1A190911FB0C6AD00B030D8 /* ShepSinglesAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A1908F1FB0C6AD00B030D8 /* ShepSinglesAnnotation.swift */; };
+		A145675D1FBCE73D0016C1A2 /* ShepSingleAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A145675C1FBCE73D0016C1A2 /* ShepSingleAnnotation.swift */; };
 		A1A190921FB0C6AD00B030D8 /* commented_AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A190901FB0C6AD00B030D8 /* commented_AppDelegate.swift */; };
 		A1A190951FB0CA6A00B030D8 /* ShepMap1Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A190931FB0CA6A00B030D8 /* ShepMap1Controller.swift */; };
-		A1A190961FB0CA6A00B030D8 /* ShepMap1SingleAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A190941FB0CA6A00B030D8 /* ShepMap1SingleAnnotation.swift */; };
-		A1A190991FB0CBC400B030D8 /* ShepMap1.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1A190971FB0CBC400B030D8 /* ShepMap1.storyboard */; };
 		A1A1909D1FB0D37F00B030D8 /* ShepMap3SingleAnnotData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A1909A1FB0D37F00B030D8 /* ShepMap3SingleAnnotData.swift */; };
 		A1A1909E1FB0D37F00B030D8 /* ShepMap3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A1909B1FB0D37F00B030D8 /* ShepMap3ViewController.swift */; };
 		A1A1909F1FB0D37F00B030D8 /* ShepMap3_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A1909C1FB0D37F00B030D8 /* ShepMap3_VC.swift */; };
@@ -44,11 +42,9 @@
 		9F90FE8A1ED4E1C5003B1E35 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		9FB957461ECF67850080CB0C /* Data.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Data.plist; sourceTree = "<group>"; };
 		9FC208D31EBA94A100DAD70E /* Bike.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bike.swift; sourceTree = "<group>"; };
-		A1A1908F1FB0C6AD00B030D8 /* ShepSinglesAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShepSinglesAnnotation.swift; sourceTree = "<group>"; };
+		A145675C1FBCE73D0016C1A2 /* ShepSingleAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShepSingleAnnotation.swift; sourceTree = "<group>"; };
 		A1A190901FB0C6AD00B030D8 /* commented_AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = commented_AppDelegate.swift; sourceTree = "<group>"; };
 		A1A190931FB0CA6A00B030D8 /* ShepMap1Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShepMap1Controller.swift; sourceTree = "<group>"; };
-		A1A190941FB0CA6A00B030D8 /* ShepMap1SingleAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShepMap1SingleAnnotation.swift; sourceTree = "<group>"; };
-		A1A190981FB0CBC400B030D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/ShepMap1.storyboard; sourceTree = "<group>"; };
 		A1A1909A1FB0D37F00B030D8 /* ShepMap3SingleAnnotData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShepMap3SingleAnnotData.swift; sourceTree = "<group>"; };
 		A1A1909B1FB0D37F00B030D8 /* ShepMap3ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShepMap3ViewController.swift; sourceTree = "<group>"; };
 		A1A1909C1FB0D37F00B030D8 /* ShepMap3_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShepMap3_VC.swift; sourceTree = "<group>"; };
@@ -99,14 +95,15 @@
 			isa = PBXGroup;
 			children = (
 				A1A190A81FB0D4DB00B030D8 /* ShepMaps files */,
+				9F7038301EA835EB00DA5564 /* ShepTandmVC.swift */,
+				A145675C1FBCE73D0016C1A2 /* ShepSingleAnnotation.swift */,
 				9F70382E1EA835EB00DA5564 /* AppDelegate.swift */,
 				A1A190901FB0C6AD00B030D8 /* commented_AppDelegate.swift */,
 				9FC208D31EBA94A100DAD70E /* Bike.swift */,
 				9F60E9681EC1357B00CB9BEC /* BikeView.swift */,
 				9F1680731ECF57AC008B3B25 /* ClusterView.swift */,
-				9F7038301EA835EB00DA5564 /* ShepTandmVC.swift */,
-				9F7038321EA835EB00DA5564 /* Main.storyboard */,
 				9F7038351EA835EB00DA5564 /* Assets.xcassets */,
+				9F7038321EA835EB00DA5564 /* Main.storyboard */,
 				9F7038371EA835EB00DA5564 /* LaunchScreen.storyboard */,
 				9F70383A1EA835EB00DA5564 /* Info.plist */,
 				9FB957461ECF67850080CB0C /* Data.plist */,
@@ -124,9 +121,6 @@
 				A1A1909A1FB0D37F00B030D8 /* ShepMap3SingleAnnotData.swift */,
 				A1A1909B1FB0D37F00B030D8 /* ShepMap3ViewController.swift */,
 				A1A190931FB0CA6A00B030D8 /* ShepMap1Controller.swift */,
-				A1A190941FB0CA6A00B030D8 /* ShepMap1SingleAnnotation.swift */,
-				A1A1908F1FB0C6AD00B030D8 /* ShepSinglesAnnotation.swift */,
-				A1A190971FB0CBC400B030D8 /* ShepMap1.storyboard */,
 			);
 			path = "ShepMaps files";
 			sourceTree = "<group>";
@@ -207,7 +201,6 @@
 				9F7038391EA835EB00DA5564 /* LaunchScreen.storyboard in Resources */,
 				9FB957471ECF67850080CB0C /* Data.plist in Resources */,
 				9F7038361EA835EB00DA5564 /* Assets.xcassets in Resources */,
-				A1A190991FB0CBC400B030D8 /* ShepMap1.storyboard in Resources */,
 				9F7038341EA835EB00DA5564 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -219,16 +212,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A1A190911FB0C6AD00B030D8 /* ShepSinglesAnnotation.swift in Sources */,
 				9F7038311EA835EB00DA5564 /* ShepTandmVC.swift in Sources */,
 				A1A190A71FB0D4BA00B030D8 /* ShepMap2SingleAnnotation.swift in Sources */,
 				9F70382F1EA835EB00DA5564 /* AppDelegate.swift in Sources */,
 				9FC208D41EBA94A100DAD70E /* Bike.swift in Sources */,
+				A145675D1FBCE73D0016C1A2 /* ShepSingleAnnotation.swift in Sources */,
 				A1A1909E1FB0D37F00B030D8 /* ShepMap3ViewController.swift in Sources */,
 				A1A190921FB0C6AD00B030D8 /* commented_AppDelegate.swift in Sources */,
 				9F1680741ECF57AC008B3B25 /* ClusterView.swift in Sources */,
 				A1A190951FB0CA6A00B030D8 /* ShepMap1Controller.swift in Sources */,
-				A1A190961FB0CA6A00B030D8 /* ShepMap1SingleAnnotation.swift in Sources */,
 				A1A1909F1FB0D37F00B030D8 /* ShepMap3_VC.swift in Sources */,
 				A1A190A61FB0D4BA00B030D8 /* ShepMap2DataSource.swift in Sources */,
 				9F60E9691EC1357B00CB9BEC /* BikeView.swift in Sources */,
@@ -254,14 +246,6 @@
 				9F7038381EA835EB00DA5564 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		A1A190971FB0CBC400B030D8 /* ShepMap1.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A1A190981FB0CBC400B030D8 /* Base */,
-			);
-			name = ShepMap1.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
