@@ -53,7 +53,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let region1 = MKCoordinateRegionMakeWithDistance(initialLocation.coordinate, initialDistance, initialDistance)
         mapView.setRegion(region1, animated: true)
         
-        searchMap("park")
+        performLocalSearch("park")
         
         // create region
         //        let region2 = MKCoordinateRegionMakeWithDistance(initialLocation.coordinate, initialDistance, initialDistance)
@@ -72,7 +72,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     // LocalSearchRequest
     //
     // 搜索
-    func searchMap(_ place:String) {
+    func performLocalSearch(_ place:String) {
         let request = MKLocalSearchRequest()
         request.naturalLanguageQuery = place
         // 搜索当前区域

@@ -2,7 +2,7 @@
  
  
 //  ShepMapController.swift
-//  SearchMap Ottawa
+//  performLocalSearch Ottawa
 //
 // try this
 
@@ -25,26 +25,26 @@ class ShepMap1ViewController: UIViewController, CLLocationManagerDelegate {
     
     @IBAction func btnHospitalClick(_ sender: AnyObject) {
         mapView.removeAnnotations(mapView.annotations)
-        searchMap("Hospital")
-        //searchMap("Market Basket")
+        performLocalSearch("Hospital")
+        //performLocalSearch("Market Basket")
         reset()
     }
     
     @IBAction func btnTargetClick(_ sender: AnyObject) {
         mapView.removeAnnotations(mapView.annotations)
-        searchMap("Target")
+        performLocalSearch("Target")
         reset()
     }
     
     @IBAction func btnGasClick(_ sender: AnyObject) {
         mapView.removeAnnotations(mapView.annotations)
-        searchMap("Walmart")
+        performLocalSearch("Walmart")
         reset()
     }
     
     @IBAction func btnSupermarket(_ sender: AnyObject) {
         mapView.removeAnnotations(mapView.annotations)
-        searchMap("Stop & Shop")
+        performLocalSearch("Stop & Shop")
         reset()
     }
     
@@ -103,7 +103,7 @@ class ShepMap1ViewController: UIViewController, CLLocationManagerDelegate {
         let region1 = MKCoordinateRegionMakeWithDistance(initialLocation.coordinate, initialDistance, initialDistance)
         mapView.setRegion(region1, animated: true)
 
-        searchMap("park")
+        performLocalSearch("park")
         
         // create region
         //        let region2 = MKCoordinateRegionMakeWithDistance(initialLocation.coordinate, initialDistance, initialDistance)
@@ -122,7 +122,7 @@ class ShepMap1ViewController: UIViewController, CLLocationManagerDelegate {
     // LocalSearchRequest
     //
     // 搜索
-    func searchMap(_ place:String) {
+    func performLocalSearch(_ place:String) {
         let request = MKLocalSearchRequest()
         request.naturalLanguageQuery = place
         // 搜索当前区域

@@ -10,12 +10,12 @@
 		9F1680741ECF57AC008B3B25 /* ClusterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1680731ECF57AC008B3B25 /* ClusterView.swift */; };
 		9F60E9691EC1357B00CB9BEC /* BikeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F60E9681EC1357B00CB9BEC /* BikeView.swift */; };
 		9F70382F1EA835EB00DA5564 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F70382E1EA835EB00DA5564 /* AppDelegate.swift */; };
-		9F7038311EA835EB00DA5564 /* ShepTandmVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7038301EA835EB00DA5564 /* ShepTandmVC.swift */; };
+		9F7038311EA835EB00DA5564 /* ShepTandmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7038301EA835EB00DA5564 /* ShepTandmViewController.swift */; };
 		9F7038341EA835EB00DA5564 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F7038321EA835EB00DA5564 /* Main.storyboard */; };
 		9F7038361EA835EB00DA5564 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F7038351EA835EB00DA5564 /* Assets.xcassets */; };
 		9F7038391EA835EB00DA5564 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F7038371EA835EB00DA5564 /* LaunchScreen.storyboard */; };
 		9FB957471ECF67850080CB0C /* Data.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9FB957461ECF67850080CB0C /* Data.plist */; };
-		9FC208D41EBA94A100DAD70E /* Bike.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC208D31EBA94A100DAD70E /* Bike.swift */; };
+		9FC208D41EBA94A100DAD70E /* AppleSingleAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC208D31EBA94A100DAD70E /* AppleSingleAnnotation.swift */; };
 		A145675D1FBCE73D0016C1A2 /* ShepSingleAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A145675C1FBCE73D0016C1A2 /* ShepSingleAnnotation.swift */; };
 		A1A190921FB0C6AD00B030D8 /* commented_AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A190901FB0C6AD00B030D8 /* commented_AppDelegate.swift */; };
 		A1A190951FB0CA6A00B030D8 /* ShepMap1Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A190931FB0CA6A00B030D8 /* ShepMap1Controller.swift */; };
@@ -25,6 +25,7 @@
 		A1A190A51FB0D4BA00B030D8 /* ShepMap2_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A190A21FB0D4BA00B030D8 /* ShepMap2_VC.swift */; };
 		A1A190A61FB0D4BA00B030D8 /* ShepMap2DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A190A31FB0D4BA00B030D8 /* ShepMap2DataSource.swift */; };
 		A1A190A71FB0D4BA00B030D8 /* ShepMap2SingleAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A190A41FB0D4BA00B030D8 /* ShepMap2SingleAnnotation.swift */; };
+		A1D66C211FD0995B0036EDAC /* SingleAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D66C201FD0995B0036EDAC /* SingleAnnotationView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,14 +35,14 @@
 		9F60E9681EC1357B00CB9BEC /* BikeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BikeView.swift; sourceTree = "<group>"; };
 		9F70382B1EA835EB00DA5564 /* Tandm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tandm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F70382E1EA835EB00DA5564 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		9F7038301EA835EB00DA5564 /* ShepTandmVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShepTandmVC.swift; sourceTree = "<group>"; };
+		9F7038301EA835EB00DA5564 /* ShepTandmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShepTandmViewController.swift; sourceTree = "<group>"; };
 		9F7038331EA835EB00DA5564 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9F7038351EA835EB00DA5564 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9F7038381EA835EB00DA5564 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9F70383A1EA835EB00DA5564 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9F90FE8A1ED4E1C5003B1E35 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		9FB957461ECF67850080CB0C /* Data.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Data.plist; sourceTree = "<group>"; };
-		9FC208D31EBA94A100DAD70E /* Bike.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bike.swift; sourceTree = "<group>"; };
+		9FC208D31EBA94A100DAD70E /* AppleSingleAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSingleAnnotation.swift; sourceTree = "<group>"; };
 		A145675C1FBCE73D0016C1A2 /* ShepSingleAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShepSingleAnnotation.swift; sourceTree = "<group>"; };
 		A1A190901FB0C6AD00B030D8 /* commented_AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = commented_AppDelegate.swift; sourceTree = "<group>"; };
 		A1A190931FB0CA6A00B030D8 /* ShepMap1Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShepMap1Controller.swift; sourceTree = "<group>"; };
@@ -51,6 +52,7 @@
 		A1A190A21FB0D4BA00B030D8 /* ShepMap2_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShepMap2_VC.swift; sourceTree = "<group>"; };
 		A1A190A31FB0D4BA00B030D8 /* ShepMap2DataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShepMap2DataSource.swift; sourceTree = "<group>"; };
 		A1A190A41FB0D4BA00B030D8 /* ShepMap2SingleAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShepMap2SingleAnnotation.swift; sourceTree = "<group>"; };
+		A1D66C201FD0995B0036EDAC /* SingleAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleAnnotationView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,11 +97,12 @@
 			isa = PBXGroup;
 			children = (
 				A1A190A81FB0D4DB00B030D8 /* ShepMaps files */,
-				9F7038301EA835EB00DA5564 /* ShepTandmVC.swift */,
+				9F7038301EA835EB00DA5564 /* ShepTandmViewController.swift */,
 				A145675C1FBCE73D0016C1A2 /* ShepSingleAnnotation.swift */,
+				A1D66C201FD0995B0036EDAC /* SingleAnnotationView.swift */,
+				9FC208D31EBA94A100DAD70E /* AppleSingleAnnotation.swift */,
 				9F70382E1EA835EB00DA5564 /* AppDelegate.swift */,
 				A1A190901FB0C6AD00B030D8 /* commented_AppDelegate.swift */,
-				9FC208D31EBA94A100DAD70E /* Bike.swift */,
 				9F60E9681EC1357B00CB9BEC /* BikeView.swift */,
 				9F1680731ECF57AC008B3B25 /* ClusterView.swift */,
 				9F7038351EA835EB00DA5564 /* Assets.xcassets */,
@@ -166,7 +169,7 @@
 					9F70382A1EA835EB00DA5564 = {
 						CreatedOnToolsVersion = 9.0;
 						LastSwiftMigration = 0900;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.Maps.iOS = {
 								enabled = 1;
@@ -212,15 +215,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9F7038311EA835EB00DA5564 /* ShepTandmVC.swift in Sources */,
+				9F7038311EA835EB00DA5564 /* ShepTandmViewController.swift in Sources */,
 				A1A190A71FB0D4BA00B030D8 /* ShepMap2SingleAnnotation.swift in Sources */,
 				9F70382F1EA835EB00DA5564 /* AppDelegate.swift in Sources */,
-				9FC208D41EBA94A100DAD70E /* Bike.swift in Sources */,
+				9FC208D41EBA94A100DAD70E /* AppleSingleAnnotation.swift in Sources */,
 				A145675D1FBCE73D0016C1A2 /* ShepSingleAnnotation.swift in Sources */,
 				A1A1909E1FB0D37F00B030D8 /* ShepMap3ViewController.swift in Sources */,
 				A1A190921FB0C6AD00B030D8 /* commented_AppDelegate.swift in Sources */,
 				9F1680741ECF57AC008B3B25 /* ClusterView.swift in Sources */,
 				A1A190951FB0CA6A00B030D8 /* ShepMap1Controller.swift in Sources */,
+				A1D66C211FD0995B0036EDAC /* SingleAnnotationView.swift in Sources */,
 				A1A1909F1FB0D37F00B030D8 /* ShepMap3_VC.swift in Sources */,
 				A1A190A61FB0D4BA00B030D8 /* ShepMap2DataSource.swift in Sources */,
 				9F60E9691EC1357B00CB9BEC /* BikeView.swift in Sources */,
@@ -363,6 +367,7 @@
 			baseConfigurationReference = 10A329974D3AAF685A59CEA5 /* SampleCode.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Tandm/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -380,6 +385,7 @@
 			baseConfigurationReference = 10A329974D3AAF685A59CEA5 /* SampleCode.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Tandm/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

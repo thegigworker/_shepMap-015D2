@@ -5,10 +5,6 @@
 ////  Created by Malek T. on 3/9/16.
 ////  Copyright © 2016 Medigarage Studios LTD. All rights reserved.
 ////
-//
-//// Shep is messing with Github -- and is doing it a third time
-//// blah blah blah yada yada
-
 
 
 /*

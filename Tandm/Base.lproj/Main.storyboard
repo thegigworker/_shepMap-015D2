@@ -5,7 +5,6 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
-        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -82,9 +81,9 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n7C-sn-Sob">
                                 <rect key="frame" x="172" y="500" width="40" height="39"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button" image="1"/>
+                                <state key="normal" title="Button" image="x button"/>
                                 <connections>
-                                    <action selector="btnMenuClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wQg-Qc-3BA"/>
+                                    <action selector="btnMenuClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ayN-mg-DJI"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jxr-bU-9aj" userLabel="ShepTestView">
@@ -126,14 +125,7 @@
                                             <action selector="DisplayDistanceSliderMoved:" destination="BYZ-38-t0r" eventType="primaryActionTriggered" id="CFm-5y-25l"/>
                                         </connections>
                                     </slider>
-                                    <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="1" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="Kv3-pm-WwI" userLabel="SearchDistanceSlider">
-                                        <rect key="frame" x="96" y="33" width="210" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <connections>
-                                            <action selector="SearchDistanceSliderMoved:" destination="BYZ-38-t0r" eventType="valueChanged" id="MCc-dJ-K7H"/>
-                                        </connections>
-                                    </slider>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Nm-Kn-Cae" userLabel="shepButton2">
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Nm-Kn-Cae" userLabel="DoTheThingBtn">
                                         <rect key="frame" x="229" y="62" width="137" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
@@ -142,6 +134,13 @@
                                             <action selector="shepDoThingBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NKg-oF-AbN"/>
                                         </connections>
                                     </button>
+                                    <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="1" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="Kv3-pm-WwI" userLabel="SearchDistanceSlider">
+                                        <rect key="frame" x="96" y="39" width="210" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <connections>
+                                            <action selector="SearchDistanceSliderMoved:" destination="BYZ-38-t0r" eventType="valueChanged" id="MCc-dJ-K7H"/>
+                                        </connections>
+                                    </slider>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
@@ -166,82 +165,6 @@
                         <outlet property="mapView" destination="O32-Ux-jkO" id="Pm6-hX-TH0"/>
                     </connections>
                 </viewController>
-                <view contentMode="scaleToFill" id="To8-48-0kY" userLabel="x View">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="wb3-Ts-pZc">
-                            <rect key="frame" x="0.0" y="0.0" width="374" height="568"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        </stackView>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gRa-K0-D6P">
-                            <rect key="frame" x="172" y="500" width="40" height="40"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" title="Button" image="1"/>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9XM-Te-9Fc">
-                            <rect key="frame" x="159" y="433" width="57" height="30"/>
-                            <color key="backgroundColor" red="0.79725265499999998" green="0.92159986500000002" blue="0.56964260339999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="57" id="U4q-hb-aiq"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                            <state key="normal" title="Hospital">
-                                <color key="titleColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </state>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IhB-1y-7gc" userLabel="Btn Target">
-                            <rect key="frame" x="170" y="433" width="44" height="30"/>
-                            <color key="backgroundColor" red="0.64203774930000002" green="0.80266940590000002" blue="0.99919462199999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="37" id="eIN-mW-Ith"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                            <state key="normal" title="Target">
-                                <color key="titleColor" red="0.034757062790000001" green="0.31522077320000003" blue="0.81491315360000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </state>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VGt-nD-Hxw" userLabel="Btn Gas Station">
-                            <rect key="frame" x="164" y="433" width="53" height="30"/>
-                            <color key="backgroundColor" red="0.88115584849999995" green="0.35495457050000001" blue="0.22894422710000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="30" id="4iJ-JI-M9x"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                            <state key="normal" title="Gas Stations">
-                                <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </state>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DTD-ra-9Ye" userLabel="Btn StopShop">
-                            <rect key="frame" x="150" y="433" width="75" height="30"/>
-                            <color key="backgroundColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="75" id="nsV-d8-Lab"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                            <state key="normal" title="Stop &amp; Shop">
-                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </state>
-                        </button>
-                    </subviews>
-                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <constraints>
-                        <constraint firstItem="IhB-1y-7gc" firstAttribute="centerX" secondItem="VGt-nD-Hxw" secondAttribute="centerX" id="0ZD-g0-ZR8"/>
-                        <constraint firstItem="9XM-Te-9Fc" firstAttribute="centerX" secondItem="To8-48-0kY" secondAttribute="centerX" id="1lF-wu-SRl"/>
-                        <constraint firstItem="DTD-ra-9Ye" firstAttribute="baseline" secondItem="9XM-Te-9Fc" secondAttribute="baseline" id="3Bm-qO-438"/>
-                        <constraint firstItem="IhB-1y-7gc" firstAttribute="baseline" secondItem="9XM-Te-9Fc" secondAttribute="baseline" id="4R6-3m-7zV"/>
-                        <constraint firstItem="9XM-Te-9Fc" firstAttribute="baseline" secondItem="DTD-ra-9Ye" secondAttribute="firstBaseline" id="Pg1-Wk-quF"/>
-                        <constraint firstItem="9XM-Te-9Fc" firstAttribute="centerX" secondItem="VGt-nD-Hxw" secondAttribute="centerX" id="R1Q-Da-Gfy"/>
-                        <constraint firstItem="VGt-nD-Hxw" firstAttribute="centerX" secondItem="DTD-ra-9Ye" secondAttribute="centerX" id="WhP-rP-twm"/>
-                        <constraint firstItem="IhB-1y-7gc" firstAttribute="top" secondItem="VGt-nD-Hxw" secondAttribute="top" id="aUb-ms-Rwc"/>
-                        <constraint firstItem="IhB-1y-7gc" firstAttribute="firstBaseline" secondItem="VGt-nD-Hxw" secondAttribute="baseline" id="bMS-qg-k0B"/>
-                        <constraint firstItem="IhB-1y-7gc" firstAttribute="baseline" secondItem="9XM-Te-9Fc" secondAttribute="firstBaseline" id="c3M-Oc-3Im"/>
-                        <constraint firstItem="IhB-1y-7gc" firstAttribute="baseline" secondItem="VGt-nD-Hxw" secondAttribute="baseline" id="fee-Ri-Mg0"/>
-                        <constraint firstItem="9XM-Te-9Fc" firstAttribute="top" secondItem="VGt-nD-Hxw" secondAttribute="top" id="iPz-eM-foE"/>
-                        <constraint firstItem="IhB-1y-7gc" firstAttribute="baseline" secondItem="VGt-nD-Hxw" secondAttribute="firstBaseline" id="pjq-jB-eA0"/>
-                        <constraint firstItem="DTD-ra-9Ye" firstAttribute="top" secondItem="VGt-nD-Hxw" secondAttribute="top" id="xZW-yp-77Y"/>
-                    </constraints>
-                </view>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" id="eIo-pb-Hml">
                     <rect key="frame" x="0.0" y="0.0" width="200" height="54"/>
@@ -269,11 +192,11 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="teg-WA-1TE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="213.59999999999999" y="792.95352323838085"/>
+            <point key="canvasLocation" x="306" y="753"/>
         </scene>
     </scenes>
     <resources>
-        <image name="1" width="1005" height="952"/>
         <image name="Logo" width="200" height="53"/>
+        <image name="x button" width="1005" height="952"/>
     </resources>
 </document>

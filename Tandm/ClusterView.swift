@@ -25,7 +25,7 @@ class ClusterView: MKAnnotationView {
                 let renderer = UIGraphicsImageRenderer(size: CGSize(width: 40, height: 40))
                 let count = cluster.memberAnnotations.count
                 let uniCount = cluster.memberAnnotations.filter { member -> Bool in
-                    return (member as! Bike).type == .unicycle
+                    return (member as! AppleSingleAnnotation).type == .unicycle
                 }.count
                 image = renderer.image { _ in
                     // Fill full circle with tricycle color

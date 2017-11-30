@@ -10,8 +10,11 @@ class BikeView: MKMarkerAnnotationView {
 
     override var annotation: MKAnnotation? {
         willSet {
-            if let bike = newValue as? Bike {
-                clusteringIdentifier = "bike"
+            if let bike = newValue as? AppleSingleAnnotation {
+//                clusteringIdentifier = "bike"
+//                canShowCallout = true
+//                calloutOffset = CGPoint(x: -5, y: 5)
+//                rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
                 if bike.type == .unicycle {
                     markerTintColor = UIColor(named: "unicycleCol")
                     glyphImage = UIImage(named: "unicycle")
