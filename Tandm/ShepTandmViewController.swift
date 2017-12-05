@@ -10,7 +10,7 @@ let HARTFORD_GPS = (latitude: 41.767603, longitude: -72.684036)
 
 let initialLocation = CLLocation(latitude: THOMPSON_GPS.latitude, longitude: THOMPSON_GPS.longitude)
 let initialDisplay: Double = 30
-let initialSearch: Double = 10
+let initialSearch: Double = 15
 let initialDisplayDistance = CLLocationDistance(miles2meters(miles: initialDisplay))
 let initialSearchDistance = CLLocationDistance(miles2meters(miles: initialSearch))
 let initialMapSearch = "gas stations"
@@ -51,6 +51,10 @@ class ViewController: UIViewController, MKMapViewDelegate {
     //@IBOutlet weak var DisplayDistanceText: UILabel!
     @IBOutlet weak var DisplayDistanceText2: UILabel!
     @IBOutlet weak var SearchDistanceText2: UILabel!
+    @IBOutlet weak var RouteDataView: UIView!
+    @IBOutlet weak var lblCrowFlies: UILabel!
+    @IBOutlet weak var lblDrivingDistance: UILabel!
+    @IBOutlet weak var lblDrivingTime: UILabel!
     
     var currentDisplayDistance = initialDisplayDistance
     var currentSearchDistance = initialSearchDistance
@@ -154,10 +158,19 @@ class ViewController: UIViewController, MKMapViewDelegate {
                 self.myMapView.removeOverlays(self.myMapView.overlays)
                 self.myRoute = response!.routes[0] as MKRoute
                 self.myMapView.add(self.myRoute.polyline)
-                let distance = response!.routes[0].distance // meters
-                print ("Driving distance? \(meters2miles(meters: distance)) miles.")
+                let distance = meters2miles(meters: response!.routes[0].distance) // response distance in meters
+               // print ("Driving distance? \(String(format: "%.02f", distance)) miles.")
                 let drivingTime = ((response!.routes[0].expectedTravelTime) / 60)  //expectedTravelTime is in secs
-                print ("This drive will take \(drivingTime) minutes.\n")
+                //print ("This drive will take \(String(format: "%.02f", drivingTime)) minutes.\n")
+                //let sourceLocation = CLLocationCoordinate2DMake(point1.coordinate.latitude, point1.coordinate.longitude)
+                let sourceLocation = CLLocation(latitude: point1.coordinate.latitude, longitude: point1.coordinate.longitude)
+                let destinationLocation = CLLocation(latitude: point2.coordinate.latitude, longitude: point2.coordinate.longitude)
+                let crowFliesDistance = sourceLocation.distance(from: destinationLocation) // result is in meters
+                let distanceInMiles = meters2miles(meters: crowFliesDistance)
+                self.RouteDataView.alpha = 1
+                self.lblCrowFlies.text = "As crow flies: \(String(format: "%.02f", distanceInMiles)) miles"
+                self.lblDrivingDistance.text = "Driving distance: \(String(format: "%.02f", distance)) miles"
+                self.lblDrivingTime.text = "Driving time: \(String(format: "%.02f", drivingTime)) minutes"
             }
         })
         

@@ -154,6 +154,34 @@
                                     <action selector="btnMenuClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ayN-mg-DJI"/>
                                 </connections>
                             </button>
+                            <view alpha="0.10000000000000001" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="U7z-ao-dgl" userLabel="Route Data View">
+                                <rect key="frame" x="1" y="64" width="182" height="57"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0ng-bl-dOu" userLabel="Crow Flies">
+                                        <rect key="frame" x="4" y="0.0" width="179" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CeX-be-BSS">
+                                        <rect key="frame" x="4" y="18" width="179" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SHS-Sd-9qk">
+                                        <rect key="frame" x="4" y="37" width="179" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -165,6 +193,7 @@
                     <connections>
                         <outlet property="DisplayDistanceSlider" destination="IwG-9x-gHw" id="IZX-OR-3s5"/>
                         <outlet property="DisplayDistanceText2" destination="6ku-Sd-dCn" id="F2v-8S-Gw8"/>
+                        <outlet property="RouteDataView" destination="U7z-ao-dgl" id="EUi-Hg-8JS"/>
                         <outlet property="SearchDistanceSlider" destination="Kv3-pm-WwI" id="ODy-yX-0a6"/>
                         <outlet property="SearchDistanceText2" destination="vyH-va-cdu" id="KbS-CV-SUu"/>
                         <outlet property="btnHospital" destination="3OE-vJ-jW7" id="G2l-Eg-YjA"/>
@@ -172,7 +201,11 @@
                         <outlet property="btnMenu" destination="n7C-sn-Sob" id="RAj-cc-Oyn"/>
                         <outlet property="btnSupermarket" destination="fW5-F8-UCm" id="5et-0q-I4H"/>
                         <outlet property="btnTarget" destination="YyB-2q-KDQ" id="cxP-rI-u6b"/>
+                        <outlet property="lblCrowFlies" destination="0ng-bl-dOu" id="ife-tZ-8Lh"/>
+                        <outlet property="lblDrivingDistance" destination="CeX-be-BSS" id="LhD-yl-xfS"/>
+                        <outlet property="lblDrivingTime" destination="SHS-Sd-9qk" id="Ezt-mO-qfS"/>
                         <outlet property="myMapView" destination="O32-Ux-jkO" id="Pm6-hX-TH0"/>
+                        <outlet property="shepDoThingBtn" destination="9Nm-Kn-Cae" id="4iV-DD-9dS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
