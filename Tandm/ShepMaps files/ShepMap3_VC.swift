@@ -15,11 +15,11 @@ extension ViewController: MKMapViewDelegate {
     // inside:  extension ViewController: MKMapViewDelegate {
     // which is extension for:  class ViewController: UIViewController {
     //
-  func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+  func myMapView(_ myMapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
       if let annotation = annotation as? ShepSingleAnnotationData {
         let identifier = "artPin"
         var view: MKPinAnnotationView
-        if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+        if let dequeuedView = myMapView.dequeueReusableAnnotationView(withIdentifier: identifier)
           as? MKPinAnnotationView { // 2
             dequeuedView.annotation = annotation
             view = dequeuedView
@@ -41,7 +41,7 @@ extension ViewController: MKMapViewDelegate {
       return nil
   }
   
-  func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+  func myMapView(_ myMapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
     let location = view.annotation as! ShepSingleAnnotationData
     let launchOptions = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving]
     location.mapItem().openInMaps(launchOptions: launchOptions)

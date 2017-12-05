@@ -15,7 +15,7 @@ let THOMPSON_GPS = (latitude: 41.9360805, longitude: -71.7978248)
 
 class ShepMap1ViewController: UIViewController, CLLocationManagerDelegate {
     
-    @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var myMapView: MKMapView!
     @IBOutlet weak var btnHospital: UIButton!
     @IBOutlet weak var btnTarget: UIButton!
     @IBOutlet weak var btnMall: UIButton!
@@ -24,26 +24,26 @@ class ShepMap1ViewController: UIViewController, CLLocationManagerDelegate {
 
     
     @IBAction func btnHospitalClick(_ sender: AnyObject) {
-        mapView.removeAnnotations(mapView.annotations)
+        myMapView.removeAnnotations(myMapView.annotations)
         performLocalSearch("Hospital")
         //performLocalSearch("Market Basket")
         reset()
     }
     
     @IBAction func btnTargetClick(_ sender: AnyObject) {
-        mapView.removeAnnotations(mapView.annotations)
+        myMapView.removeAnnotations(myMapView.annotations)
         performLocalSearch("Target")
         reset()
     }
     
     @IBAction func btnGasClick(_ sender: AnyObject) {
-        mapView.removeAnnotations(mapView.annotations)
+        myMapView.removeAnnotations(myMapView.annotations)
         performLocalSearch("Walmart")
         reset()
     }
     
     @IBAction func btnSupermarket(_ sender: AnyObject) {
-        mapView.removeAnnotations(mapView.annotations)
+        myMapView.removeAnnotations(myMapView.annotations)
         performLocalSearch("Stop & Shop")
         reset()
     }
@@ -101,13 +101,13 @@ class ShepMap1ViewController: UIViewController, CLLocationManagerDelegate {
         
         // create region for map
         let region1 = MKCoordinateRegionMakeWithDistance(initialLocation.coordinate, initialDistance, initialDistance)
-        mapView.setRegion(region1, animated: true)
+        myMapView.setRegion(region1, animated: true)
 
         performLocalSearch("park")
         
         // create region
         //        let region2 = MKCoordinateRegionMakeWithDistance(initialLocation.coordinate, initialDistance, initialDistance)
-        //        mapView.setRegion(region2, animated: true)
+        //        myMapView.setRegion(region2, animated: true)
         
         
         // Request for a user's authorization for location services
@@ -115,7 +115,7 @@ class ShepMap1ViewController: UIViewController, CLLocationManagerDelegate {
         locationManager.requestWhenInUseAuthorization()
         let status = CLLocationManager.authorizationStatus()
         if status == CLAuthorizationStatus.authorizedWhenInUse {
-            mapView.showsUserLocation = true
+            myMapView.showsUserLocation = true
         }
     }
     
@@ -201,7 +201,7 @@ class ShepMap1ViewController: UIViewController, CLLocationManagerDelegate {
         let annotation = ShepMap1SingleAnnotation(coordinate: location, title: title, subtitle: subtitle)
         // annotation.pinTintColor
         
-        mapView.addAnnotation(annotation)
+        myMapView.addAnnotation(annotation)
         
         //        if let currentPlacemarkCoordinate = currentPlacemark?.location?.coordinate {
         //            if currentPlacemarkCoordinate.latitude == annotation.coordinate.latitude &&

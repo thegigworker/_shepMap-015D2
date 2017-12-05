@@ -78,14 +78,6 @@
                                     <action selector="btnGasClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gZt-er-sUd"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n7C-sn-Sob">
-                                <rect key="frame" x="172" y="500" width="40" height="39"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button" image="x button"/>
-                                <connections>
-                                    <action selector="btnMenuClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ayN-mg-DJI"/>
-                                </connections>
-                            </button>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jxr-bU-9aj" userLabel="ShepTestView">
                                 <rect key="frame" x="1" y="567" width="374" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
@@ -125,15 +117,6 @@
                                             <action selector="DisplayDistanceSliderMoved:" destination="BYZ-38-t0r" eventType="primaryActionTriggered" id="CFm-5y-25l"/>
                                         </connections>
                                     </slider>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Nm-Kn-Cae" userLabel="DoTheThingBtn">
-                                        <rect key="frame" x="229" y="62" width="137" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                        <state key="normal" title="Do the thing"/>
-                                        <connections>
-                                            <action selector="shepDoThingBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NKg-oF-AbN"/>
-                                        </connections>
-                                    </button>
                                     <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="1" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="Kv3-pm-WwI" userLabel="SearchDistanceSlider">
                                         <rect key="frame" x="96" y="39" width="210" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -141,9 +124,36 @@
                                             <action selector="SearchDistanceSliderMoved:" destination="BYZ-38-t0r" eventType="valueChanged" id="MCc-dJ-K7H"/>
                                         </connections>
                                     </slider>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="COs-xG-AWB" userLabel="DrawPolyBtn">
+                                        <rect key="frame" x="13" y="66" width="129" height="26"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <state key="normal" title="Directions"/>
+                                        <connections>
+                                            <action selector="doDirections:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Qep-7x-q0H"/>
+                                            <action selector="shepDoThingBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6Cg-aS-sg7"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Nm-Kn-Cae" userLabel="DoTheThingBtn">
+                                        <rect key="frame" x="166" y="66" width="168" height="26"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <state key="normal" title="Change Height"/>
+                                        <connections>
+                                            <action selector="shepDoThingBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Aff-1N-uPE"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n7C-sn-Sob">
+                                <rect key="frame" x="172" y="491" width="40" height="39"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button" image="x button"/>
+                                <connections>
+                                    <action selector="btnMenuClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ayN-mg-DJI"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -155,14 +165,14 @@
                     <connections>
                         <outlet property="DisplayDistanceSlider" destination="IwG-9x-gHw" id="IZX-OR-3s5"/>
                         <outlet property="DisplayDistanceText2" destination="6ku-Sd-dCn" id="F2v-8S-Gw8"/>
-                        <outlet property="SearchDistanceSlider" destination="Kv3-pm-WwI" id="Rb1-FT-72z"/>
+                        <outlet property="SearchDistanceSlider" destination="Kv3-pm-WwI" id="ODy-yX-0a6"/>
                         <outlet property="SearchDistanceText2" destination="vyH-va-cdu" id="KbS-CV-SUu"/>
                         <outlet property="btnHospital" destination="3OE-vJ-jW7" id="G2l-Eg-YjA"/>
                         <outlet property="btnMall" destination="Iu6-7c-6tt" id="6o3-4d-WCJ"/>
                         <outlet property="btnMenu" destination="n7C-sn-Sob" id="RAj-cc-Oyn"/>
                         <outlet property="btnSupermarket" destination="fW5-F8-UCm" id="5et-0q-I4H"/>
                         <outlet property="btnTarget" destination="YyB-2q-KDQ" id="cxP-rI-u6b"/>
-                        <outlet property="mapView" destination="O32-Ux-jkO" id="Pm6-hX-TH0"/>
+                        <outlet property="myMapView" destination="O32-Ux-jkO" id="Pm6-hX-TH0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -185,6 +195,7 @@
                     <nil name="viewControllers"/>
                     <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="52T-iv-1LL">
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="1" green="0.1857388616" blue="0.57339501380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </toolbar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="WRK-N3-cyi"/>

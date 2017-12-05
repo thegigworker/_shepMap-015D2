@@ -4,7 +4,7 @@
 //  Created by Shepard Tamler on 11/20/17.
 //
 
-// NOTE:  Now, you could keep adding code to mapView(_:viewFor:), but that would clutter up the view controller.
+// NOTE:  Now, you could keep adding code to myMapView(_:viewFor:), but that would clutter up the view controller.
 // Here’s a more elegant way, similar to what you can do for table view cells.
 
 import Foundation
@@ -20,7 +20,7 @@ import MapKit
 class SingleAnnotationView: MKMarkerAnnotationView {
     override var annotation: MKAnnotation? {
         willSet {
-            // These lines do the same thing as your mapView(_:viewFor:), configuring the callout.
+            // These lines do the same thing as your myMapView(_:viewFor:), configuring the callout.
             guard let myAnnotationData = newValue as? SingleAnnotationData else { return }
             canShowCallout = true
             calloutOffset = CGPoint(x: -5, y: 5)
@@ -35,7 +35,7 @@ class SingleAnnotationView: MKMarkerAnnotationView {
             leftCalloutAccessoryView = imageView
             
             // Below is a function which has some stuff re setting leftCalloutAccessoryView as UIButton
-//            func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+//            func myMapView(_ myMapView: MKMapView, didSelect view: MKAnnotationView) {
 //                if let thumbnailImageButton = view.leftCalloutAccessoryView as? UIButton,
 //                    //let url = (view.annotation as? GPX.Waypoint)?.thumbnailURL,
 //                    //let imageData = try? Data(contentsOf: url), // blocks main queue
@@ -62,12 +62,12 @@ class SingleAnnotationView: MKMarkerAnnotationView {
 /*
  If you were interested in CHANGING THE HEIGHT OF THE ANNOTATION CALLOUT here is the simple way. And I am just making the height to 200 units.
  
- func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+ func myMapView(myMapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
  if annotation is MKUserLocation {
  return nil
  }
  let reuseID = "pin"
- var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseID) as? MKPinAnnotationView
+ var pinView = myMapView.dequeueReusableAnnotationViewWithIdentifier(reuseID) as? MKPinAnnotationView
  if pinView == nil {
  pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseID)
  pinView!.canShowCallout = true

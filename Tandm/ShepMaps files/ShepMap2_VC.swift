@@ -17,7 +17,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var gpxURL: URL? {
         didSet {
             // clearWaypoints()
-            mapView?.removeAnnotations(mapView.annotations)
+            myMapView?.removeAnnotations(myMapView.annotations)
             
             
             if let url = gpxURL {
@@ -51,13 +51,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         // create region for map
         let region1 = MKCoordinateRegionMakeWithDistance(initialLocation.coordinate, initialDistance, initialDistance)
-        mapView.setRegion(region1, animated: true)
+        myMapView.setRegion(region1, animated: true)
         
         performLocalSearch("park")
         
         // create region
         //        let region2 = MKCoordinateRegionMakeWithDistance(initialLocation.coordinate, initialDistance, initialDistance)
-        //        mapView.setRegion(region2, animated: true)
+        //        myMapView.setRegion(region2, animated: true)
         
         
         // Request for a user's authorization for location services
@@ -65,7 +65,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         locationManager.requestWhenInUseAuthorization()
         let status = CLLocationManager.authorizationStatus()
         if status == CLAuthorizationStatus.authorizedWhenInUse {
-            mapView.showsUserLocation = true
+            myMapView.showsUserLocation = true
         }
     }
     
@@ -111,7 +111,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         let annotation = MyAnnotation(coordinate: location, title: title, subtitle: subtitle)
         // annotation.pinTintColor
-        mapView.addAnnotation(annotation)
+        myMapView.addAnnotation(annotation)
        
     }
 
@@ -119,29 +119,29 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     // MARK: Outlets
 
-    @IBOutlet weak var mapView: MKMapView! {
+    @IBOutlet weak var myMapView: MKMapView! {
         didSet {
             
-            //mapView.mapType = .satellite
-            mapView.mapType = .hybrid
-            mapView.delegate = self
+            //myMapView.mapType = .satellite
+            myMapView.mapType = .hybrid
+            myMapView.delegate = self
         }
     }
     
     // MARK: Private Implementation
 
 //    fileprivate func clearWaypoints() {
-//        mapView?.removeAnnotations(mapView.annotations)
+//        myMapView?.removeAnnotations(myMapView.annotations)
 //    }
     
     fileprivate func addWaypoints(_ shepArrayofSngAnts: [shepDataSource.shepSingleAnnotation]) {
-        mapView?.addAnnotations(shepArrayofSngAnts)
-        mapView?.showAnnotations(shepArrayofSngAnts, animated: true)
+        myMapView?.addAnnotations(shepArrayofSngAnts)
+        myMapView?.showAnnotations(shepArrayofSngAnts, animated: true)
     }
     
     fileprivate func selectWaypoint(_ waypoint: shepDataSource.shepSingleAnnotation?) {
         if waypoint != nil {
-            mapView.selectAnnotation(waypoint!, animated: true)
+            myMapView.selectAnnotation(waypoint!, animated: true)
         }
     }
 
@@ -159,7 +159,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     //        }
     
     
-    //    func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+    //    func myMapView(myMapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
     //
     //        if annotation is MKUserLocation {
     //            //return nil so map view draws "blue dot" for standard user location
@@ -168,7 +168,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     //
     //        let reuseId = "pin"
     //
-    //        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
+    //        var pinView = myMapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
     //        if pinView == nil {
     //            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
     //            pinView!.canShowCallout = true
@@ -186,12 +186,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     // from ShepMap2
     // inside:  class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UIPopoverPresentationControllerDelegate
     //
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        var view: MKAnnotationView! = mapView.dequeueReusableAnnotationView(withIdentifier: Constants.AnnotationViewReuseIdentifier)
+    func myMapView(_ myMapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        var view: MKAnnotationView! = myMapView.dequeueReusableAnnotationView(withIdentifier: Constants.AnnotationViewReuseIdentifier)
         //
         let reuseId = "temp" // Constants.AnnotationViewReuseIdentifier
         
-        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
+        var pinView = myMapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
         if pinView == nil {
             pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
             pinView!.canShowCallout = true
@@ -230,7 +230,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
   
     // this is where we draw an image on the leftCalloutAccessoryView
-    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+    func myMapView(_ myMapView: MKMapView, didSelect view: MKAnnotationView) {
         if let thumbnailImageButton = view.leftCalloutAccessoryView as? UIButton,
             let url = (view.annotation as? shepDataSource.shepSingleAnnotation)?.thumbnailURL,
             let imageData = try? Data(contentsOf: url as URL), // blocks main queue
@@ -240,11 +240,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     // calloutAccessoryControlTapped
-    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+    func myMapView(_ myMapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.leftCalloutAccessoryView {
             performSegue(withIdentifier: Constants.ShowImageSegue, sender: view)
         } else if control == view.rightCalloutAccessoryView  {
-            mapView.deselectAnnotation(view.annotation, animated: true)
+            myMapView.deselectAnnotation(view.annotation, animated: true)
             performSegue(withIdentifier: Constants.EditUserWaypoint, sender: view)
         }
     }
@@ -277,10 +277,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     // Long press gesture adds a waypoint
     @IBAction func addWaypoint(_ sender: UILongPressGestureRecognizer) {
         if sender.state == .began {
-            let coordinate = mapView.convert(sender.location(in: mapView), toCoordinateFrom: mapView)
+            let coordinate = myMapView.convert(sender.location(in: myMapView), toCoordinateFrom: myMapView)
             let waypoint = EditableWaypoint(latitude: coordinate.latitude, longitude: coordinate.longitude)
             waypoint.name = "Dropped"
-            mapView.addAnnotation(waypoint)
+            myMapView.addAnnotation(waypoint)
         }
     }
     
