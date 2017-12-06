@@ -159,10 +159,7 @@ class ViewController: UIViewController, MKMapViewDelegate {
                 self.myRoute = response!.routes[0] as MKRoute
                 self.myMapView.add(self.myRoute.polyline)
                 let distance = meters2miles(meters: response!.routes[0].distance) // response distance in meters
-               // print ("Driving distance? \(String(format: "%.02f", distance)) miles.")
                 let drivingTime = ((response!.routes[0].expectedTravelTime) / 60)  //expectedTravelTime is in secs
-                //print ("This drive will take \(String(format: "%.02f", drivingTime)) minutes.\n")
-                //let sourceLocation = CLLocationCoordinate2DMake(point1.coordinate.latitude, point1.coordinate.longitude)
                 let sourceLocation = CLLocation(latitude: point1.coordinate.latitude, longitude: point1.coordinate.longitude)
                 let destinationLocation = CLLocation(latitude: point2.coordinate.latitude, longitude: point2.coordinate.longitude)
                 let crowFliesDistance = sourceLocation.distance(from: destinationLocation) // result is in meters
