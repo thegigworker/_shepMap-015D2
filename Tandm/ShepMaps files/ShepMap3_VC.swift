@@ -16,7 +16,7 @@ extension ViewController: MKMapViewDelegate {
     // which is extension for:  class ViewController: UIViewController {
     //
   func myMapView(_ myMapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-      if let annotation = annotation as? ShepSingleAnnotationData {
+      if let annotation = annotation as? ShepShepSingleAnnotation {
         let identifier = "artPin"
         var view: MKPinAnnotationView
         if let dequeuedView = myMapView.dequeueReusableAnnotationView(withIdentifier: identifier)
@@ -42,7 +42,7 @@ extension ViewController: MKMapViewDelegate {
   }
   
   func myMapView(_ myMapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-    let location = view.annotation as! ShepSingleAnnotationData
+    let location = view.annotation as! ShepShepSingleAnnotation
     let launchOptions = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving]
     location.mapItem().openInMaps(launchOptions: launchOptions)
   }

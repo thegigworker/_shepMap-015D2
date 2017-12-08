@@ -6,7 +6,7 @@
 //import MapKit
 //import Contacts  // for CNPostalAddressStreetKey
 //
-//class ShepSingleAnnotationData: NSObject, MKAnnotation {
+//class ShepShepSingleAnnotation: NSObject, MKAnnotation {
 //    let title: String?
 //    let locationName: String
 //    let discipline: String
@@ -24,7 +24,7 @@
 //        super.init()
 //    }
 //
-//    class func shep_fromJSON(_ json: [JSONValue]) -> ShepSingleAnnotationData? {
+//    class func shep_fromJSON(_ json: [JSONValue]) -> ShepShepSingleAnnotation? {
 //        // 1
 //        var title: String
 //        //    if let titleOrNil = json[16].string {
@@ -58,7 +58,7 @@
 //        let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
 //
 //        // 3
-//        return ShepSingleAnnotationData(title: shepTitle, locationName: shepLocationName, discipline: discipline!, coordinate: coordinate, shepsPassedVariable: shepsData, shepPassedString: shepStringData)
+//        return ShepShepSingleAnnotation(title: shepTitle, locationName: shepLocationName, discipline: discipline!, coordinate: coordinate, shepsPassedVariable: shepsData, shepPassedString: shepStringData)
 //
 //    }
 //

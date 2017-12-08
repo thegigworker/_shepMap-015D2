@@ -43,25 +43,25 @@ class shepDataSource: NSObject, XMLParserDelegate
                 attributes["desc"] = (self.shepStringData + "  " + (attributes["desc"])!)
             }
             get {
-                print ("In shepSingleAnnotationData info var, shepString is: \(shepStringData)")
+                print ("In shepShepSingleAnnotation info var, shepString is: \(shepStringData)")
                 if shepName != "" {
                     shepName  = attributes["name"]!
                     attributes["name"] = (self.shepStringData + " -- " + attributes["name"]!)
                     shepName = ""
                 }
-                print ("In shepSingleAnnotationData info var, attributes[name] is: \(String(describing: attributes["name"]!))")
+                print ("In shepShepSingleAnnotation info var, attributes[name] is: \(String(describing: attributes["name"]!))")
                 if shepDesc != "" {
                     if attributes["desc"] == nil {
-                        print ("In shepSingleAnnotationData info var, attributes[desc] is NIL \n")
+                        print ("In shepShepSingleAnnotation info var, attributes[desc] is NIL \n")
                     } else {
                         shepDesc  = attributes["desc"]!
                         attributes["desc"] = ("Shep says: " + attributes["desc"]!)
-                        print ("In shepSingleAnnotationData info var, attributes[desc] is: \(String(describing: attributes["desc"]!)) \n")
+                        print ("In shepShepSingleAnnotation info var, attributes[desc] is: \(String(describing: attributes["desc"]!)) \n")
                     }
                     shepDesc = ""
                 }
                 // let shepDesc = attributes["desc"]
-                // print ("In shepSingleAnnotationData info var, attributes[desc] is: \(String(describing: attributes["desc"]!)) \n")
+                // print ("In shepShepSingleAnnotation info var, attributes[desc] is: \(String(describing: attributes["desc"]!)) \n")
                 
                 return attributes["desc"] }
         }
@@ -78,7 +78,7 @@ class shepDataSource: NSObject, XMLParserDelegate
         }
         
         override var description: String {
-            //            print ("In shepSingleAnnotationData override description: \(self.description) \n")
+            //            print ("In shepShepSingleAnnotation override description: \(self.description) \n")
             return ["lat=\(latitude)", "lon=\(longitude)", super.description].joined(separator: " ")
         }
     }
@@ -142,7 +142,7 @@ class shepDataSource: NSObject, XMLParserDelegate
     //
     //    class Track: Entry
     //    {
-    //        var fixes = [shepSingleAnnotationData]()
+    //        var fixes = [shepShepSingleAnnotation]()
     //
     //        override var description: String {
     //            let waypointDescription = "fixes=[\n" + fixes.map { $0.description }.joined(separator: "\n") + "\n]"
@@ -233,7 +233,7 @@ class shepDataSource: NSObject, XMLParserDelegate
     //        case "rtept", "trkpt", "wpt":
     //            let latitude = Double(attributeDict["lat"] ?? "0") ?? 0.0
     //            let longitude = Double(attributeDict["lon"] ?? "0") ?? 0.0
-    //            waypoint = shepSingleAnnotationData(latitude: latitude, longitude: longitude)
+    //            waypoint = shepShepSingleAnnotation(latitude: latitude, longitude: longitude)
     //        case "link":
     //            if let href = attributeDict["href"] {
     //                link = Link(href: href)

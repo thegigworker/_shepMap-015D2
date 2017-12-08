@@ -1,6 +1,6 @@
 
 ////
-////  Enhancements to GPX.shepSingleAnnotationData to support MKMapView
+////  Enhancements to GPX.shepShepSingleAnnotation to support MKMapView
 //
 //
 //import MapKit
@@ -54,7 +54,7 @@
 //
 //// ----------------------------------------------------------
 //
-//class ShepSingleAnnotationData: NSObject, MKAnnotation {
+//class ShepShepSingleAnnotation: NSObject, MKAnnotation {
 //    let title: String?
 //    let locationName: String
 //    // let discipline: String
@@ -76,7 +76,7 @@
 //        super.init()
 //    }
 //
-//    class func shep_testMakeSingleAnnotation() -> ShepSingleAnnotationData? {
+//    class func shep_testMakeSingleAnnotation() -> ShepShepSingleAnnotation? {
 //        // 1
 //        var title: String
 //        title = "shepTitle"
@@ -98,7 +98,7 @@
 //        let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
 //
 //        // 3
-//        return ShepSingleAnnotationData(title: shepTitle, locationName: shepLocationName, coordinate: coordinate, shepsPassedVariable: shepsData, shepPassedString: shepStringData)
+//        return ShepShepSingleAnnotation(title: shepTitle, locationName: shepLocationName, coordinate: coordinate, shepsPassedVariable: shepsData, shepPassedString: shepStringData)
 //    }
 //}
 //

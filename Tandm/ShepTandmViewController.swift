@@ -7,15 +7,18 @@ import MapKit
 let THOMPSON_GPS = (latitude: 41.9360805, longitude: -71.7978248)
 let HARTFORD_GPS = (latitude: 41.767603, longitude: -72.684036)
 // Yankee Stadium:  40.830304, -73.926089
+// let myUserLocation = CLLocation(latitude: 21.282778, longitude: -157.829444) // Honolulu
+// var initialLocation = CLLocation(latitude: THOMPSON_GPS.latitude, longitude: THOMPSON_GPS.longitude)
 
-let initialLocation = CLLocation(latitude: THOMPSON_GPS.latitude, longitude: THOMPSON_GPS.longitude)
-let initialDisplay: Double = 30
+var initialLocation: CLLocation = CLLocation()
+let initialDisplay: Double = 20
 let initialSearch: Double = 15
 let initialDisplayDistance = CLLocationDistance(miles2meters(miles: initialDisplay))
 let initialSearchDistance = CLLocationDistance(miles2meters(miles: initialSearch))
 let initialMapSearch = "gas stations"
 
-/// Remember that THREE SLASHES above a custom method puts that comment intole( the Xcode quickhelp
+//MARK: puts this comment into the jump bar
+/// THREE SLASHES above a custom method puts that comment into the Xcode quickhelp
 func miles2meters (miles: Double) -> Double {
     let meters = miles * 1609.34
     return meters
@@ -59,7 +62,7 @@ class ViewController: UIViewController, MKMapViewDelegate {
     var currentDisplayDistance = initialDisplayDistance
     var currentSearchDistance = initialSearchDistance
     var myArray_MKMapItems = [MKMapItem]()
-    var shepAnnotationsArray = [SingleAnnotationData]()
+    var shepAnnotationsArray = [ShepSingleAnnotation]()
     var myRoute : MKRoute!
     //var currentRoute:MKRoute?
     var currentTransportType = MKDirectionsTransportType.automobile
@@ -104,48 +107,36 @@ class ViewController: UIViewController, MKMapViewDelegate {
             //for _ in shepAnnotationsArray {
             let sourceItem = Int(arc4random_uniform(howMany))
             let destinationItem = Int(arc4random_uniform(howMany))
-            makeDirectionsRoutePolyline(source: self.shepAnnotationsArray[sourceItem], destination: self.shepAnnotationsArray[destinationItem])
-                print("shepAnotationsArray in doDirections is \(howMany) \n")
-            // }
-        } else {
-            print ("less than 2 items in shepAnnotationsArray")
-        }
+            if sourceItem != destinationItem {
+                makeDirectionsRoutePolyline(source: self.shepAnnotationsArray[sourceItem], destination: self.shepAnnotationsArray[destinationItem])
+            } else { print ("source and destination are the same") }
+        } else { print ("less than 2 items in shepAnnotationsArray") }
     }
     
-    func makeDirectionsRoutePolyline (source: SingleAnnotationData, destination: SingleAnnotationData) {
+    func makeDirectionsRoutePolyline (source: ShepSingleAnnotation, destination: ShepSingleAnnotation) {
        // myMapView.removeAnnotations(myMapView.annotations)
         //myMapView.removeOverlays(myMapView.overlays)
         
         let point1 = MKPointAnnotation()
         let point2 = MKPointAnnotation()
-//        point1.coordinate = CLLocationCoordinate2DMake(HARTFORD_GPS.latitude, HARTFORD_GPS.longitude)
-//        point1.title = "ShepTitle 1"
-//        point1.subtitle = "ShepSubTitle 1"
         point1.coordinate = CLLocationCoordinate2DMake(source.coordinate.latitude, source.coordinate.longitude)
-        point1.title = source.title
-        point1.subtitle = source.subtitle
-        myMapView.addAnnotation(point1)
-//        point2.coordinate = CLLocationCoordinate2DMake(THOMPSON_GPS.latitude, THOMPSON_GPS.longitude)
-//        point2.title = "ShepTitle 2"
-//        point2.subtitle = "ShepSubTitle 2"
+       // point1.title = source.title
+        //point1.subtitle = source.subtitle
+       // myMapView.addAnnotation(source)
         point2.coordinate = CLLocationCoordinate2DMake(destination.coordinate.latitude, destination.coordinate.longitude)
-        point2.title = destination.title
-        point2.subtitle = destination.subtitle
-        myMapView.addAnnotation(point2)
-        myMapView.centerCoordinate = point2.coordinate
-        myMapView.delegate = self
+        //point2.title = destination.title
+        //point2.subtitle = destination.subtitle
+        //myMapView.addAnnotation(destination)
+        //myMapView.centerCoordinate = point2.coordinate
+        //myMapView.delegate = self
         
-        //Span of the map
-        //myMapView.region = MKCoordinateRegionMakeWithDistance(point2.coordinate, currentDisplayDistance, currentDisplayDistance)
         
-        //myMapView.setRegion(MKCoordinateRegionMake(point2.coordinate, MKCoordinateSpanMake(0.7,0.7)), animated: true)
-        
-        let directionsRequest = MKDirectionsRequest()
         let point1_Placemark = MKPlacemark(coordinate: CLLocationCoordinate2DMake(point1.coordinate.latitude, point1.coordinate.longitude), addressDictionary: nil)
         let point2_Placemark = MKPlacemark(coordinate: CLLocationCoordinate2DMake(point2.coordinate.latitude, point2.coordinate.longitude), addressDictionary: nil)
         
-        directionsRequest.source = MKMapItem(placemark: point2_Placemark)
-        directionsRequest.destination = MKMapItem(placemark: point1_Placemark)
+        let directionsRequest = MKDirectionsRequest()
+        directionsRequest.source = MKMapItem(placemark: point1_Placemark)
+        directionsRequest.destination = MKMapItem(placemark: point2_Placemark)
         directionsRequest.transportType = currentTransportType
         let directions = MKDirections(request: directionsRequest)
         
@@ -168,6 +159,8 @@ class ViewController: UIViewController, MKMapViewDelegate {
                 self.lblCrowFlies.text = "As crow flies: \(String(format: "%.02f", distanceInMiles)) miles"
                 self.lblDrivingDistance.text = "Driving distance: \(String(format: "%.02f", distance)) miles"
                 self.lblDrivingTime.text = "Driving time: \(String(format: "%.02f", drivingTime)) minutes"
+                self.myMapView.addAnnotation(source)
+                self.myMapView.addAnnotation(destination)
             }
         })
         
@@ -218,21 +211,22 @@ class ViewController: UIViewController, MKMapViewDelegate {
         myLineRenderer.lineWidth = 4
         return myLineRenderer
     }
-
     
+
     // 搜索
     func performLocalSearch(_ searchString:String) {
         shepAnnotationsArray.removeAll()
         let request = MKLocalSearchRequest()
+
         request.naturalLanguageQuery = searchString
         // 搜索当前区域
         let searchRegion1 = MKCoordinateRegionMakeWithDistance(initialLocation.coordinate, currentSearchDistance, currentSearchDistance)
         request.region = searchRegion1
         //request.region = myMapView.region
 
+        // a MKLocalSearch object initiates a search operation and will deliver the results back into an array of MKMapItems. This will contain the name, latitude and longitude of the current POI.
         // 启动搜索,并且把返回结果保存到数组中
         let search = MKLocalSearch(request: request)
-        
         search.start(completionHandler: {(response, error) in
             // Local searches are performed asynchronously
             //and a completion handler called when the search is complete.
@@ -244,7 +238,7 @@ class ViewController: UIViewController, MKMapViewDelegate {
                 print("\n \(response!.mapItems.count) matches found")
                 //The code in the completion handler checks the response to make sure that matches were found
                 //and then accesses the mapItems property of the response which contains an array of mapItem instances for the matching locations.
-                shepSearch: for item in response!.mapItems {
+                shepSearchResultLoop: for item in response!.mapItems {
                     // print("Name = \(String(describing: item.name!))")
                     //print("Description = \(String(describing: item.description)) \n")
                     //print("Placemark = \(String(describing: item.placemark)) \n")
@@ -262,22 +256,25 @@ class ViewController: UIViewController, MKMapViewDelegate {
                     //print ("Search distance: \(self.currentSearchDistance) and this distance: \(mapItemDistance) \n")
                     if mapItemDistance > self.currentSearchDistance {
                         print ("took one down")
-                        continue shepSearch
+                        continue shepSearchResultLoop
                     } else {
                         annotation.title = item.name
-                        self.myMapView.addAnnotation(annotation)  //<-----
+                        // ---> self.myMapView.addAnnotation(annotation)  //<-----
                         
                         //  self.addAnnotation(item.name!, subtitle: self.mySubtitleString, latitude: (item.placemark.location?.coordinate.latitude)!, longitude: (item.placemark.location?.coordinate.longitude)!)
                         
-                        let shepPassedVariable = Double(arc4random_uniform(25) + 1)
+                        let shepPassedVariable = Double(arc4random_uniform(40) + 1)
                         let shepPassedString = shepCurrencyFromDouble(shepNumber: shepPassedVariable)
-                        let validResult = SingleAnnotationData(searchResult: item, shepPassedVariable: shepPassedVariable, shepPassedString: shepPassedString)
+                        let validResult = ShepSingleAnnotation(searchResult: item, shepPassedVariable: shepPassedVariable, shepPassedString: shepPassedString)
                         self.shepAnnotationsArray.append(validResult)
-                        print ("in shepSearch shepAnnotationsArray count is \(self.shepAnnotationsArray.count) \n")
+                        print ("inside shepSearchResultLoop shepAnnotationsArray count: \(self.shepAnnotationsArray.count)")
                     }
+                    print ("shepSearchResultLoop is done?, shepAnnotationsArray count is \(self.shepAnnotationsArray.count) \n")
                 }
+                print ("shepSearchResultLoop is done now???, shepAnnotationsArray count is \(self.shepAnnotationsArray.count) \n")
             }
         })
+        print ("opening gambit, shepAnnotationsArray count is \(self.shepAnnotationsArray.count) \n")
     }
     
     @IBAction func btnHospitalClick(_ sender: AnyObject) {
@@ -285,6 +282,9 @@ class ViewController: UIViewController, MKMapViewDelegate {
         myMapView.removeAnnotations(myMapView.annotations)
         performLocalSearch("Hospital")
         resetTwirlButtons()
+        centerMapOnLocation(location: initialLocation)
+        myMapView.addAnnotations(shepAnnotationsArray)
+        myMapView.showAnnotations(shepAnnotationsArray, animated: true)
     }
     
     @IBAction func btnTargetClick(_ sender: AnyObject) {
@@ -292,6 +292,9 @@ class ViewController: UIViewController, MKMapViewDelegate {
         myMapView.removeAnnotations(myMapView.annotations)
         performLocalSearch("Target")
         resetTwirlButtons()
+        centerMapOnLocation(location: initialLocation)
+        myMapView.addAnnotations(shepAnnotationsArray)
+        myMapView.showAnnotations(shepAnnotationsArray, animated: true)
     }
     
     @IBAction func btnGasClick(_ sender: AnyObject) {
@@ -299,14 +302,23 @@ class ViewController: UIViewController, MKMapViewDelegate {
         myMapView.removeAnnotations(myMapView.annotations)
         performLocalSearch("gas station")
         resetTwirlButtons()
+        centerMapOnLocation(location: initialLocation)
+        myMapView.addAnnotations(shepAnnotationsArray)
+        myMapView.showAnnotations(shepAnnotationsArray, animated: true)
     }
     
     @IBAction func btnSupermarket(_ sender: AnyObject) {
         print ("in suprmarkclick")
         myMapView.removeAnnotations(myMapView.annotations)
+        print ("in btnSupermarket_A shepAnnotationsArray count is \(shepAnnotationsArray.count)")
+        shepAnnotationsArray = []
         //performLocalSearch("Market Basket")
         performLocalSearch("Stop & Shop")
+        print ("in btnSupermarket_B shepAnnotationsArray count is \(shepAnnotationsArray.count) \n")
         resetTwirlButtons()
+        centerMapOnLocation(location: initialLocation)
+        myMapView.addAnnotations(shepAnnotationsArray)
+        myMapView.showAnnotations(shepAnnotationsArray, animated: true)
     }
     
     @IBAction func btnMenuClick(_ sender: AnyObject) {
@@ -345,7 +357,6 @@ class ViewController: UIViewController, MKMapViewDelegate {
         }, completion: nil)
     }
     
-    
     // Create a location manager to trigger user tracking
     let locationManager: CLLocationManager = {
         let manager = CLLocationManager()
@@ -353,6 +364,24 @@ class ViewController: UIViewController, MKMapViewDelegate {
         manager.startUpdatingLocation()
         return manager
     }()
+    
+    
+    // MARK: didUpdate userLocation NOT YET WORKING
+    // Updating the Map View based on User Movement
+    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
+        mapView.centerCoordinate = userLocation.location!.coordinate
+    }
+    
+    //    You have to override CLLocationManager.didUpdateLocations (part of CLLocationManagerDelegate) to get notified when the location manager retrieves the current location:
+    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+        let currentLocation = locations.last as! CLLocation
+        initialLocation = currentLocation
+        //let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+        //        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+        //
+        //        self.map.setRegion(region, animated: true)
+    }
+    /////////////////////
     
     func setupCompassButton() {
         let compass = MKCompassButton(mapView: myMapView)
@@ -408,12 +437,24 @@ class ViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
-    /// not using this function at the moment
+    //let regionRadius: CLLocationDistance = ()
     func centerMapOnLocation(location: CLLocation) {
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, currentDisplayDistance, currentDisplayDistance)
         myMapView.setRegion(coordinateRegion, animated: true)
     }
     
+    // ????
+    //newRegion.center.latitude = self.userCoordinate.latitude
+    //newRegion.center.longitude = self.userCoordinate.longitude
+    
+    // Setup the area spanned by the map region:
+    // We use the delta values to indicate the desired zoom level of the map,
+    //      (smaller delta values corresponding to a higher zoom level).
+    //      The numbers used here correspond to a roughly 8 mi
+    //      diameter area.
+    //
+    //newRegion.span.latitudeDelta = 0.112872;
+    //newRegion.span.longitudeDelta = 0.109863;
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -424,7 +465,24 @@ class ViewController: UIViewController, MKMapViewDelegate {
         setupCompassButton()
         setupUserTrackingButtonAndScaleView()
         registerAnnotationViewClasses()
-        loadDataForMapRegionAndBikes()
+        //loadDataForMapRegionAndBikes()
+        
+        // "Setting ViewController as the delegate of the map view.  You can do this in Main.storyboard, but I prefer to do it in code, where it’s more visible."
+        myMapView.delegate = self
+        
+        print ("in ***viewDidLoad *** shepAnnotationsArray count is \(self.shepAnnotationsArray.count) \n")
+        myMapView.addAnnotations(shepAnnotationsArray)
+        myMapView.showAnnotations(shepAnnotationsArray, animated: true)
+        
+        
+        //MARK: USER LOCATION STUFF NOT YET WORKING
+        if let myInitialLocation = myMapView.userLocation.location {
+            initialLocation = myInitialLocation
+        } else {
+            //myUserLocation = CLLocation(latitude: 21.282778, longitude: -157.829444) // Honolulu
+            initialLocation = CLLocation(latitude: 41.9360805, longitude: -71.7978248) // THOMPSON_GPS
+        }
+        centerMapOnLocation(location: initialLocation)
         
         // ----
         self.btnMenu.alpha = 0
@@ -448,14 +506,7 @@ class ViewController: UIViewController, MKMapViewDelegate {
             self.btnMenu.alpha = 1
             self.btnMenu.transform = CGAffineTransform(rotationAngle: 0.25*3.1415927)
         }, completion: nil)
-        
-        // create initial region for map
-        let mapRegion1 = MKCoordinateRegionMakeWithDistance(initialLocation.coordinate, initialDisplayDistance, initialDisplayDistance)
-        myMapView.setRegion(mapRegion1, animated: true)
-        
-        // "All that’s left is setting ViewController as the delegate of the map view.  You can do this in Main.storyboard,
-        //  but I prefer to do it in code, where it’s more visible."
-        myMapView.delegate = self
+
         }
     }
 
@@ -469,7 +520,7 @@ extension ViewController {
     // myMapView annotation calloutAccessoryControl was tapped, open Maps
     func myMapView(_ myMapView: MKMapView, annotationView view: MKAnnotationView,
                  calloutAccessoryControlTapped control: UIControl) {
-        let location = view.annotation as! SingleAnnotationData
+        let location = view.annotation as! ShepSingleAnnotation
         let launchOptions = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving]
         // Note: Explore the MKMapItem documentation to see other launch option dictionary keys,
         // and the openMaps(with:launchOptions:) method that lets you pass an array of MKMapItem objects.
@@ -484,9 +535,9 @@ extension ViewController {
 // ------------
 //    func myMapView(_ myMapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
 //        // 2
-//       // Your app might use other annotations, like user location, so check that this annotation is an SingleAnnotationData object.
+//       // Your app might use other annotations, like user location, so check that this annotation is an ShepSingleAnnotation object.
 //        // If it isn’t, return nil to let the map view use its default annotation view.
-//        guard let annotation = annotation as? SingleAnnotationData else { return nil }
+//        guard let annotation = annotation as? ShepSingleAnnotation else { return nil }
 //        // 3
 //       // To make markers appear, you create each view as an MKMarkerAnnotationView.
 //        // Later in this tutorial, you’ll create MKAnnotationView objects, to display images instead of markers.
@@ -502,7 +553,7 @@ extension ViewController {
 //        } else {
 //            // 5
 //            // Here you create a new MKMarkerAnnotationView object, if an annotation view could not be dequeued.
-//            // It uses the title and subtitle properties of your SingleAnnotationData class to determine what to show in the callout.
+//            // It uses the title and subtitle properties of your ShepSingleAnnotation class to determine what to show in the callout.
 //            view = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
 //            view.canShowCallout = true
 //            view.calloutOffset = CGPoint(x: -5, y: 5)
@@ -515,7 +566,7 @@ extension ViewController {
 // -----------------------------------------------
 /* Next, you have to tell MapKit what to do when the user taps the callout button.
  When the user taps a map annotation marker, the callout shows an info button. If the user taps this info button, the myMapView(_:annotationView:calloutAccessoryControlTapped:) method is called.
- In this method, you grab the SingleAnnotationData object that this tap refers to, and then launch the Maps app by creating an associated MKMapItem, and calling openInMaps(launchOptions:) on the map item.
+ In this method, you grab the ShepSingleAnnotation object that this tap refers to, and then launch the Maps app by creating an associated MKMapItem, and calling openInMaps(launchOptions:) on the map item.
  Notice you’re passing a dictionary to this method. This allows you to specify a few different options; here the DirectionModeKey is set to Driving. This causes the Maps app to show driving directions from the user’s current location to this pin. Neat!
  */
 

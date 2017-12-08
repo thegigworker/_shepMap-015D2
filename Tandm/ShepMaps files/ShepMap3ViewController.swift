@@ -37,7 +37,7 @@
 ////    myMapView.addAnnotation(artwork)
 //  }
 //
-//  var shepAnnotationsArray = [ShepSingleAnnotationData]()
+//  var shepAnnotationsArray = [ShepShepSingleAnnotation]()
 //
 //  func loadInitialData() {
 //    // 1
@@ -66,7 +66,7 @@
 //      for artworkJSON in jsonData {
 //        if let artworkJSON = artworkJSON.array,
 //        // 5
-//        let myArtwork = ShepSingleAnnotationData.shep_fromJSON(artworkJSON) {
+//        let myArtwork = ShepShepSingleAnnotation.shep_fromJSON(artworkJSON) {
 //
 //          shepAnnotationsArray.append(myArtwork)
 //        }

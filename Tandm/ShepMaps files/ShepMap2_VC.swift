@@ -149,9 +149,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     // MARK: MKMapViewDelegate
     
     //        func pinTintColor() -> UIColor  {
-    //            if GPX.shepSingleAnnotationData.shepsVariable <= 3 {
+    //            if GPX.shepShepSingleAnnotation.shepsVariable <= 3 {
     //                return MKPinAnnotationView.redPinColor()
-    //            } else if (GPX.shepSingleAnnotationData.shepsVariable > 3.0 && self.shepsVariable <= 10) {
+    //            } else if (GPX.shepShepSingleAnnotation.shepsVariable > 3.0 && self.shepsVariable <= 10) {
     //                return MKPinAnnotationView.purplePinColor()
     //            } else {
     //                return MKPinAnnotationView.greenPinColor()
@@ -197,12 +197,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             pinView!.canShowCallout = true
             pinView!.animatesDrop = true
             pinView!.pinTintColor = .purple
-            // pinView!.pinTintColor = GPX.shepSingleAnnotationData.pinTintColor(GPX.shepSingleAnnotationData)()
+            // pinView!.pinTintColor = GPX.shepShepSingleAnnotation.pinTintColor(GPX.shepShepSingleAnnotation)()
         } else {
             pinView!.pinTintColor = .green
             pinView!.annotation = annotation
         }
-//        if annotation is GPX.shepSingleAnnotationData {
+//        if annotation is GPX.shepShepSingleAnnotation {
 //            let shepsPinView: MKPinAnnotationView  = MKPinAnnotationView.redPinColor()
 //            shepsPinView.pinTintColor = .purple // annotation.pinTintColor()
 //            // shepsPinView.pinTintColor = annotation.pinTintColor() as! UIColor

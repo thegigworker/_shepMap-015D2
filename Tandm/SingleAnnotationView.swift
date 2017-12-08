@@ -21,7 +21,7 @@ class SingleAnnotationView: MKMarkerAnnotationView {
     override var annotation: MKAnnotation? {
         willSet {
             // These lines do the same thing as your myMapView(_:viewFor:), configuring the callout.
-            guard let myAnnotationData = newValue as? SingleAnnotationData else { return }
+            guard let myAnnotationData = newValue as? ShepSingleAnnotation else { return }
             canShowCallout = true
             calloutOffset = CGPoint(x: -5, y: 5)
             rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
