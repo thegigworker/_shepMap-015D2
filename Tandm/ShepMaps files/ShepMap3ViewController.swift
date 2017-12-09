@@ -22,8 +22,8 @@
 //    super.viewDidLoad()
 //
 //    // set initial location in Honolulu
-//    let initialLocation = CLLocation(latitude: 21.282778, longitude: -157.829444)
-//    centerMapOnLocation(initialLocation)
+//    let myUserLocation = CLLocation(latitude: 21.282778, longitude: -157.829444)
+//    centerMapOnLocation(myUserLocation)
 //
 //    loadInitialData()
 //    myMapView.addAnnotations(shepAnnotationsArray)

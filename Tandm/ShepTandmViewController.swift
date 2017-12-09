@@ -8,14 +8,15 @@ let THOMPSON_GPS = (latitude: 41.9360805, longitude: -71.7978248)
 let HARTFORD_GPS = (latitude: 41.767603, longitude: -72.684036)
 // Yankee Stadium:  40.830304, -73.926089
 // let myUserLocation = CLLocation(latitude: 21.282778, longitude: -157.829444) // Honolulu
-// var initialLocation = CLLocation(latitude: THOMPSON_GPS.latitude, longitude: THOMPSON_GPS.longitude)
+// var myUserLocation = CLLocation(latitude: THOMPSON_GPS.latitude, longitude: THOMPSON_GPS.longitude)
 
-var initialLocation: CLLocation = CLLocation()
+var myUserLocation: CLLocation = CLLocation()
 let initialDisplay: Double = 20
 let initialSearch: Double = 15
 let initialDisplayDistance = CLLocationDistance(miles2meters(miles: initialDisplay))
 let initialSearchDistance = CLLocationDistance(miles2meters(miles: initialSearch))
-let initialMapSearch = "gas stations"
+
+//let initialMapSearch = "gas stations"
 
 //MARK: puts this comment into the jump bar
 /// THREE SLASHES above a custom method puts that comment into the Xcode quickhelp
@@ -97,7 +98,7 @@ class ViewController: UIViewController, MKMapViewDelegate {
         currentSearchDistance = CLLocationDistance(miles2meters(miles: tempTranslator))
         print ("currentSearchDistance is \(String(format: "%.02f", tempTranslator))")
         // create region for map
-        let mapRegion1 = MKCoordinateRegionMakeWithDistance(initialLocation.coordinate, currentDisplayDistance, currentDisplayDistance)
+        let mapRegion1 = MKCoordinateRegionMakeWithDistance(myUserLocation.coordinate, currentDisplayDistance, currentDisplayDistance)
         myMapView.setRegion(mapRegion1, animated: true)
     }
     
@@ -108,126 +109,30 @@ class ViewController: UIViewController, MKMapViewDelegate {
             let sourceItem = Int(arc4random_uniform(howMany))
             let destinationItem = Int(arc4random_uniform(howMany))
             if sourceItem != destinationItem {
-                makeDirectionsRoutePolyline(source: self.shepAnnotationsArray[sourceItem], destination: self.shepAnnotationsArray[destinationItem])
+                makeDirectionsRoutePolyline(source: shepAnnotationsArray[sourceItem], destination: shepAnnotationsArray[destinationItem])
             } else { print ("source and destination are the same") }
         } else { print ("less than 2 items in shepAnnotationsArray") }
-    }
-    
-    func makeDirectionsRoutePolyline (source: ShepSingleAnnotation, destination: ShepSingleAnnotation) {
-       // myMapView.removeAnnotations(myMapView.annotations)
-        //myMapView.removeOverlays(myMapView.overlays)
-        
-        let point1 = MKPointAnnotation()
-        let point2 = MKPointAnnotation()
-        point1.coordinate = CLLocationCoordinate2DMake(source.coordinate.latitude, source.coordinate.longitude)
-       // point1.title = source.title
-        //point1.subtitle = source.subtitle
-       // myMapView.addAnnotation(source)
-        point2.coordinate = CLLocationCoordinate2DMake(destination.coordinate.latitude, destination.coordinate.longitude)
-        //point2.title = destination.title
-        //point2.subtitle = destination.subtitle
-        //myMapView.addAnnotation(destination)
-        //myMapView.centerCoordinate = point2.coordinate
-        //myMapView.delegate = self
-        
-        
-        let point1_Placemark = MKPlacemark(coordinate: CLLocationCoordinate2DMake(point1.coordinate.latitude, point1.coordinate.longitude), addressDictionary: nil)
-        let point2_Placemark = MKPlacemark(coordinate: CLLocationCoordinate2DMake(point2.coordinate.latitude, point2.coordinate.longitude), addressDictionary: nil)
-        
-        let directionsRequest = MKDirectionsRequest()
-        directionsRequest.source = MKMapItem(placemark: point1_Placemark)
-        directionsRequest.destination = MKMapItem(placemark: point2_Placemark)
-        directionsRequest.transportType = currentTransportType
-        let directions = MKDirections(request: directionsRequest)
-        
-        directions.calculate(completionHandler: {
-            response, error in
-            // response has an array of MKRoutes
-            if error != nil {
-                print ("Directions Retreival Error: \(String(describing: error))")
-            } else {
-                self.myMapView.removeOverlays(self.myMapView.overlays)
-                self.myRoute = response!.routes[0] as MKRoute
-                self.myMapView.add(self.myRoute.polyline)
-                let distance = meters2miles(meters: response!.routes[0].distance) // response distance in meters
-                let drivingTime = ((response!.routes[0].expectedTravelTime) / 60)  //expectedTravelTime is in secs
-                let sourceLocation = CLLocation(latitude: point1.coordinate.latitude, longitude: point1.coordinate.longitude)
-                let destinationLocation = CLLocation(latitude: point2.coordinate.latitude, longitude: point2.coordinate.longitude)
-                let crowFliesDistance = sourceLocation.distance(from: destinationLocation) // result is in meters
-                let distanceInMiles = meters2miles(meters: crowFliesDistance)
-                self.RouteDataView.alpha = 1
-                self.lblCrowFlies.text = "As crow flies: \(String(format: "%.02f", distanceInMiles)) miles"
-                self.lblDrivingDistance.text = "Driving distance: \(String(format: "%.02f", distance)) miles"
-                self.lblDrivingTime.text = "Driving time: \(String(format: "%.02f", drivingTime)) minutes"
-                self.myMapView.addAnnotation(source)
-                self.myMapView.addAnnotation(destination)
-            }
-        })
-        
-//        You need to make a MKDirections request. From calculateDirectionsWithCompletionHandler you will get a MKDirectionsResponse. This has a routes array of MKRoutes. Each route has a distance (i.e. road distance) property.
-//
-//        let source = MKMapItem( placemark: MKPlacemark(
-//            coordinate: CLLocationCoordinate2DMake(-41.27, 173.28),
-//            addressDictionary: nil))
-//        let destination = MKMapItem(placemark: MKPlacemark(
-//            coordinate: CLLocationCoordinate2DMake(-41.11, 173),
-//            addressDictionary: nil))
-//        let directionsRequest = MKDirectionsRequest()
-//        directionsRequest.source = source
-//        directionsRequest.destination = destination
-//
-//        let directions = MKDirections(request: directionsRequest)
-
-//        directions.calculateDirectionsWithCompletionHandler { (response, error) -> Void in
-//            print(error)
-//            let distance = response!.routes.first?.distance // meters
-//            print("\(distance! / 1000)km")
-//        }
-///////////////////////////////////////////////////////////////////////////////////
-        
-//        // let route = routeResponse.routes[0]
-//        //self.myRoute = route
-//        self.myMapView.removeOverlays(self.myMapView.overlays)
-//        self.myMapView.add(self.myRoute.polyline, level: MKOverlayLevel.aboveRoads)
-//
-//        var rect = self.myRoute.polyline.boundingMapRect
-//        //
-//        // add a margin to the MKCoordinateRegionForMapRect
-//        rect.size.width = rect.size.width * 1.15
-//        rect.origin.x = rect.origin.x  - (rect.size.width * 0.07)
-//        rect.size.height = rect.size.height * 1.15
-//        rect.origin.y = rect.origin.y  - (rect.size.height * 0.07)
-//
-//        self.myMapView.setRegion(MKCoordinateRegionForMapRect(rect), animated: true)
- 
-        let mapRegion1 = MKCoordinateRegionMakeWithDistance(initialLocation.coordinate, currentDisplayDistance, currentDisplayDistance)
-         myMapView.setRegion(mapRegion1, animated: true)
-    }
-
-    // directions/polyline related
-    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        let myLineRenderer = MKPolylineRenderer(polyline: myRoute.polyline)
-        myLineRenderer.strokeColor = UIColor.blue
-        myLineRenderer.lineWidth = 4
-        return myLineRenderer
     }
     
 
     // 搜索
     func performLocalSearch(_ searchString:String) {
-        shepAnnotationsArray.removeAll()
+        //shepAnnotationsArray.removeAll()
         let request = MKLocalSearchRequest()
-
         request.naturalLanguageQuery = searchString
         // 搜索当前区域
-        let searchRegion1 = MKCoordinateRegionMakeWithDistance(initialLocation.coordinate, currentSearchDistance, currentSearchDistance)
+       // print ("in performLocalSearch searchRegion search distance: \(meters2miles(meters: self.currentSearchDistance))")
+        let searchRegion1 = MKCoordinateRegionMakeWithDistance(myUserLocation.coordinate, currentSearchDistance, currentSearchDistance)
         request.region = searchRegion1
         //request.region = myMapView.region
-
         // a MKLocalSearch object initiates a search operation and will deliver the results back into an array of MKMapItems. This will contain the name, latitude and longitude of the current POI.
+        print ("before search.start shepAnnotationsArray count: \(shepAnnotationsArray.count)")
         // 启动搜索,并且把返回结果保存到数组中
         let search = MKLocalSearch(request: request)
         search.start(completionHandler: {(response, error) in
+            //let myViewController = ViewController()
+            var validSearchResultsArray: [ShepSingleAnnotation] = []
+            print ("inside completionHandler shepAnnotationsArray count: \(self.shepAnnotationsArray.count)")
             // Local searches are performed asynchronously
             //and a completion handler called when the search is complete.
             if error != nil {
@@ -250,7 +155,7 @@ class ViewController: UIViewController, MKMapViewDelegate {
                     // print("Annotation.coordinate = \(String(describing: item.placemark.coordinate)) \n")
                     let searchResultCoordinates = annotation.coordinate
                     let searchResultLocation = CLLocation(latitude: searchResultCoordinates.latitude, longitude: searchResultCoordinates.longitude)
-                    let mapItemDistance = initialLocation.distance(from: searchResultLocation) // result is in meters
+                    let mapItemDistance = myUserLocation.distance(from: searchResultLocation) // result is in meters
                     //let distanceInMiles = meters2miles(meters: mapItemDistance)
                     print ("Current search distance: \(meters2miles(meters: self.currentSearchDistance)) and this distance: \(meters2miles(meters: mapItemDistance))")
                     //print ("Search distance: \(self.currentSearchDistance) and this distance: \(mapItemDistance) \n")
@@ -266,15 +171,113 @@ class ViewController: UIViewController, MKMapViewDelegate {
                         let shepPassedVariable = Double(arc4random_uniform(40) + 1)
                         let shepPassedString = shepCurrencyFromDouble(shepNumber: shepPassedVariable)
                         let validResult = ShepSingleAnnotation(searchResult: item, shepPassedVariable: shepPassedVariable, shepPassedString: shepPassedString)
-                        self.shepAnnotationsArray.append(validResult)
+                        validSearchResultsArray.append(validResult)
                         print ("inside shepSearchResultLoop shepAnnotationsArray count: \(self.shepAnnotationsArray.count)")
+                        print ("inside shepSearchResultLoop validSearchResultsArray count: \(validSearchResultsArray.count)")
                     }
-                    print ("shepSearchResultLoop is done?, shepAnnotationsArray count is \(self.shepAnnotationsArray.count) \n")
+                    print ("still inside shepSearchResultLoop validSearchResultsArray count: \(validSearchResultsArray.count)")
+                    print ("still inside shepSearchResultLoop?, shepAnnotationsArray count is \(self.shepAnnotationsArray.count) \n")
                 }
-                print ("shepSearchResultLoop is done now???, shepAnnotationsArray count is \(self.shepAnnotationsArray.count) \n")
+                self.shepAnnotationsArray.append(contentsOf: validSearchResultsArray)
+                print ("shepSearchResultLoop is done now???, shepAnnotationsArray count is \(self.shepAnnotationsArray.count)")
+                print ("shepSearchResultLoop is done now???, validSearchResultsArray count is \(validSearchResultsArray.count) \n")
+                self.myMapView.addAnnotations(validSearchResultsArray)
+                self.myMapView.showAnnotations(validSearchResultsArray, animated: true)
+                
+                /*
+                 CREATING AN ARRAY BY ADDING TWO ARRAYS TOGETHER
+                 
+                 var threeDoubles = Array(repeating: 0.0, count: 3)
+                 // threeDoubles is of type [Double], and equals [0.0, 0.0, 0.0]
+                 You can create a new array by adding together two existing arrays with compatible types with the addition operator (+). The new array’s type is inferred from the type of the two arrays you add together:
+                 var anotherThreeDoubles = Array(repeating: 2.5, count: 3)
+                 // anotherThreeDoubles is of type [Double], and equals [2.5, 2.5, 2.5]
+                 var sixDoubles = threeDoubles + anotherThreeDoubles
+                 // sixDoubles is inferred as [Double], and equals [0.0, 0.0, 0.0, 2.5, 2.5, 2.5]
+                 */
+                
+                
+                
+                
+                /*  YES, SWIFT HAS THE SET CLASS.
+                 
+                Check if no members same
+                Set1.isDisjointWith(Set2)    Returns true if the two Sequences have no members in common.
+                 
+                 Combine Sets
+                 Set1.union(Set2)    Returns a new Set containing the members of both set1 and set2.
+                 
+                 Combine Sets In Place
+                 Set1.unionInPlace(Set2)    Mutates set2 to add the members of set1 to it.
+                 
+                 Subtract One Set From Another
+                 set2.subtract(entreeSet)    Returns a new Set with the values of entreeSet removed from set2, if they were present.
+                 
+                 Subtract One Set From Another In Place
+                 set2.subtractInPlace(entreeSet)    Mutates the set2 Set to subtract an values that were specified in the entreeSet (like above).
+                 
+                 Create Set of Common Members
+                 moreFoods.intersect(entreeSet)    Returns a new Set with the values that were in common between moreFoods and entreeSet.
+                 
+                 Create Set of Common Members In Place
+                 moreFoods.intersectInPlace(entreeSet)    Mutates the moreFoods Set to perform the intersect method above.
+                 
+                 Create Set of Uncommon Members
+                 moreFoods.exclusiveOr(dessertsSet)    Returns a new Set containing the values that were in either moreFoods or dessertsSet, but NOT both.
+                 
+                 Create Set of Uncommon Members In Place
+                 moreFoods.exclusiveOrInPlace(dessertsSet)    Mutates the moreFoods Set with the result of the exclusiveOr method above.
+                 
+                 ///////////////////////////////////////////////////////
+                 //entreeSet   is {"Salad", "Sandwiches"}
+                 //sameFoodSet is {"Salad", "Chips", "Sandwiches"}
+                 //otherFoods  is {"Quiche", "Donuts"}
+                 
+                 foodSet.contains("Chips")               //returns true
+                 
+                 entreeSet.isSubsetOf(foodSet)           //returns true
+                 sameFoodSet.isStrictSubsetOf(foodSet)   //returns false
+                 
+                 foodSet.isSupersetOf(entreeSet)         //returns true
+                 foodSet.isStrictSupersetOf(sameFoodSet) //returns false
+                 foodSet.isStrictSupersetOf(entreeSet)   //returns true
+                 
+                 foodSet.isDisjointWith(entreeSet)       //returns false
+                 foodSet.isDisjointWith(otherFoods)      //returns true
+                 ///////////////////////////////////////////////////////
+                 
+                let array1 = ["a", "b", "c"]
+                let array2 = ["a", "b", "d"]
+                
+                let set1:Set<String> = Set(array1)
+                let set2:Set<String> = Set(array2)
+                 
+                Swift 3.0+ can do operations on sets as:
+                
+                firstSet.union(secondSet)// Union of two sets
+                firstSet.intersection(secondSet)// Intersection of two sets
+                firstSet.symmetricDifference(secondSet)// exclusiveOr
+                 
+                Swift 2.0 can calculate on array arguments:
+                
+                set1.union(array2)       // {"a", "b", "c", "d"}
+                set1.intersect(array2)   // {"a", "b"}
+                set1.subtract(array2)    // {"c"}
+                set1.exclusiveOr(array2) // {"c", "d"}
+                 
+                Swift 1.2+ can calculate on sets:
+                
+                set1.union(set2)        // {"a", "b", "c", "d"}
+                set1.intersect(set2)    // {"a", "b"}
+                set1.subtract(set2)     // {"c"}
+                set1.exclusiveOr(set2)  // {"c", "d"}
+                 
+                If you're using custom structs, you need to implement Hashable.
+                */
             }
         })
-        print ("opening gambit, shepAnnotationsArray count is \(self.shepAnnotationsArray.count) \n")
+        //print ("opening gambit, validSearchResultsArray count is \(validSearchResultsArray.count) \n")  // validSearchResultsArray doesn't work here
+        print ("opening gambit, shepAnnotationsArray count is \(shepAnnotationsArray.count) \n")
     }
     
     @IBAction func btnHospitalClick(_ sender: AnyObject) {
@@ -282,9 +285,7 @@ class ViewController: UIViewController, MKMapViewDelegate {
         myMapView.removeAnnotations(myMapView.annotations)
         performLocalSearch("Hospital")
         resetTwirlButtons()
-        centerMapOnLocation(location: initialLocation)
-        myMapView.addAnnotations(shepAnnotationsArray)
-        myMapView.showAnnotations(shepAnnotationsArray, animated: true)
+        centerMapOnLocation(location: myUserLocation)
     }
     
     @IBAction func btnTargetClick(_ sender: AnyObject) {
@@ -292,9 +293,7 @@ class ViewController: UIViewController, MKMapViewDelegate {
         myMapView.removeAnnotations(myMapView.annotations)
         performLocalSearch("Target")
         resetTwirlButtons()
-        centerMapOnLocation(location: initialLocation)
-        myMapView.addAnnotations(shepAnnotationsArray)
-        myMapView.showAnnotations(shepAnnotationsArray, animated: true)
+        centerMapOnLocation(location: myUserLocation)
     }
     
     @IBAction func btnGasClick(_ sender: AnyObject) {
@@ -302,23 +301,20 @@ class ViewController: UIViewController, MKMapViewDelegate {
         myMapView.removeAnnotations(myMapView.annotations)
         performLocalSearch("gas station")
         resetTwirlButtons()
-        centerMapOnLocation(location: initialLocation)
-        myMapView.addAnnotations(shepAnnotationsArray)
-        myMapView.showAnnotations(shepAnnotationsArray, animated: true)
+        centerMapOnLocation(location: myUserLocation)
+        print ("in btnGasClick shepAnnotationsArray count is \(shepAnnotationsArray.count) \n")
     }
     
     @IBAction func btnSupermarket(_ sender: AnyObject) {
         print ("in suprmarkclick")
         myMapView.removeAnnotations(myMapView.annotations)
         print ("in btnSupermarket_A shepAnnotationsArray count is \(shepAnnotationsArray.count)")
-        shepAnnotationsArray = []
+        //shepAnnotationsArray = []
         //performLocalSearch("Market Basket")
         performLocalSearch("Stop & Shop")
         print ("in btnSupermarket_B shepAnnotationsArray count is \(shepAnnotationsArray.count) \n")
         resetTwirlButtons()
-        centerMapOnLocation(location: initialLocation)
-        myMapView.addAnnotations(shepAnnotationsArray)
-        myMapView.showAnnotations(shepAnnotationsArray, animated: true)
+        centerMapOnLocation(location: myUserLocation)
     }
     
     @IBAction func btnMenuClick(_ sender: AnyObject) {
@@ -365,23 +361,113 @@ class ViewController: UIViewController, MKMapViewDelegate {
         return manager
     }()
     
-    
     // MARK: didUpdate userLocation NOT YET WORKING
     // Updating the Map View based on User Movement
     func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
         mapView.centerCoordinate = userLocation.location!.coordinate
+        myUserLocation = myMapView.userLocation.location!
     }
     
     //    You have to override CLLocationManager.didUpdateLocations (part of CLLocationManagerDelegate) to get notified when the location manager retrieves the current location:
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         let currentLocation = locations.last as! CLLocation
-        initialLocation = currentLocation
+        myUserLocation = currentLocation
         //let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
         //        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
         //
         //        self.map.setRegion(region, animated: true)
     }
-    /////////////////////
+    
+    func makeDirectionsRoutePolyline (source: ShepSingleAnnotation, destination: ShepSingleAnnotation) {
+        // myMapView.removeAnnotations(myMapView.annotations)
+        //myMapView.removeOverlays(myMapView.overlays)
+        
+        let point1 = MKPointAnnotation()
+        let point2 = MKPointAnnotation()
+        point1.coordinate = CLLocationCoordinate2DMake(source.coordinate.latitude, source.coordinate.longitude)
+        point2.coordinate = CLLocationCoordinate2DMake(destination.coordinate.latitude, destination.coordinate.longitude)
+        let point1_Placemark = MKPlacemark(coordinate: CLLocationCoordinate2DMake(point1.coordinate.latitude, point1.coordinate.longitude), addressDictionary: nil)
+        let point2_Placemark = MKPlacemark(coordinate: CLLocationCoordinate2DMake(point2.coordinate.latitude, point2.coordinate.longitude), addressDictionary: nil)
+        
+        let directionsRequest = MKDirectionsRequest()
+        directionsRequest.source = MKMapItem(placemark: point1_Placemark)
+        directionsRequest.destination = MKMapItem(placemark: point2_Placemark)
+        directionsRequest.transportType = currentTransportType
+        let directions = MKDirections(request: directionsRequest)
+        
+        directions.calculate(completionHandler: {
+            response, error in
+            // response has an array of MKRoutes
+            if error != nil {
+                print ("Directions Retreival Error: \(String(describing: error))")
+            } else {
+                self.myMapView.removeOverlays(self.myMapView.overlays)
+                self.myRoute = response!.routes[0] as MKRoute
+                self.myMapView.add(self.myRoute.polyline)
+                let distance = meters2miles(meters: response!.routes[0].distance) // response distance in meters
+                let drivingTime = ((response!.routes[0].expectedTravelTime) / 60)  //expectedTravelTime is in secs
+                let sourceLocation = CLLocation(latitude: point1.coordinate.latitude, longitude: point1.coordinate.longitude)
+                let destinationLocation = CLLocation(latitude: point2.coordinate.latitude, longitude: point2.coordinate.longitude)
+                let crowFliesDistance = sourceLocation.distance(from: destinationLocation) // result is in meters
+                let distanceInMiles = meters2miles(meters: crowFliesDistance)
+                self.RouteDataView.alpha = 1
+                self.lblCrowFlies.text = "As crow flies: \(String(format: "%.02f", distanceInMiles)) miles"
+                self.lblDrivingDistance.text = "Driving distance: \(String(format: "%.02f", distance)) miles"
+                self.lblDrivingTime.text = "Driving time: \(String(format: "%.02f", drivingTime)) minutes"
+                //self.myMapView.addAnnotation(source)
+                //self.myMapView.addAnnotation(destination)
+            }
+        })
+        
+        //        You need to make a MKDirections request. From calculateDirectionsWithCompletionHandler you will get a MKDirectionsResponse. This has a routes array of MKRoutes. Each route has a distance (i.e. road distance) property.
+        //
+        //        let source = MKMapItem( placemark: MKPlacemark(
+        //            coordinate: CLLocationCoordinate2DMake(-41.27, 173.28),
+        //            addressDictionary: nil))
+        //        let destination = MKMapItem(placemark: MKPlacemark(
+        //            coordinate: CLLocationCoordinate2DMake(-41.11, 173),
+        //            addressDictionary: nil))
+        //        let directionsRequest = MKDirectionsRequest()
+        //        directionsRequest.source = source
+        //        directionsRequest.destination = destination
+        //
+        //        let directions = MKDirections(request: directionsRequest)
+        
+        //        directions.calculateDirectionsWithCompletionHandler { (response, error) -> Void in
+        //            print(error)
+        //            let distance = response!.routes.first?.distance // meters
+        //            print("\(distance! / 1000)km")
+        //        }
+        ///////////////////////////////////////////////////////////////////////////////////
+        
+        //        // let route = routeResponse.routes[0]
+        //        //self.myRoute = route
+        //        self.myMapView.removeOverlays(self.myMapView.overlays)
+        //        self.myMapView.add(self.myRoute.polyline, level: MKOverlayLevel.aboveRoads)
+        //
+        //        var rect = self.myRoute.polyline.boundingMapRect
+        //        //
+        //        // add a margin to the MKCoordinateRegionForMapRect
+        //        rect.size.width = rect.size.width * 1.15
+        //        rect.origin.x = rect.origin.x  - (rect.size.width * 0.07)
+        //        rect.size.height = rect.size.height * 1.15
+        //        rect.origin.y = rect.origin.y  - (rect.size.height * 0.07)
+        //
+        //        self.myMapView.setRegion(MKCoordinateRegionForMapRect(rect), animated: true)
+        
+        let mapRegion1 = MKCoordinateRegionMakeWithDistance(myUserLocation.coordinate, currentDisplayDistance, currentDisplayDistance)
+        myMapView.setRegion(mapRegion1, animated: true)
+    }
+    
+    
+    // directions/polyline related
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        let myLineRenderer = MKPolylineRenderer(polyline: myRoute.polyline)
+        myLineRenderer.strokeColor = UIColor.blue
+        myLineRenderer.lineWidth = 4
+        return myLineRenderer
+    }
+    
     
     func setupCompassButton() {
         let compass = MKCompassButton(mapView: myMapView)
@@ -470,19 +556,27 @@ class ViewController: UIViewController, MKMapViewDelegate {
         // "Setting ViewController as the delegate of the map view.  You can do this in Main.storyboard, but I prefer to do it in code, where it’s more visible."
         myMapView.delegate = self
         
-        print ("in ***viewDidLoad *** shepAnnotationsArray count is \(self.shepAnnotationsArray.count) \n")
-        myMapView.addAnnotations(shepAnnotationsArray)
+        SearchDistanceSlider.value = Float(currentSearchDistance)
+        
+        print ("in ***viewDidLoad *** shepAnnotationsArray count is \(shepAnnotationsArray.count) \n")
+        //print ("in ***viewDidLoad Current search distance: \(meters2miles(meters: self.currentSearchDistance))")
+        //btnGasClick(_: self)
+        performLocalSearch("gas station") //INITIAL ONE SOMETHING GOES WRONG WITH SEARCH REGION -- BUT I CAN'T FIND IT
+        print ("in viewDidLoad AFTER SEARCH shepAnnotationsArray count is \(shepAnnotationsArray.count)")
+        print ("in ***viewDidLoad AFTER SEARCH Current search distance: \(meters2miles(meters: self.currentSearchDistance))")
         myMapView.showAnnotations(shepAnnotationsArray, animated: true)
         
         
         //MARK: USER LOCATION STUFF NOT YET WORKING
-        if let myInitialLocation = myMapView.userLocation.location {
-            initialLocation = myInitialLocation
-        } else {
+        if myMapView.userLocation.location == nil {
+            //myUserLocation = myUserLocation
+            print ("myUserLocation was nil, setting it to THOMPSON")
+            myUserLocation = CLLocation(latitude: 41.9360805, longitude: -71.7978248) // THOMPSON_GPS
             //myUserLocation = CLLocation(latitude: 21.282778, longitude: -157.829444) // Honolulu
-            initialLocation = CLLocation(latitude: 41.9360805, longitude: -71.7978248) // THOMPSON_GPS
+        } else {
+            print("in viewDidLoad my userLocation was: \(String(describing: myMapView.userLocation.location))")
         }
-        centerMapOnLocation(location: initialLocation)
+        centerMapOnLocation(location: myUserLocation)
         
         // ----
         self.btnMenu.alpha = 0

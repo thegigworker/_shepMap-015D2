@@ -41,7 +41,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     
     let locationManager = CLLocationManager()
-    let initialLocation = CLLocation(latitude: THOMPSON_GPS.latitude, longitude: THOMPSON_GPS.longitude)
+    let myUserLocation = CLLocation(latitude: THOMPSON_GPS.latitude, longitude: THOMPSON_GPS.longitude)
     // search range?
     let initialDistance = CLLocationDistance(20000)
     var mySubtitleString: String = ""
@@ -50,13 +50,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         super.viewDidLoad()
         
         // create region for map
-        let region1 = MKCoordinateRegionMakeWithDistance(initialLocation.coordinate, initialDistance, initialDistance)
+        let region1 = MKCoordinateRegionMakeWithDistance(myUserLocation.coordinate, initialDistance, initialDistance)
         myMapView.setRegion(region1, animated: true)
         
         performLocalSearch("park")
         
         // create region
-        //        let region2 = MKCoordinateRegionMakeWithDistance(initialLocation.coordinate, initialDistance, initialDistance)
+        //        let region2 = MKCoordinateRegionMakeWithDistance(myUserLocation.coordinate, initialDistance, initialDistance)
         //        myMapView.setRegion(region2, animated: true)
         
         
@@ -78,7 +78,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         // 搜索当前区域
         // search radius
         let span = MKCoordinateSpanMake(0.09, 0.09)
-        request.region = MKCoordinateRegion(center: initialLocation.coordinate, span: span)
+        request.region = MKCoordinateRegion(center: myUserLocation.coordinate, span: span)
         //启动搜索,并且把返回结果保存到数组中
         let search = MKLocalSearch(request: request)
         search.start { (response, error) -> Void in
