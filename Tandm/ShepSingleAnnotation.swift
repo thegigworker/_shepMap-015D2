@@ -13,21 +13,23 @@ import Contacts
 //and inform the map how the annotation should be displayed.
 class ShepSingleAnnotation: NSObject, MKAnnotation {
     let origTitle: String?
-    let locationName: String
+    //let locationName: String
     //let discipline: String
     let coordinate: CLLocationCoordinate2D
     let shepsVariable: Double
     let shepStringData: String
+    var myMapItem: MKMapItem
     
-    init(searchResult: MKMapItem, shepPassedVariable: Double, shepPassedString: String) {
-        self.origTitle = searchResult.name ?? "No Title"
-        self.locationName = searchResult.name! //searchResult.description
+    init(myMapItem: MKMapItem, shepPassedVariable: Double, shepPassedString: String) {
+        self.origTitle = myMapItem.name ?? "No Title"
+        //self.locationName = myMapItem.name! //searchResult.description
         self.shepsVariable = shepPassedVariable
+        self.myMapItem = myMapItem
         self.shepStringData = shepCurrencyFromDouble(shepNumber: self.shepsVariable)
 //        self.shepsVariable = Double(arc4random_uniform(25) + 1)
 //        self.shepStringData = shepCurrencyFromDouble(shepNumber: self.shepsVariable)
-        let latitude = searchResult.placemark.coordinate.latitude
-        let longitude = searchResult.placemark.coordinate.longitude
+        let latitude = myMapItem.placemark.coordinate.latitude
+        let longitude = myMapItem.placemark.coordinate.longitude
         self.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         super.init()
     }
@@ -58,8 +60,26 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
     }
     
     var subtitle: String? {
-        return "Shep subtitle:  " + locationName
+        // takes the placemark.title string, which is really the address line, and cuts off the last 15 chars: ", United States"
+        return String(myMapItem.placemark.title!.dropLast(_:15))
     }
+    
+    var crowFliesDistance: String? {
+        let myLocation = CLLocation(latitude: self.coordinate.latitude, longitude: self.coordinate.longitude)
+        let distance = myUserLocation.distance(from: myLocation) // result is in meters
+        let distanceInMiles = meters2miles(meters: distance)
+        return String(format: "%.02f", distanceInMiles)
+    }
+    
+//    let searchResultCoordinates = item.placemark.coordinate
+//    let searchResultLocation = CLLocation(latitude: searchResultCoordinates.latitude, longitude: searchResultCoordinates.longitude)
+//    let mapItemDistance = myUserLocation.distance(from: searchResultLocation) // result is in meters
+//    //let distanceInMiles = meters2miles(meters: mapItemDistance)
+    
+//    let crowFliesDistance = sourceLocation.distance(from: destinationLocation) // result is in meters
+//    let distanceInMiles = meters2miles(meters: crowFliesDistance)
+//    self.lblCrowFlies.text = "As crow flies: \(String(format: "%.02f", distanceInMiles)) miles"
+    
     
     // Annotation right callout accessory opens this mapItem in Maps app
     // Here you create an MKMapItem from an MKPlacemark. The Maps app is able to read this MKMapItem, and display the right thing.
@@ -77,7 +97,7 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
         case 0..<1:
             return .black
         case 1..<5:
-            return .orange
+            return .red
         case 5..<10:
             return .orange
         case 10..<25:

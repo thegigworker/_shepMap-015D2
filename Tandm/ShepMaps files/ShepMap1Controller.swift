@@ -18,9 +18,9 @@ class ShepMap1ViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var myMapView: MKMapView!
     @IBOutlet weak var btnHospital: UIButton!
     @IBOutlet weak var btnTarget: UIButton!
-    @IBOutlet weak var btnMall: UIButton!
-    @IBOutlet weak var btnSupermarket: UIButton!
-    @IBOutlet weak var btnMenu: UIButton!
+    @IBOutlet weak var btnGas: UIButton!
+    @IBOutlet weak var btnPizza: UIButton!
+    @IBOutlet weak var btnTwirlMenu: UIButton!
 
     
     @IBAction func btnHospitalClick(_ sender: AnyObject) {
@@ -42,7 +42,7 @@ class ShepMap1ViewController: UIViewController, CLLocationManagerDelegate {
         reset()
     }
     
-    @IBAction func btnSupermarket(_ sender: AnyObject) {
+    @IBAction func btnPizza(_ sender: AnyObject) {
         myMapView.removeAnnotations(myMapView.annotations)
         performLocalSearch("Stop & Shop")
         reset()
@@ -53,10 +53,10 @@ class ShepMap1ViewController: UIViewController, CLLocationManagerDelegate {
 //    // search range
 //    let initialDistance = CLLocationDistance(20000)
     
-    @IBAction func btnMenuClick(_ sender: AnyObject) {
+    @IBAction func twirlButtonTapped(_ sender: AnyObject) {
         
         UIView.animate(withDuration: 0.1, delay: 0.05, options: UIViewAnimationOptions.curveEaseOut, animations: {
-            self.btnMenu.transform = CGAffineTransform(rotationAngle: 0)
+            self.btnTwirlMenu.transform = CGAffineTransform(rotationAngle: 0)
             
             self.btnTarget.alpha = 0.8
             self.btnTarget.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: -50, y: -25))
@@ -64,11 +64,11 @@ class ShepMap1ViewController: UIViewController, CLLocationManagerDelegate {
             self.btnHospital.alpha = 0.8
             self.btnHospital.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: -100, y: 30))
             
-            self.btnSupermarket.alpha = 0.8
-            self.btnSupermarket.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: 80, y: 10))
+            self.btnPizza.alpha = 0.8
+            self.btnPizza.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: 80, y: 10))
             
-            self.btnMall.alpha = 0.8
-            self.btnMall.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: 100, y: -50))
+            self.btnGas.alpha = 0.8
+            self.btnGas.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: 100, y: -50))
         }, completion: nil)
         
     }
@@ -82,21 +82,21 @@ class ShepMap1ViewController: UIViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.btnMenu.alpha = 0
+        self.btnTwirlMenu.alpha = 0
         self.btnTarget.alpha = 0
         self.btnHospital.alpha = 0
-        self.btnSupermarket.alpha = 0
-        self.btnMall.alpha = 0
+        self.btnPizza.alpha = 0
+        self.btnGas.alpha = 0
         
         self.btnHospital.layer.cornerRadius = 10
         self.btnTarget.layer.cornerRadius = 10
-        self.btnSupermarket.layer.cornerRadius = 10
-        self.btnMall.layer.cornerRadius = 10
-        self.btnMenu.layer.cornerRadius = 10
+        self.btnPizza.layer.cornerRadius = 10
+        self.btnGas.layer.cornerRadius = 10
+        self.btnTwirlMenu.layer.cornerRadius = 10
         
         UIView.animate(withDuration: 0.1, delay: 0.1, options: UIViewAnimationOptions.curveEaseOut, animations: {
-            self.btnMenu.alpha = 1
-            self.btnMenu.transform = CGAffineTransform(rotationAngle: 0.25*3.1415927)
+            self.btnTwirlMenu.alpha = 1
+            self.btnTwirlMenu.transform = CGAffineTransform(rotationAngle: 0.25*3.1415927)
         }, completion: nil)
         
         // create region for map
@@ -177,7 +177,7 @@ class ShepMap1ViewController: UIViewController, CLLocationManagerDelegate {
     func reset(){
         
         UIView.animate(withDuration: 0.2, delay: 0.2, options: UIViewAnimationOptions.curveEaseOut, animations: {
-            self.btnMenu.transform = CGAffineTransform(rotationAngle: 0.25*3.1415927)
+            self.btnTwirlMenu.transform = CGAffineTransform(rotationAngle: 0.25*3.1415927)
             
             self.btnTarget.alpha = 0
             self.btnTarget.transform = CGAffineTransform(scaleX: 1, y: 1).concatenating(CGAffineTransform(translationX: 0, y: 0))
@@ -185,11 +185,11 @@ class ShepMap1ViewController: UIViewController, CLLocationManagerDelegate {
             self.btnHospital.alpha = 0
             self.btnHospital.transform = CGAffineTransform(scaleX: 1, y: 1).concatenating(CGAffineTransform(translationX: 0, y: 0))
             
-            self.btnSupermarket.alpha = 0
-            self.btnSupermarket.transform = CGAffineTransform(scaleX: 1, y: 1).concatenating(CGAffineTransform(translationX: 0, y: 0))
+            self.btnPizza.alpha = 0
+            self.btnPizza.transform = CGAffineTransform(scaleX: 1, y: 1).concatenating(CGAffineTransform(translationX: 0, y: 0))
             
-            self.btnMall.alpha = 0
-            self.btnMall.transform = CGAffineTransform(scaleX: 1, y: 1).concatenating(CGAffineTransform(translationX: 0, y: 0))
+            self.btnGas.alpha = 0
+            self.btnGas.transform = CGAffineTransform(scaleX: 1, y: 1).concatenating(CGAffineTransform(translationX: 0, y: 0))
         }, completion: nil)
         
     }

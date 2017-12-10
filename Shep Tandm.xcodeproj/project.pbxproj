@@ -26,6 +26,7 @@
 		A1A190A61FB0D4BA00B030D8 /* ShepMap2DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A190A31FB0D4BA00B030D8 /* ShepMap2DataSource.swift */; };
 		A1A190A71FB0D4BA00B030D8 /* ShepMap2SingleAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A190A41FB0D4BA00B030D8 /* ShepMap2SingleAnnotation.swift */; };
 		A1D66C211FD0995B0036EDAC /* SingleAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D66C201FD0995B0036EDAC /* SingleAnnotationView.swift */; };
+		A1FFDE741FDCBD960048F1FD /* MyFirstTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FFDE731FDCBD960048F1FD /* MyFirstTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +54,7 @@
 		A1A190A31FB0D4BA00B030D8 /* ShepMap2DataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShepMap2DataSource.swift; sourceTree = "<group>"; };
 		A1A190A41FB0D4BA00B030D8 /* ShepMap2SingleAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShepMap2SingleAnnotation.swift; sourceTree = "<group>"; };
 		A1D66C201FD0995B0036EDAC /* SingleAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleAnnotationView.swift; sourceTree = "<group>"; };
+		A1FFDE731FDCBD960048F1FD /* MyFirstTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFirstTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 				9F1680731ECF57AC008B3B25 /* ClusterView.swift */,
 				9F7038351EA835EB00DA5564 /* Assets.xcassets */,
 				9F7038321EA835EB00DA5564 /* Main.storyboard */,
+				A1FFDE731FDCBD960048F1FD /* MyFirstTableViewController.swift */,
 				9F7038371EA835EB00DA5564 /* LaunchScreen.storyboard */,
 				9F70383A1EA835EB00DA5564 /* Info.plist */,
 				9FB957461ECF67850080CB0C /* Data.plist */,
@@ -215,6 +218,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1FFDE741FDCBD960048F1FD /* MyFirstTableViewController.swift in Sources */,
 				9F7038311EA835EB00DA5564 /* ShepTandmViewController.swift in Sources */,
 				A1A190A71FB0D4BA00B030D8 /* ShepMap2SingleAnnotation.swift in Sources */,
 				9F70382F1EA835EB00DA5564 /* AppDelegate.swift in Sources */,

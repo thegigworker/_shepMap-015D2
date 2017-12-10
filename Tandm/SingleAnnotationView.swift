@@ -17,6 +17,57 @@ import MapKit
  As with any custom drawing you do in a view, always consider performance before choosing an approach. Although custom drawing gives you the most flexibility, using images can be faster, especially if most of your content is fixed.
  */
 
+
+/*  CUSTOM FONT FOR MKANNOTATIONVIEW CALLOUT
+ You have to call setNeedsLayout() on didAddSubview() because otherwise when you deselect and reselect the annotation layoutSubviews() is not called and the callout has its old font.
+ 
+ // elsewhere, in a category on UIView.
+ // thanks to this answer: http://stackoverflow.com/a/25877372/607876
+ 
+ typealias ViewBlock = (view : UIView) -> Bool
+ 
+ extension UIView {
+ func loopViewHierarchy(block : ViewBlock?) {
+ 
+ if block?(view: self) ?? true {
+ for subview in subviews {
+ subview.loopViewHierarchy(block)
+ }
+ }
+ }
+ }
+ 
+ // then, in your MKAnnotationView subclass
+ 
+ class CustomFontAnnotationView : MKAnnotationView {
+ 
+ override func didAddSubview(subview: UIView) {
+ if selected {
+ setNeedsLayout()
+ }
+ }
+ 
+ override func layoutSubviews() {
+ 
+ // MKAnnotationViews only have subviews if they've been selected.
+ // short-circuit if there's nothing to loop over
+ 
+ if !selected {
+ return
+ }
+ 
+ loopViewHierarchy({(view : UIView) -> Bool in
+ if let label = view as? UILabel {
+ label.font = labelFont
+ return false
+ }
+ return true
+ })
+ }
+ }
+
+ */
+
 class SingleAnnotationView: MKMarkerAnnotationView {
     override var annotation: MKAnnotation? {
         willSet {

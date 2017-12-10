@@ -3,12 +3,21 @@
 
 import UIKit
 import MapKit
+import Contacts
+// This adds the Contacts framework, which contains dictionary key constants such as CNPostalAddressStreetKey,
+// for when you need to set the address, city or state fields of a location.
 
-let THOMPSON_GPS = (latitude: 41.9360805, longitude: -71.7978248)
-let HARTFORD_GPS = (latitude: 41.767603, longitude: -72.684036)
-// Yankee Stadium:  40.830304, -73.926089
-// let myUserLocation = CLLocation(latitude: 21.282778, longitude: -157.829444) // Honolulu
-// var myUserLocation = CLLocation(latitude: THOMPSON_GPS.latitude, longitude: THOMPSON_GPS.longitude)
+let THOMPSON_GPS = (latitude: 41.93636, longitude: -71.79837)
+//HARTFORD_GPS = (latitude: 41.767603, longitude: -72.684036)
+//109 Pixley Ave, Corte Madera, CA.  37.928940, -122.526666
+//Transamerica Pyramid,  San Francisco, CA.  37.795315, -122.402833
+//Yankee Stadium:  40.830304, -73.926089// Honolulu    CLLocation(latitude: 21.282778, longitude: -157.829444)
+//Wrigley Field, Chicago, IL.   41.948450, -87.655329
+//The Alamo, Alamo Plaza, San Antonio, TX.    29.425976, -98.486139
+//Supreme Court Building, Washington, DC.  38.890734, -77.004214
+//Kurt Cobain's House: 151 Lake Washington Blvd E, Seattle  47.619281, -122.282161
+//Sarah Palin's street in Wasilla, Alaska   61.577718, -149.492511
+
 
 var myUserLocation: CLLocation = CLLocation()
 let initialDisplay: Double = 20
@@ -43,9 +52,11 @@ class ViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var myMapView: MKMapView!
     @IBOutlet weak var btnHospital: UIButton!
     @IBOutlet weak var btnTarget: UIButton!
-    @IBOutlet weak var btnMall: UIButton!
-    @IBOutlet weak var btnSupermarket: UIButton!
-    @IBOutlet weak var btnMenu: UIButton!
+    @IBOutlet weak var btnGas: UIButton!
+    @IBOutlet weak var btnPizza: UIButton!
+    @IBOutlet weak var btnPark: UIButton!
+    @IBOutlet weak var btnMcD: UIButton!
+    @IBOutlet weak var btnTwirlMenu: UIButton!
     @IBOutlet weak var shepDoThingBtn: UIButton!
 
     @IBOutlet weak var DisplayDistanceSlider: UISlider!
@@ -114,7 +125,89 @@ class ViewController: UIViewController, MKMapViewDelegate {
         } else { print ("less than 2 items in shepAnnotationsArray") }
     }
     
+    func makeDirectionsRoutePolyline (source: ShepSingleAnnotation, destination: ShepSingleAnnotation) {
+        // myMapView.removeAnnotations(myMapView.annotations)
+        //myMapView.removeOverlays(myMapView.overlays)
+        
+        let point1 = MKPointAnnotation()
+        let point2 = MKPointAnnotation()
+        point1.coordinate = CLLocationCoordinate2DMake(source.coordinate.latitude, source.coordinate.longitude)
+        point2.coordinate = CLLocationCoordinate2DMake(destination.coordinate.latitude, destination.coordinate.longitude)
+        let point1_Placemark = MKPlacemark(coordinate: CLLocationCoordinate2DMake(point1.coordinate.latitude, point1.coordinate.longitude), addressDictionary: nil)
+        let point2_Placemark = MKPlacemark(coordinate: CLLocationCoordinate2DMake(point2.coordinate.latitude, point2.coordinate.longitude), addressDictionary: nil)
+        
+        let directionsRequest = MKDirectionsRequest()
+        directionsRequest.source = MKMapItem(placemark: point1_Placemark)
+        directionsRequest.destination = MKMapItem(placemark: point2_Placemark)
+        directionsRequest.transportType = currentTransportType
+        let directions = MKDirections(request: directionsRequest)
+        
+        directions.calculate(completionHandler: {
+            response, error in
+            // response has an array of MKRoutes
+            if error != nil {
+                print ("Directions Retreival Error: \(String(describing: error))")
+            } else {
+                self.myMapView.removeOverlays(self.myMapView.overlays)
+                self.myRoute = response!.routes[0] as MKRoute
+                self.myMapView.add(self.myRoute.polyline)
+                let distance = meters2miles(meters: response!.routes[0].distance) // response distance in meters
+                let drivingTime = ((response!.routes[0].expectedTravelTime) / 60)  //expectedTravelTime is in secs
+                let sourceLocation = CLLocation(latitude: point1.coordinate.latitude, longitude: point1.coordinate.longitude)
+                let destinationLocation = CLLocation(latitude: point2.coordinate.latitude, longitude: point2.coordinate.longitude)
+                let crowFliesDistance = sourceLocation.distance(from: destinationLocation) // result is in meters
+                let distanceInMiles = meters2miles(meters: crowFliesDistance)
+                self.RouteDataView.alpha = 1
+                self.lblCrowFlies.text = "As crow flies: \(String(format: "%.02f", distanceInMiles)) miles"
+                self.lblDrivingDistance.text = "Driving distance: \(String(format: "%.02f", distance)) miles"
+                self.lblDrivingTime.text = "Driving time: \(String(format: "%.02f", drivingTime)) minutes"
+            }
+        })
+        
+        let mapRegion1 = MKCoordinateRegionMakeWithDistance(myUserLocation.coordinate, currentDisplayDistance, currentDisplayDistance)
+        myMapView.setRegion(mapRegion1, animated: true)
+    }
+    
+        //        You need to make a MKDirections request. From calculateDirectionsWithCompletionHandler you will get a MKDirectionsResponse. This has a routes array of MKRoutes. Each route has a distance (i.e. road distance) property.
+        //
+        //        let source = MKMapItem( placemark: MKPlacemark(
+        //            coordinate: CLLocationCoordinate2DMake(-41.27, 173.28),
+        //            addressDictionary: nil))
+        //        let destination = MKMapItem(placemark: MKPlacemark(
+        //            coordinate: CLLocationCoordinate2DMake(-41.11, 173),
+        //            addressDictionary: nil))
+        //        let directionsRequest = MKDirectionsRequest()
+        //        directionsRequest.source = source
+        //        directionsRequest.destination = destination
+        //
+        //        let directions = MKDirections(request: directionsRequest)
+        
+        //        directions.calculateDirectionsWithCompletionHandler { (response, error) -> Void in
+        //            print(error)
+        //            let distance = response!.routes.first?.distance // meters
+        //            print("\(distance! / 1000)km")
+        //        }
+        ///////////////////////////////////////////////////////////////////////////////////
+        
+        //        // let route = routeResponse.routes[0]
+        //        //self.myRoute = route
+        //        self.myMapView.removeOverlays(self.myMapView.overlays)
+        //        self.myMapView.add(self.myRoute.polyline, level: MKOverlayLevel.aboveRoads)
+        //
+        //        var rect = self.myRoute.polyline.boundingMapRect
+        //        //
+        //        // add a margin to the MKCoordinateRegionForMapRect
+        //        rect.size.width = rect.size.width * 1.15
+        //        rect.origin.x = rect.origin.x  - (rect.size.width * 0.07)
+        //        rect.size.height = rect.size.height * 1.15
+        //        rect.origin.y = rect.origin.y  - (rect.size.height * 0.07)
+        //
+        //        self.myMapView.setRegion(MKCoordinateRegionForMapRect(rect), animated: true)
+        
 
+
+    
+    //
     // 搜索
     func performLocalSearch(_ searchString:String) {
         //shepAnnotationsArray.removeAll()
@@ -144,48 +237,36 @@ class ViewController: UIViewController, MKMapViewDelegate {
                 //The code in the completion handler checks the response to make sure that matches were found
                 //and then accesses the mapItems property of the response which contains an array of mapItem instances for the matching locations.
                 shepSearchResultLoop: for item in response!.mapItems {
-                    // print("Name = \(String(describing: item.name!))")
-                    //print("Description = \(String(describing: item.description)) \n")
-                    //print("Placemark = \(String(describing: item.placemark)) \n")
-                    //self.myArray_MKMapItems.append(item as MKMapItem)
-                    
-                    let annotation = MKPointAnnotation()
-                    // let annotation: MKAnnotation?
-                    annotation.coordinate = item.placemark.coordinate
-                    // print("Annotation.coordinate = \(String(describing: item.placemark.coordinate)) \n")
-                    let searchResultCoordinates = annotation.coordinate
+                    let searchResultCoordinates = item.placemark.coordinate
                     let searchResultLocation = CLLocation(latitude: searchResultCoordinates.latitude, longitude: searchResultCoordinates.longitude)
                     let mapItemDistance = myUserLocation.distance(from: searchResultLocation) // result is in meters
                     //let distanceInMiles = meters2miles(meters: mapItemDistance)
                     print ("Current search distance: \(meters2miles(meters: self.currentSearchDistance)) and this distance: \(meters2miles(meters: mapItemDistance))")
-                    //print ("Search distance: \(self.currentSearchDistance) and this distance: \(mapItemDistance) \n")
-                    if mapItemDistance > self.currentSearchDistance {
-                        print ("took one down")
+                    
+                    if mapItemDistance > self.currentSearchDistance {  // if SearchResult is further away than currentSearchDistance
+                        print ("took one down, too far away")
                         continue shepSearchResultLoop
                     } else {
-                        annotation.title = item.name
-                        // ---> self.myMapView.addAnnotation(annotation)  //<-----
-                        
-                        //  self.addAnnotation(item.name!, subtitle: self.mySubtitleString, latitude: (item.placemark.location?.coordinate.latitude)!, longitude: (item.placemark.location?.coordinate.longitude)!)
-                        
                         let shepPassedVariable = Double(arc4random_uniform(40) + 1)
                         let shepPassedString = shepCurrencyFromDouble(shepNumber: shepPassedVariable)
-                        let validResult = ShepSingleAnnotation(searchResult: item, shepPassedVariable: shepPassedVariable, shepPassedString: shepPassedString)
+                        let validResult = ShepSingleAnnotation(myMapItem: item, shepPassedVariable: shepPassedVariable, shepPassedString: shepPassedString)
                         validSearchResultsArray.append(validResult)
-                        print ("inside shepSearchResultLoop shepAnnotationsArray count: \(self.shepAnnotationsArray.count)")
-                        print ("inside shepSearchResultLoop validSearchResultsArray count: \(validSearchResultsArray.count)")
                     }
-                    print ("still inside shepSearchResultLoop validSearchResultsArray count: \(validSearchResultsArray.count)")
-                    print ("still inside shepSearchResultLoop?, shepAnnotationsArray count is \(self.shepAnnotationsArray.count) \n")
+                    print ("still inside shepSearchResultLoop?, shepAnnotationsArray count is \(self.shepAnnotationsArray.count)")
+                    print ("still inside shepSearchResultLoop? validSearchResultsArray count: \(validSearchResultsArray.count) \n")
                 }
                 self.shepAnnotationsArray.append(contentsOf: validSearchResultsArray)
                 print ("shepSearchResultLoop is done now???, shepAnnotationsArray count is \(self.shepAnnotationsArray.count)")
                 print ("shepSearchResultLoop is done now???, validSearchResultsArray count is \(validSearchResultsArray.count) \n")
                 self.myMapView.addAnnotations(validSearchResultsArray)
                 self.myMapView.showAnnotations(validSearchResultsArray, animated: true)
+            }
+        })
+        //print ("opening gambit, validSearchResultsArray count is \(validSearchResultsArray.count) \n")  // validSearchResultsArray doesn't work here
+        print ("OPENING GAMBIT, shepAnnotationsArray count is \(shepAnnotationsArray.count) \n")
+    }
                 
-                /*
-                 CREATING AN ARRAY BY ADDING TWO ARRAYS TOGETHER
+                /*  CREATING AN ARRAY BY ADDING TWO ARRAYS TOGETHER
                  
                  var threeDoubles = Array(repeating: 0.0, count: 3)
                  // threeDoubles is of type [Double], and equals [0.0, 0.0, 0.0]
@@ -195,9 +276,7 @@ class ViewController: UIViewController, MKMapViewDelegate {
                  var sixDoubles = threeDoubles + anotherThreeDoubles
                  // sixDoubles is inferred as [Double], and equals [0.0, 0.0, 0.0, 2.5, 2.5, 2.5]
                  */
-                
-                
-                
+    
                 
                 /*  YES, SWIFT HAS THE SET CLASS.
                  
@@ -274,15 +353,10 @@ class ViewController: UIViewController, MKMapViewDelegate {
                  
                 If you're using custom structs, you need to implement Hashable.
                 */
-            }
-        })
-        //print ("opening gambit, validSearchResultsArray count is \(validSearchResultsArray.count) \n")  // validSearchResultsArray doesn't work here
-        print ("opening gambit, shepAnnotationsArray count is \(shepAnnotationsArray.count) \n")
-    }
     
     @IBAction func btnHospitalClick(_ sender: AnyObject) {
         print ("in Hospclick")
-        myMapView.removeAnnotations(myMapView.annotations)
+        //myMapView.removeAnnotations(myMapView.annotations)
         performLocalSearch("Hospital")
         resetTwirlButtons()
         centerMapOnLocation(location: myUserLocation)
@@ -290,7 +364,7 @@ class ViewController: UIViewController, MKMapViewDelegate {
     
     @IBAction func btnTargetClick(_ sender: AnyObject) {
         print ("in targetclick")
-        myMapView.removeAnnotations(myMapView.annotations)
+        //myMapView.removeAnnotations(myMapView.annotations)
         performLocalSearch("Target")
         resetTwirlButtons()
         centerMapOnLocation(location: myUserLocation)
@@ -298,58 +372,79 @@ class ViewController: UIViewController, MKMapViewDelegate {
     
     @IBAction func btnGasClick(_ sender: AnyObject) {
         print ("in gasclick")
-        myMapView.removeAnnotations(myMapView.annotations)
+        //myMapView.removeAnnotations(myMapView.annotations)
         performLocalSearch("gas station")
         resetTwirlButtons()
         centerMapOnLocation(location: myUserLocation)
         print ("in btnGasClick shepAnnotationsArray count is \(shepAnnotationsArray.count) \n")
     }
     
-    @IBAction func btnSupermarket(_ sender: AnyObject) {
+    @IBAction func btnMcDClick(_ sender: AnyObject) {
+        print ("in McDClick")
+        //myMapView.removeAnnotations(myMapView.annotations)
+        performLocalSearch("McDonalds")
+        resetTwirlButtons()
+        centerMapOnLocation(location: myUserLocation)
+        print ("in btnGasClick shepAnnotationsArray count is \(shepAnnotationsArray.count) \n")
+    }
+    
+    @IBAction func btnParkClick(_ sender: AnyObject) {
+        print ("in McDClick")
+        //myMapView.removeAnnotations(myMapView.annotations)
+        performLocalSearch("Park")
+        resetTwirlButtons()
+        centerMapOnLocation(location: myUserLocation)
+        print ("in btnPark shepAnnotationsArray count is \(shepAnnotationsArray.count) \n")
+    }
+    
+    @IBAction func btnPizza(_ sender: AnyObject) {
         print ("in suprmarkclick")
-        myMapView.removeAnnotations(myMapView.annotations)
-        print ("in btnSupermarket_A shepAnnotationsArray count is \(shepAnnotationsArray.count)")
-        //shepAnnotationsArray = []
+        //myMapView.removeAnnotations(myMapView.annotations)
+        print ("in btnPizza_A shepAnnotationsArray count is \(shepAnnotationsArray.count)")
         //performLocalSearch("Market Basket")
-        performLocalSearch("Stop & Shop")
-        print ("in btnSupermarket_B shepAnnotationsArray count is \(shepAnnotationsArray.count) \n")
+       // performLocalSearch("Stop & Shop")
+        //performLocalSearch("Safeway")
+        performLocalSearch("pizza")
+        print ("in btnPizza_B shepAnnotationsArray count is \(shepAnnotationsArray.count) \n")
         resetTwirlButtons()
         centerMapOnLocation(location: myUserLocation)
     }
     
-    @IBAction func btnMenuClick(_ sender: AnyObject) {
+    @IBAction func twirlButtonTapped(_ sender: AnyObject) {
         UIView.animate(withDuration: 0.1, delay: 0.05, options: UIViewAnimationOptions.curveEaseOut, animations: {
-            self.btnMenu.transform = CGAffineTransform(rotationAngle: 0)
+            self.btnTwirlMenu.transform = CGAffineTransform(rotationAngle: 0)
             
             self.btnTarget.alpha = 0.8
-            self.btnTarget.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: -50, y: -25))
-            
+            self.btnTarget.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: -50, y: -22))
             self.btnHospital.alpha = 0.8
             self.btnHospital.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: -100, y: 30))
-            
-            self.btnSupermarket.alpha = 0.8
-            self.btnSupermarket.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: 80, y: 10))
-            
-            self.btnMall.alpha = 0.8
-            self.btnMall.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: 100, y: -50))
+            self.btnPizza.alpha = 0.8
+            self.btnPizza.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: 80, y: 20))
+            self.btnGas.alpha = 0.8
+            self.btnGas.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: 100, y: -35))
+            self.btnPark.alpha = 0.8
+            self.btnPark.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: 20, y: -80))
+            self.btnMcD.alpha = 0.8
+            self.btnMcD.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: -115, y: -70))
         }, completion: nil)
     }
     
     func resetTwirlButtons() {
         UIView.animate(withDuration: 0.2, delay: 0.2, options: UIViewAnimationOptions.curveEaseOut, animations: {
-            self.btnMenu.transform = CGAffineTransform(rotationAngle: 0.25*3.1415927)
+            self.btnTwirlMenu.transform = CGAffineTransform(rotationAngle: 0.25*3.1415927)
             
             self.btnTarget.alpha = 0
             self.btnTarget.transform = CGAffineTransform(scaleX: 1, y: 1).concatenating(CGAffineTransform(translationX: 0, y: 0))
-            
             self.btnHospital.alpha = 0
             self.btnHospital.transform = CGAffineTransform(scaleX: 1, y: 1).concatenating(CGAffineTransform(translationX: 0, y: 0))
-            
-            self.btnSupermarket.alpha = 0
-            self.btnSupermarket.transform = CGAffineTransform(scaleX: 1, y: 1).concatenating(CGAffineTransform(translationX: 0, y: 0))
-            
-            self.btnMall.alpha = 0
-            self.btnMall.transform = CGAffineTransform(scaleX: 1, y: 1).concatenating(CGAffineTransform(translationX: 0, y: 0))
+            self.btnPizza.alpha = 0
+            self.btnPizza.transform = CGAffineTransform(scaleX: 1, y: 1).concatenating(CGAffineTransform(translationX: 0, y: 0))
+            self.btnGas.alpha = 0
+            self.btnGas.transform = CGAffineTransform(scaleX: 1, y: 1).concatenating(CGAffineTransform(translationX: 0, y: 0))
+            self.btnPark.alpha = 0.0
+            self.btnPark.transform = CGAffineTransform(scaleX: 1, y: 1).concatenating(CGAffineTransform(translationX: 0, y: 0))
+            self.btnMcD.alpha = 0.0
+            self.btnMcD.transform = CGAffineTransform(scaleX: 1, y: 1).concatenating(CGAffineTransform(translationX: 0, y: 0))
         }, completion: nil)
     }
     
@@ -361,7 +456,6 @@ class ViewController: UIViewController, MKMapViewDelegate {
         return manager
     }()
     
-    // MARK: didUpdate userLocation NOT YET WORKING
     // Updating the Map View based on User Movement
     func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
         mapView.centerCoordinate = userLocation.location!.coordinate
@@ -378,86 +472,7 @@ class ViewController: UIViewController, MKMapViewDelegate {
         //        self.map.setRegion(region, animated: true)
     }
     
-    func makeDirectionsRoutePolyline (source: ShepSingleAnnotation, destination: ShepSingleAnnotation) {
-        // myMapView.removeAnnotations(myMapView.annotations)
-        //myMapView.removeOverlays(myMapView.overlays)
-        
-        let point1 = MKPointAnnotation()
-        let point2 = MKPointAnnotation()
-        point1.coordinate = CLLocationCoordinate2DMake(source.coordinate.latitude, source.coordinate.longitude)
-        point2.coordinate = CLLocationCoordinate2DMake(destination.coordinate.latitude, destination.coordinate.longitude)
-        let point1_Placemark = MKPlacemark(coordinate: CLLocationCoordinate2DMake(point1.coordinate.latitude, point1.coordinate.longitude), addressDictionary: nil)
-        let point2_Placemark = MKPlacemark(coordinate: CLLocationCoordinate2DMake(point2.coordinate.latitude, point2.coordinate.longitude), addressDictionary: nil)
-        
-        let directionsRequest = MKDirectionsRequest()
-        directionsRequest.source = MKMapItem(placemark: point1_Placemark)
-        directionsRequest.destination = MKMapItem(placemark: point2_Placemark)
-        directionsRequest.transportType = currentTransportType
-        let directions = MKDirections(request: directionsRequest)
-        
-        directions.calculate(completionHandler: {
-            response, error in
-            // response has an array of MKRoutes
-            if error != nil {
-                print ("Directions Retreival Error: \(String(describing: error))")
-            } else {
-                self.myMapView.removeOverlays(self.myMapView.overlays)
-                self.myRoute = response!.routes[0] as MKRoute
-                self.myMapView.add(self.myRoute.polyline)
-                let distance = meters2miles(meters: response!.routes[0].distance) // response distance in meters
-                let drivingTime = ((response!.routes[0].expectedTravelTime) / 60)  //expectedTravelTime is in secs
-                let sourceLocation = CLLocation(latitude: point1.coordinate.latitude, longitude: point1.coordinate.longitude)
-                let destinationLocation = CLLocation(latitude: point2.coordinate.latitude, longitude: point2.coordinate.longitude)
-                let crowFliesDistance = sourceLocation.distance(from: destinationLocation) // result is in meters
-                let distanceInMiles = meters2miles(meters: crowFliesDistance)
-                self.RouteDataView.alpha = 1
-                self.lblCrowFlies.text = "As crow flies: \(String(format: "%.02f", distanceInMiles)) miles"
-                self.lblDrivingDistance.text = "Driving distance: \(String(format: "%.02f", distance)) miles"
-                self.lblDrivingTime.text = "Driving time: \(String(format: "%.02f", drivingTime)) minutes"
-                //self.myMapView.addAnnotation(source)
-                //self.myMapView.addAnnotation(destination)
-            }
-        })
-        
-        //        You need to make a MKDirections request. From calculateDirectionsWithCompletionHandler you will get a MKDirectionsResponse. This has a routes array of MKRoutes. Each route has a distance (i.e. road distance) property.
-        //
-        //        let source = MKMapItem( placemark: MKPlacemark(
-        //            coordinate: CLLocationCoordinate2DMake(-41.27, 173.28),
-        //            addressDictionary: nil))
-        //        let destination = MKMapItem(placemark: MKPlacemark(
-        //            coordinate: CLLocationCoordinate2DMake(-41.11, 173),
-        //            addressDictionary: nil))
-        //        let directionsRequest = MKDirectionsRequest()
-        //        directionsRequest.source = source
-        //        directionsRequest.destination = destination
-        //
-        //        let directions = MKDirections(request: directionsRequest)
-        
-        //        directions.calculateDirectionsWithCompletionHandler { (response, error) -> Void in
-        //            print(error)
-        //            let distance = response!.routes.first?.distance // meters
-        //            print("\(distance! / 1000)km")
-        //        }
-        ///////////////////////////////////////////////////////////////////////////////////
-        
-        //        // let route = routeResponse.routes[0]
-        //        //self.myRoute = route
-        //        self.myMapView.removeOverlays(self.myMapView.overlays)
-        //        self.myMapView.add(self.myRoute.polyline, level: MKOverlayLevel.aboveRoads)
-        //
-        //        var rect = self.myRoute.polyline.boundingMapRect
-        //        //
-        //        // add a margin to the MKCoordinateRegionForMapRect
-        //        rect.size.width = rect.size.width * 1.15
-        //        rect.origin.x = rect.origin.x  - (rect.size.width * 0.07)
-        //        rect.size.height = rect.size.height * 1.15
-        //        rect.origin.y = rect.origin.y  - (rect.size.height * 0.07)
-        //
-        //        self.myMapView.setRegion(MKCoordinateRegionForMapRect(rect), animated: true)
-        
-        let mapRegion1 = MKCoordinateRegionMakeWithDistance(myUserLocation.coordinate, currentDisplayDistance, currentDisplayDistance)
-        myMapView.setRegion(mapRegion1, animated: true)
-    }
+ 
     
     
     // directions/polyline related
@@ -558,7 +573,8 @@ class ViewController: UIViewController, MKMapViewDelegate {
         
         SearchDistanceSlider.value = Float(currentSearchDistance)
         
-        print ("in ***viewDidLoad *** shepAnnotationsArray count is \(shepAnnotationsArray.count) \n")
+        print ("in **viewDidLoad** shepAnnotationsArray count is \(shepAnnotationsArray.count) \n")
+        print ("in ***viewDidLoad BEFORE SEARCH Current search distance: \(meters2miles(meters: self.currentSearchDistance))")
         //print ("in ***viewDidLoad Current search distance: \(meters2miles(meters: self.currentSearchDistance))")
         //btnGasClick(_: self)
         performLocalSearch("gas station") //INITIAL ONE SOMETHING GOES WRONG WITH SEARCH REGION -- BUT I CAN'T FIND IT
@@ -567,38 +583,41 @@ class ViewController: UIViewController, MKMapViewDelegate {
         myMapView.showAnnotations(shepAnnotationsArray, animated: true)
         
         
-        //MARK: USER LOCATION STUFF NOT YET WORKING
-        if myMapView.userLocation.location == nil {
-            //myUserLocation = myUserLocation
-            print ("myUserLocation was nil, setting it to THOMPSON")
-            myUserLocation = CLLocation(latitude: 41.9360805, longitude: -71.7978248) // THOMPSON_GPS
-            //myUserLocation = CLLocation(latitude: 21.282778, longitude: -157.829444) // Honolulu
-        } else {
-            print("in viewDidLoad my userLocation was: \(String(describing: myMapView.userLocation.location))")
-        }
+//        //MARK: USER LOCATION STUFF WORKING?
+//        if myMapView.userLocation.location == nil {
+//            //myUserLocation = myUserLocation
+//            print ("myUserLocation was nil, setting it to THOMPSON")
+//            myUserLocation = CLLocation(latitude: 41.9360805, longitude: -71.7978248) // THOMPSON_GPS
+//            //myUserLocation = CLLocation(latitude: 21.282778, longitude: -157.829444) // Honolulu
+//        } else {
+//            print("in viewDidLoad my userLocation was: \(String(describing: myMapView.userLocation.location))")
+//        }
         centerMapOnLocation(location: myUserLocation)
         
         // ----
-        self.btnMenu.alpha = 0
-        self.btnTarget.alpha = 0
-        self.btnHospital.alpha = 0
-        self.btnSupermarket.alpha = 0
-        self.btnMall.alpha = 0
+//        self.btnTwirlMenu.alpha = 0
+//        self.btnTarget.alpha = 0
+//        self.btnHospital.alpha = 0
+//        self.btnPizza.alpha = 0
+//        self.btnGas.alpha = 0
         
         self.btnHospital.layer.cornerRadius = 10
         self.btnTarget.layer.cornerRadius = 10
-        self.btnSupermarket.layer.cornerRadius = 10
-        self.btnMall.layer.cornerRadius = 10
-        self.btnMenu.layer.cornerRadius = 10
+        self.btnPizza.layer.cornerRadius = 10
+        self.btnGas.layer.cornerRadius = 10
+        self.btnTwirlMenu.layer.cornerRadius = 10
+        self.btnPark.layer.cornerRadius = 10
+        self.btnMcD.layer.cornerRadius = 10
         
         DisplayDistanceSlider.value = Float(initialDisplay)
         SearchDistanceSlider.value = Float(initialSearch)
         DisplayDistanceText2.text = String(initialDisplay)
         SearchDistanceText2.text = String(initialSearch)
         
-        UIView.animate(withDuration: 0.1, delay: 0.1, options: UIViewAnimationOptions.curveEaseOut, animations: {
-            self.btnMenu.alpha = 1
-            self.btnMenu.transform = CGAffineTransform(rotationAngle: 0.25*3.1415927)
+        //the twirl?
+        UIView.animate(withDuration: 0.2, delay: 0.2, options: UIViewAnimationOptions.curveEaseOut, animations: {
+            self.btnTwirlMenu.alpha = 1
+            self.btnTwirlMenu.transform = CGAffineTransform(rotationAngle: 0.25*3.1415927)
         }, completion: nil)
 
         }
