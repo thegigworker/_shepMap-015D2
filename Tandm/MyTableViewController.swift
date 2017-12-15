@@ -1,5 +1,5 @@
 //
-//  MyFirstTableViewController.swift
+//  MyTableViewController.swift
 //  Tandm
 //
 //  Created by Shepard Tamler on 12/9/17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MyFirstTableViewController: UITableViewController {
+class MyTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

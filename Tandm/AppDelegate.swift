@@ -5,7 +5,6 @@ Abstract:
 Application delegate.
 */
 
-// SHEP2 TANDM
 
 
 
@@ -15,3 +14,5 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 }
+
+

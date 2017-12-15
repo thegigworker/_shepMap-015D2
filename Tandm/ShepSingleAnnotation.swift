@@ -19,12 +19,14 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
     let shepsVariable: Double
     let shepStringData: String
     var myMapItem: MKMapItem
+    var myStoredRoute: MKRoute?
     
-    init(myMapItem: MKMapItem, shepPassedVariable: Double, shepPassedString: String) {
+    init(myMapItem: MKMapItem, myStoredRoute: MKRoute, shepDollarValue: Double) {
         self.origTitle = myMapItem.name ?? "No Title"
         //self.locationName = myMapItem.name! //searchResult.description
-        self.shepsVariable = shepPassedVariable
+        self.shepsVariable = shepDollarValue
         self.myMapItem = myMapItem
+        self.myStoredRoute = myStoredRoute
         self.shepStringData = shepCurrencyFromDouble(shepNumber: self.shepsVariable)
 //        self.shepsVariable = Double(arc4random_uniform(25) + 1)
 //        self.shepStringData = shepCurrencyFromDouble(shepNumber: self.shepsVariable)
@@ -65,11 +67,63 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
     }
     
     var crowFliesDistance: String? {
-        let myLocation = CLLocation(latitude: self.coordinate.latitude, longitude: self.coordinate.longitude)
-        let distance = myUserLocation.distance(from: myLocation) // result is in meters
+        let thisLocation = CLLocation(latitude: self.coordinate.latitude, longitude: self.coordinate.longitude)
+        let distance = myUserLocation.distance(from: thisLocation) // result is in meters
         let distanceInMiles = meters2miles(meters: distance)
         return String(format: "%.02f", distanceInMiles)
     }
+    
+//    self.lblCrowFlies.text = "As crow flies: \(String(format: "%.02f", distanceInMiles)) miles"
+//    self.lblDrivingDistance.text = "Driving distance: \(String(format: "%.02f", drivingDistance)) miles"
+//    self.lblDrivingTime.text = "Driving time: \(String(format: "%.02f", drivingTime)) minutes"
+    
+    var routeDrivingDistance: Double {
+        if let myRoute = self.myStoredRoute {
+            let drivingDistance = meters2miles(meters: myRoute.distance)
+            return drivingDistance // drivingDistance in miles
+        } else {
+            //let drivingDistance = 0.0
+            return 0.0
+        }
+    }
+    
+    var drivingTime: Double {
+        if let myRoute = self.myStoredRoute {
+            let drivingTime = myRoute.expectedTravelTime / 60
+            return drivingTime // drivingDistance in miles
+        } else {
+            //let drivingDistance = 0.0
+            return 0.0
+        }
+    }
+    
+    
+                //    self.lblDrivingDistance.text = "Driving distance: \(String(format: "%.02f", drivingDistance)) miles"
+                //return drivingDistance
+//                } else {
+//                    let NildrivingDistance = 0
+//                    return NildrivingDistance
+//                }
+
+                
+      /*          The if let statement takes an optional variable. If it is nil, the else block or nothing is executed. If it has a value, the value is assigned to a different variable as a non-optional type.
+                
+                So, the following code would output the value of score1 or "No" if there is none:
+                
+                if let score1Unwrapped = score1
+                { print(score1Unwrapped)
+                } else {print("No")}
+                 
+                A shorter version of the same would be:
+                print(score1 ?? "No")
+                 
+                In your case, where you don't actually use the value stored in the optional variable, you can also check if the value is nil:
+                
+                if score1 != nil {
+                    ...
+                }
+       */
+                
     
 //    let searchResultCoordinates = item.placemark.coordinate
 //    let searchResultLocation = CLLocation(latitude: searchResultCoordinates.latitude, longitude: searchResultCoordinates.longitude)
@@ -96,13 +150,13 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
         switch shepsVariable {
         case 0..<1:
             return .black
-        case 1..<5:
+        case 1...5:
             return .red
-        case 5..<10:
+        case 6...20:
             return .orange
-        case 10..<25:
+        case 21...30:
             return .yellow
-        case 25...40:
+        case 31...40:
             return .green
         default:
             return .white
@@ -111,13 +165,13 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
     
     func switchGlyph() -> String? { // marker glyph
         switch shepsVariable {
-        case 0..<5:
+        case 0...5:
             return "tricycle"
-        case 5..<10:
+        case 6...20:
             return "unicycle"
-        case 10..<25:
+        case 21...30:
             return "monopoly man"
-        case 25...40:
+        case 31...40:
             return "Flag"
         default:
             return "HMI"
@@ -126,13 +180,13 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
     
     func switchImage() -> String? { // leftCalloutAccessory image
         switch shepsVariable {
-        case 0..<5:
+        case 0...5:
             return "zzz..."
-        case 5..<10:
+        case 6...20:
             return "coins"
-        case 10..<25:
+        case 21...30:
             return "dollars"
-        case 25...40:
+        case 31...40:
             return "monopoly man"
         default:
             return "superman"

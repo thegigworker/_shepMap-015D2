@@ -29,7 +29,7 @@
 		<string>armv7</string>
 	</array>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>User location is used to find bikes near you.</string>
+	<string>What do you think? This whole app needs to use your location, fool.</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

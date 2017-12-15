@@ -1,5 +1,4 @@
 /*
-//
 //  MapViewController.swift
 //  Trax
 //
@@ -7,105 +6,6 @@
 //  Copyright © 2016 Stanford University. All rights reserved.
 //
 
-import UIKit
-import MapKit
-
-class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UIPopoverPresentationControllerDelegate
-{
-    // MARK: Public Model
-
-    var gpxURL: URL? {
-        didSet {
-            // clearWaypoints()
-            myMapView?.removeAnnotations(myMapView.annotations)
-            
-            
-            if let url = gpxURL {
-                shepDataSource.parse(url) { gpx in
-                    if gpx != nil {
-                        self.addWaypoints(gpx!.shepArrayOfAnnotations)
-                    }
-                }
-            }
-        }
-    }
-    
-    // MARK: View Controller Lifecycle
-    
-    
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        gpxURL = URL(string: "http://cs193p.stanford.edu/Vacation.gpx")
-//    }
-//    
-    
-    
-    let locationManager = CLLocationManager()
-    let myUserLocation = CLLocation(latitude: THOMPSON_GPS.latitude, longitude: THOMPSON_GPS.longitude)
-    // search range?
-    let initialDistance = CLLocationDistance(20000)
-    var mySubtitleString: String = ""
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // create region for map
-        let region1 = MKCoordinateRegionMakeWithDistance(myUserLocation.coordinate, initialDistance, initialDistance)
-        myMapView.setRegion(region1, animated: true)
-        
-        performLocalSearch("park")
-        
-        // create region
-        //        let region2 = MKCoordinateRegionMakeWithDistance(myUserLocation.coordinate, initialDistance, initialDistance)
-        //        myMapView.setRegion(region2, animated: true)
-        
-        
-        // Request for a user's authorization for location services
-        locationManager.delegate = self
-        locationManager.requestWhenInUseAuthorization()
-        let status = CLLocationManager.authorizationStatus()
-        if status == CLAuthorizationStatus.authorizedWhenInUse {
-            myMapView.showsUserLocation = true
-        }
-    }
-    
-    // LocalSearchRequest
-    //
-    // 搜索
-    func performLocalSearch(_ place:String) {
-        let request = MKLocalSearchRequest()
-        request.naturalLanguageQuery = place
-        // 搜索当前区域
-        // search radius
-        let span = MKCoordinateSpanMake(0.09, 0.09)
-        request.region = MKCoordinateRegion(center: myUserLocation.coordinate, span: span)
-        //启动搜索,并且把返回结果保存到数组中
-        let search = MKLocalSearch(request: request)
-        search.start { (response, error) -> Void in
-            guard let response = response else {
-                if let error = error {
-                    print(error)
-                }
-                return
-            }
-            
-            let mapItems = response.mapItems
-            for item in (mapItems) {
-                if let myOtherVar = item.placemark.addressDictionary {
-                    print ("THIS IS DICTIONARY ITEM Name: \(myOtherVar ["Name"] ?? "nada")")
-                     print ("THIS IS DICTIONARY ITEM FormattedAddressLines: \(myOtherVar ["FormattedAddressLines"] ?? "nada")")
-                    print ("\n")
-                    
-                    var tempVar = (myOtherVar ["Street"] ?? "... ") as! String
-                    tempVar = tempVar + ", \(((myOtherVar ["City"] ?? "... ") as! String)), \((myOtherVar ["State"] ?? "got nothing") as! String)"
-                    self.mySubtitleString = tempVar
-                }
-   
-                self.addAnnotation(item.name!, subtitle: self.mySubtitleString, latitude: (item.placemark.location?.coordinate.latitude)!, longitude: (item.placemark.location?.coordinate.longitude)!)
-            }
-        }
-    }
-    
     func addAnnotation(_ title:String, subtitle:String, latitude: CLLocationDegrees, longitude: CLLocationDegrees){
         
         let location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
@@ -114,22 +14,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         myMapView.addAnnotation(annotation)
        
     }
-
-    
-    
-    // MARK: Outlets
-
-    @IBOutlet weak var myMapView: MKMapView! {
-        didSet {
-            
-            //myMapView.mapType = .satellite
-            myMapView.mapType = .hybrid
-            myMapView.delegate = self
-        }
-    }
     
     // MARK: Private Implementation
-
 //    fileprivate func clearWaypoints() {
 //        myMapView?.removeAnnotations(myMapView.annotations)
 //    }
@@ -145,45 +31,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
     }
 
-    
-    // MARK: MKMapViewDelegate
-    
-    //        func pinTintColor() -> UIColor  {
-    //            if GPX.shepShepSingleAnnotation.shepsVariable <= 3 {
-    //                return MKPinAnnotationView.redPinColor()
-    //            } else if (GPX.shepShepSingleAnnotation.shepsVariable > 3.0 && self.shepsVariable <= 10) {
-    //                return MKPinAnnotationView.purplePinColor()
-    //            } else {
-    //                return MKPinAnnotationView.greenPinColor()
-    //            }
-    //        }
-    
-    
-    //    func myMapView(myMapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
-    //
-    //        if annotation is MKUserLocation {
-    //            //return nil so map view draws "blue dot" for standard user location
-    //            return nil
-    //        }
-    //
-    //        let reuseId = "pin"
-    //
-    //        var pinView = myMapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
-    //        if pinView == nil {
-    //            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-    //            pinView!.canShowCallout = true
-    //            pinView!.animatesDrop = true
-    //            pinView!.pinTintColor = .purple
-    //        }
-    //        else {
-    //            pinView!.annotation = annotation
-    //        }
-    //        
-    //        return pinView
-    //    }
-
-    
-    // from ShepMap2
+ //// from ShepMap2
     // inside:  class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UIPopoverPresentationControllerDelegate
     //
     func myMapView(_ myMapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -224,33 +72,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
             }
         }
-        
         return view
     }
-    
-  
-    // this is where we draw an image on the leftCalloutAccessoryView
-    func myMapView(_ myMapView: MKMapView, didSelect view: MKAnnotationView) {
-        if let thumbnailImageButton = view.leftCalloutAccessoryView as? UIButton,
-            let url = (view.annotation as? shepDataSource.shepSingleAnnotation)?.thumbnailURL,
-            let imageData = try? Data(contentsOf: url as URL), // blocks main queue
-            let image = UIImage(data: imageData) {
-            thumbnailImageButton.setImage(image, for: UIControlState())
-        }
-    }
-    
-    // calloutAccessoryControlTapped
-    func myMapView(_ myMapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        if control == view.leftCalloutAccessoryView {
-            performSegue(withIdentifier: Constants.ShowImageSegue, sender: view)
-        } else if control == view.rightCalloutAccessoryView  {
-            myMapView.deselectAnnotation(view.annotation, animated: true)
-            performSegue(withIdentifier: Constants.EditUserWaypoint, sender: view)
-        }
-    }
-    
+ 
+ 
     // MARK: Navigation
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destination = segue.destination.contentViewController
         let annotationView = sender as? MKAnnotationView
@@ -290,7 +116,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     // MARK: UIPopoverPresentationControllerDelegate
-    
     // when popover is dismissed, selected the just-edited waypoint
     // see also unwind target above (does the same thing for adapted UI)
 
@@ -314,10 +139,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     // and install a blurring visual effect behind all the navigation controller draws
     // autoresizingMask is "old style" constraints
     
-    func presentationController(
-        _ controller: UIPresentationController,
-        viewControllerForAdaptivePresentationStyle style: UIModalPresentationStyle
-    ) -> UIViewController? {
+    func presentationController(_ controller: UIPresentationController, viewControllerForAdaptivePresentationStyle style: UIModalPresentationStyle) -> UIViewController? {
         if style == .fullScreen || style == .overFullScreen {
             let navcon = UINavigationController(rootViewController: controller.presentedViewController)
             let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .extraLight))
@@ -329,9 +151,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             return nil
         }
     }
-    
+ 
+ 
     // MARK: Constants
-    
     fileprivate struct Constants {
         static let LeftCalloutFrame = CGRect(x: 0, y: 0, width: 59, height: 59) // sad face
         static let AnnotationViewReuseIdentifier = "waypoint"
@@ -339,19 +161,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         static let EditUserWaypoint = "Edit Waypoint"
     }
 }
-
-
-extension UIViewController {
-    var contentViewController: UIViewController {
-        if let navcon = self as? UINavigationController {
-            return navcon.visibleViewController ?? navcon
-        } else {
-            return self
-        }
-    }
-}
-
-/*
  
- 
- */*/
+*/
+
