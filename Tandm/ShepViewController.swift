@@ -81,7 +81,7 @@ class ViewController: UIViewController, MKMapViewDelegate, DataModelDelegate {
     
     //var currentDisplayDistance = initialDisplayDistance
     //var currentSearchDistance = initialSearchDistance
-    var whichPolylineStyle : String = ""
+    var whichRouteStyle : String = ""
     let myDataModel = shepDataModel()
     
     func didReceiveMethodCallFromDataModel() {
@@ -144,36 +144,22 @@ class ViewController: UIViewController, MKMapViewDelegate, DataModelDelegate {
         let sourceItem = Int(arc4random_uniform(howMany))
         let destinationItem = Int(arc4random_uniform(howMany))
         if sourceItem != destinationItem {
+            whichRouteStyle = "random"
             //print ("thisisCrowFliesDistanceInMiles:  \(myRouteData.thisisCrowFliesDistanceInMiles)")
-            guard let myRouteData = myDataModel.getRouteData2(source: myDataModel.shepAnnotationsArray[sourceItem], destination: myDataModel.shepAnnotationsArray[destinationItem])
-                //                guard let myRouteData = myDataModel.getRouteData2(source: myDataModel.shepAnnotationsArray[sourceItem], destination: myDataModel.shepAnnotationsArray[destinationItem])
-                else {
-                    print("inside makeRandomRoute, myRouteData was nil /n")
-                    return
-            }
-            myDataModel.currentRoute = myRouteData
-            print ("myRouteData.thisismyRoute:  \(String(describing: myDataModel.currentRoute))")
-            myMapView.removeOverlays(myMapView.overlays)
-            whichPolylineStyle = "blue"
-            drawPolyline(theRoute: myRouteData)
-            let drivingDistance = meters2miles(meters: (myRouteData.distance)) // response distance in meters
-            let drivingTime = ((myRouteData.expectedTravelTime) / 60)  //expectedTravelTime is in secs
-            RouteDataView.alpha = 1
-            lblCrowFlies.text = "As crow flies: \(String(format: "%.02f", myDataModel.crowFliesDistance)) miles"
-            lblDrivingDistance.text = "Driving distance: \(String(format: "%.02f", drivingDistance)) miles"
-            lblDrivingTime.text = "Driving time: \(String(format: "%.02f", drivingTime)) minutes"
+            myDataModel.getRouteData2(source: myDataModel.shepAnnotationsArray[sourceItem], destination: myDataModel.shepAnnotationsArray[destinationItem])
         } else { print ("source and destination are the same \n") }
     }
     
-    
-   // MKPlacemark is a subclass of CLPlacemark, therefore you cannot just cast it. You can instantiate an MKPlacemark from a CLPlacemark using the code below
-   // if let addressDict = clPlacemark.addressDictionary, coordinate = clPlacemark.location.coordinate {
-   //let mkPlacemark = MKPlacemark(coordinate: coordinate, addressDictionary: addressDict)
-    
-    //init(placemark: MKPlacemark)
-   // Initializes and returns a map item object using the specified placemark object.
-    
-    //var placemark: MKPlacemark { get }
+
+//            myDataModel.currentRoute = myRouteData
+//            print ("myRouteData.thisismyRoute:  \(String(describing: myDataModel.currentRoute))")
+//            myMapView.removeOverlays(myMapView.overlays)
+//            whichPolylineStyle = "blue"
+//            drawPolyline(theRoute: myRouteData)
+//            let drivingDistance = meters2miles(meters: (myRouteData.distance)) // response distance in meters
+//            let drivingTime = ((myRouteData.expectedTravelTime) / 60)  //expectedTravelTime is in secs
+//            RouteDataView.alpha = 1
+
 
     @IBAction func makeGoldenRoute(_ sender: UIButton) {
         if myDataModel.shepAnnotationsArray.count < 1 {
@@ -187,31 +173,41 @@ class ViewController: UIViewController, MKMapViewDelegate, DataModelDelegate {
         //self.mapItemData = localSearchResponse?.mapItems.last
         
         ///////////  CONVERSION FROM COORDINATES INTO MKMAPITEM?
-        let temp = myUserLocation.coordinate
-        let MKPlacemark1 = MKPlacemark(coordinate: CLLocationCoordinate2DMake(temp.latitude, temp.longitude), addressDictionary: nil)
-        let myMKMapItem : MKMapItem = MKMapItem(placemark: MKPlacemark1)
+        let HomeLocationCoord = myUserLocation.coordinate
+        let HomeLocationPlacemark = MKPlacemark(coordinate: CLLocationCoordinate2DMake(HomeLocationCoord.latitude, HomeLocationCoord.longitude), addressDictionary: nil)
+        let HomeLocationMapItem : MKMapItem = MKMapItem(placemark: HomeLocationPlacemark)
         ///////////  CONVERSION FROM COORDINATES INTO MKMAPITEM?
         
-        let sourceItem = ShepSingleAnnotation(myMapItem: myMKMapItem, currentRoute: MKRoute(), shepDollarValue: 0.0)
+        let sourceItem = ShepSingleAnnotation(myMapItem: HomeLocationMapItem, currentRoute: MKRoute(), shepDollarValue: 0.0)
         let howMany = UInt32(myDataModel.shepAnnotationsArray.count)
         let destinationItem = Int(arc4random_uniform(howMany))
-            guard let myRouteData = myDataModel.getRouteData2(source: sourceItem, destination: myDataModel.shepAnnotationsArray[destinationItem])
-                else {
-                    print ("myRouteData is nil \n" )
-                    return
-            }
-            myDataModel.currentRoute = myRouteData
-            print ("myRouteData.thisismyRoute:  \(String(describing: myDataModel.currentRoute))")
-            myMapView.removeOverlays(myMapView.overlays)
-            whichPolylineStyle = "green"
-            drawPolyline(theRoute: myRouteData)
-            let drivingDistance = meters2miles(meters: myRouteData.distance) // response distance in meters
-            let drivingTime = ((myRouteData.expectedTravelTime) / 60)  //expectedTravelTime is in secs
-            RouteDataView.alpha = 1
-            lblCrowFlies.text = "As crow flies: \(String(format: "%.02f", myDataModel.crowFliesDistance)) miles"
-            lblDrivingDistance.text = "Driving distance: \(String(format: "%.02f", drivingDistance)) miles"
-            lblDrivingTime.text = "Driving time: \(String(format: "%.02f", drivingTime)) minutes"
+
+        if myDataModel.shepAnnotationsArray.count < 2 {
+            print ("less than 2 items in shepAnnotationsArray \n")
+            return
+        }
+        whichRouteStyle = "golden"
+        myDataModel.getRouteData2(source: sourceItem, destination: myDataModel.shepAnnotationsArray[destinationItem])
+
+//            guard let myRouteData = myDataModel.getRouteData2(source: sourceItem, destination: myDataModel.shepAnnotationsArray[destinationItem])
+//                else {
+//                    print ("myRouteData is nil \n" )
+//                    return
+//            }
+//            myDataModel.currentRoute = myRouteData
+//            print ("myRouteData.thisismyRoute:  \(String(describing: myDataModel.currentRoute))")
+//            myMapView.removeOverlays(myMapView.overlays)
+//            whichPolylineStyle = "green"
+//            drawPolyline(theRoute: myRouteData)
+//            let drivingDistance = meters2miles(meters: myRouteData.distance) // response distance in meters
+//            let drivingTime = ((myRouteData.expectedTravelTime) / 60)  //expectedTravelTime is in secs
+//            RouteDataView.alpha = 1
+//            lblCrowFlies.text = "As crow flies: \(String(format: "%.02f", myDataModel.crowFliesDistance)) miles"
+//            lblDrivingDistance.text = "Driving distance: \(String(format: "%.02f", drivingDistance)) miles"
+//            lblDrivingTime.text = "Driving time: \(String(format: "%.02f", drivingTime)) minutes"
     }
+    
+    
     
 //    //func getRouteData (source: ShepSingleAnnotation, destination: ShepSingleAnnotation) {
 //    func getRouteData (source: ShepSingleAnnotation, destination: ShepSingleAnnotation) -> (MKRoute?) {
@@ -245,6 +241,37 @@ class ViewController: UIViewController, MKMapViewDelegate, DataModelDelegate {
 //
 //        return (myDataModel.myRoute)
 //    }
+    
+    func handleRandomRoute(thisRoute: MKRoute) {
+        print("handleRandomRoute: \(thisRoute)")
+        
+        myDataModel.currentRoute = thisRoute
+        print ("handleRandomRoute.thisRoute:  \(String(describing: myDataModel.currentRoute))")
+        myMapView.removeOverlays(myMapView.overlays)
+        drawPolyline(theRoute: thisRoute)
+        let drivingDistance = meters2miles(meters: (thisRoute.distance)) // response distance in meters
+        let drivingTime = ((thisRoute.expectedTravelTime) / 60)  //expectedTravelTime is in secs
+        RouteDataView.alpha = 1
+        lblCrowFlies.text = "As crow flies: \(String(format: "%.02f", myDataModel.crowFliesDistance)) miles"
+        lblDrivingDistance.text = "Driving distance: \(String(format: "%.02f", drivingDistance)) miles"
+        lblDrivingTime.text = "Driving time: \(String(format: "%.02f", drivingTime)) minutes"
+        
+    }
+    
+    func handleGoldenRoute(thisRoute: MKRoute) {
+        print("handleGoldenRoute: \(thisRoute)")
+        
+        myDataModel.currentRoute = thisRoute
+        print ("handleGoldenRoute.thisRoute:  \(String(describing: myDataModel.currentRoute))")
+        myMapView.removeOverlays(myMapView.overlays)
+         drawPolyline(theRoute: thisRoute)
+        let drivingDistance = meters2miles(meters: (thisRoute.distance)) // response distance in meters
+        let drivingTime = ((thisRoute.expectedTravelTime) / 60)  //expectedTravelTime is in secs
+        RouteDataView.alpha = 1
+        lblCrowFlies.text = "As crow flies: \(String(format: "%.02f", myDataModel.crowFliesDistance)) miles"
+        lblDrivingDistance.text = "Driving distance: \(String(format: "%.02f", drivingDistance)) miles"
+        lblDrivingTime.text = "Driving time: \(String(format: "%.02f", drivingTime)) minutes"
+    }
     
     func drawPolyline (theRoute: MKRoute) {
         //self.myMapView.removeOverlays(self.myMapView.overlays)
@@ -355,9 +382,9 @@ class ViewController: UIViewController, MKMapViewDelegate, DataModelDelegate {
         //centerMapOnLocation(location: myUserLocation)
     }
     
-    func handleValidSarchResults(validSearchResults: [ShepSingleAnnotation]) {
-        //print ("In ViewController, handleValidSarchResults was: \(validSearchResults)")
-        print ("In ViewController, handleValidSarchResults count was: \(validSearchResults.count)")
+    func handleValidSearchResults(validSearchResults: [ShepSingleAnnotation]) {
+        //print ("In ViewController, handleValidSearchResults was: \(validSearchResults)")
+        print ("In ViewController, handleValidSearchResults count was: \(validSearchResults.count)")
          print ("In ViewController, myDataModel.shepAnnotationsArray count was: \(myDataModel.shepAnnotationsArray.count) \n")
         myMapView.addAnnotations(validSearchResults)
         myMapView.showAnnotations(myDataModel.shepAnnotationsArray, animated: true)
@@ -600,7 +627,7 @@ extension ViewController {
     // directions/polyline related
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         let myLineRenderer = MKPolylineRenderer(polyline: myDataModel.currentRoute!.polyline)
-        if whichPolylineStyle == "blue" {
+        if whichRouteStyle == "random" {
             myLineRenderer.lineWidth = 4
             myLineRenderer.strokeColor = .blue
         } else {

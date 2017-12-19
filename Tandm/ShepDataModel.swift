@@ -17,30 +17,33 @@ let initialDisplay: Double = 20
 
 //The class keyword in the Swift protocol definition limits protocol adoption to class types (and not structures or enums). This is important if we want to use a weak reference to the delegate. We need be sure we do not create a retain cycle between the delegate and the delegating objects, so we use a weak reference to delegate (see below).
 protocol DataModelDelegate: class {
-    func didReceiveMethodCallFromDataModel()
-    func didReceiveDataUpdate(data: String)
-    func handleValidSarchResults(validSearchResults: [ShepSingleAnnotation])
+    //func didReceiveMethodCallFromDataModel()
+    //func didReceiveDataUpdate(data: String)
+    func handleValidSearchResults(validSearchResults: [ShepSingleAnnotation])
+    func handleRandomRoute(thisRoute: MKRoute)
+    func handleGoldenRoute(thisRoute: MKRoute)
 }
 //Comparing to the callback way, Delegation pattern is easier to reuse across the app: you can create a base class that conforms to the protocol delegate and avoid code redundancy. However, delegation is harder to implement: you need to create a protocol, set the protocol methods, create Delegate property, assign Delegate to ViewController, and make this ViewController conform to the protocol. Also, the Delegate has to implement every method of the protocol by default.
 
-
 class shepDataModel: NSObject {
     
-    func triggerMethodInDataModel() {
-        print("triggerMethodInDataModel happened")
-        delegate?.didReceiveMethodCallFromDataModel()
-    }
+    let centsPerMileExpense: Int = 60
     
-    func requestData() {
-        // the data was received and parsed to String
-        let data = "medical maryjane"
-        print("in RequestData, the data is: \(data)")
-        delegate?.didReceiveDataUpdate(data: data)
-    }
+//    func triggerMethodInDataModel() {
+//        print("triggerMethodInDataModel happened")
+//        delegate?.didReceiveMethodCallFromDataModel()
+//    }
+//
+//    func requestData() {
+//        // the data was received and parsed to String
+//        let data = "medical maryjanexxx"
+//        print("in RequestData, the data is: \(data)")
+//        delegate?.didReceiveDataUpdate(data: data)
+//    }
     
     var currentTransportType = MKDirectionsTransportType.automobile
     //var myRoute : MKRoute!
-    let centsPerMileExpense: Int = 60
+
     //var myArray_MKMapItems = [MKMapItem]()
     var shepAnnotationsArray = [ShepSingleAnnotation]()
     var validSearchResultsArray = [ShepSingleAnnotation]()
@@ -61,8 +64,17 @@ class shepDataModel: NSObject {
         completion(myotherDataReqData)
     }
     
+    
+    // MKPlacemark is a subclass of CLPlacemark, therefore you cannot just cast it. You can instantiate an MKPlacemark from a CLPlacemark using the code below
+    //     if let addressDict = clPlacemark.addressDictionary, coordinate = clPlacemark.location.coordinate {
+    //     let mkPlacemark = MKPlacemark(coordinate: coordinate, addressDictionary: addressDict)
+    //     init(placemark: MKPlacemark)
+    // Initializes and returns a map item object using the specified placemark object.
+    //     var placemark: MKPlacemark { get }
+    
+    
     //func getRouteData2 (source: ShepSingleAnnotation, destination: ShepSingleAnnotation) {
-    func getRouteData2 (source: ShepSingleAnnotation, destination: ShepSingleAnnotation) -> (MKRoute?) {
+    func getRouteData2 (source: ShepSingleAnnotation, destination: ShepSingleAnnotation) -> () {
         let point1 = MKPointAnnotation()
         let point2 = MKPointAnnotation()
         point1.coordinate = CLLocationCoordinate2DMake(source.coordinate.latitude, source.coordinate.longitude)
@@ -91,14 +103,11 @@ class shepDataModel: NSObject {
                 let destinationLocation = CLLocation(latitude: point2.coordinate.latitude, longitude: point2.coordinate.longitude)
                 self.crowFliesDistance = sourceLocation.distance(from: destinationLocation) // result is in meters
                 self.crowFliesDistance = meters2miles(meters: self.crowFliesDistance)
-                let data = "medical maryjane"
-                //print("in RequestData, the data is: \(data)")
-                self.delegate?.didReceiveDataUpdate(data: data)
+                let data = "last dance for medical maryjane"
+                print("in RequestData, the data is: \(data)")
+                self.delegate?.handleRandomRoute(thisRoute: self.currentRoute!)
             }
-            //return (self.myRoute)  // Unexpected non-void return value in void function
         })
-        
-        return (currentRoute)
     }
     
     // 搜索
@@ -151,13 +160,13 @@ class shepDataModel: NSObject {
                 }
                 //let data = "medical maryjane's last dance"
                 //print("in performLocalSearch2 completionHandler: \(data)")
-                //handleValidSarchResults(validSearchResults: [ShepSingleAnnotation])
+                //handleValidSearchResults(validSearchResults: [ShepSingleAnnotation])
                 self.shepAnnotationsArray.append(contentsOf: self.validSearchResultsArray)
                 //self.shepAnnotationsArray.append(contentsOf: self.validSearchResultsArray)
                 print ("shepSearchResultLoop is done now???, shepAnnotationsArray count is \(self.shepAnnotationsArray.count)")
                 print ("shepSearchResultLoop is done now???, validSearchResultsArray count is \(self.validSearchResultsArray.count) \n")
                 
-                self.delegate?.handleValidSarchResults(validSearchResults: self.validSearchResultsArray)
+                self.delegate?.handleValidSearchResults(validSearchResults: self.validSearchResultsArray)
 
                // myMapView.addAnnotations(validSearchResultsArray)
                // myMapView.showAnnotations(shepAnnotationsArray, animated: true)
