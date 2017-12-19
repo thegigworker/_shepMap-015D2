@@ -163,9 +163,9 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
         switch shepDollarValue {
         case 0..<1:
             return .black
-        case 1...5:
+        case 1...10:
             return .darkGray
-        case 6...20:
+        case 11...20:
             return .orange
         case 21...30:
             return .green
@@ -178,9 +178,9 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
     
     func switchGlyph() -> String? { // marker glyph
         switch shepDollarValue {
-        case 0...5:
+        case 0...10:
             return "tricycle"
-        case 6...20:
+        case 11...20:
             return "unicycle"
         case 21...30:
             return "monopoly man"
@@ -193,9 +193,9 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
     
     func switchImage() -> String? { // leftCalloutAccessory image
         switch shepDollarValue {
-        case 0...5:
+        case 0...10:
             return "zzz..."
-        case 6...20:
+        case 11...20:
             return "coins"
         case 21...30:
             return "dollars"

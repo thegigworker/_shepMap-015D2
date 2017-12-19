@@ -19,6 +19,7 @@ let initialDisplay: Double = 20
 protocol DataModelDelegate: class {
     func didReceiveMethodCallFromDataModel()
     func didReceiveDataUpdate(data: String)
+    func handleValidSarchResults(validSearchResults: [ShepSingleAnnotation])
 }
 //Comparing to the callback way, Delegation pattern is easier to reuse across the app: you can create a base class that conforms to the protocol delegate and avoid code redundancy. However, delegation is harder to implement: you need to create a protocol, set the protocol methods, create Delegate property, assign Delegate to ViewController, and make this ViewController conform to the protocol. Also, the Delegate has to implement every method of the protocol by default.
 
@@ -90,6 +91,9 @@ class shepDataModel: NSObject {
                 let destinationLocation = CLLocation(latitude: point2.coordinate.latitude, longitude: point2.coordinate.longitude)
                 self.crowFliesDistance = sourceLocation.distance(from: destinationLocation) // result is in meters
                 self.crowFliesDistance = meters2miles(meters: self.crowFliesDistance)
+                let data = "medical maryjane"
+                //print("in RequestData, the data is: \(data)")
+                self.delegate?.didReceiveDataUpdate(data: data)
             }
             //return (self.myRoute)  // Unexpected non-void return value in void function
         })
@@ -145,10 +149,16 @@ class shepDataModel: NSObject {
                     print ("still inside shepSearchResultLoop?, shepAnnotationsArray count is \(self.shepAnnotationsArray.count)")
                     print ("still inside shepSearchResultLoop? validSearchResultsArray count: \(self.validSearchResultsArray.count) \n")
                 }
+                //let data = "medical maryjane's last dance"
+                //print("in performLocalSearch2 completionHandler: \(data)")
+                //handleValidSarchResults(validSearchResults: [ShepSingleAnnotation])
                 self.shepAnnotationsArray.append(contentsOf: self.validSearchResultsArray)
+                //self.shepAnnotationsArray.append(contentsOf: self.validSearchResultsArray)
                 print ("shepSearchResultLoop is done now???, shepAnnotationsArray count is \(self.shepAnnotationsArray.count)")
                 print ("shepSearchResultLoop is done now???, validSearchResultsArray count is \(self.validSearchResultsArray.count) \n")
                 
+                self.delegate?.handleValidSarchResults(validSearchResults: self.validSearchResultsArray)
+
                // myMapView.addAnnotations(validSearchResultsArray)
                // myMapView.showAnnotations(shepAnnotationsArray, animated: true)
             }
