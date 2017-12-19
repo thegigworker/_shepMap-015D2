@@ -1,13 +1,6 @@
 //  ShepMapController.swift
 //
-
-import UIKit
-import MapKit
-import Contacts
-// This adds the Contacts framework, which contains dictionary key constants such as CNPostalAddressStreetKey,
-// for when you need to set the address, city or state fields of a location.
-
-let THOMPSON_GPS = (latitude: 41.93636, longitude: -71.79837)
+//let THOMPSON_GPS = (latitude: 41.93636, longitude: -71.79837)
 //HARTFORD_GPS = (latitude: 41.767603, longitude: -72.684036)
 //109 Pixley Ave, Corte Madera, CA.  37.928940, -122.526666
 //Transamerica Pyramid,  San Francisco, CA.  37.795315, -122.402833
@@ -18,12 +11,18 @@ let THOMPSON_GPS = (latitude: 41.93636, longitude: -71.79837)
 //Kurt Cobain's House: 151 Lake Washington Blvd E, Seattle  47.619281, -122.282161
 //Sarah Palin's street in Wasilla, Alaska   61.577718, -149.492511
 
+import UIKit
+import MapKit
+import Contacts
+// This adds the Contacts framework, which contains dictionary key constants such as CNPostalAddressStreetKey,
+// for when you need to set the address, city or state fields of a location.
+
 var myUserLocation: CLLocation = CLLocation()
 //var myMapItem: MKMapItem = forCurrentLocation()
-let initialDisplay: Double = 20
-let initialSearch: Double = 15
-let initialDisplayDistance = CLLocationDistance(miles2meters(miles: initialDisplay))
-let initialSearchDistance = CLLocationDistance(miles2meters(miles: initialSearch))
+//let initialDisplay: Double = 20
+//let initialSearch: Double = 15
+//let initialDisplayDistance = CLLocationDistance(miles2meters(miles: initialDisplay))
+//let initialSearchDistance = CLLocationDistance(miles2meters(miles: initialSearch))
 
 //let initialMapSearch = "gas stations"
 
@@ -48,8 +47,7 @@ func shepCurrencyFromDouble(shepNumber : Double) -> String  {
 }
 
 
-
-class ViewController: UIViewController, MKMapViewDelegate {
+class ViewController: UIViewController, MKMapViewDelegate, DataModelDelegate {
 
     @IBOutlet weak var myMapView: MKMapView!
     //    @IBOutlet weak var myMapView: MKMapView! {
@@ -81,27 +79,32 @@ class ViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var lblDrivingDistance: UILabel!
     @IBOutlet weak var lblDrivingTime: UILabel!
     
-    var currentDisplayDistance = initialDisplayDistance
-    var currentSearchDistance = initialSearchDistance
-    var myArray_MKMapItems = [MKMapItem]()
-    var shepAnnotationsArray = [ShepSingleAnnotation]()
-    var myRoute : MKRoute!
+    //var currentDisplayDistance = initialDisplayDistance
+    //var currentSearchDistance = initialSearchDistance
     var whichPolylineStyle : String = ""
-    //var currentRoute:MKRoute?
-    var currentTransportType = MKDirectionsTransportType.automobile
     let myDataModel = shepDataModel()
+    
+    func didReceiveMethodCallFromDataModel() {
+        print("In ViewController, didReceiveMethodCallFromDataModel happened")
+    }
+    
+    func didReceiveDataUpdate(data: String) {
+        print ("In ViewController, didReceiveDataUpdate was: \(data) \n")
+    }
     
     @IBAction func DisplayDistanceSliderMoved(_ sender: AnyObject) {
         // Get Float value from Slider when it is moved.
         let value = DisplayDistanceSlider.value
         // Assign text to string representation of float.
         DisplayDistanceText2.text = String(format: "%.02f", value)
+        myDataModel.currentDisplayDistance = miles2meters(miles: Double(value))
     }
     
     @IBAction func SearchDistanceSliderMoved(_ sender: AnyObject) {
         let value = SearchDistanceSlider.value
         SearchDistanceText2.text = String(format: "%.02f", value)
-        currentSearchDistance = miles2meters(miles: Double(value))
+        myDataModel.currentSearchDistance2 = miles2meters(miles: Double(value))
+        //myDataModel.currentSearchDistance2 = miles2meters(miles: Double(value))
     }
     
     //   RE DETECTING END OF SLIDER CHANGE
@@ -116,45 +119,46 @@ class ViewController: UIViewController, MKMapViewDelegate {
         myMapView.removeOverlays(myMapView.overlays)
         myMapView.removeAnnotations(myMapView.annotations)
         RouteDataView.alpha = 0.2
-        shepAnnotationsArray.removeAll()
+        myDataModel.shepAnnotationsArray.removeAll()
     }
     
     @IBAction func changeHeight(_ sender: Any) {
-        var tempTranslator = Double(CLLocationDistance(DisplayDistanceSlider.value))
-        currentDisplayDistance = CLLocationDistance(miles2meters(miles: tempTranslator))
-        // print ("currentDisplayDistance is \(String(format: "%.02f", tempTranslator))")
-        tempTranslator = Double(CLLocationDistance(SearchDistanceSlider.value))
-        currentSearchDistance = CLLocationDistance(miles2meters(miles: tempTranslator))
-        print ("currentSearchDistance is \(String(format: "%.02f", tempTranslator))")
-        // create region for map
-        let mapRegion1 = MKCoordinateRegionMakeWithDistance(myUserLocation.coordinate, currentDisplayDistance, currentDisplayDistance)
+//        let tempTranslator = Double(CLLocationDistance(DisplayDistanceSlider.value))
+//        print ("currentDisplayDistance is \(String(format: "%.02f", tempTranslator))")
+//        let tempTranslator2 = meters2miles(meters: myDataModel.currentDisplayDistance)
+//        print ("currentDisplayDistance is \(String(format: "%.02f", tempTranslator2))")
+
+//        // create region for map
+        let mapRegion1 = MKCoordinateRegionMakeWithDistance(myUserLocation.coordinate, myDataModel.currentDisplayDistance, myDataModel.currentDisplayDistance)
+        
         myMapView.setRegion(mapRegion1, animated: true)
     }
     
     @IBAction func makeRandomRoute(_ sender: UIButton) {
-        if shepAnnotationsArray.count < 2 {
+        if myDataModel.shepAnnotationsArray.count < 2 {
             print ("less than 2 items in shepAnnotationsArray \n")
             return
         }
-        let howMany = UInt32(shepAnnotationsArray.count)
+        let howMany = UInt32(myDataModel.shepAnnotationsArray.count)
         //for _ in shepAnnotationsArray {
         let sourceItem = Int(arc4random_uniform(howMany))
         let destinationItem = Int(arc4random_uniform(howMany))
         if sourceItem != destinationItem {
             //print ("thisisCrowFliesDistanceInMiles:  \(myRouteData.thisisCrowFliesDistanceInMiles)")
-            guard let myRouteData = getRouteData(source: shepAnnotationsArray[sourceItem], destination: shepAnnotationsArray[destinationItem])
+            guard let myRouteData = myDataModel.getRouteData2(source: myDataModel.shepAnnotationsArray[sourceItem], destination: myDataModel.shepAnnotationsArray[destinationItem])
                 else {
+                    print("inside makeRandomRoute, myRouteData was nil /n")
                     return
             }
-            myRoute = myRouteData
-            print ("myRouteData.thisismyRoute:  \(String(describing: myRoute))")
+            myDataModel.currentRoute = myRouteData
+            print ("myRouteData.thisismyRoute:  \(String(describing: myDataModel.currentRoute))")
             myMapView.removeOverlays(myMapView.overlays)
             whichPolylineStyle = "blue"
             drawPolyline(theRoute: myRouteData)
             let drivingDistance = meters2miles(meters: myRouteData.distance) // response distance in meters
             let drivingTime = ((myRouteData.expectedTravelTime) / 60)  //expectedTravelTime is in secs
             RouteDataView.alpha = 1
-            //lblCrowFlies.text = "As crow flies: \(String(format: "%.02f", myRouteData.thisisCrowFliesDistanceInMiles)) miles"
+            lblCrowFlies.text = "As crow flies: \(String(format: "%.02f", myDataModel.crowFliesDistance)) miles"
             lblDrivingDistance.text = "Driving distance: \(String(format: "%.02f", drivingDistance)) miles"
             lblDrivingTime.text = "Driving time: \(String(format: "%.02f", drivingTime)) minutes"
         } else { print ("source and destination are the same \n") }
@@ -171,7 +175,7 @@ class ViewController: UIViewController, MKMapViewDelegate {
     //var placemark: MKPlacemark { get }
 
     @IBAction func makeGoldenRoute(_ sender: UIButton) {
-        if shepAnnotationsArray.count < 1 {
+        if myDataModel.shepAnnotationsArray.count < 1 {
             print ("in makeGoldenRoute NO items in shepAnnotationsArray \n")
             return
         }
@@ -187,61 +191,59 @@ class ViewController: UIViewController, MKMapViewDelegate {
         let myMKMapItem : MKMapItem = MKMapItem(placemark: MKPlacemark1)
         ///////////  CONVERSION FROM COORDINATES INTO MKMAPITEM?
         
-        let sourceItem = ShepSingleAnnotation(myMapItem: myMKMapItem, myStoredRoute: MKRoute(), shepDollarValue: 0.0)
-        let howMany = UInt32(shepAnnotationsArray.count)
+        let sourceItem = ShepSingleAnnotation(myMapItem: myMKMapItem, currentRoute: MKRoute(), shepDollarValue: 0.0)
+        let howMany = UInt32(myDataModel.shepAnnotationsArray.count)
         let destinationItem = Int(arc4random_uniform(howMany))
-            guard let myRouteData = getRouteData(source: sourceItem, destination: shepAnnotationsArray[destinationItem])
+            guard let myRouteData = myDataModel.getRouteData2(source: sourceItem, destination: myDataModel.shepAnnotationsArray[destinationItem])
                 else {
+                    print ("myRouteData is nil \n" )
                     return
             }
-            myRoute = myRouteData
-            print ("myRouteData.thisismyRoute:  \(String(describing: myRoute))")
+            myDataModel.currentRoute = myRouteData
+            print ("myRouteData.thisismyRoute:  \(String(describing: myDataModel.currentRoute))")
             myMapView.removeOverlays(myMapView.overlays)
             whichPolylineStyle = "green"
             drawPolyline(theRoute: myRouteData)
             let drivingDistance = meters2miles(meters: myRouteData.distance) // response distance in meters
             let drivingTime = ((myRouteData.expectedTravelTime) / 60)  //expectedTravelTime is in secs
             RouteDataView.alpha = 1
-            //lblCrowFlies.text = "As crow flies: \(String(format: "%.02f", myRouteData.thisisCrowFliesDistanceInMiles)) miles"
+            lblCrowFlies.text = "As crow flies: \(String(format: "%.02f", myDataModel.crowFliesDistance)) miles"
             lblDrivingDistance.text = "Driving distance: \(String(format: "%.02f", drivingDistance)) miles"
             lblDrivingTime.text = "Driving time: \(String(format: "%.02f", drivingTime)) minutes"
     }
     
-    func getRouteData (source: ShepSingleAnnotation, destination: ShepSingleAnnotation) -> (MKRoute?) {
-        let point1 = MKPointAnnotation()
-        let point2 = MKPointAnnotation()
-        point1.coordinate = CLLocationCoordinate2DMake(source.coordinate.latitude, source.coordinate.longitude)
-        point2.coordinate = CLLocationCoordinate2DMake(destination.coordinate.latitude, destination.coordinate.longitude)
-        let point1_placemark = MKPlacemark(coordinate: CLLocationCoordinate2DMake(point1.coordinate.latitude, point1.coordinate.longitude), addressDictionary: nil)
-        let point2_placemark = MKPlacemark(coordinate: CLLocationCoordinate2DMake(point2.coordinate.latitude, point2.coordinate.longitude), addressDictionary: nil)
-        
-        let directionsRequest = MKDirectionsRequest()
-        directionsRequest.source = MKMapItem(placemark: point1_placemark)
-        directionsRequest.destination = MKMapItem(placemark: point2_placemark)
-        directionsRequest.transportType = currentTransportType
-        //  Set the transportation type to .Automobile for this particular scenario. (.Walking and .Any are also valid MKDirectionsTransportTypes.)
-        //  Set requestsAlternateRoutes to true to fetch all the reasonable routes from the source to destination.
-        let directions = MKDirections(request: directionsRequest)
-        //var crowFliesDistanceInMiles: Double = 0.0
-        
-        directions.calculate(completionHandler: {
-            response, error in
-            // response has an array of MKRoutes
-            if error != nil {
-                print ("Directions Retreival Error: \(String(describing: error))")
-            } else {
-                //self.myMapView.removeOverlays(self.myMapView.overlays)
-                self.myRoute = response!.routes[0] as MKRoute
-               // let sourceLocation = CLLocation(latitude: point1.coordinate.latitude, longitude: point1.coordinate.longitude)
-                //let destinationLocation = CLLocation(latitude: point2.coordinate.latitude, longitude: point2.coordinate.longitude)
-               // let crowFliesDistance = sourceLocation.distance(from: destinationLocation) // result is in meters
-                //crowFliesDistanceInMiles = meters2miles(meters: crowFliesDistance)
-                //return (thisismyRoute: myRoute, thisisCrowFliesDistanceInMiles: crowFliesDistanceInMiles)
-            }
-            //return (thisismyRoute: mapViewController.myRoute, thisisCrowFliesDistanceInMiles: crowFliesDistanceInMiles)
-        })
-        return (myRoute)
-    }
+//    //func getRouteData (source: ShepSingleAnnotation, destination: ShepSingleAnnotation) {
+//    func getRouteData (source: ShepSingleAnnotation, destination: ShepSingleAnnotation) -> (MKRoute?) {
+//        let point1 = MKPointAnnotation()
+//        let point2 = MKPointAnnotation()
+//        point1.coordinate = CLLocationCoordinate2DMake(source.coordinate.latitude, source.coordinate.longitude)
+//        point2.coordinate = CLLocationCoordinate2DMake(destination.coordinate.latitude, destination.coordinate.longitude)
+//        let point1_placemark = MKPlacemark(coordinate: CLLocationCoordinate2DMake(point1.coordinate.latitude, point1.coordinate.longitude), addressDictionary: nil)
+//        let point2_placemark = MKPlacemark(coordinate: CLLocationCoordinate2DMake(point2.coordinate.latitude, point2.coordinate.longitude), addressDictionary: nil)
+//
+//        let directionsRequest = MKDirectionsRequest()
+//        directionsRequest.source = MKMapItem(placemark: point1_placemark)
+//        directionsRequest.destination = MKMapItem(placemark: point2_placemark)
+//        directionsRequest.transportType = myDataModel.currentTransportType
+//        //  Set the transportation type to .Automobile for this particular scenario. (.Walking and .Any are also valid MKDirectionsTransportTypes.)
+//        //  Set requestsAlternateRoutes to true to fetch all the reasonable routes from the source to destination.
+//        let directions = MKDirections(request: directionsRequest)
+//        //var crowFliesDistanceInMiles: Double = 0.0
+//
+//        directions.calculate(completionHandler: {
+//            response, error in
+//            // response has an array of MKRoutes
+//            if error != nil {
+//                print ("Directions Retreival Error: \(String(describing: error))")
+//            } else {
+//                //self.myMapView.removeOverlays(self.myMapView.overlays)
+//                self.myDataModel.myRoute = response!.routes[0] as MKRoute
+//            }
+//            //return (self.myRoute)  // Unexpected non-void return value in void function
+//        })
+//
+//        return (myDataModel.myRoute)
+//    }
     
     func drawPolyline (theRoute: MKRoute) {
         //self.myMapView.removeOverlays(self.myMapView.overlays)
@@ -324,7 +326,7 @@ class ViewController: UIViewController, MKMapViewDelegate {
     }
     
     @IBAction func btnGasClick(_ sender: AnyObject) {
-        print ("in btnGasClick shepAnnotationsArray count is \(shepAnnotationsArray.count) \n")
+        print ("in btnGasClick shepAnnotationsArray count is \(myDataModel.shepAnnotationsArray.count) \n")
          handleLocalSearch ("gas station")
     }
     
@@ -333,22 +335,54 @@ class ViewController: UIViewController, MKMapViewDelegate {
     }
     
     @IBAction func btnParkClick(_ sender: AnyObject) {
-        print ("in btnPark shepAnnotationsArray count is \(shepAnnotationsArray.count) \n")
+        print ("in btnPark shepAnnotationsArray count is \(myDataModel.shepAnnotationsArray.count) \n")
         handleLocalSearch ("Park")
     }
     
     @IBAction func btnPizza(_ sender: AnyObject) {
-        print ("in btnPizza_A shepAnnotationsArray count is \(shepAnnotationsArray.count)")
+        print ("in btnPizza_A shepAnnotationsArray count is \(myDataModel.shepAnnotationsArray.count)")
         handleLocalSearch ("pizza")
     }
     
     func handleLocalSearch (_ searchString:String){
-        performLocalSearch(searchString)
-        //shepDataModel.performLocalSearch2(searchString)
-        print ("in handleLocalSearch AnnotationsArray count is \(shepAnnotationsArray.count) \n")
+        //performLocalSearch(searchString)
+        myDataModel.performLocalSearch2(searchString)
+        myMapView.addAnnotations(myDataModel.validSearchResultsArray)
+        myMapView.showAnnotations(myDataModel.shepAnnotationsArray, animated: true)
+        print ("in handleLocalSearch AnnotationsArray count is \(myDataModel.shepAnnotationsArray.count) \n")
         resetTwirlButtons()
         centerMapOnLocation(location: myUserLocation)
     }
+    //Part 1. Callback as Completion Handler
+    //This way is very easy to setup. First, we create a requestData method that takes completion (a block):
+    
+    //Completion here is a method, that takes a String as a data and has a Void return type.
+    //Inside requestData, we run the code to request the data from any source:
+    
+    //All we need to do now is to call completion with the data we have just received:
+//    class DataModel {
+//        func performDataRequest(completion: ((_ shepdata: String) -> Void)) {
+//            // the data was received and parsed to String
+//            let myDataRequestData = "xyData from wherever"
+//            let myotherDataReqData = "second " + myDataRequestData
+//            completion(myotherDataReqData)
+//        }
+//    }
+    
+    //The next step is to create an instance of DataModel in ViewController class and call requestData method. In completion, we call a private method useData:
+    //class ViewController: UIViewController {  //UIViewController {
+    //let dataModel = DataModel()
+    //dataModel.performDataRequest { [weak self] (data: String) in self?.useData(data: data)
+    
+    func eatmyshorts(incomingData: String) {
+        //let data2 = "shorts"
+        myDataModel.performDataRequest { [weak self] (data2: String) in self?.useData(data: data2)}
+    }
+    
+    func useData(data: String) {
+        print("still calculating \n\(data)")
+    }
+    // }
     
     @IBAction func twirlButtonTapped(_ sender: AnyObject) {
         UIView.animate(withDuration: 0.1, delay: 0.05, options: UIViewAnimationOptions.curveEaseOut, animations: {
@@ -388,25 +422,7 @@ class ViewController: UIViewController, MKMapViewDelegate {
         }, completion: nil)
     }
     
-    // Create a location manager to trigger user tracking
-    let locationManager: CLLocationManager = {
-        let manager = CLLocationManager()
-        manager.requestWhenInUseAuthorization()
-        manager.startUpdatingLocation()
-        return manager
-    }()
-    
 
-    //    You have to override CLLocationManager.didUpdateLocations (part of CLLocationManagerDelegate) to get notified when the location manager retrieves the current location:
-    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
-        let currentLocation = locations.last as! CLLocation
-        myUserLocation = currentLocation
-        //let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-        //        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-        //
-        //        self.map.setRegion(region, animated: true)
-    }
-    
     // set up compass as UIBarButtonItem, separate from map itself
 //    func setupCompassButton() {
 //        let compass = MKCompassButton(mapView: myMapView)
@@ -444,25 +460,42 @@ class ViewController: UIViewController, MKMapViewDelegate {
         myMapView.register(SingleAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
     }
     
-    func loadDataForMapRegionAndBikes() {
-        if let plist = NSDictionary(contentsOfFile: Bundle.main.path(forResource: "Data", ofType: "plist")!) {
-            if (plist["region"] as? [NSNumber]) != nil {
-                //  let coordinate = CLLocationCoordinate2D(latitude: region[0].doubleValue, longitude: region[1].doubleValue)
-                // let span = MKCoordinateSpanMake(region[2].doubleValue, region[3].doubleValue)
-                let coordinate = CLLocationCoordinate2D(latitude: THOMPSON_GPS.latitude, longitude: THOMPSON_GPS.longitude)
-                let initialDistance = CLLocationDistance(miles2meters(miles: 55.2))
-                myMapView.region = MKCoordinateRegionMakeWithDistance(coordinate, initialDistance, initialDistance)
-                // myMapView.region = MKCoordinateRegionMake(coordinate, span)
-            }
-            if let makeAppleArrayofAnnts = plist["bikes"] as? [[String : NSNumber]] {
-                self.myMapView.addAnnotations(AppleSingleAnnotation.makeAppleArrayofAnnts(fromDictionaries: makeAppleArrayofAnnts))
-            }
-        }
+//    func loadDataForMapRegionAndBikes() {
+//        if let plist = NSDictionary(contentsOfFile: Bundle.main.path(forResource: "Data", ofType: "plist")!) {
+//            if (plist["region"] as? [NSNumber]) != nil {
+//                //  let coordinate = CLLocationCoordinate2D(latitude: region[0].doubleValue, longitude: region[1].doubleValue)
+//                // let span = MKCoordinateSpanMake(region[2].doubleValue, region[3].doubleValue)
+//                let coordinate = CLLocationCoordinate2D(latitude: THOMPSON_GPS.latitude, longitude: THOMPSON_GPS.longitude)
+//                let initialDistance = CLLocationDistance(miles2meters(miles: 55.2))
+//                myMapView.region = MKCoordinateRegionMakeWithDistance(coordinate, initialDistance, initialDistance)
+//                // myMapView.region = MKCoordinateRegionMake(coordinate, span)
+//            }
+//            if let makeAppleArrayofAnnts = plist["bikes"] as? [[String : NSNumber]] {
+//                self.myMapView.addAnnotations(AppleSingleAnnotation.makeAppleArrayofAnnts(fromDictionaries: makeAppleArrayofAnnts))
+//            }
+//        }
+//    }
+    
+    // Create a location manager to trigger user tracking
+    let locationManager: CLLocationManager = {
+        let manager = CLLocationManager()
+        manager.requestWhenInUseAuthorization()
+        manager.startUpdatingLocation()
+        return manager
+    }()
+    
+    //    You have to override CLLocationManager.didUpdateLocations (part of CLLocationManagerDelegate) to get notified when the location manager retrieves the current location:
+    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+        let currentLocation = locations.last as! CLLocation
+        myUserLocation = currentLocation
+        //let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+        //        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+        //        self.map.setRegion(region, animated: true)
     }
     
     //let regionRadius: CLLocationDistance = ()
     func centerMapOnLocation(location: CLLocation) {
-        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, currentDisplayDistance, currentDisplayDistance)
+        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, myDataModel.currentDisplayDistance, myDataModel.currentDisplayDistance)
         myMapView.setRegion(coordinateRegion, animated: true)
     }
     
@@ -486,6 +519,12 @@ class ViewController: UIViewController, MKMapViewDelegate {
    // When a view controller is loaded from a storyboard, the system instantiates the view hierarchy and assigns the appropriate values to all the view controller’s outlets. By the time the view controller’s viewDidLoad() method is called, the system has assigned valid values to all of the controller’s outlets, and you can safely access their contents.
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Comparing to the callback way, Delegation pattern is easier to reuse across the app: you can create a base class that conforms to the protocol delegate and avoid code redundancy. However, delegation is harder to implement: you need to create a protocol, set the protocol methods, create Delegate property, assign Delegate to ViewController, and make this ViewController conform to the protocol. Also, the Delegate has to implement every method of the protocol by default.
+        myDataModel.delegate = self
+        myDataModel.triggerMethodInDataModel()
+        myDataModel.requestData()
+        
         setupUserTrackingButtonAndScaleView()
         registerAnnotationViewClasses()
         //loadDataForMapRegionAndBikes()
@@ -494,15 +533,15 @@ class ViewController: UIViewController, MKMapViewDelegate {
         // "Setting ViewController as the delegate of the map view.  You can do this in Main.storyboard, but I prefer to do it in code, where it’s more visible."
         myMapView.delegate = self
         
-        SearchDistanceSlider.value = Float(currentSearchDistance)
+       // SearchDistanceSlider.value = Float(myDataModel.currentSearchDistance2)
         
-        print ("in **viewDidLoad** shepAnnotationsArray count is \(shepAnnotationsArray.count) \n")
-        print ("in ***viewDidLoad BEFORE SEARCH Current search distance: \(meters2miles(meters: self.currentSearchDistance))")
+        print ("in **viewDidLoad** shepAnnotationsArray count is \(myDataModel.shepAnnotationsArray.count) \n")
+        print ("in ***viewDidLoad BEFORE SEARCH Current search distance: \(meters2miles(meters: myDataModel.currentSearchDistance2))")
         //print ("in ***viewDidLoad Current search distance: \(meters2miles(meters: self.currentSearchDistance))")
         handleLocalSearch("gas station")
         //myDataModel.performLocalSearch2("gas station") //INITIAL ONE SOMETHING GOES WRONG WITH SEARCH REGION -- BUT I CAN'T FIND IT
-        print ("in viewDidLoad AFTER SEARCH shepAnnotationsArray count is \(shepAnnotationsArray.count)")
-        print ("in ***viewDidLoad AFTER SEARCH Current search distance: \(meters2miles(meters: self.currentSearchDistance))")
+        print ("in viewDidLoad AFTER SEARCH shepAnnotationsArray count is \(myDataModel.shepAnnotationsArray.count)")
+        print ("in ***viewDidLoad AFTER SEARCH Current search distance: \(meters2miles(meters: myDataModel.currentSearchDistance2))")
         
         centerMapOnLocation(location: myUserLocation)
         
@@ -515,7 +554,9 @@ class ViewController: UIViewController, MKMapViewDelegate {
         self.btnMcD.layer.cornerRadius = 10
         
         DisplayDistanceSlider.value = Float(initialDisplay)
+        print ("initialDisplay is: \(initialDisplay)")
         SearchDistanceSlider.value = Float(initialSearch)
+        print ("SearchDistanceSlider.value: \(SearchDistanceSlider.value)")
         DisplayDistanceText2.text = String(initialDisplay)
         SearchDistanceText2.text = String(initialSearch)
         
@@ -548,7 +589,7 @@ extension ViewController {
 
     // directions/polyline related
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        let myLineRenderer = MKPolylineRenderer(polyline: myRoute.polyline)
+        let myLineRenderer = MKPolylineRenderer(polyline: myDataModel.currentRoute!.polyline)
         if whichPolylineStyle == "blue" {
             myLineRenderer.lineWidth = 4
             myLineRenderer.strokeColor = .blue
@@ -627,17 +668,18 @@ func performLocalSearch(_ searchString:String) {
     var validSearchResultsArray: [ShepSingleAnnotation] = []
     // 搜索当前区域
     // print ("in performLocalSearch searchRegion search distance: \(meters2miles(meters: self.currentSearchDistance))")
-    let searchRegion1 = MKCoordinateRegionMakeWithDistance(myUserLocation.coordinate, currentSearchDistance, currentSearchDistance)
+    let searchRegion1 = MKCoordinateRegionMakeWithDistance(myUserLocation.coordinate, myDataModel.currentSearchDistance2, myDataModel.currentSearchDistance2)
     request.region = searchRegion1
     //request.region = myMapView.region
     // a MKLocalSearch object initiates a search operation and will deliver the results back into an array of MKMapItems. This will contain the name, latitude and longitude of the current POI.
-    print ("before search.start shepAnnotationsArray count: \(shepAnnotationsArray.count)")
+    print ("before search.start shepAnnotationsArray count: \(myDataModel.shepAnnotationsArray.count)")
     // 启动搜索,并且把返回结果保存到数组中
     let search = MKLocalSearch(request: request)
+    
     search.start(completionHandler: {(response, error) in
         //let myViewController = ViewController()
         //var validSearchResultsArray: [ShepSingleAnnotation] = []
-        print ("inside completionHandler shepAnnotationsArray count: \(self.shepAnnotationsArray.count)")
+        print ("inside completionHandler shepAnnotationsArray count: \(self.myDataModel.shepAnnotationsArray.count)")
         // Local searches are performed asynchronously
         //and a completion handler called when the search is complete.
         if error != nil {
@@ -653,29 +695,39 @@ func performLocalSearch(_ searchString:String) {
                 let searchResultLocation = CLLocation(latitude: searchResultCoordinates.latitude, longitude: searchResultCoordinates.longitude)
                 let mapItemDistance = myUserLocation.distance(from: searchResultLocation) // result is in meters
                 //let distanceInMiles = meters2miles(meters: mapItemDistance)
-                print ("Current search distance: \(meters2miles(meters: self.currentSearchDistance)) and this distance: \(meters2miles(meters: mapItemDistance))")
+                print ("Current search distance: \(meters2miles(meters: self.myDataModel.currentSearchDistance2)) and this distance: \(meters2miles(meters: mapItemDistance))")
 
-                if mapItemDistance > self.currentSearchDistance {  // if SearchResult is further away than currentSearchDistance
+                if mapItemDistance > self.myDataModel.currentSearchDistance2 {  // if SearchResult is further away than currentSearchDistance
                     print ("took one down, too far away")
                     continue shepSearchResultLoop
                 } else {
                     let shepDollarValue = Double(arc4random_uniform(40) + 1)
                     //let shepPassedString = shepCurrencyFromDouble(shepNumber: shepDollarValue)
-                    let validResult = ShepSingleAnnotation(myMapItem: item, myStoredRoute: MKRoute(), shepDollarValue: shepDollarValue)
+                    let validResult = ShepSingleAnnotation(myMapItem: item, currentRoute: MKRoute(), shepDollarValue: shepDollarValue)
+                    
+                    print("validResult shepStringData: \(validResult.shepStringData)")
+                     print("validResult routeDrivingDistance: \(validResult.routeDrivingDistance)")
+                    print("validResult bestRouteScore: \(validResult.bestRouteScore)")
+                    print("validResult drivingTime: \(validResult.drivingTime)")
+                    //print("validResult crowFliesDistance: \(String(describing: validResult.crowFliesDistance!))")
+                    print("validResult myStoredRoute: \(String(describing: validResult.currentRoute!)) \n")
+                   
+                    //print("validResult routeDrivingDistance: \(validResult.)")
+                    
                     validSearchResultsArray.append(validResult)
                 }
-                print ("still inside shepSearchResultLoop?, shepAnnotationsArray count is \(self.shepAnnotationsArray.count)")
+                print ("still inside shepSearchResultLoop?, shepAnnotationsArray count is \(self.myDataModel.shepAnnotationsArray.count)")
                 print ("still inside shepSearchResultLoop? validSearchResultsArray count: \(validSearchResultsArray.count) \n")
             }
-            self.shepAnnotationsArray.append(contentsOf: validSearchResultsArray)
-            print ("shepSearchResultLoop is done now???, shepAnnotationsArray count is \(self.shepAnnotationsArray.count)")
+            self.myDataModel.shepAnnotationsArray.append(contentsOf: validSearchResultsArray)
+            print ("shepSearchResultLoop is done now???, shepAnnotationsArray count is \(self.myDataModel.shepAnnotationsArray.count)")
             print ("shepSearchResultLoop is done now???, validSearchResultsArray count is \(validSearchResultsArray.count) \n")
             self.myMapView.addAnnotations(validSearchResultsArray)
-            self.myMapView.showAnnotations(self.shepAnnotationsArray, animated: true)
+            self.myMapView.showAnnotations(self.myDataModel.shepAnnotationsArray, animated: true)
         }
     })
     //print ("opening gambit, validSearchResultsArray count is \(validSearchResultsArray.count) \n")  // validSearchResultsArray doesn't work here
-    print ("OPENING GAMBIT, shepAnnotationsArray count is \(shepAnnotationsArray.count) \n")
+    print ("OPENING GAMBIT, shepAnnotationsArray count is \(myDataModel.shepAnnotationsArray.count) \n")
 }
 
 }

@@ -16,18 +16,20 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
     //let locationName: String
     //let discipline: String
     let coordinate: CLLocationCoordinate2D
-    let shepsVariable: Double
+    let shepDollarValue: Double
     let shepStringData: String
     var myMapItem: MKMapItem
-    var myStoredRoute: MKRoute?
+    var currentRoute: MKRoute?
+    //let myDataModelInstance = shepDataModel(myMapItem: myMapItem, currentRoute: currentRoute)
     
-    init(myMapItem: MKMapItem, myStoredRoute: MKRoute, shepDollarValue: Double) {
+    init(myMapItem: MKMapItem, currentRoute: MKRoute, shepDollarValue: Double) {
         self.origTitle = myMapItem.name ?? "No Title"
         //self.locationName = myMapItem.name! //searchResult.description
-        self.shepsVariable = shepDollarValue
+        self.shepDollarValue = shepDollarValue
         self.myMapItem = myMapItem
-        self.myStoredRoute = myStoredRoute
-        self.shepStringData = shepCurrencyFromDouble(shepNumber: self.shepsVariable)
+        //self.currentRoute = currentRoute
+        self.currentRoute = currentRoute
+        self.shepStringData = shepCurrencyFromDouble(shepNumber: self.shepDollarValue)
 //        self.shepsVariable = Double(arc4random_uniform(25) + 1)
 //        self.shepStringData = shepCurrencyFromDouble(shepNumber: self.shepsVariable)
         let latitude = myMapItem.placemark.coordinate.latitude
@@ -35,6 +37,7 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
         self.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         super.init()
     }
+    
     
 //    init?(json: [Any]) {
 //        // 1
@@ -66,19 +69,15 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
         return String(myMapItem.placemark.title!.dropLast(_:15))
     }
     
-    var crowFliesDistance: String? {
-        let thisLocation = CLLocation(latitude: self.coordinate.latitude, longitude: self.coordinate.longitude)
-        let distance = myUserLocation.distance(from: thisLocation) // result is in meters
-        let distanceInMiles = meters2miles(meters: distance)
-        return String(format: "%.02f", distanceInMiles)
-    }
-    
-//    self.lblCrowFlies.text = "As crow flies: \(String(format: "%.02f", distanceInMiles)) miles"
-//    self.lblDrivingDistance.text = "Driving distance: \(String(format: "%.02f", drivingDistance)) miles"
-//    self.lblDrivingTime.text = "Driving time: \(String(format: "%.02f", drivingTime)) minutes"
+//    var crowFliesDistance: String? {
+//        let thisLocation = CLLocation(latitude: self.coordinate.latitude, longitude: self.coordinate.longitude)
+//        let distance = myUserLocation.distance(from: thisLocation) // result is in meters
+//        let distanceInMiles = meters2miles(meters: distance)
+//        return String(format: "%.02f", distanceInMiles)
+//    }
     
     var routeDrivingDistance: Double {
-        if let myRoute = self.myStoredRoute {
+        if let myRoute = self.currentRoute {
             let drivingDistance = meters2miles(meters: myRoute.distance)
             return drivingDistance // drivingDistance in miles
         } else {
@@ -87,8 +86,22 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
         }
     }
     
+    var bestRouteScore: Double {
+        if let myRoute = self.currentRoute {
+            let drivingDistance = meters2miles(meters: myRoute.distance)
+            let tempDataModel = shepDataModel()
+            let tempCentsPerMileDecimal = Double(100/tempDataModel.centsPerMileExpense)
+            var bestRouteScore = drivingDistance * tempCentsPerMileDecimal 
+            bestRouteScore = shepDollarValue - bestRouteScore
+            return bestRouteScore // drivingDistance in miles
+        } else {
+            //let drivingDistance = 0.0
+            return 0.0
+        }
+    }
+    
     var drivingTime: Double {
-        if let myRoute = self.myStoredRoute {
+        if let myRoute = self.currentRoute {
             let drivingTime = myRoute.expectedTravelTime / 60
             return drivingTime // drivingDistance in miles
         } else {
@@ -147,24 +160,24 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
     }
     
     func switchTintColor() -> UIColor {
-        switch shepsVariable {
+        switch shepDollarValue {
         case 0..<1:
             return .black
         case 1...5:
-            return .red
+            return .darkGray
         case 6...20:
             return .orange
         case 21...30:
-            return .yellow
-        case 31...40:
             return .green
+        case 31...40:
+            return .white
         default:
             return .white
         }
     }
     
     func switchGlyph() -> String? { // marker glyph
-        switch shepsVariable {
+        switch shepDollarValue {
         case 0...5:
             return "tricycle"
         case 6...20:
@@ -179,7 +192,7 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
     }
     
     func switchImage() -> String? { // leftCalloutAccessory image
-        switch shepsVariable {
+        switch shepDollarValue {
         case 0...5:
             return "zzz..."
         case 6...20:
