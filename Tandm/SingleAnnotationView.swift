@@ -18,7 +18,7 @@ import MapKit
  */
 
 
-/*  CUSTOM FONT FOR MKANNOTATIONVIEW CALLOUT
+/*  CUSTOM FONT FOR MKAnnotationView CALLOUT
  You have to call setNeedsLayout() on didAddSubview() because otherwise when you deselect and reselect the annotation layoutSubviews() is not called and the callout has its old font.
  
  // elsewhere, in a category on UIView.

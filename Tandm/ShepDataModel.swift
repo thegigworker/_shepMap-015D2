@@ -12,58 +12,38 @@ import MapKit
 let initialSearch: Double = 15
 let initialDisplay: Double = 20
 //let initialDisplayDistance = CLLocationDistance(miles2meters(miles: initialDisplay))
-//var currentSearchDistance = CLLocationDistance(miles2meters(miles: initialSearch))
+//var currentSearchDistanceX = CLLocationDistance(miles2meters(miles: initialSearch))
 
 
 //The class keyword in the Swift protocol definition limits protocol adoption to class types (and not structures or enums). This is important if we want to use a weak reference to the delegate. We need be sure we do not create a retain cycle between the delegate and the delegating objects, so we use a weak reference to delegate (see below).
 protocol DataModelDelegate: class {
+    
+    //func didReceiveMethodCallFromDataModel()
+    //func didReceiveDataUpdate(data: String)
+   // func entireSearchDirectionsLoopSuccessful(myAnnotationsArray: [ShepSingleAnnotation])
+    
     //func didReceiveMethodCallFromDataModel()
     //func didReceiveDataUpdate(data: String)
     func handleValidSearchResults(validSearchResults: [ShepSingleAnnotation])
-    func handleRandomRoute(thisRoute: MKRoute)
-    func handleGoldenRoute(thisRoute: MKRoute)
+    func drawNewRoute(thisRoute: MKRoute)
+    //func handleGoldenRoute(thisRoute: MKRoute)
 }
 //Comparing to the callback way, Delegation pattern is easier to reuse across the app: you can create a base class that conforms to the protocol delegate and avoid code redundancy. However, delegation is harder to implement: you need to create a protocol, set the protocol methods, create Delegate property, assign Delegate to ViewController, and make this ViewController conform to the protocol. Also, the Delegate has to implement every method of the protocol by default.
 
 class shepDataModel: NSObject {
-    
+    //We need be sure we do not create a retain cycle between the delegate and the delegating objects, so we use a weak reference to delegate.
+    weak var delegate: DataModelDelegate?
     let centsPerMileExpense: Int = 60
-    
-//    func triggerMethodInDataModel() {
-//        print("triggerMethodInDataModel happened")
-//        delegate?.didReceiveMethodCallFromDataModel()
-//    }
-//
-//    func requestData() {
-//        // the data was received and parsed to String
-//        let data = "medical maryjanexxx"
-//        print("in RequestData, the data is: \(data)")
-//        delegate?.didReceiveDataUpdate(data: data)
-//    }
-    
     var currentTransportType = MKDirectionsTransportType.automobile
-    //var myRoute : MKRoute!
-
-    //var myArray_MKMapItems = [MKMapItem]()
     var shepAnnotationsArray = [ShepSingleAnnotation]()
     var validSearchResultsArray = [ShepSingleAnnotation]()
-    var currentSearchDistance2 = CLLocationDistance(miles2meters(miles: initialSearch))
-    //print ("currentSearchDistance2 \(currentSearchDistance2)")
+    var currentSearchDistance = CLLocationDistance(miles2meters(miles: initialSearch))
+    //print ("currentSearchDistance \(currentSearchDistance)")
     var currentDisplayDistance = CLLocationDistance(miles2meters(miles: initialDisplay))
-    var currentRoute: MKRoute?
+    var currentRoute = MKRoute()
     var crowFliesDistance : Double = 1.0
-    
-//We need be sure we do not create a retain cycle between the delegate and the delegating objects, so we use a weak reference to delegate.
-    weak var delegate: DataModelDelegate?
-    
-    
-    func performDataRequest(completion: ((_ shepdata: String) -> Void)) {
-        // the data was received and parsed to String
-        let myDataRequestData = "xyData from wherever"
-        let myotherDataReqData = "second " + myDataRequestData
-        completion(myotherDataReqData)
-    }
-    
+    var howManyRouteInfosCompleted: Int = 0
+    var whichRouteStyle : String = ""
     
     // MKPlacemark is a subclass of CLPlacemark, therefore you cannot just cast it. You can instantiate an MKPlacemark from a CLPlacemark using the code below
     //     if let addressDict = clPlacemark.addressDictionary, coordinate = clPlacemark.location.coordinate {
@@ -72,111 +52,346 @@ class shepDataModel: NSObject {
     // Initializes and returns a map item object using the specified placemark object.
     //     var placemark: MKPlacemark { get }
     
-    
-    //func getRouteData2 (source: ShepSingleAnnotation, destination: ShepSingleAnnotation) {
-    func getRouteData2 (source: ShepSingleAnnotation, destination: ShepSingleAnnotation) -> () {
-        let point1 = MKPointAnnotation()
-        let point2 = MKPointAnnotation()
-        point1.coordinate = CLLocationCoordinate2DMake(source.coordinate.latitude, source.coordinate.longitude)
-        point2.coordinate = CLLocationCoordinate2DMake(destination.coordinate.latitude, destination.coordinate.longitude)
-        let point1_placemark = MKPlacemark(coordinate: CLLocationCoordinate2DMake(point1.coordinate.latitude, point1.coordinate.longitude), addressDictionary: nil)
-        let point2_placemark = MKPlacemark(coordinate: CLLocationCoordinate2DMake(point2.coordinate.latitude, point2.coordinate.longitude), addressDictionary: nil)
+    func chooseGoldenRoute() -> ShepSingleAnnotation {
+        var myAnnotationsArray = shepAnnotationsArray
+        print ("in model chooseGoldenRoute(), myAnnotationsArray.count is: \(myAnnotationsArray.count)")
+        print ("this is before sort")
+        myAnnotationsArray = myAnnotationsArray.sorted {($0.goldenRouteScore) > ($1.goldenRouteScore) }
+        print ("this is after sort \n")
         
+        var fakeIndexNumber : Int = 0
+        goldenRouteFinder: for eachAnnotation in myAnnotationsArray {
+            print ("In model, chooseGOLDENRoute FOR LOOP ---- SORTED")
+            print ("myFakeIndexlikeNumber is \(fakeIndexNumber)")
+            fakeIndexNumber = fakeIndexNumber + 1
+            let myTitle = eachAnnotation.title
+            print ("       --------------\n myTitle            \(String(describing: myTitle!))")
+            //let mySubTitle = myAnnotation.subtitle
+            //print ("mySubTitle          \(String(describing: mySubTitle!))")
+            let myDrivingDistance = eachAnnotation.routeDrivingDistance
+            let routeExpense : Double = myDrivingDistance * Double(self.centsPerMileExpense)/100
+            print ("routeExpense is     \(shepCurrencyFromDouble(shepNumber: routeExpense))")
+            let myGoldenRouteScore = eachAnnotation.goldenRouteScore
+            let myFormattedGoldenRouteScore = (shepCurrencyFromDouble(shepNumber: myGoldenRouteScore))
+            print ("-myGoldenRouteScore \(myFormattedGoldenRouteScore) ---  \(myFormattedGoldenRouteScore) \n        --------------")
+            print ("crowFliesDistance: \(String(format: "%.02f", eachAnnotation.crowFliesDistance)) miles")
+           
+            print ("DrivingDistance is: \(String(format: "%.02f", myDrivingDistance)) miles")
+            let myDrivingTime = eachAnnotation.drivingTime
+            let lineBreak = "\n-------------------------------------------------------------------------"
+            print ("drivingTime is:    \(String(format: "%.02f", myDrivingTime)) minutes \(lineBreak)")
+            
+        }  //  chooseGoldenRoute()  LOOP
+        print ("in Model fromTheFinalCompletionHandler : END OF chooseGoldenRoute()")
+        print ("end of chooseGoldenRoute(), myAnnotationsArray.count is: \(myAnnotationsArray.count)")
+       return myAnnotationsArray[0]
+    }
+    
+//    func getRouteInfoFromAppleViaLocation (sourceLocation: CLLocation, destinationAnnotation: ShepSingleAnnotation) {
+//
+//        let destinationAnnotation_location = CLLocation(latitude: destinationAnnotation.coordinate.latitude, longitude: destinationAnnotation.coordinate.longitude)
+//        let destinationAnnotation_placemark = MKPlacemark(coordinate: destinationAnnotation_location.coordinate, addressDictionary: nil)
+//        let sourceLocation_placemark = MKPlacemark(coordinate: CLLocationCoordinate2DMake(sourceLocation.coordinate.latitude, sourceLocation.coordinate.longitude), addressDictionary: nil)
+//
+//        let directionsRequest = MKDirectionsRequest()
+//        directionsRequest.source = MKMapItem(placemark: sourceLocation_placemark)
+//        directionsRequest.destination = MKMapItem(placemark: destinationAnnotation_placemark)
+//        directionsRequest.transportType = MKDirectionsTransportType.automobile
+//        //  Set the transportation type to .Automobile for this particular scenario. (.Walking and .Any are also valid MKDirectionsTransportTypes.)
+//        //  Set requestsAlternateRoutes to true to fetch all the reasonable routes from the source to sourceLocation.
+//
+//        let myCount = validSearchResultsArray.index(of: destinationAnnotation)! + 1
+//        print ("in getRouteInfoFromAppleViaLocation, myCount -- \(String(describing: myCount))")
+//
+//        let directions = MKDirections(request: directionsRequest)
+//
+//        directions.calculate(completionHandler: {(response, error) in
+//            // response has an array of MKRoutes
+//            if error != nil {
+//                print ("Directions Retreival Error: \(String(describing: error))")
+//            } else {
+//                //self.myMapView.removeOverlays(self.myMapView.overlays)
+//                self.currentLinkedRoute = response!.routes[0] as MKRoute
+//                self.howManyRouteInfosCompleted = self.howManyRouteInfosCompleted + 1
+//                let myRoute = self.currentLinkedRoute!
+//                print ("INSIDE getRouteInfoFromAppleViaLocation COMPLETION HANDLER")
+//                print ("this is myRoute: \(String(describing: myRoute))")
+//
+//                destinationAnnotation.currentLinkedRoute = myRoute
+//
+//                self.crowFliesDistance = sourceLocation.distance(from: destinationAnnotation_location) // result is in meters
+//                self.crowFliesDistance = meters2miles(meters: self.crowFliesDistance)
+//                let myCount = self.shepAnnotationsArray.index(of: destinationAnnotation)! + 1
+//                print ("Array.index + 1 =       \(String(describing: myCount))")
+//                print ("howManyRouteInfosCompleted: \(String(describing: self.howManyRouteInfosCompleted))")
+//                let theIndex = self.shepAnnotationsArray.index(of: destinationAnnotation)!
+//                let myAnnotation = self.shepAnnotationsArray[theIndex]
+//                myAnnotation.currentLinkedRoute = myRoute
+//                myAnnotation.crowFliesDistance = self.crowFliesDistance
+//                let myDrivingDistance = myAnnotation.routeDrivingDistance
+//                let myTitle = myAnnotation.title
+//                print ("       --------------\n myTitle            \(String(describing: myTitle!))")
+//                //let mySubTitle = myAnnotation.subtitle
+//                //print ("mySubTitle          \(String(describing: mySubTitle!))")
+//                let routeExpense : Double = myDrivingDistance * Double(self.centsPerMileExpense)/100
+//                print ("routeExpense is     \(shepCurrencyFromDouble(shepNumber: routeExpense))")
+//                let myGoldenRouteScore = myAnnotation.goldenRouteScore
+//                print ("-myGoldenRouteScore \(shepCurrencyFromDouble(shepNumber: myGoldenRouteScore))\n        --------------")
+//                print ("crowFliesDistance: \(String(format: "%.02f", myAnnotation.crowFliesDistance)) miles")
+//                //let myDrivingDistance = myAnnotation.routeDrivingDistance
+//                print ("DrivingDistance is: \(String(format: "%.02f", myDrivingDistance)) miles")
+//                let myDrivingTime = myAnnotation.drivingTime
+//                let lineBreak = "\n-------------------------------------------------------------------------"
+//                print ("drivingTime is:    \(String(format: "%.02f", myDrivingTime)) minutes \(lineBreak)")
+//                //                let myGoldenRouteScore = myAnnotation.goldenRouteScore
+//                //                print ("myGoldenRouteScore \(shepCurrencyFromDouble(shepNumber: myGoldenRouteScore)) \n")
+//
+//                //IF ALL THE ROUTES REQUESTED FROM APPLE HAVE BEEN RECEIVED
+//                if self.validSearchResultsArray.count <= self.howManyRouteInfosCompleted {
+//                    print("\n ALL THE ROUTES REQUESTED FROM APPLE HAVE BEEN RECEIVED \n")
+//                   // self.delegate?.entireSearchDirectionsLoopSuccessful(myAnnotationsArray: self.shepAnnotationsArray)
+//                   // self.chooseGoldenRoute()
+//                    // self.triggerMethodInDataModel()
+//                    //self.chooseGoldenRoute()
+//                    //self.justShowShepAnnotationsArray()
+//                }
+//
+//                // THIS IS THE END OF getRouteInfoFromApple COMPLETION HANDLER
+//            }
+//        })
+//    }
+    
+    //func getRouteInfoVia2Annotations (source: ShepSingleAnnotation, destination: ShepSingleAnnotation) {
+    func getRouteInfoVia2Annotations (source: ShepSingleAnnotation, destination: ShepSingleAnnotation) -> () {
+        let sourceAnnotation = MKPointAnnotation()
+        let destinationAnnotation = MKPointAnnotation()
+        destinationAnnotation.coordinate = CLLocationCoordinate2DMake(destination.coordinate.latitude, destination.coordinate.longitude)
+        let destinationLocation = CLLocation(latitude: destinationAnnotation.coordinate.latitude, longitude: destinationAnnotation.coordinate.longitude)
+        sourceAnnotation.coordinate = CLLocationCoordinate2DMake(source.coordinate.latitude, source.coordinate.longitude)
+        let sourceLocation = CLLocation(latitude: sourceAnnotation.coordinate.latitude, longitude: sourceAnnotation.coordinate.longitude)
+        let sourceAnnotation_placemark = MKPlacemark(coordinate: CLLocationCoordinate2DMake(sourceAnnotation.coordinate.latitude, sourceAnnotation.coordinate.longitude), addressDictionary: nil)
+        let destinationAnnotation_placemark = MKPlacemark(coordinate: CLLocationCoordinate2DMake(destinationAnnotation.coordinate.latitude, destinationAnnotation.coordinate.longitude), addressDictionary: nil)
+
         let directionsRequest = MKDirectionsRequest()
-        directionsRequest.source = MKMapItem(placemark: point1_placemark)
-        directionsRequest.destination = MKMapItem(placemark: point2_placemark)
+        directionsRequest.source = MKMapItem(placemark: sourceAnnotation_placemark)
+        directionsRequest.destination = MKMapItem(placemark: destinationAnnotation_placemark)
         directionsRequest.transportType = currentTransportType
         //  Set the transportation type to .Automobile for this particular scenario. (.Walking and .Any are also valid MKDirectionsTransportTypes.)
         //  Set requestsAlternateRoutes to true to fetch all the reasonable routes from the source to destination.
         let directions = MKDirections(request: directionsRequest)
-        //var crowFliesDistanceInMiles: Double = 0.0
-        //self.lblCrowFlies.text = "As crow flies: \(String(format: "%.02f", distanceInMiles)) miles"
-        
+
         directions.calculate(completionHandler: {(response, error) in
+//            // response has an array of MKRoutes
+//            if error != nil {
+//                print ("Directions Retreival Error: \(String(describing: error))")
+//            } else {
+//                //self.myMapView.removeOverlays(self.myMapView.overlays)
+//                self.currentLinkedRoute = response!.routes[0] as MKRoute
+//                let sourceLocation = CLLocation(latitude: sourceAnnotation.coordinate.latitude, longitude: sourceAnnotation.coordinate.longitude)
+//                let destinationLocation = CLLocation(latitude: destinationAnnotation.coordinate.latitude, longitude: destinationAnnotation.coordinate.longitude)
+//                self.crowFliesDistance = sourceLocation.distance(from: destinationLocation) // result is in meters
+//                self.crowFliesDistance = meters2miles(meters: self.crowFliesDistance)
+            
             // response has an array of MKRoutes
             if error != nil {
                 print ("Directions Retreival Error: \(String(describing: error))")
             } else {
                 //self.myMapView.removeOverlays(self.myMapView.overlays)
-                self.currentRoute = response!.routes[0] as MKRoute
-                let sourceLocation = CLLocation(latitude: point1.coordinate.latitude, longitude: point1.coordinate.longitude)
-                let destinationLocation = CLLocation(latitude: point2.coordinate.latitude, longitude: point2.coordinate.longitude)
+                //self.currentRoute = response!.routes[0] as MKRoute
+                self.howManyRouteInfosCompleted = self.howManyRouteInfosCompleted + 1
+                //let myRoute = self.currentRoute
+                let myRoute = response!.routes[0] as MKRoute
+                print ("INSIDE getRouteInfoFromAppleViaLocation COMPLETION HANDLER")
+                print ("this is myRoute: \(String(describing: myRoute))")
+                
+                //destinationAnnotation.currentLinkedRoute = myRoute
+                
                 self.crowFliesDistance = sourceLocation.distance(from: destinationLocation) // result is in meters
                 self.crowFliesDistance = meters2miles(meters: self.crowFliesDistance)
-                let data = "last dance for medical maryjane"
-                print("in RequestData, the data is: \(data)")
-                self.delegate?.handleRandomRoute(thisRoute: self.currentRoute!)
+                let myCount = self.shepAnnotationsArray.index(of: destination)! + 1
+                print ("Array.index + 1 =       \(String(describing: myCount))")
+                print ("howManyRouteInfosCompleted: \(String(describing: self.howManyRouteInfosCompleted))")
+                let theIndex = self.shepAnnotationsArray.index(of: destination)!
+                let myAnnotation = self.shepAnnotationsArray[theIndex]
+                myAnnotation.currentLinkedRoute = myRoute
+                myAnnotation.crowFliesDistance = self.crowFliesDistance
+                let myDrivingDistance = myAnnotation.routeDrivingDistance
+                let myTitle = myAnnotation.title
+                print ("       --------------\n myTitle            \(String(describing: myTitle!))")
+                //let mySubTitle = myAnnotation.subtitle
+                //print ("mySubTitle          \(String(describing: mySubTitle!))")
+                let routeExpense : Double = myDrivingDistance * Double(self.centsPerMileExpense)/100
+                print ("routeExpense is     \(shepCurrencyFromDouble(shepNumber: routeExpense))")
+                let myGoldenRouteScore = myAnnotation.goldenRouteScore
+                print ("-myGoldenRouteScore \(shepCurrencyFromDouble(shepNumber: myGoldenRouteScore))\n        --------------")
+                print ("crowFliesDistance: \(String(format: "%.02f", myAnnotation.crowFliesDistance)) miles")
+                //let myDrivingDistance = myAnnotation.routeDrivingDistance
+                print ("DrivingDistance is: \(String(format: "%.02f", myDrivingDistance)) miles")
+                let myDrivingTime = myAnnotation.drivingTime
+                let lineBreak = "\n-------------------------------------------------------------------------"
+                print ("drivingTime is:    \(String(format: "%.02f", myDrivingTime)) minutes \(lineBreak)")
+                //                let myGoldenRouteScore = myAnnotation.goldenRouteScore
+                //                print ("myGoldenRouteScore \(shepCurrencyFromDouble(shepNumber: myGoldenRouteScore)) \n")
+                
+                //IF ALL THE ROUTES REQUESTED FROM APPLE HAVE BEEN RECEIVED
+                if self.validSearchResultsArray.count <= self.howManyRouteInfosCompleted {
+                    print("\n ALL THE ROUTES REQUESTED FROM APPLE HAVE BEEN RECEIVED \n")
+                    self.howManyRouteInfosCompleted = 0
+                }
+                
+                if self.whichRouteStyle == "random" {
+                    self.currentRoute = myRoute
+                    self.delegate?.drawNewRoute(thisRoute: myRoute)
+                }
+                
+                // THIS IS THE END OF getRouteInfoVia2Annotations COMPLETION HANDLER
+               // self.delegate?.drawNewRoute(thisRoute: self.currentLinkedRoute!)
             }
         })
     }
     
-    // 搜索
-    func performLocalSearch2(_ searchString:String) {
-        //shepAnnotationsArray.removeAll()
+    func populateMapViaAppleLocalSearch(searchString:String) {
         let request = MKLocalSearchRequest()
         request.naturalLanguageQuery = searchString
         validSearchResultsArray = [ShepSingleAnnotation]()
+        /////////  CONVERSION FROM COORDINATES INTO MKMAPITEM
+        let HomeLocationCoord = myUserLocation.coordinate
+        let HomeLocationPlacemark = MKPlacemark(coordinate: CLLocationCoordinate2DMake(HomeLocationCoord.latitude, HomeLocationCoord.longitude), addressDictionary: nil)
+        let HomeLocationMapItem = MKMapItem(placemark: HomeLocationPlacemark)
+        /////////  THEN MAKE ANNOTATION FROM MKMAPITEM
+        let HomeLocationAnnotation = ShepSingleAnnotation(myMapItem: HomeLocationMapItem, currentLinkedRoute: MKRoute(), shepDollarValue: 0.0)
+        
         // 搜索当前区域
-        // print ("in performLocalSearch searchRegion search distance: \(meters2miles(meters: self.currentSearchDistance))")
-        let searchRegion1 = MKCoordinateRegionMakeWithDistance(myUserLocation.coordinate, currentSearchDistance2, currentSearchDistance2)
+        // print ("in performLocalSearch searchRegion search distance: \(meters2miles(meters: self.currentSearchDistanceX))")
+       // let temp = CLLocationCoordinate2DMake(THOMPSON_GPS.latitude, THOMPSON_GPS.longitude)
+        let searchRegion1 = MKCoordinateRegionMakeWithDistance(myUserLocation.coordinate, currentSearchDistance, currentSearchDistance)
         request.region = searchRegion1
         //request.region = myMapView.region
         // a MKLocalSearch object initiates a search operation and will deliver the results back into an array of MKMapItems. This will contain the name, latitude and longitude of the current POI.
         print ("before search.start shepAnnotationsArray count: \(shepAnnotationsArray.count)")
         // 启动搜索,并且把返回结果保存到数组中
         let search = MKLocalSearch(request: request)
+        
         search.start(completionHandler: {(response, error) in
             //let myViewController = ViewController()
             //var validSearchResultsArray: [ShepSingleAnnotation] = []
-            print ("inside completionHandler shepAnnotationsArray count: \(self.shepAnnotationsArray.count)")
+            print ("search.start completionHandler, shepAnnotationsArray count: \(self.shepAnnotationsArray.count)")
             // Local searches are performed asynchronously
             //and a completion handler called when the search is complete.
+
+            
             if error != nil {
                 print("Error occured in search: \(error!.localizedDescription)")
             } else if response!.mapItems.count == 0 {
                 print("No matches found")
             } else {
-                print("\n \(response!.mapItems.count) matches found")
+                print("search completionHandler   \(response!.mapItems.count) matches found \n ")
                 //The code in the completion handler checks the response to make sure that matches were found
                 //and then accesses the mapItems property of the response which contains an array of mapItem instances for the matching locations.
                 shepSearchResultLoop: for item in response!.mapItems {
                     let searchResultCoordinates = item.placemark.coordinate
                     let searchResultLocation = CLLocation(latitude: searchResultCoordinates.latitude, longitude: searchResultCoordinates.longitude)
-                    let mapItemDistance = myUserLocation.distance(from: searchResultLocation) // result is in meters
+                    // a source locations are userLocation, currently Thompson
+                    let sourceLocation = myUserLocation
+                    let mapItemDistance = sourceLocation.distance(from: searchResultLocation) // result is in meters
                     //let distanceInMiles = meters2miles(meters: mapItemDistance)
-                    print ("Current search distance: \(meters2miles(meters: self.currentSearchDistance2)) and this distance: \(meters2miles(meters: mapItemDistance))")
+                    print ("Current search distance: \(meters2miles(meters: self.currentSearchDistance)) and this distance: \(meters2miles(meters: mapItemDistance))")
                     
-                    if mapItemDistance > self.currentSearchDistance2 {  // if SearchResult is further away than currentSearchDistance
+                    if mapItemDistance > self.currentSearchDistance {  // if SearchResult is further away than currentSearchDistanceX
                         print ("took one down, too far away")
                         continue shepSearchResultLoop
                     } else {
-                        let shepDollarValue = Double(arc4random_uniform(40) + 1)
-                        //let shepPassedString = shepCurrencyFromDouble(shepNumber: shepDollarValue)
-                        let validResult = ShepSingleAnnotation(myMapItem: item, currentRoute: MKRoute(), shepDollarValue: shepDollarValue)
+                        let shepDollarValue = Double(arc4random_uniform(60) + 1)
+                        let validResult = ShepSingleAnnotation(myMapItem: item, currentLinkedRoute: MKRoute(), shepDollarValue: shepDollarValue)
                         self.validSearchResultsArray.append(validResult)
+                        print ("We just found a valid search result, now calling getRouteInfoVia2Annotations")
+                        //self.getRouteInfoFromAppleViaLocation(sourceLocation: sourceLocation, destinationAnnotation: validResult)
+                        
+                        self.getRouteInfoVia2Annotations(source: HomeLocationAnnotation, destination: validResult)
                     }
-                    print ("still inside shepSearchResultLoop?, shepAnnotationsArray count is \(self.shepAnnotationsArray.count)")
-                    print ("still inside shepSearchResultLoop? validSearchResultsArray count: \(self.validSearchResultsArray.count) \n")
+                    print ("still inside shepSearchResultLoop, shepAnnotationsArray count is \(self.shepAnnotationsArray.count)")
+                    print ("still inside shepSearchResultLoop validSearchResultsArray count: \(self.validSearchResultsArray.count) \n")
                 }
-                //let data = "medical maryjane's last dance"
-                //print("in performLocalSearch2 completionHandler: \(data)")
-                //handleValidSearchResults(validSearchResults: [ShepSingleAnnotation])
+                
                 self.shepAnnotationsArray.append(contentsOf: self.validSearchResultsArray)
-                //self.shepAnnotationsArray.append(contentsOf: self.validSearchResultsArray)
-                print ("shepSearchResultLoop is done now???, shepAnnotationsArray count is \(self.shepAnnotationsArray.count)")
-                print ("shepSearchResultLoop is done now???, validSearchResultsArray count is \(self.validSearchResultsArray.count) \n")
+                print ("shepSearchResultLoop is done now, shepAnnotationsArray count is \(self.shepAnnotationsArray.count)")
+                print ("shepSearchResultLoop is done now, validSearchResultsArray count is \(self.validSearchResultsArray.count) \n")
                 
                 self.delegate?.handleValidSearchResults(validSearchResults: self.validSearchResultsArray)
-
-               // myMapView.addAnnotations(validSearchResultsArray)
-               // myMapView.showAnnotations(shepAnnotationsArray, animated: true)
+                //self.validSearchResultsArray = []
+                
+                //self.getRouteInfoFromApple(sourceLocation: sourceLocation, destinationAnnotation: <#T##ShepSingleAnnotation#>)
             }
         })
-        //print ("opening gambit, validSearchResultsArray count is \(validSearchResultsArray.count) \n")  // validSearchResultsArray doesn't work here
         print ("OPENING GAMBIT, shepAnnotationsArray count is \(shepAnnotationsArray.count) \n")
     }
     
 }
+//    // 搜索
+//    func performLocalSearch2(_ searchString:String) {
+//        let request = MKLocalSearchRequest()
+//        request.naturalLanguageQuery = searchString
+//        validSearchResultsArray = [ShepSingleAnnotation]()
+//        // 搜索当前区域
+//        // print ("in performLocalSearch searchRegion search distance: \(meters2miles(meters: self.currentSearchDistanceX))")
+//        let searchRegion1 = MKCoordinateRegionMakeWithDistance(myUserLocation.coordinate, currentSearchDistance, currentSearchDistance)
+//        request.region = searchRegion1
+//        //request.region = myMapView.region
+//        // a MKLocalSearch object initiates a search operation and will deliver the results back into an array of MKMapItems. This will contain the name, latitude and longitude of the current POI.
+//        print ("before search.start shepAnnotationsArray count: \(shepAnnotationsArray.count)")
+//        // 启动搜索,并且把返回结果保存到数组中
+//        let search = MKLocalSearch(request: request)
+//        search.start(completionHandler: {(response, error) in
+//            //let myViewController = ViewController()
+//            //var validSearchResultsArray: [ShepSingleAnnotation] = []
+//            print ("inside completionHandler shepAnnotationsArray count: \(self.shepAnnotationsArray.count)")
+//            // Local searches are performed asynchronously
+//            //and a completion handler called when the search is complete.
+//            if error != nil {
+//                print("Error occured in search: \(error!.localizedDescription)")
+//            } else if response!.mapItems.count == 0 {
+//                print("No matches found")
+//            } else {
+//                print("\n \(response!.mapItems.count) matches found")
+//                //The code in the completion handler checks the response to make sure that matches were found
+//                //and then accesses the mapItems property of the response which contains an array of mapItem instances for the matching locations.
+//                shepSearchResultLoop: for item in response!.mapItems {
+//                    let searchResultCoordinates = item.placemark.coordinate
+//                    let searchResultLocation = CLLocation(latitude: searchResultCoordinates.latitude, longitude: searchResultCoordinates.longitude)
+//                    let mapItemDistance = myUserLocation.distance(from: searchResultLocation) // result is in meters
+//                    //let distanceInMiles = meters2miles(meters: mapItemDistance)
+//                    print ("Current search distance: \(meters2miles(meters: self.currentSearchDistance)) and this distance: \(meters2miles(meters: mapItemDistance))")
+//
+//                    if mapItemDistance > self.currentSearchDistance {  // if SearchResult is further away than currentSearchDistance
+//                        print ("took one down, too far away")
+//                        continue shepSearchResultLoop
+//                    } else {
+//                        let shepDollarValue = Double(arc4random_uniform(40) + 1)
+//                        let validResult = ShepSingleAnnotation(myMapItem: item, currentLinkedRoute: MKRoute(), shepDollarValue: shepDollarValue)
+////                        let myRouteDrivingDistance = validResult.routeDrivingDistance
+////                        print ("myRouteDrivingDistance is \(myRouteDrivingDistance)")
+//                        let goldenRouteScore: Double  = validResult.goldenRouteScore
+//                        print ("goldenRouteScore is \(goldenRouteScore)")
+////                        let drivingTime: Double  = validResult.drivingTime
+////                        print ("drivingTime is \(drivingTime)")
+//                        self.validSearchResultsArray.append(validResult)
+//                    }
+//                    print ("still inside shepSearchResultLoop?, shepAnnotationsArray count is \(self.shepAnnotationsArray.count)")
+//                    print ("still inside shepSearchResultLoop? validSearchResultsArray count: \(self.validSearchResultsArray.count) \n")
+//                }
+//
+//                self.shepAnnotationsArray.append(contentsOf: self.validSearchResultsArray)
+//                print ("shepSearchResultLoop is done now???, shepAnnotationsArray count is \(self.shepAnnotationsArray.count)")
+//                print ("shepSearchResultLoop is done now???, validSearchResultsArray count is \(self.validSearchResultsArray.count) \n")
+//
+//                self.delegate?.handleValidSearchResults(validSearchResults: self.validSearchResultsArray)
+//
+//            }
+//        })
+//        print ("OPENING GAMBIT, shepAnnotationsArray count is \(shepAnnotationsArray.count) \n")
+//    }
+    
+//}
 
 /*  CREATING AN ARRAY BY ADDING TWO ARRAYS TOGETHER
  

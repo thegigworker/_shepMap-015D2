@@ -52,7 +52,7 @@
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <state key="normal" title="Clear map"/>
                                         <connections>
-                                            <action selector="clearMap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="b3w-3y-1MD"/>
+                                            <action selector="btnClearMap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="b3w-3y-1MD"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Nm-Kn-Cae">
@@ -61,7 +61,7 @@
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <state key="normal" title="Change Height"/>
                                         <connections>
-                                            <action selector="changeHeight:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Aff-1N-uPE"/>
+                                            <action selector="btnChangeHeight:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Aff-1N-uPE"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="COs-xG-AWB">
@@ -70,16 +70,17 @@
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <state key="normal" title="Random Route"/>
                                         <connections>
-                                            <action selector="makeRandomRoute:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Qep-7x-q0H"/>
+                                            <action selector="btnMakeRandomRoute:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Qep-7x-q0H"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2HM-Kt-2VX" userLabel="Button 4">
                                         <rect key="frame" x="0.0" y="114" width="108" height="27"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <state key="normal" title="Button 4">
-                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
+                                        <state key="normal" title="Map Type"/>
+                                        <connections>
+                                            <action selector="btnToggleMapType:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Hzc-uM-f9Y"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y5Q-nb-7mj" userLabel="Golden Route">
                                         <rect key="frame" x="109" y="115" width="128" height="26"/>
@@ -87,7 +88,7 @@
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <state key="normal" title="Golden Route"/>
                                         <connections>
-                                            <action selector="makeGoldenRoute:" destination="BYZ-38-t0r" eventType="touchUpInside" id="b1U-uw-UBV"/>
+                                            <action selector="btnMakeGoldenRoute:" destination="BYZ-38-t0r" eventType="touchUpInside" id="b1U-uw-UBV"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f2p-tt-zT7" userLabel="Button 6">
@@ -242,6 +243,34 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lh6-ss-w2R" userLabel="GoldenRoute View">
+                                <rect key="frame" x="88" y="208" width="203" height="88"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Expense" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GPv-0q-8RM" userLabel="lblExpense">
+                                        <rect key="frame" x="8" y="34" width="214" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
+                                        <nil key="textColor"/>
+                                        <color key="highlightedColor" red="0.0" green="0.56904578210000001" blue="0.57461684940000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Earning" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ipD-lf-fai" userLabel="lblEarning">
+                                        <rect key="frame" x="8" y="59" width="214" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
+                                        <color key="textColor" red="0.0" green="0.56904578210000001" blue="0.57461684940000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="highlightedColor" red="0.0" green="0.56904578210000001" blue="0.57461684940000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Pay" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="biz-gs-kUg" userLabel="lblPay">
+                                        <rect key="frame" x="8" y="8" width="214" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
+                                        <nil key="textColor"/>
+                                        <color key="highlightedColor" red="0.0" green="0.56904578210000001" blue="0.57461684940000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -253,10 +282,13 @@
                     </navigationItem>
                     <connections>
                         <outlet property="DisplayDistanceSlider" destination="IwG-9x-gHw" id="IZX-OR-3s5"/>
-                        <outlet property="DisplayDistanceText2" destination="6ku-Sd-dCn" id="F2v-8S-Gw8"/>
+                        <outlet property="DisplayDistanceText" destination="6ku-Sd-dCn" id="F2v-8S-Gw8"/>
+                        <outlet property="GoldenRouteView" destination="lh6-ss-w2R" id="BdI-Ob-Hpz"/>
                         <outlet property="RouteDataView" destination="U7z-ao-dgl" id="EUi-Hg-8JS"/>
                         <outlet property="SearchDistanceSlider" destination="vmL-sm-7h9" id="aIe-BB-AYO"/>
-                        <outlet property="SearchDistanceText2" destination="6K1-SO-jw3" id="bTF-xv-BnO"/>
+                        <outlet property="SearchDistanceText" destination="6K1-SO-jw3" id="bTF-xv-BnO"/>
+                        <outlet property="btnChangeHeight" destination="9Nm-Kn-Cae" id="4iV-DD-9dS"/>
+                        <outlet property="btnClearMap" destination="3iT-ct-fWY" id="3I9-Fb-cmF"/>
                         <outlet property="btnGas" destination="Iu6-7c-6tt" id="6o3-4d-WCJ"/>
                         <outlet property="btnHospital" destination="3OE-vJ-jW7" id="G2l-Eg-YjA"/>
                         <outlet property="btnMcD" destination="B0F-y2-Vv1" id="w9k-Ps-1nb"/>
@@ -264,10 +296,12 @@
                         <outlet property="btnPizza" destination="fW5-F8-UCm" id="5et-0q-I4H"/>
                         <outlet property="btnTarget" destination="YyB-2q-KDQ" id="cxP-rI-u6b"/>
                         <outlet property="btnTwirlMenu" destination="n7C-sn-Sob" id="RAj-cc-Oyn"/>
-                        <outlet property="changeHeight" destination="9Nm-Kn-Cae" id="4iV-DD-9dS"/>
                         <outlet property="lblCrowFlies" destination="0ng-bl-dOu" id="ife-tZ-8Lh"/>
                         <outlet property="lblDrivingDistance" destination="CeX-be-BSS" id="LhD-yl-xfS"/>
                         <outlet property="lblDrivingTime" destination="SHS-Sd-9qk" id="Ezt-mO-qfS"/>
+                        <outlet property="lblEarning" destination="ipD-lf-fai" id="eg4-ih-Qxo"/>
+                        <outlet property="lblExpense" destination="GPv-0q-8RM" id="axQ-Ln-PIw"/>
+                        <outlet property="lblPay" destination="biz-gs-kUg" id="eRe-Pl-UIm"/>
                         <outlet property="myMapView" destination="O32-Ux-jkO" id="Pm6-hX-TH0"/>
                     </connections>
                 </viewController>
@@ -277,7 +311,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                 </imageView>
             </objects>
-            <point key="canvasLocation" x="1344.8" y="781.25937031484261"/>
+            <point key="canvasLocation" x="1072.8" y="666.11694152923542"/>
         </scene>
         <!--My Table View Controller-->
         <scene sceneID="4wK-bd-HBT">
