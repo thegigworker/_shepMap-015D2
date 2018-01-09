@@ -22,7 +22,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="O32-Ux-jkO">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="518"/>
+                                <rect key="frame" x="2" y="0.0" width="375" height="518"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <connections>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="ID1-QR-wbd"/>
@@ -32,22 +32,15 @@
                                 <rect key="frame" x="1" y="518" width="374" height="149"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Display Distance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eai-dc-aNq">
-                                        <rect key="frame" x="10" y="44" width="112" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Search Radius" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z4h-16-D5v">
+                                        <rect key="frame" x="6" y="8" width="104" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Search Distance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z4h-16-D5v">
-                                        <rect key="frame" x="10" y="7" width="112" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3iT-ct-fWY">
-                                        <rect key="frame" x="0.0" y="79" width="108" height="30"/>
+                                        <rect key="frame" x="6" y="43" width="108" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <state key="normal" title="Clear map"/>
@@ -56,25 +49,27 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Nm-Kn-Cae">
-                                        <rect key="frame" x="108" y="81" width="131" height="26"/>
+                                        <rect key="frame" x="249" y="78" width="117" height="26"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <state key="normal" title="Change Height"/>
+                                        <state key="normal" title="Button">
+                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
                                         <connections>
-                                            <action selector="btnChangeHeight:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Aff-1N-uPE"/>
+                                            <action selector="btnXChangeHeight:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Aff-1N-uPE"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="COs-xG-AWB">
-                                        <rect key="frame" x="245" y="81" width="129" height="26"/>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="COs-xG-AWB" userLabel="Make Route">
+                                        <rect key="frame" x="115" y="45" width="129" height="26"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <state key="normal" title="Random Route"/>
+                                        <state key="normal" title="Make A Route"/>
                                         <connections>
                                             <action selector="btnMakeRandomRoute:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Qep-7x-q0H"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2HM-Kt-2VX" userLabel="Button 4">
-                                        <rect key="frame" x="0.0" y="114" width="108" height="27"/>
+                                        <rect key="frame" x="15" y="77" width="91" height="27"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <state key="normal" title="Map Type"/>
@@ -83,76 +78,75 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y5Q-nb-7mj" userLabel="Golden Route">
-                                        <rect key="frame" x="109" y="115" width="128" height="26"/>
+                                        <rect key="frame" x="110" y="78" width="139" height="26"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <state key="normal" title="Golden Route"/>
+                                        <state key="normal" title="Gold Route"/>
                                         <connections>
-                                            <action selector="btnMakeGoldenRoute:" destination="BYZ-38-t0r" eventType="touchUpInside" id="b1U-uw-UBV"/>
+                                            <action selector="btnMaketheChosenRoute:" destination="BYZ-38-t0r" eventType="touchUpInside" id="b1U-uw-UBV"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f2p-tt-zT7" userLabel="Button 6">
-                                        <rect key="frame" x="245" y="114" width="129" height="26"/>
+                                        <rect key="frame" x="243" y="45" width="129" height="26"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <state key="normal" title="Show TableView">
                                             <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ku-Sd-dCn">
-                                        <rect key="frame" x="294" y="44" width="52" height="21"/>
+                                    <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="1" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="vmL-sm-7h9" userLabel="SearchDistanceSlider">
+                                        <rect key="frame" x="113" y="4" width="186" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <connections>
+                                            <action selector="SearchDistanceSliderMoved:" destination="BYZ-38-t0r" eventType="valueChanged" id="p2H-hk-Fot"/>
+                                        </connections>
+                                    </slider>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="View Height" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eai-dc-aNq">
+                                        <rect key="frame" x="7" y="116" width="96" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ku-Sd-dCn">
+                                        <rect key="frame" x="320" y="116" width="52" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="1" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="IwG-9x-gHw" userLabel="DisplayDistanceSlider">
-                                        <rect key="frame" x="128" y="40" width="160" height="30"/>
+                                        <rect key="frame" x="113" y="112" width="186" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <connections>
                                             <action selector="DisplayDistanceSliderMoved:" destination="BYZ-38-t0r" eventType="primaryActionTriggered" id="CFm-5y-25l"/>
                                         </connections>
                                     </slider>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6K1-SO-jw3">
-                                        <rect key="frame" x="294" y="7" width="52" height="21"/>
+                                        <rect key="frame" x="300" y="8" width="72" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="1" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="vmL-sm-7h9" userLabel="SearchDistanceSlider">
-                                        <rect key="frame" x="128" y="3" width="160" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <connections>
-                                            <action selector="SearchDistanceSliderMoved:" destination="BYZ-38-t0r" eventType="valueChanged" id="p2H-hk-Fot"/>
-                                        </connections>
-                                    </slider>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n7C-sn-Sob">
-                                <rect key="frame" x="169" y="464" width="40" height="39"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button" image="x button"/>
-                                <connections>
-                                    <action selector="twirlButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ayN-mg-DJI"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3OE-vJ-jW7">
-                                <rect key="frame" x="161" y="413" width="65" height="27"/>
+                                <rect key="frame" x="157" y="435" width="65" height="27"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.79725265499999998" green="0.92159986500000002" blue="0.56964260339999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.64203774930000002" green="0.80266940590000002" blue="0.99919462199999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <inset key="titleEdgeInsets" minX="2" minY="0.0" maxX="2" maxY="0.0"/>
-                                <state key="normal" title="Hospital">
-                                    <color key="titleColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Park">
+                                    <color key="titleColor" red="0.034757062790000001" green="0.31522077320000003" blue="0.81491315360000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="btnHospitalClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1Pa-Dd-tqG"/>
+                                    <action selector="btnParkClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1Pa-Dd-tqG"/>
                                 </connections>
                             </button>
                             <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fW5-F8-UCm" userLabel="Btn Pizza">
-                                <rect key="frame" x="153" y="410" width="63" height="26"/>
+                                <rect key="frame" x="149" y="432" width="63" height="26"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -164,19 +158,19 @@
                                 </connections>
                             </button>
                             <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YyB-2q-KDQ" userLabel="Btn Target">
-                                <rect key="frame" x="167" y="412" width="55" height="26"/>
+                                <rect key="frame" x="163" y="434" width="75" height="26"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.64203774930000002" green="0.80266940590000002" blue="0.99919462199999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.79863232374191284" green="0.92236149311065674" blue="0.56814754009246826" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <state key="normal" title="Target">
-                                    <color key="titleColor" red="0.034757062790000001" green="0.31522077320000003" blue="0.81491315360000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
                                 <connections>
                                     <action selector="btnTargetClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aqW-Iy-i30"/>
                                 </connections>
                             </button>
                             <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iu6-7c-6tt" userLabel="Btn Gas Station">
-                                <rect key="frame" x="145" y="411" width="85" height="27"/>
+                                <rect key="frame" x="141" y="433" width="85" height="27"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.88115584849999995" green="0.35495457050000001" blue="0.22894422710000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -190,51 +184,51 @@
                                 </connections>
                             </button>
                             <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B0F-y2-Vv1" userLabel="Btn McDonalds">
-                                <rect key="frame" x="147" y="413" width="85" height="27"/>
+                                <rect key="frame" x="143" y="435" width="85" height="27"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.88115584849999995" green="0.35495457050000001" blue="0.22894422710000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <inset key="contentEdgeInsets" minX="2" minY="1" maxX="0.0" maxY="0.0"/>
                                 <inset key="titleEdgeInsets" minX="2" minY="0.0" maxX="2" maxY="0.0"/>
                                 <state key="normal" title="McDonalds">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
                                     <action selector="btnMcDClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Dh8-Dh-MAZ"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q7L-rU-f39" userLabel="Btn Park">
-                                <rect key="frame" x="162" y="413" width="55" height="26"/>
+                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q7L-rU-f39" userLabel="Btn Pub">
+                                <rect key="frame" x="158" y="435" width="55" height="26"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.64203774930000002" green="0.80266940590000002" blue="0.99919462199999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <state key="normal" title="Parks">
-                                    <color key="titleColor" red="0.034757062790000001" green="0.31522077320000003" blue="0.81491315360000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Pub">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
                                 <connections>
-                                    <action selector="btnParkClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="MG1-1x-Xmy"/>
+                                    <action selector="btnPubClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="MG1-1x-Xmy"/>
                                 </connections>
                             </button>
                             <view alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="U7z-ao-dgl" userLabel="Route Data View">
-                                <rect key="frame" x="93" y="64" width="182" height="57"/>
+                                <rect key="frame" x="90" y="177" width="207" height="78"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0ng-bl-dOu" userLabel="Crow Flies">
-                                        <rect key="frame" x="4" y="0.0" width="179" height="21"/>
+                                        <rect key="frame" x="13" y="10" width="195" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CeX-be-BSS">
-                                        <rect key="frame" x="4" y="18" width="179" height="21"/>
+                                        <rect key="frame" x="13" y="28" width="195" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SHS-Sd-9qk">
-                                        <rect key="frame" x="4" y="37" width="179" height="21"/>
+                                        <rect key="frame" x="13" y="47" width="195" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <nil key="textColor"/>
@@ -243,59 +237,66 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lh6-ss-w2R" userLabel="GoldenRoute View">
-                                <rect key="frame" x="88" y="208" width="203" height="88"/>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lh6-ss-w2R" userLabel="theChosenRoute View">
+                                <rect key="frame" x="62" y="107" width="253" height="71"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Expense" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GPv-0q-8RM" userLabel="lblExpense">
-                                        <rect key="frame" x="8" y="34" width="214" height="21"/>
+                                        <rect key="frame" x="8" y="25" width="245" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="highlightedColor" red="0.0" green="0.56904578210000001" blue="0.57461684940000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Earning" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ipD-lf-fai" userLabel="lblEarning">
-                                        <rect key="frame" x="8" y="59" width="214" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Earning" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ipD-lf-fai" userLabel="lblEarning">
+                                        <rect key="frame" x="8" y="47" width="245" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.56904578210000001" blue="0.57461684940000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="highlightedColor" red="0.0" green="0.56904578210000001" blue="0.57461684940000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Pay" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="biz-gs-kUg" userLabel="lblPay">
-                                        <rect key="frame" x="8" y="8" width="214" height="21"/>
+                                        <rect key="frame" x="8" y="5" width="245" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="highlightedColor" red="0.0" green="0.56904578210000001" blue="0.57461684940000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
+                            <button opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n7C-sn-Sob">
+                                <rect key="frame" x="167" y="466" width="40" height="39"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button" image="x button"/>
+                                <connections>
+                                    <action selector="twirlButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ayN-mg-DJI"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="ljA-B0-WDe">
                         <nil key="title"/>
                         <connections>
-                            <outlet property="titleView" destination="eIo-pb-Hml" id="hle-5L-2Ls"/>
+                            <outlet property="titleView" destination="l0g-Vb-oZq" id="6qq-0I-fsV"/>
                         </connections>
                     </navigationItem>
                     <connections>
                         <outlet property="DisplayDistanceSlider" destination="IwG-9x-gHw" id="IZX-OR-3s5"/>
-                        <outlet property="DisplayDistanceText" destination="6ku-Sd-dCn" id="F2v-8S-Gw8"/>
-                        <outlet property="GoldenRouteView" destination="lh6-ss-w2R" id="BdI-Ob-Hpz"/>
+                        <outlet property="HeightText" destination="6ku-Sd-dCn" id="F2v-8S-Gw8"/>
                         <outlet property="RouteDataView" destination="U7z-ao-dgl" id="EUi-Hg-8JS"/>
                         <outlet property="SearchDistanceSlider" destination="vmL-sm-7h9" id="aIe-BB-AYO"/>
-                        <outlet property="SearchDistanceText" destination="6K1-SO-jw3" id="bTF-xv-BnO"/>
-                        <outlet property="btnChangeHeight" destination="9Nm-Kn-Cae" id="4iV-DD-9dS"/>
+                        <outlet property="SearchRadiusText" destination="6K1-SO-jw3" id="bTF-xv-BnO"/>
                         <outlet property="btnClearMap" destination="3iT-ct-fWY" id="3I9-Fb-cmF"/>
                         <outlet property="btnGas" destination="Iu6-7c-6tt" id="6o3-4d-WCJ"/>
-                        <outlet property="btnHospital" destination="3OE-vJ-jW7" id="G2l-Eg-YjA"/>
                         <outlet property="btnMcD" destination="B0F-y2-Vv1" id="w9k-Ps-1nb"/>
-                        <outlet property="btnPark" destination="q7L-rU-f39" id="upg-ib-JLB"/>
+                        <outlet property="btnPark" destination="3OE-vJ-jW7" id="G2l-Eg-YjA"/>
                         <outlet property="btnPizza" destination="fW5-F8-UCm" id="5et-0q-I4H"/>
+                        <outlet property="btnPub" destination="q7L-rU-f39" id="upg-ib-JLB"/>
                         <outlet property="btnTarget" destination="YyB-2q-KDQ" id="cxP-rI-u6b"/>
                         <outlet property="btnTwirlMenu" destination="n7C-sn-Sob" id="RAj-cc-Oyn"/>
+                        <outlet property="btnXChangeHeight" destination="9Nm-Kn-Cae" id="4iV-DD-9dS"/>
                         <outlet property="lblCrowFlies" destination="0ng-bl-dOu" id="ife-tZ-8Lh"/>
                         <outlet property="lblDrivingDistance" destination="CeX-be-BSS" id="LhD-yl-xfS"/>
                         <outlet property="lblDrivingTime" destination="SHS-Sd-9qk" id="Ezt-mO-qfS"/>
@@ -303,15 +304,16 @@
                         <outlet property="lblExpense" destination="GPv-0q-8RM" id="axQ-Ln-PIw"/>
                         <outlet property="lblPay" destination="biz-gs-kUg" id="eRe-Pl-UIm"/>
                         <outlet property="myMapView" destination="O32-Ux-jkO" id="Pm6-hX-TH0"/>
+                        <outlet property="theChosenRouteView" destination="lh6-ss-w2R" id="BdI-Ob-Hpz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" id="eIo-pb-Hml">
-                    <rect key="frame" x="0.0" y="0.0" width="102" height="54"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" id="l0g-Vb-oZq">
+                    <rect key="frame" x="0.0" y="0.0" width="200" height="54"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                 </imageView>
             </objects>
-            <point key="canvasLocation" x="1072.8" y="666.11694152923542"/>
+            <point key="canvasLocation" x="1125.5999999999999" y="612.14392803598207"/>
         </scene>
         <!--My Table View Controller-->
         <scene sceneID="4wK-bd-HBT">
@@ -356,7 +358,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LQA-no-TSb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2189.5999999999999" y="789.35532233883066"/>
+            <point key="canvasLocation" x="1954" y="625"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="x0u-yQ-400">
@@ -378,7 +380,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="teg-WA-1TE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="306" y="753"/>
+            <point key="canvasLocation" x="290" y="599"/>
         </scene>
     </scenes>
     <resources>

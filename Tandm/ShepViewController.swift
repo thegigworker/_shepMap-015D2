@@ -4,8 +4,9 @@
 //HARTFORD_GPS = (latitude: 41.767603, longitude: -72.684036)
 //109 Pixley Ave, Corte Madera, CA.  37.928940, -122.526666
 //Transamerica Pyramid,  San Francisco, CA.  37.795315, -122.402833
-//Yankee Stadium:  40.830304, -73.926089// Honolulu    CLLocation(latitude: 21.282778, longitude: -157.829444)
+//Yankee Stadium, New York:    40.830304, -73.926089
 //Wrigley Field, Chicago, IL.   41.948450, -87.655329
+//Obama's birthplace in Hawaii, 6085 Kalanianaole Hwy:  21.285900, -157.723680
 //The Alamo, Alamo Plaza, San Antonio, TX.    29.425976, -98.486139
 //Supreme Court Building, Washington, DC.  38.890734, -77.004214
 //Kurt Cobain's House: 151 Lake Washington Blvd E, Seattle  47.619281, -122.282161
@@ -23,9 +24,8 @@ var myUserLocation: CLLocation = CLLocation()
 //let initialSearch: Double = 15
 //let initialDisplayDistance = CLLocationDistance(miles2meters(miles: initialDisplay))
 //let initialSearchDistance = CLLocationDistance(miles2meters(miles: initialSearch))
-
 //let initialMapSearch = "gas stations"
-
+ // #colorLiteral(red: 0.3188906631, green: 0.9223614931, blue: 0.2959105277, alpha: 1)
 //MARK: puts this comment into the jump bar
 /// THREE SLASHES above a custom method puts that comment into the Xcode quickhelp
 func miles2meters (miles: Double) -> Double {
@@ -57,23 +57,23 @@ class ViewController: UIViewController, MKMapViewDelegate, DataModelDelegate {
     //        }
     //    }
     
-    @IBOutlet weak var btnHospital: UIButton!
+    @IBOutlet weak var btnPark: UIButton!
     @IBOutlet weak var btnTarget: UIButton!
     @IBOutlet weak var btnGas: UIButton!
     @IBOutlet weak var btnPizza: UIButton!
-    @IBOutlet weak var btnPark: UIButton!
+    @IBOutlet weak var btnPub: UIButton!
     @IBOutlet weak var btnMcD: UIButton!
     @IBOutlet weak var btnTwirlMenu: UIButton!
-    @IBOutlet weak var btnChangeHeight: UIButton!
+    @IBOutlet weak var btnXChangeHeight: UIButton!
     @IBOutlet weak var btnClearMap: UIButton!
     
     @IBOutlet weak var DisplayDistanceSlider: UISlider!
     @IBOutlet weak var SearchDistanceSlider: UISlider!
     
-    @IBOutlet weak var DisplayDistanceText: UILabel!
-    @IBOutlet weak var SearchDistanceText: UILabel!
+    @IBOutlet weak var HeightText: UILabel!
+    @IBOutlet weak var SearchRadiusText: UILabel!
     @IBOutlet weak var RouteDataView: UIView!
-    @IBOutlet weak var GoldenRouteView: UIView!
+    @IBOutlet weak var theChosenRouteView: UIView!
     @IBOutlet weak var lblCrowFlies: UILabel!
     @IBOutlet weak var lblDrivingDistance: UILabel!
     @IBOutlet weak var lblDrivingTime: UILabel!
@@ -81,11 +81,12 @@ class ViewController: UIViewController, MKMapViewDelegate, DataModelDelegate {
     @IBOutlet weak var lblExpense: UILabel!
     @IBOutlet weak var lblEarning: UILabel!
     
-   // @IBOutlet weak var GoldenRouteView: UIView!
+   // @IBOutlet weak var theChosenRouteView: UIView!
     //var currentDisplayDistance = initialDisplayDistance
     //var currentSearchDistanceX= initialSearchDistance
     //var whichRouteStyle : String = "random"
     let myDataModel = shepDataModel()
+    var twirlMenuIsUntwirled: Bool = false
     
 //    func didReceiveMethodCallFromDataModel() {
 //        print("In ViewController, didReceiveMethodCallFromDataModel happened")
@@ -99,13 +100,17 @@ class ViewController: UIViewController, MKMapViewDelegate, DataModelDelegate {
         // Get Float value from Slider when it is moved.
         let value = DisplayDistanceSlider.value
         // Assign text to string representation of float.
-        DisplayDistanceText.text = String(format: "%.02f", value)
+       // HeightText.text = String(format: "%.02f", value)
+         HeightText.text = String(format: "%.f", value)
+       // HeightText.text = String(value)
         myDataModel.currentDisplayDistance = miles2meters(miles: Double(value))
+        let mapRegion1 = MKCoordinateRegionMakeWithDistance(myUserLocation.coordinate, myDataModel.currentDisplayDistance, myDataModel.currentDisplayDistance)
+        myMapView.setRegion(mapRegion1, animated: true)
     }
     
     @IBAction func SearchDistanceSliderMoved(_ sender: AnyObject) {
         let value = SearchDistanceSlider.value
-        SearchDistanceText.text = String(format: "%.02f", value)
+        SearchRadiusText.text = String(format: "%.02f", value) + " mi."
         myDataModel.currentSearchDistance = miles2meters(miles: Double(value))
         //myDataModel.currentSearchDistance = miles2meters(miles: Double(value))
     }
@@ -132,20 +137,22 @@ class ViewController: UIViewController, MKMapViewDelegate, DataModelDelegate {
         myMapView.removeOverlays(myMapView.overlays)
         myMapView.removeAnnotations(myMapView.annotations)
         RouteDataView.alpha = 0.0
-        GoldenRouteView.alpha = 0.0
+        theChosenRouteView.alpha = 0.0
+        myDataModel.whichRouteStyle = ""
         myDataModel.shepAnnotationsArray.removeAll()
     }
     
-    @IBAction func btnChangeHeight(_ sender: Any) {
+    @IBAction func btnXChangeHeight(_ sender: Any) {
 //        let tempTranslator = Double(CLLocationDistance(DisplayDistanceSlider.value))
 //        print ("currentDisplayDistance is \(String(format: "%.02f", tempTranslator))")
 //        let tempTranslator2 = meters2miles(meters: myDataModel.currentDisplayDistance)
 //        print ("currentDisplayDistance is \(String(format: "%.02f", tempTranslator2))")
 
 //        // create region for map
-        let mapRegion1 = MKCoordinateRegionMakeWithDistance(myUserLocation.coordinate, myDataModel.currentDisplayDistance, myDataModel.currentDisplayDistance)
         
-        myMapView.setRegion(mapRegion1, animated: true)
+//        let mapRegion1 = MKCoordinateRegionMakeWithDistance(myUserLocation.coordinate, myDataModel.currentDisplayDistance, myDataModel.currentDisplayDistance)
+//
+//        myMapView.setRegion(mapRegion1, animated: true)
     }
     
     @IBAction func btnMakeRandomRoute(_ sender: UIButton) {
@@ -153,8 +160,6 @@ class ViewController: UIViewController, MKMapViewDelegate, DataModelDelegate {
             print ("less than 2 items in shepAnnotationsArray \n")
             return
         }
-        GoldenRouteView.alpha = 0.0
-        RouteDataView.alpha = 1.0
         let howMany = UInt32(myDataModel.shepAnnotationsArray.count)
         //for _ in shepAnnotationsArray {
         let sourceAnnotation = Int(arc4random_uniform(howMany))
@@ -164,9 +169,11 @@ class ViewController: UIViewController, MKMapViewDelegate, DataModelDelegate {
             //print ("thisisCrowFliesDistanceInMiles:  \(myRouteData.thisisCrowFliesDistanceInMiles)")
             myDataModel.howManyRouteInfosCompleted = 0
             myDataModel.getRouteInfoVia2Annotations(source: myDataModel.shepAnnotationsArray[sourceAnnotation], destination: myDataModel.shepAnnotationsArray[destinationItem])
+            theChosenRouteView.alpha = 0.0
+            RouteDataView.alpha = 0.9
             //let myRoute = myDataModel.currentRoute
             //drawNewRoute(thisRoute: myRoute)
-        } else { print ("source and destination are the same \n") }
+        } else { print ("\n source and destination are the same \n") }
     }
 
 //    func didReceiveMethodCallFromDataModel() {
@@ -193,9 +200,9 @@ class ViewController: UIViewController, MKMapViewDelegate, DataModelDelegate {
 //            print ("       --------------\n myTitle            \(String(describing: myTitle!))")
 //            //let mySubTitle = myAnnotation.subtitle
 //            //print ("mySubTitle          \(String(describing: mySubTitle!))")
-//            let myGoldenRouteScore = eachAnnotation.goldenRouteScore
-//            let myFormattedGoldenRouteScore = (shepCurrencyFromDouble(shepNumber: myGoldenRouteScore))
-//            print ("-myGoldenRouteScore \(myFormattedGoldenRouteScore) ---  \(myFormattedGoldenRouteScore) \n        --------------")
+//            let mytheChosenRouteScore = eachAnnotation.goldRouteScore
+//            let myFormattedtheChosenRouteScore = (shepCurrencyFromDouble(shepNumber: mytheChosenRouteScore))
+//            print ("-mytheChosenRouteScore \(myFormattedtheChosenRouteScore) ---  \(myFormattedtheChosenRouteScore) \n        --------------")
 //            print ("crowFliesDistance: \(String(format: "%.02f", eachAnnotation.crowFliesDistance)) miles")
 //            let myDrivingDistance = eachAnnotation.routeDrivingDistance
 //            print ("DrivingDistance is: \(String(format: "%.02f", myDrivingDistance)) miles")
@@ -205,13 +212,13 @@ class ViewController: UIViewController, MKMapViewDelegate, DataModelDelegate {
 //
 //        }  //  entireSearchDirectionsLoopSuccessful()  LOOP
 //
-//        //model.chooseGoldenRoute()
+//        //model.choosetheChosenRoute()
 //        print ("In ViewController, entireSearchDirectionsLoopSuccessful DONE")
 //    }
  
-    @IBAction func btnMakeGoldenRoute(_ sender: UIButton) {
+    @IBAction func btnMaketheChosenRoute(_ sender: UIButton) {
         if myDataModel.shepAnnotationsArray.count < 1 {
-            print ("in btnMakeGoldenRoute NO items in shepAnnotationsArray \n")
+            print ("in btnMaketheChosenRoute NO items in shepAnnotationsArray \n")
             return
         }
 
@@ -220,47 +227,64 @@ class ViewController: UIViewController, MKMapViewDelegate, DataModelDelegate {
             return
         }
         
-        GoldenRouteView.alpha = 1.0
-        RouteDataView.alpha = 1.0
-        let myChosenGoldenAnnotation = myDataModel.chooseGoldenRoute()
-        RouteDataView.alpha = 1.0
-        //let destinationAnnotation_location = CLLocation(latitude: myGoldenRoute.coordinate.latitude, longitude: myGoldenRoute.coordinate.longitude)
+
+        let myChosenGoldenAnnotation = myDataModel.choosetheChosenRoute()
+        //let destinationAnnotation_location = CLLocation(latitude: mytheChosenRoute.coordinate.latitude, longitude: mytheChosenRoute.coordinate.longitude)
         let myTitle = myChosenGoldenAnnotation.title
         let myDrivingDistance = myChosenGoldenAnnotation.routeDrivingDistance
         let routeExpense : Double = myDrivingDistance * Double(myDataModel.centsPerMileExpense)/100
-        let myGoldenRouteScore = myChosenGoldenAnnotation.goldenRouteScore
+        let mytheChosenRouteScore = myChosenGoldenAnnotation.goldRouteScore
         //getRouteInfoVia2Annotations
-        //let myFormattedGoldenRouteScore = (shepCurrencyFromDouble(shepNumber: myGoldenRouteScore))
-        //print ("-myGoldenRouteScore \(myFormattedGoldenRouteScore) ---  \(myFormattedGoldenRouteScore) \n        --------------")
-        lblPay.text = "PAY: \(String(describing: myTitle!))"
-        lblExpense.text = "EXPENSE: \(shepCurrencyFromDouble(shepNumber: routeExpense))"
-        lblEarning.text = "EARNING: \(shepCurrencyFromDouble(shepNumber: myGoldenRouteScore))"
-        myDataModel.whichRouteStyle = "golden"
-        //myDataModel.getRouteInfoVia2Annotations(source: sourceAnnotation, destination: myGoldenRoute)
+        //let myFormattedtheChosenRouteScore = (shepCurrencyFromDouble(shepNumber: mytheChosenRouteScore))
+        //print ("-mytheChosenRouteScore \(myFormattedtheChosenRouteScore) ---  \(myFormattedtheChosenRouteScore) \n        --------------")
+        lblPay.text = "PAY:           \(String(describing: myTitle!))"
+        lblExpense.text = "EXPENSE:  \(shepCurrencyFromDouble(shepNumber: routeExpense))      (60¢ / mile)"
+        lblEarning.text = "EARNING: \(shepCurrencyFromDouble(shepNumber: mytheChosenRouteScore))"
+        myDataModel.whichRouteStyle = "gold"
+        //myDataModel.getRouteInfoVia2Annotations(source: sourceAnnotation, destination: mytheChosenRoute)
         drawNewRoute(thisRoute: myChosenGoldenAnnotation.currentLinkedRoute)
+        theChosenRouteView.alpha = 0.9
+        RouteDataView.alpha = 0.9
     }
     
     @IBAction func twirlButtonTapped(_ sender: AnyObject) {
+        if twirlMenuIsUntwirled == false {
         UIView.animate(withDuration: 0.1, delay: 0.05, options: UIViewAnimationOptions.curveEaseOut, animations: {
             self.btnTwirlMenu.transform = CGAffineTransform(rotationAngle: 0)
             
             self.btnTarget.alpha = 0.8
-            self.btnTarget.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: -50, y: -22))
-            self.btnHospital.alpha = 0.8
-            self.btnHospital.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: -100, y: 30))
-            self.btnPizza.alpha = 0.8
-            self.btnPizza.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: 80, y: 20))
-            self.btnGas.alpha = 0.8
-            self.btnGas.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: 100, y: -35))
+//            self.btnTarget.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: -50, y: -22))
+//            self.btnPark.alpha = 0.8
+//            self.btnPark.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: -100, y: 30))
+//            self.btnPizza.alpha = 0.8
+//            self.btnPizza.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: 80, y: 20))
+//            self.btnGas.alpha = 0.8
+//            self.btnGas.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: 100, y: -35))
+//            self.btnPub.alpha = 0.8
+//            self.btnPub.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: 20, y: -80))
+//            self.btnMcD.alpha = 0.8
+//            self.btnMcD.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: -115, y: -70))
+            self.btnTarget.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: -50, y: -105))
             self.btnPark.alpha = 0.8
-            self.btnPark.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: 20, y: -80))
+            self.btnPark.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: -100, y: -50))
+            self.btnPizza.alpha = 0.8
+            self.btnPizza.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: 80, y: -40))
+            self.btnGas.alpha = 0.8
+            self.btnGas.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: 100, y: -120))
+            self.btnPub.alpha = 0.8
+            self.btnPub.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: 20, y: -180))
             self.btnMcD.alpha = 0.8
-            self.btnMcD.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: -115, y: -70))
+            self.btnMcD.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: -115, y: -170))
+            self.twirlMenuIsUntwirled = true
         }, completion: nil)
+        } else {
+            resetTwirlButtons()
+        }
     }
     
-    @IBAction func btnHospitalClick(_ sender: AnyObject) {
-        myDataModel.populateMapViaAppleLocalSearch (searchString: "Hospital")
+    @IBAction func btnParkClick(_ sender: AnyObject) {
+       // myDataModel.populateMapViaAppleLocalSearch (searchString: "Hospital")
+        myDataModel.populateMapViaAppleLocalSearch (searchString: "Park")
         resetTwirlButtons()
     }
     
@@ -280,9 +304,9 @@ class ViewController: UIViewController, MKMapViewDelegate, DataModelDelegate {
         resetTwirlButtons()
     }
     
-    @IBAction func btnParkClick(_ sender: AnyObject) {
-        print ("in btnPark shepAnnotationsArray count is \(myDataModel.shepAnnotationsArray.count) \n")
-        myDataModel.populateMapViaAppleLocalSearch (searchString: "Park")
+    @IBAction func btnPubClick(_ sender: AnyObject) {
+        print ("in btnPub shepAnnotationsArray count is \(myDataModel.shepAnnotationsArray.count) \n")
+        myDataModel.populateMapViaAppleLocalSearch (searchString: "Pub")
         resetTwirlButtons()
     }
     
@@ -292,10 +316,10 @@ class ViewController: UIViewController, MKMapViewDelegate, DataModelDelegate {
         resetTwirlButtons()
     }
 
-    //    func handleGoldenRoute(thisRoute: MKRoute) {
-    //        print("handleGoldenRoute: \(thisRoute)")
+    //    func handletheChosenRoute(thisRoute: MKRoute) {
+    //        print("handletheChosenRoute: \(thisRoute)")
     ////        myDataModel.currentLinkedRoute = thisRoute
-    ////        print ("handleGoldenRoute.thisRoute:  \(String(describing: myDataModel.currentLinkedRoute))")
+    ////        print ("handletheChosenRoute.thisRoute:  \(String(describing: myDataModel.currentLinkedRoute))")
     ////        myMapView.removeOverlays(myMapView.overlays)
     ////        drawPolyline(theRoute: thisRoute)
     ////        let drivingDistance = meters2miles(meters: (thisRoute.distance)) // response distance in meters
@@ -328,7 +352,7 @@ class ViewController: UIViewController, MKMapViewDelegate, DataModelDelegate {
         drawPolyline(theRoute: thisRoute)
         let drivingDistance = meters2miles(meters: (thisRoute.distance)) // response distance in meters
         let drivingTime = ((thisRoute.expectedTravelTime) / 60)  //expectedTravelTime is in secs
-        RouteDataView.alpha = 1
+        RouteDataView.alpha = 0.8
         lblCrowFlies.text = "As crow flies: \(String(format: "%.02f", myDataModel.crowFliesDistance)) miles"
         lblDrivingDistance.text = "Driving distance: \(String(format: "%.02f", drivingDistance)) miles"
         lblDrivingTime.text = "Driving time: \(String(format: "%.02f", drivingTime)) minutes"
@@ -338,7 +362,7 @@ class ViewController: UIViewController, MKMapViewDelegate, DataModelDelegate {
         self.myMapView.add(theRoute.polyline, level: MKOverlayLevel.aboveRoads)
         // self.myMapView.add(theRoute.polyline)
         let myMKMapRect = theRoute.polyline.boundingMapRect
-        self.myMapView.setVisibleMapRect(myMKMapRect, edgePadding: UIEdgeInsetsMake(15.0, 15.0, 15.0, 15.0), animated: true)
+        self.myMapView.setVisibleMapRect(myMKMapRect, edgePadding: UIEdgeInsetsMake(18.0, 18.0, 18.0, 18.0), animated: true)
     }
     /*
      func plotPolyline(route: MKRoute) {
@@ -393,17 +417,21 @@ class ViewController: UIViewController, MKMapViewDelegate, DataModelDelegate {
             
             self.btnTarget.alpha = 0
             self.btnTarget.transform = CGAffineTransform(scaleX: 1, y: 1).concatenating(CGAffineTransform(translationX: 0, y: 0))
-            self.btnHospital.alpha = 0
-            self.btnHospital.transform = CGAffineTransform(scaleX: 1, y: 1).concatenating(CGAffineTransform(translationX: 0, y: 0))
+            self.btnPark.alpha = 0
+            self.btnPark.transform = CGAffineTransform(scaleX: 1, y: 1).concatenating(CGAffineTransform(translationX: 0, y: 0))
             self.btnPizza.alpha = 0
             self.btnPizza.transform = CGAffineTransform(scaleX: 1, y: 1).concatenating(CGAffineTransform(translationX: 0, y: 0))
             self.btnGas.alpha = 0
             self.btnGas.transform = CGAffineTransform(scaleX: 1, y: 1).concatenating(CGAffineTransform(translationX: 0, y: 0))
-            self.btnPark.alpha = 0.0
-            self.btnPark.transform = CGAffineTransform(scaleX: 1, y: 1).concatenating(CGAffineTransform(translationX: 0, y: 0))
+            self.btnPub.alpha = 0.0
+            self.btnPub.transform = CGAffineTransform(scaleX: 1, y: 1).concatenating(CGAffineTransform(translationX: 0, y: 0))
             self.btnMcD.alpha = 0.0
             self.btnMcD.transform = CGAffineTransform(scaleX: 1, y: 1).concatenating(CGAffineTransform(translationX: 0, y: 0))
+             self.twirlMenuIsUntwirled = false
         }, completion: nil)
+        
+        RouteDataView.alpha = 0.0
+        theChosenRouteView.alpha = 0.0
     }
     
     // set up compass as UIBarButtonItem, separate from map itself
@@ -496,12 +524,12 @@ class ViewController: UIViewController, MKMapViewDelegate, DataModelDelegate {
     //newRegion.span.longitudeDelta = 0.109863;
     
     ////////////////////////////////////////
-    // When a view controller is loaded from a storyboard, the system instantiates the view hierarchy and assigns the appropriate values to all the view controller’s outlets. By the time the view controller’s viewDidLoad() method is called, the system has assigned valid values to all of the controller’s outlets, and you can safely access their contents.
+    // When a view controller  😍 😎  is loaded from a storyboard, the system instantiates the view hierarchy and assigns the appropriate values to all the view controller’s outlets. By the time the view controller’s viewDidLoad() method is called, the system has assigned valid values to all of the controller’s outlets, and you can safely access their contents.
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //Comparing to the callback way, Delegation pattern is easier to reuse across the app: you can create a base class that conforms to the protocol delegate and avoid code redundancy. However, delegation is harder to implement: you need to create a protocol, set the protocol methods, create Delegate property, assign Delegate to ViewController, and make this ViewController conform to the protocol. Also, the Delegate has to implement every method of the protocol by default.
+        print (" 😅  😂  😇  ")
         myDataModel.delegate = self
+        //Comparing to the callback way, Delegation pattern is easier to reuse across the app: you can create a base class that conforms to the protocol delegate and avoid code redundancy. However, delegation is harder to implement: you need to create a protocol, set the protocol methods, create Delegate property, assign Delegate to ViewController, and make this ViewController conform to the protocol. Also, the Delegate has to implement every method of the protocol by default.
         
         // A DELEGATE is an object that acts on behalf of, or in coordination with, another object. The delegating object—in this case, the text field—keeps a reference to the other object—the delegate—and at the appropriate time, the delegating object sends a message to the delegate. The message tells the delegate about an event that the delegating object is about to handle or has just handled.
         // "Setting ViewController as the delegate of the map view.  You can do this in Main.storyboard, but I prefer to do it in code, where it’s more visible."
@@ -519,21 +547,23 @@ class ViewController: UIViewController, MKMapViewDelegate, DataModelDelegate {
         
         centerMapOnLocation(location: myUserLocation)
         
-        self.btnHospital.layer.cornerRadius = 10
-        self.btnTarget.layer.cornerRadius = 10
-        self.btnPizza.layer.cornerRadius = 10
-        self.btnGas.layer.cornerRadius = 10
-        self.btnTwirlMenu.layer.cornerRadius = 10
-        self.btnPark.layer.cornerRadius = 10
-        self.btnMcD.layer.cornerRadius = 10
+        btnPark.layer.cornerRadius = 10
+        btnTarget.layer.cornerRadius = 10
+        btnPizza.layer.cornerRadius = 10
+        btnGas.layer.cornerRadius = 10
+        btnTwirlMenu.layer.cornerRadius = 10
+        btnPub.layer.cornerRadius = 10
+        btnMcD.layer.cornerRadius = 10
         
         DisplayDistanceSlider.value = Float(initialDisplay)
         print ("initialDisplay is: \(initialDisplay)")
         SearchDistanceSlider.value = Float(initialSearch)
         print ("SearchDistanceSlider.value: \(SearchDistanceSlider.value)")
-        DisplayDistanceText.text = String(initialDisplay)
-        SearchDistanceText.text = String(initialSearch)
-        GoldenRouteView.alpha = 0.0
+        HeightText.text = String(initialDisplay)
+        SearchRadiusText.text = String(initialSearch) + " mi."
+        theChosenRouteView.layer.cornerRadius = 10
+        RouteDataView.layer.cornerRadius = 10
+        theChosenRouteView.alpha = 0.0
         RouteDataView.alpha = 0.0
         
         //set up the twirl button
@@ -557,6 +587,16 @@ extension ViewController {
         myUserLocation = myMapView.userLocation.location!
     }
     
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView,
+                 calloutAccessoryControlTapped control: UIControl) {
+        let location = view.annotation as! ShepSingleAnnotation
+        let launchOptions = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving]
+        // Note: Explore the MKMapItem documentation to see other launch option dictionary keys,
+        // and the openMaps(with:launchOptions:) method that lets you pass an array of MKMapItem objects.
+        location.mapItem().openInMaps(launchOptions: launchOptions)
+    }
+    
     // myMapView annotation calloutAccessoryControl was tapped, open Maps
     func myMapView(_ myMapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         let location = view.annotation as! ShepSingleAnnotation
@@ -570,11 +610,11 @@ extension ViewController {
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         let myLineRenderer = MKPolylineRenderer(polyline: myDataModel.currentRoute.polyline)
         if myDataModel.whichRouteStyle == "random" {
-            myLineRenderer.lineWidth = 4
+            myLineRenderer.lineWidth = 5
             myLineRenderer.strokeColor = .blue
-        } else { // "golden" or anything else right now
-            myLineRenderer.lineWidth = 8
-            myLineRenderer.strokeColor = .green
+        } else { // "gold" or anything else right now
+            myLineRenderer.lineWidth = 5
+            myLineRenderer.strokeColor = .red
         }
         return myLineRenderer
     }

@@ -31,51 +31,6 @@
         }
     }
 
- //// from ShepMap2
-    // inside:  class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UIPopoverPresentationControllerDelegate
-    //
-    func myMapView(_ myMapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        var view: MKAnnotationView! = myMapView.dequeueReusableAnnotationView(withIdentifier: Constants.AnnotationViewReuseIdentifier)
-        //
-        let reuseId = "temp" // Constants.AnnotationViewReuseIdentifier
-        
-        var pinView = myMapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
-        if pinView == nil {
-            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-            pinView!.canShowCallout = true
-            pinView!.animatesDrop = true
-            pinView!.pinTintColor = .purple
-            // pinView!.pinTintColor = GPX.shepShepSingleAnnotation.pinTintColor(GPX.shepShepSingleAnnotation)()
-        } else {
-            pinView!.pinTintColor = .green
-            pinView!.annotation = annotation
-        }
-//        if annotation is GPX.shepShepSingleAnnotation {
-//            let shepsPinView: MKPinAnnotationView  = MKPinAnnotationView.redPinColor()
-//            shepsPinView.pinTintColor = .purple // annotation.pinTintColor()
-//            // shepsPinView.pinTintColor = annotation.pinTintColor() as! UIColor
-//        }
-        if view == nil {
-            view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: Constants.AnnotationViewReuseIdentifier)
-            view.canShowCallout = true
-        } else {
-            view.annotation = annotation
-        }
-        view.isDraggable = annotation is EditableWaypoint
-        view.leftCalloutAccessoryView = nil
-        view.rightCalloutAccessoryView = nil
-        if let waypoint = annotation as? shepDataSource.shepSingleAnnotation {
-            if waypoint.thumbnailURL != nil {
-                view.leftCalloutAccessoryView = UIButton(frame: Constants.LeftCalloutFrame)
-            }
-            if waypoint is EditableWaypoint {
-                view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
-            }
-        }
-        return view
-    }
- 
- 
     // MARK: Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destination = segue.destination.contentViewController

@@ -60,7 +60,7 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
     var title: String? {
         let temp: String?
         temp = self.origTitle
-        return shepStringData + " --- " + temp!
+        return shepStringData + " -- " + temp!
     }
     
     var subtitle: String? {
@@ -75,11 +75,11 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
         return drivingDistance // drivingDistance in miles
     }
     
-    var goldenRouteScore: Double {
+    var goldRouteScore: Double {
         let drivingDistance = meters2miles(meters: currentLinkedRoute.distance)
         let routeExpense = drivingDistance * Double(myDataModel.centsPerMileExpense)/100
-        let myGoldenRouteScore = shepDollarValue - routeExpense
-        return myGoldenRouteScore
+        let mytheChosenRouteScore = shepDollarValue - routeExpense
+        return mytheChosenRouteScore
     }
     
     var drivingTime: Double {
@@ -122,8 +122,10 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
     func mapItem() -> MKMapItem {
         let addressDict = [CNPostalAddressStreetKey: subtitle!]
         let placemark = MKPlacemark(coordinate: coordinate, addressDictionary: addressDict)
+        //var placemark = MKPlacemark(coordinate: coordinate, addressDictionary: addressDict)
+        //placemark.title = "xyz"
+        
         let mapItem = MKMapItem(placemark: placemark)
-        //mapItem.name = title
         mapItem.name = title
         return mapItem
     }
@@ -192,36 +194,6 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
 //}
 
 
-// extension ViewController: MKMapViewDelegate {
-
-// 1
-//    func myMapView(_ myMapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-//        if let annotation = annotation as? ShepShepSingleAnnotation {
-//            let identifier = "artPin"
-//            var view: MKPinAnnotationView
-//            if let dequeuedView = myMapView.dequeueReusableAnnotationView(withIdentifier: identifier)
-//                as? MKPinAnnotationView { // 2
-//                dequeuedView.annotation = annotation
-//                view = dequeuedView
-//            } else {
-//                // 3
-//                view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-//                view.canShowCallout = true
-//                view.calloutOffset = CGPoint(x: -5, y: 5)
-//                view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure) as UIView
-//
-//                //view.annotationImage = UIImage(named: <#T##String#>)
-//                //view.leftCalloutAccessoryView = UILabel(.text("Hello"))as UIView
-//            }
-//
-//            // annotation.
-//            view.pinTintColor = annotation.pinTintColor()
-//            return view
-//        }
-//        return nil
-//}
-
-
 //// this is where we draw an image on the leftCalloutAccessoryView
 //func myMapView(_ myMapView: MKMapView, didSelect view: MKAnnotationView) {
 //    if let thumbnailImageButton = view.leftCalloutAccessoryView as? UIButton,
@@ -230,49 +202,6 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
 //        let image = UIImage(data: imageData) {
 //        thumbnailImageButton.setImage(image, for: UIControlState())
 //    }
-//}
-
-
-//CODE FROM SHEP_MAPKIT x?
-//
-//func myMapView(_ myMapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-//    let identifier = "MyPin"
-//
-//    if annotation is MKUserLocation {
-//        return nil
-//    }
-//
-//    // Reuse the annotation if possible
-//    var annotationView:MKPinAnnotationView? = myMapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKPinAnnotationView
-//
-//    if annotationView == nil {
-//        annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-//        annotationView?.canShowCallout = true
-//    }
-//
-////    if let currentPlacemarkCoordinate = currentPlacemark?.location?.coordinate {
-////        if currentPlacemarkCoordinate.latitude == annotation.coordinate.latitude &&
-////            currentPlacemarkCoordinate.longitude == annotation.coordinate.longitude {
-////
-////            let leftIconView = UIImageView(frame: CGRect(x: 0, y: 0, width: 53, height: 53))
-////            leftIconView.image = UIImage(named: restaurant.image)!
-////            annotationView?.leftCalloutAccessoryView = leftIconView
-////
-////            // Pin color customization
-////            if #available(iOS 9.0, *) {
-////                annotationView?.pinTintColor = UIColor.orange
-////            }
-////        } else {
-////            // Pin color customization
-////            if #available(iOS 9.0, *) {
-////                annotationView?.pinTintColor = UIColor.red
-////            }
-////        }
-//    }
-//
-//    // annotationView?.rightCalloutAccessoryView = UIButton(type: UIButtonType.detailDisclosure)
-//
-//   return annotationView
 //}
 
 

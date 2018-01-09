@@ -74,8 +74,10 @@ class SingleAnnotationView: MKMarkerAnnotationView {
             // These lines do the same thing as your myMapView(_:viewFor:), configuring the callout.
             guard let myAnnotationData = newValue as? ShepSingleAnnotation else { return }
             canShowCallout = true
+            //pinView!.animatesDrop = true
             calloutOffset = CGPoint(x: -5, y: 5)
             rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+            //rightCalloutAccessoryView = UIButton(type: .infoDark) //???
       
             let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 54, height: 54))
             //You can try to set the UIImageView size to the created MKPinAnnotationView
