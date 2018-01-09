@@ -335,71 +335,7 @@ class shepDataModel: NSObject {
     }
     
 }
-//    // 搜索
-//    func performLocalSearch2(_ searchString:String) {
-//        let request = MKLocalSearchRequest()
-//        request.naturalLanguageQuery = searchString
-//        validSearchResultsArray = [ShepSingleAnnotation]()
-//        // 搜索当前区域
-//        // print ("in performLocalSearch searchRegion search distance: \(meters2miles(meters: self.currentSearchDistanceX))")
-//        let searchRegion1 = MKCoordinateRegionMakeWithDistance(myUserLocation.coordinate, currentSearchDistance, currentSearchDistance)
-//        request.region = searchRegion1
-//        //request.region = myMapView.region
-//        // a MKLocalSearch object initiates a search operation and will deliver the results back into an array of MKMapItems. This will contain the name, latitude and longitude of the current POI.
-//        print ("before search.start shepAnnotationsArray count: \(shepAnnotationsArray.count)")
-//        // 启动搜索,并且把返回结果保存到数组中
-//        let search = MKLocalSearch(request: request)
-//        search.start(completionHandler: {(response, error) in
-//            //let myViewController = ViewController()
-//            //var validSearchResultsArray: [ShepSingleAnnotation] = []
-//            print ("inside completionHandler shepAnnotationsArray count: \(self.shepAnnotationsArray.count)")
-//            // Local searches are performed asynchronously
-//            //and a completion handler called when the search is complete.
-//            if error != nil {
-//                print("Error occured in search: \(error!.localizedDescription)")
-//            } else if response!.mapItems.count == 0 {
-//                print("No matches found")
-//            } else {
-//                print("\n \(response!.mapItems.count) matches found")
-//                //The code in the completion handler checks the response to make sure that matches were found
-//                //and then accesses the mapItems property of the response which contains an array of mapItem instances for the matching locations.
-//                shepSearchResultLoop: for item in response!.mapItems {
-//                    let searchResultCoordinates = item.placemark.coordinate
-//                    let searchResultLocation = CLLocation(latitude: searchResultCoordinates.latitude, longitude: searchResultCoordinates.longitude)
-//                    let mapItemDistance = myUserLocation.distance(from: searchResultLocation) // result is in meters
-//                    //let distanceInMiles = meters2miles(meters: mapItemDistance)
-//                    print ("Current search distance: \(meters2miles(meters: self.currentSearchDistance)) and this distance: \(meters2miles(meters: mapItemDistance))")
-//
-//                    if mapItemDistance > self.currentSearchDistance {  // if SearchResult is further away than currentSearchDistance
-//                        print ("took one down, too far away")
-//                        continue shepSearchResultLoop
-//                    } else {
-//                        let shepDollarValue = Double(arc4random_uniform(40) + 1)
-//                        let validResult = ShepSingleAnnotation(myMapItem: item, currentLinkedRoute: MKRoute(), shepDollarValue: shepDollarValue)
-////                        let myRouteDrivingDistance = validResult.routeDrivingDistance
-////                        print ("myRouteDrivingDistance is \(myRouteDrivingDistance)")
-//                        let goldRouteScore: Double  = validResult.goldRouteScore
-//                        print ("goldRouteScore is \(goldRouteScore)")
-////                        let drivingTime: Double  = validResult.drivingTime
-////                        print ("drivingTime is \(drivingTime)")
-//                        self.validSearchResultsArray.append(validResult)
-//                    }
-//                    print ("still inside shepSearchResultLoop?, shepAnnotationsArray count is \(self.shepAnnotationsArray.count)")
-//                    print ("still inside shepSearchResultLoop? validSearchResultsArray count: \(self.validSearchResultsArray.count) \n")
-//                }
-//
-//                self.shepAnnotationsArray.append(contentsOf: self.validSearchResultsArray)
-//                print ("shepSearchResultLoop is done now???, shepAnnotationsArray count is \(self.shepAnnotationsArray.count)")
-//                print ("shepSearchResultLoop is done now???, validSearchResultsArray count is \(self.validSearchResultsArray.count) \n")
-//
-//                self.delegate?.handleValidSearchResults(validSearchResults: self.validSearchResultsArray)
-//
-//            }
-//        })
-//        print ("OPENING GAMBIT, shepAnnotationsArray count is \(shepAnnotationsArray.count) \n")
-//    }
-    
-//}
+
 
 /*  CREATING AN ARRAY BY ADDING TWO ARRAYS TOGETHER
  

@@ -28,6 +28,7 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
         super.init()
     }
     
+    //MARK:----My Properties----
     let myDataModel = shepDataModel()
     let origTitle: String?
     let coordinate: CLLocationCoordinate2D
@@ -119,6 +120,7 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
     
     // Annotation right callout accessory opens this mapItem in Maps app
     // Here you create an MKMapItem from an MKPlacemark. The Maps app is able to read this MKMapItem, and display the right thing.
+    //MARK:----My functions----
     func mapItem() -> MKMapItem {
         let addressDict = [CNPostalAddressStreetKey: subtitle!]
         let placemark = MKPlacemark(coordinate: coordinate, addressDictionary: addressDict)

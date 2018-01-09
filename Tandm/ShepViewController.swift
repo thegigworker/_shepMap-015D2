@@ -48,7 +48,7 @@ func shepCurrencyFromDouble(shepNumber : Double) -> String  {
 
 
 class ViewController: UIViewController, MKMapViewDelegate, DataModelDelegate {
-
+//MARK:----@IBOutlets----
     @IBOutlet weak var myMapView: MKMapView!
     //    @IBOutlet weak var myMapView: MKMapView! {
     //        didSet {
@@ -85,6 +85,8 @@ class ViewController: UIViewController, MKMapViewDelegate, DataModelDelegate {
     //var currentDisplayDistance = initialDisplayDistance
     //var currentSearchDistanceX= initialSearchDistance
     //var whichRouteStyle : String = "random"
+    
+    //MARK:----My properties----
     let myDataModel = shepDataModel()
     var twirlMenuIsUntwirled: Bool = false
     
@@ -96,6 +98,7 @@ class ViewController: UIViewController, MKMapViewDelegate, DataModelDelegate {
 //        print ("In ViewController, didReceiveDataUpdate was: \(data) \n")
 //    }
 
+    //MARK:----@IBActions----
     @IBAction func DisplayDistanceSliderMoved(_ sender: AnyObject) {
         // Get Float value from Slider when it is moved.
         let value = DisplayDistanceSlider.value
@@ -247,23 +250,13 @@ class ViewController: UIViewController, MKMapViewDelegate, DataModelDelegate {
         RouteDataView.alpha = 0.9
     }
     
+    //MARK:----@IBActions re twirl button----
     @IBAction func twirlButtonTapped(_ sender: AnyObject) {
         if twirlMenuIsUntwirled == false {
         UIView.animate(withDuration: 0.1, delay: 0.05, options: UIViewAnimationOptions.curveEaseOut, animations: {
             self.btnTwirlMenu.transform = CGAffineTransform(rotationAngle: 0)
             
             self.btnTarget.alpha = 0.8
-//            self.btnTarget.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: -50, y: -22))
-//            self.btnPark.alpha = 0.8
-//            self.btnPark.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: -100, y: 30))
-//            self.btnPizza.alpha = 0.8
-//            self.btnPizza.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: 80, y: 20))
-//            self.btnGas.alpha = 0.8
-//            self.btnGas.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: 100, y: -35))
-//            self.btnPub.alpha = 0.8
-//            self.btnPub.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: 20, y: -80))
-//            self.btnMcD.alpha = 0.8
-//            self.btnMcD.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: -115, y: -70))
             self.btnTarget.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: -50, y: -105))
             self.btnPark.alpha = 0.8
             self.btnPark.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: -100, y: -50))
@@ -336,6 +329,7 @@ class ViewController: UIViewController, MKMapViewDelegate, DataModelDelegate {
     //        resetTwirlButtons()
     //    }
     
+    //MARK:----My functions----
     func handleValidSearchResults(validSearchResults: [ShepSingleAnnotation]) {
         //print ("In ViewController, handleValidSearchResults was: \(validSearchResults)")
         print ("In ViewController, handleValidSearchResults count was: \(validSearchResults.count)")
@@ -411,6 +405,7 @@ class ViewController: UIViewController, MKMapViewDelegate, DataModelDelegate {
     //let dataModel = DataModel()
     //dataModel.performDataRequest { [weak self] (data: String) in self?.useData(data: data)
     
+    //MARK:----My UI type functions----
     func resetTwirlButtons() {
         UIView.animate(withDuration: 0.2, delay: 0.2, options: UIViewAnimationOptions.curveEaseOut, animations: {
             self.btnTwirlMenu.transform = CGAffineTransform(rotationAngle: 0.25*3.1415927)
@@ -465,6 +460,35 @@ class ViewController: UIViewController, MKMapViewDelegate, DataModelDelegate {
                                      scale.centerYAnchor.constraint(equalTo: button.centerYAnchor)])
     }
     
+    // route polyline related
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        let myLineRenderer = MKPolylineRenderer(polyline: myDataModel.currentRoute.polyline)
+        if myDataModel.whichRouteStyle == "random" {
+            myLineRenderer.lineWidth = 5
+            myLineRenderer.strokeColor = .blue
+        } else { // "gold" or anything else right now
+            myLineRenderer.lineWidth = 5
+            myLineRenderer.strokeColor = .red
+        }
+        return myLineRenderer
+    }
+
+     // mapView annotation calloutAccessoryControl was tapped, open Maps
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        let location = view.annotation as! ShepSingleAnnotation
+        let launchOptions = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving]
+        // Note: Explore the MKMapItem documentation to see other launch option dictionary keys,
+        // and the openMaps(with:launchOptions:) method that lets you pass an array of MKMapItem objects.
+        location.mapItem().openInMaps(launchOptions: launchOptions)
+    }
+    
+    // Updating the Map View based on User Movement
+    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
+        mapView.centerCoordinate = userLocation.location!.coordinate
+        myUserLocation = myMapView.userLocation.location!
+    }
+    
+    //MARK:----My utility functions----
     func registerAnnotationViewClasses() {
         //myMapView.register(BikeView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
         //myMapView.register(ClusterView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier)
@@ -524,10 +548,10 @@ class ViewController: UIViewController, MKMapViewDelegate, DataModelDelegate {
     //newRegion.span.longitudeDelta = 0.109863;
     
     ////////////////////////////////////////
-    // When a view controller  😍 😎  is loaded from a storyboard, the system instantiates the view hierarchy and assigns the appropriate values to all the view controller’s outlets. By the time the view controller’s viewDidLoad() method is called, the system has assigned valid values to all of the controller’s outlets, and you can safely access their contents.
+    // When a view controller is loaded from a storyboard, the system instantiates the view hierarchy and assigns the appropriate values to all the view controller’s outlets. By the time the view controller’s viewDidLoad() method is called, the system has assigned valid values to all of the controller’s outlets, and you can safely access their contents.
+    //MARK:----The all important viewDidLoad()----
     override func viewDidLoad() {
         super.viewDidLoad()
-        print (" 😅  😂  😇  ")
         myDataModel.delegate = self
         //Comparing to the callback way, Delegation pattern is easier to reuse across the app: you can create a base class that conforms to the protocol delegate and avoid code redundancy. However, delegation is harder to implement: you need to create a protocol, set the protocol methods, create Delegate property, assign Delegate to ViewController, and make this ViewController conform to the protocol. Also, the Delegate has to implement every method of the protocol by default.
         
@@ -579,44 +603,6 @@ extension ViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-    }
-    
-    // Updating the Map View based on User Movement
-    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
-        mapView.centerCoordinate = userLocation.location!.coordinate
-        myUserLocation = myMapView.userLocation.location!
-    }
-    
-    
-    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView,
-                 calloutAccessoryControlTapped control: UIControl) {
-        let location = view.annotation as! ShepSingleAnnotation
-        let launchOptions = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving]
-        // Note: Explore the MKMapItem documentation to see other launch option dictionary keys,
-        // and the openMaps(with:launchOptions:) method that lets you pass an array of MKMapItem objects.
-        location.mapItem().openInMaps(launchOptions: launchOptions)
-    }
-    
-    // myMapView annotation calloutAccessoryControl was tapped, open Maps
-    func myMapView(_ myMapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        let location = view.annotation as! ShepSingleAnnotation
-        let launchOptions = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving]
-        // Note: Explore the MKMapItem documentation to see other launch option dictionary keys,
-        // and the openMaps(with:launchOptions:) method that lets you pass an array of MKMapItem objects.
-        location.mapItem().openInMaps(launchOptions: launchOptions)
-    }
-
-    // route polyline related
-    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        let myLineRenderer = MKPolylineRenderer(polyline: myDataModel.currentRoute.polyline)
-        if myDataModel.whichRouteStyle == "random" {
-            myLineRenderer.lineWidth = 5
-            myLineRenderer.strokeColor = .blue
-        } else { // "gold" or anything else right now
-            myLineRenderer.lineWidth = 5
-            myLineRenderer.strokeColor = .red
-        }
-        return myLineRenderer
     }
 
 }
