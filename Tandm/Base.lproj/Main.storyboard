@@ -98,6 +98,8 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <connections>
                                             <action selector="SearchDistanceSliderMoved:" destination="BYZ-38-t0r" eventType="valueChanged" id="p2H-hk-Fot"/>
+                                            <action selector="touchDOWNInSearchDistanceSlider:" destination="BYZ-38-t0r" eventType="touchDown" id="dAC-t6-MPT"/>
+                                            <action selector="touchUPInSearchDistanceSlider:" destination="BYZ-38-t0r" eventType="touchUpInside" id="66V-lV-m25"/>
                                         </connections>
                                     </slider>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="View Height" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eai-dc-aNq">

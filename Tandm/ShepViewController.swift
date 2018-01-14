@@ -2,13 +2,13 @@
 //
 //let THOMPSON_GPS = (latitude: 41.93636, longitude: -71.79837)
 //HARTFORD_GPS = (latitude: 41.767603, longitude: -72.684036)
-//109 Pixley Ave, Corte Madera, CA.  37.928940, -122.526666
-//Transamerica Pyramid,  San Francisco, CA.  37.795315, -122.402833
 //Yankee Stadium, New York:    40.830304, -73.926089
 //Wrigley Field, Chicago, IL.   41.948450, -87.655329
+//Transamerica Pyramid,  San Francisco, CA.  37.795315, -122.402833
+//109 Pixley Ave, Corte Madera, CA.  37.928940, -122.526666
+//The White House, Washington, DC.  38.897868, -77.036493
 //Obama's birthplace in Hawaii, 6085 Kalanianaole Hwy:  21.285900, -157.723680
 //The Alamo, Alamo Plaza, San Antonio, TX.    29.425976, -98.486139
-//Supreme Court Building, Washington, DC.  38.890734, -77.004214
 //Kurt Cobain's House: 151 Lake Washington Blvd E, Seattle  47.619281, -122.282161
 //Sarah Palin's street in Wasilla, Alaska   61.577718, -149.492511
 
@@ -26,7 +26,7 @@ var myUserLocation: CLLocation = CLLocation()
 //let initialSearchDistance = CLLocationDistance(miles2meters(miles: initialSearch))
 //let initialMapSearch = "gas stations"
  // #colorLiteral(red: 0.3188906631, green: 0.9223614931, blue: 0.2959105277, alpha: 1)
-//MARK: puts this comment into the jump bar
+
 /// THREE SLASHES above a custom method puts that comment into the Xcode quickhelp
 func miles2meters (miles: Double) -> Double {
     let meters = miles * 1609.34
@@ -89,6 +89,7 @@ class ViewController: UIViewController, MKMapViewDelegate, DataModelDelegate {
     //MARK:----My properties----
     let myDataModel = shepDataModel()
     var twirlMenuIsUntwirled: Bool = false
+    var searchDistanceCircle:MKCircle!
     
 //    func didReceiveMethodCallFromDataModel() {
 //        print("In ViewController, didReceiveMethodCallFromDataModel happened")
@@ -99,7 +100,7 @@ class ViewController: UIViewController, MKMapViewDelegate, DataModelDelegate {
 //    }
 
     //MARK:----@IBActions----
-    @IBAction func DisplayDistanceSliderMoved(_ sender: AnyObject) {
+    @IBAction func DisplayDistanceSliderMoved(_ sender: UISlider) {
         // Get Float value from Slider when it is moved.
         let value = DisplayDistanceSlider.value
         // Assign text to string representation of float.
@@ -107,24 +108,39 @@ class ViewController: UIViewController, MKMapViewDelegate, DataModelDelegate {
          HeightText.text = String(format: "%.f", value)
        // HeightText.text = String(value)
         myDataModel.currentDisplayDistance = miles2meters(miles: Double(value))
-        let mapRegion1 = MKCoordinateRegionMakeWithDistance(myUserLocation.coordinate, myDataModel.currentDisplayDistance, myDataModel.currentDisplayDistance)
+        let mapRegion1 = MKCoordinateRegionMakeWithDistance(myUserLocation.coordinate, myDataModel.currentDisplayDistance * 2, myDataModel.currentDisplayDistance * 2)
         myMapView.setRegion(mapRegion1, animated: true)
     }
     
-    @IBAction func SearchDistanceSliderMoved(_ sender: AnyObject) {
+    @IBAction func SearchDistanceSliderMoved(_ sender: UISlider) {
         let value = SearchDistanceSlider.value
         SearchRadiusText.text = String(format: "%.02f", value) + " mi."
         myDataModel.currentSearchDistance = miles2meters(miles: Double(value))
         //myDataModel.currentSearchDistance = miles2meters(miles: Double(value))
+        
+        if searchDistanceCircle != nil {myMapView.remove(searchDistanceCircle)}
+        searchDistanceCircle = MKCircle(center: myUserLocation.coordinate, radius:CLLocationDistance(myDataModel.currentSearchDistance))
+        myMapView.add(searchDistanceCircle)
+        
     }
     
-    //   RE DETECTING END OF SLIDER CHANGE
-    // You can add an action that takes two parameters, sender and an event, for UIControlEventValueChanged:
-    //
-    //    slider.addTarget(self, action: #selector(onSliderValChanged(slider:event:)), for: .valueChanged)
-    //
-    // Note in Interface Builder when adding an action you also have the option to add both sender and event parameters to the action.
-    // -------
+//    @IBAction func SearchDistanceSliderValueChanged(_ sender: UISlider) {
+//        let coordinates = CLLocationCoordinate2D(latitude: 67.550592, longitude: 133.399340)
+//        if circle != nil {self.mapView.remove(circle)}
+//        circle = MKCircle(center: coordinates, radius: CLLocationDistance(sender.value * 2000))
+//        self.mapView.add(circle)
+//    }
+    
+    @IBAction func touchDOWNInSearchDistanceSlider(_ sender: UISlider) {
+        print ("Touch DOWN in slider.")
+    }
+    
+    @IBAction func touchUPInSearchDistanceSlider(_ sender: UISlider) {
+        print ("Touch UP in slider.")
+        if searchDistanceCircle != nil {myMapView.remove(searchDistanceCircle)}
+    }
+    
+    
     
     @IBAction func btnToggleMapType(_ sender: UIButton) {
         let whichMapTypeValue = myMapView.mapType.rawValue
@@ -462,6 +478,16 @@ class ViewController: UIViewController, MKMapViewDelegate, DataModelDelegate {
     
     // route polyline related
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        
+        if overlay.isKind(of: MKCircle.self){
+            let circleRenderer = MKCircleRenderer(overlay: overlay)
+            circleRenderer.fillColor = UIColor.blue.withAlphaComponent(0.1)
+            circleRenderer.strokeColor = UIColor.blue
+            circleRenderer.lineWidth = 1
+            return circleRenderer
+        }
+        
+        // not a circle, therefore is MKPolylineRenderer
         let myLineRenderer = MKPolylineRenderer(polyline: myDataModel.currentRoute.polyline)
         if myDataModel.whichRouteStyle == "random" {
             myLineRenderer.lineWidth = 5
@@ -549,6 +575,7 @@ class ViewController: UIViewController, MKMapViewDelegate, DataModelDelegate {
     
     ////////////////////////////////////////
     // When a view controller is loaded from a storyboard, the system instantiates the view hierarchy and assigns the appropriate values to all the view controller’s outlets. By the time the view controller’s viewDidLoad() method is called, the system has assigned valid values to all of the controller’s outlets, and you can safely access their contents.
+    
     //MARK:----The all important viewDidLoad()----
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -598,13 +625,12 @@ class ViewController: UIViewController, MKMapViewDelegate, DataModelDelegate {
     }
 }
 
-
 extension ViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
+    
 }
 
 
