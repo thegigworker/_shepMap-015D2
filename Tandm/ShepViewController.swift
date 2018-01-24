@@ -66,11 +66,14 @@ class ViewController: UIViewController, MKMapViewDelegate, DataModelDelegate {
     @IBOutlet weak var btnTwirlMenu: UIButton!
     @IBOutlet weak var btnXChangeHeight: UIButton!
     @IBOutlet weak var btnClearMap: UIButton!
-    
-    @IBOutlet weak var DisplayDistanceSlider: UISlider!
     @IBOutlet weak var SearchDistanceSlider: UISlider!
-    
-    @IBOutlet weak var HeightText: UILabel!
+    @IBOutlet weak var DisplayDistanceSlider: UISlider! {
+        didSet{
+            DisplayDistanceSlider.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi/2))
+        }
+    }
+
+    // @IBOutlet weak var HeightText: UILabel!
     @IBOutlet weak var SearchRadiusText: UILabel!
     @IBOutlet weak var RouteDataView: UIView!
     @IBOutlet weak var theChosenRouteView: UIView!
@@ -105,10 +108,11 @@ class ViewController: UIViewController, MKMapViewDelegate, DataModelDelegate {
         let value = DisplayDistanceSlider.value
         // Assign text to string representation of float.
        // HeightText.text = String(format: "%.02f", value)
-         HeightText.text = String(format: "%.f", value)
+         //HeightText.text = String(format: "%.f", value)
        // HeightText.text = String(value)
         myDataModel.currentDisplayDistance = miles2meters(miles: Double(value))
-        let mapRegion1 = MKCoordinateRegionMakeWithDistance(myUserLocation.coordinate, myDataModel.currentDisplayDistance * 2, myDataModel.currentDisplayDistance * 2)
+        let mapRegion1 = MKCoordinateRegionMakeWithDistance(myMapView.centerCoordinate, myDataModel.currentDisplayDistance * 20, myDataModel.currentDisplayDistance * 20)
+//        let mapRegion1 = MKCoordinateRegionMakeWithDistance(myUserLocation.coordinate, myDataModel.currentDisplayDistance * 2, myDataModel.currentDisplayDistance * 2)
         myMapView.setRegion(mapRegion1, animated: true)
     }
     
@@ -273,17 +277,17 @@ class ViewController: UIViewController, MKMapViewDelegate, DataModelDelegate {
             self.btnTwirlMenu.transform = CGAffineTransform(rotationAngle: 0)
             
             self.btnTarget.alpha = 0.8
-            self.btnTarget.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: -50, y: -105))
+            self.btnTarget.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: -50, y: -125))
             self.btnPark.alpha = 0.8
-            self.btnPark.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: -100, y: -50))
+            self.btnPark.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: -100, y: -70))
             self.btnPizza.alpha = 0.8
-            self.btnPizza.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: 80, y: -40))
+            self.btnPizza.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: 80, y: -60))
             self.btnGas.alpha = 0.8
-            self.btnGas.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: 100, y: -120))
+            self.btnGas.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: 100, y: -140))
             self.btnPub.alpha = 0.8
-            self.btnPub.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: 20, y: -180))
+            self.btnPub.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: 20, y: -200))
             self.btnMcD.alpha = 0.8
-            self.btnMcD.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: -115, y: -170))
+            self.btnMcD.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: -115, y: -190))
             self.twirlMenuIsUntwirled = true
         }, completion: nil)
         } else {
@@ -470,7 +474,7 @@ class ViewController: UIViewController, MKMapViewDelegate, DataModelDelegate {
         scale.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(scale)
         
-        NSLayoutConstraint.activate([button.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -155),
+        NSLayoutConstraint.activate([button.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -120),
                                      button.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -05),
                                      scale.trailingAnchor.constraint(equalTo: button.leadingAnchor, constant: -150),
                                      scale.centerYAnchor.constraint(equalTo: button.centerYAnchor)])
@@ -481,7 +485,7 @@ class ViewController: UIViewController, MKMapViewDelegate, DataModelDelegate {
         
         if overlay.isKind(of: MKCircle.self){
             let circleRenderer = MKCircleRenderer(overlay: overlay)
-            circleRenderer.fillColor = UIColor.blue.withAlphaComponent(0.1)
+            circleRenderer.fillColor = UIColor.blue.withAlphaComponent(0.06)
             circleRenderer.strokeColor = UIColor.blue
             circleRenderer.lineWidth = 1
             return circleRenderer
@@ -606,11 +610,11 @@ class ViewController: UIViewController, MKMapViewDelegate, DataModelDelegate {
         btnPub.layer.cornerRadius = 10
         btnMcD.layer.cornerRadius = 10
         
-        DisplayDistanceSlider.value = Float(initialDisplay)
+        DisplayDistanceSlider.value = Float(initialDisplay/10)
         print ("initialDisplay is: \(initialDisplay)")
         SearchDistanceSlider.value = Float(initialSearch)
         print ("SearchDistanceSlider.value: \(SearchDistanceSlider.value)")
-        HeightText.text = String(initialDisplay)
+        //HeightText.text = String(initialDisplay)
         SearchRadiusText.text = String(initialSearch) + " mi."
         theChosenRouteView.layer.cornerRadius = 10
         RouteDataView.layer.cornerRadius = 10
@@ -631,6 +635,23 @@ extension ViewController {
         super.didReceiveMemoryWarning()
     }
     
+}
+
+class CustomDisplayUISlider : UISlider {
+    
+    override func trackRect(forBounds bounds: CGRect) -> CGRect {
+        
+        //keeps original origin and width, changes height, you get the idea
+        let customBounds = CGRect(origin: bounds.origin, size: CGSize(width: bounds.size.width, height: 4.0))
+        super.trackRect(forBounds: customBounds)
+        return customBounds
+    }
+    
+    //while we are here, why not change the image here as well? (bonus material)
+    override func awakeFromNib() {
+        self.setThumbImage(UIImage(named: "displayDistanceThumb"), for: .normal)
+        super.awakeFromNib()
+    }
 }
 
 
