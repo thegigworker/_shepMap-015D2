@@ -17,6 +17,10 @@ import MapKit
 import Contacts
 // This adds the Contacts framework, which contains dictionary key constants such as CNPostalAddressStreetKey,
 // for when you need to set the address, city or state fields of a location.
+import os.log
+//This imports the unified logging system. Like the print() function, the unified logging system lets you send messages to the console.
+//However, the unified logging system gives you more control over when messages appear and how they are saved.
+//For more information on the unified logging system, see Logging Reference.
 
 var myUserLocation: CLLocation = CLLocation()
 //var myMapItem: MKMapItem = forCurrentLocation()
@@ -47,7 +51,8 @@ func shepCurrencyFromDouble(shepNumber : Double) -> String  {
 }
 
 
-class ViewController: UIViewController, MKMapViewDelegate, DataModelDelegate {
+class shepMapViewController: UIViewController, MKMapViewDelegate, DataModelDelegate, UIPopoverPresentationControllerDelegate {
+    
 //MARK:----@IBOutlets----
     @IBOutlet weak var myMapView: MKMapView!
     //    @IBOutlet weak var myMapView: MKMapView! {
@@ -68,12 +73,10 @@ class ViewController: UIViewController, MKMapViewDelegate, DataModelDelegate {
     @IBOutlet weak var btnClearMap: UIButton!
     @IBOutlet weak var SearchDistanceSlider: UISlider!
     @IBOutlet weak var DisplayDistanceSlider: UISlider! {
-        didSet{
+        didSet{       // rotate slider
             DisplayDistanceSlider.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi/2))
         }
     }
-
-    // @IBOutlet weak var HeightText: UILabel!
     @IBOutlet weak var SearchRadiusText: UILabel!
     @IBOutlet weak var RouteDataView: UIView!
     @IBOutlet weak var theChosenRouteView: UIView!
@@ -102,14 +105,17 @@ class ViewController: UIViewController, MKMapViewDelegate, DataModelDelegate {
 //        print ("In ViewController, didReceiveDataUpdate was: \(data) \n")
 //    }
 
+    
     //MARK:----@IBActions----
+    
+//    @IBAction func showPopOver(){
+//       // popoverView.contentViewController.preferredContentSize =  CGSizeMake(320, 1400)
+//        self.performSegue(withIdentifier: "popoverViewSegue", sender: self)
+//    }
+    
     @IBAction func DisplayDistanceSliderMoved(_ sender: UISlider) {
         // Get Float value from Slider when it is moved.
         let value = DisplayDistanceSlider.value
-        // Assign text to string representation of float.
-       // HeightText.text = String(format: "%.02f", value)
-         //HeightText.text = String(format: "%.f", value)
-       // HeightText.text = String(value)
         myDataModel.currentDisplayDistance = miles2meters(miles: Double(value))
         let mapRegion1 = MKCoordinateRegionMakeWithDistance(myMapView.centerCoordinate, myDataModel.currentDisplayDistance * 20, myDataModel.currentDisplayDistance * 20)
 //        let mapRegion1 = MKCoordinateRegionMakeWithDistance(myUserLocation.coordinate, myDataModel.currentDisplayDistance * 2, myDataModel.currentDisplayDistance * 2)
@@ -118,7 +124,7 @@ class ViewController: UIViewController, MKMapViewDelegate, DataModelDelegate {
     
     @IBAction func SearchDistanceSliderMoved(_ sender: UISlider) {
         let value = SearchDistanceSlider.value
-        SearchRadiusText.text = String(format: "%.02f", value) + " mi."
+        SearchRadiusText.text = String(format: "%.01f", value) + " mi."
         myDataModel.currentSearchDistance = miles2meters(miles: Double(value))
         //myDataModel.currentSearchDistance = miles2meters(miles: Double(value))
         
@@ -138,7 +144,7 @@ class ViewController: UIViewController, MKMapViewDelegate, DataModelDelegate {
     @IBAction func touchDOWNInSearchDistanceSlider(_ sender: UISlider) {
         print ("Touch DOWN in slider.")
     }
-    
+
     @IBAction func touchUPInSearchDistanceSlider(_ sender: UISlider) {
         print ("Touch UP in slider.")
         if searchDistanceCircle != nil {myMapView.remove(searchDistanceCircle)}
@@ -472,6 +478,8 @@ class ViewController: UIViewController, MKMapViewDelegate, DataModelDelegate {
        // scale.legendAlignment = .trailing
         scale.legendAlignment = .leading
         scale.translatesAutoresizingMaskIntoConstraints = false
+        scale.scaleVisibility = .adaptive
+       // scale.scaleVisibility = .visible // SCALE ALWAYS VISIBLE
         view.addSubview(scale)
         
         NSLayoutConstraint.activate([button.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -120),
@@ -517,6 +525,45 @@ class ViewController: UIViewController, MKMapViewDelegate, DataModelDelegate {
         mapView.centerCoordinate = userLocation.location!.coordinate
         myUserLocation = myMapView.userLocation.location!
     }
+    
+     //MARK:----popoverPresentationController functions----
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let controller = segue.destination
+        if let searchRadiusPopOver = controller.popoverPresentationController{
+            //nv.delegate = self
+            searchRadiusPopOver.delegate = self
+        }
+    }
+    
+//    internal func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+//        return .none
+//    }
+    
+    func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) -> Bool {
+        return true
+    }
+    
+    func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
+        print ("Dismissed")
+    }
+    
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
+    }
+    
+//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) { // func for popover
+        //    if segue.identifier == "popoverViewSegue" {
+        //            let vc = segue.destinationViewController
+        //            vc.preferredContentSize = CGSize(width: 200, height: 300)
+        //            let controller = vc.popoverPresentationController
+        //            controller?.delegate = self
+        //            //you could set the following in your storyboard
+        //            controller?.sourceView = self.view
+        //            controller?.sourceRect = CGRect(x:CGRectGetMidX(self.view.bounds), y: CGRectGetMidY(self.view.bounds),width: 315,height: 230)
+        //            controller?.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
+        //        }
+        //    }
+        
     
     //MARK:----My utility functions----
     func registerAnnotationViewClasses() {
@@ -613,8 +660,7 @@ class ViewController: UIViewController, MKMapViewDelegate, DataModelDelegate {
         DisplayDistanceSlider.value = Float(initialDisplay/10)
         print ("initialDisplay is: \(initialDisplay)")
         SearchDistanceSlider.value = Float(initialSearch)
-        print ("SearchDistanceSlider.value: \(SearchDistanceSlider.value)")
-        //HeightText.text = String(initialDisplay)
+       print ("SearchDistanceSlider.value: \(SearchDistanceSlider.value)")
         SearchRadiusText.text = String(initialSearch) + " mi."
         theChosenRouteView.layer.cornerRadius = 10
         RouteDataView.layer.cornerRadius = 10
@@ -629,7 +675,7 @@ class ViewController: UIViewController, MKMapViewDelegate, DataModelDelegate {
     }
 }
 
-extension ViewController {
+extension shepMapViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -640,7 +686,6 @@ extension ViewController {
 class CustomDisplayUISlider : UISlider {
     
     override func trackRect(forBounds bounds: CGRect) -> CGRect {
-        
         //keeps original origin and width, changes height, you get the idea
         let customBounds = CGRect(origin: bounds.origin, size: CGSize(width: bounds.size.width, height: 4.0))
         super.trackRect(forBounds: customBounds)
@@ -649,7 +694,7 @@ class CustomDisplayUISlider : UISlider {
     
     //while we are here, why not change the image here as well? (bonus material)
     override func awakeFromNib() {
-        self.setThumbImage(UIImage(named: "displayDistanceThumb"), for: .normal)
+        self.setThumbImage(UIImage(named: "displayDistanceThumb2"), for: .normal)
         super.awakeFromNib()
     }
 }

@@ -19,6 +19,7 @@
 		A10B02961FE1784D004FA3B8 /* ShepDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10B02951FE1784D004FA3B8 /* ShepDataModel.swift */; };
 		A10C76AE1FE0518A009D11DD /* MyTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10C76AD1FE0518A009D11DD /* MyTableCell.swift */; };
 		A145675D1FBCE73D0016C1A2 /* ShepSingleAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A145675C1FBCE73D0016C1A2 /* ShepSingleAnnotation.swift */; };
+		A19B6E032020EA5F00AE2BBE /* searchRadiusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19B6E022020EA5F00AE2BBE /* searchRadiusViewController.swift */; };
 		A1A190921FB0C6AD00B030D8 /* commented_AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A190901FB0C6AD00B030D8 /* commented_AppDelegate.swift */; };
 		A1A190A51FB0D4BA00B030D8 /* ShepMap2_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A190A21FB0D4BA00B030D8 /* ShepMap2_VC.swift */; };
 		A1A190A61FB0D4BA00B030D8 /* ShepMap2DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A190A31FB0D4BA00B030D8 /* ShepMap2DataSource.swift */; };
@@ -43,6 +44,7 @@
 		A10B02951FE1784D004FA3B8 /* ShepDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShepDataModel.swift; sourceTree = "<group>"; };
 		A10C76AD1FE0518A009D11DD /* MyTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTableCell.swift; sourceTree = "<group>"; };
 		A145675C1FBCE73D0016C1A2 /* ShepSingleAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShepSingleAnnotation.swift; sourceTree = "<group>"; };
+		A19B6E022020EA5F00AE2BBE /* searchRadiusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = searchRadiusViewController.swift; sourceTree = "<group>"; };
 		A1A190901FB0C6AD00B030D8 /* commented_AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = commented_AppDelegate.swift; sourceTree = "<group>"; };
 		A1A190A21FB0D4BA00B030D8 /* ShepMap2_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShepMap2_VC.swift; sourceTree = "<group>"; };
 		A1A190A31FB0D4BA00B030D8 /* ShepMap2DataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShepMap2DataSource.swift; sourceTree = "<group>"; };
@@ -94,16 +96,17 @@
 			children = (
 				A10B02951FE1784D004FA3B8 /* ShepDataModel.swift */,
 				9F7038301EA835EB00DA5564 /* ShepViewController.swift */,
+				A19B6E022020EA5F00AE2BBE /* searchRadiusViewController.swift */,
 				A145675C1FBCE73D0016C1A2 /* ShepSingleAnnotation.swift */,
 				A1D66C201FD0995B0036EDAC /* SingleAnnotationView.swift */,
 				9F70382E1EA835EB00DA5564 /* AppDelegate.swift */,
 				A1A190901FB0C6AD00B030D8 /* commented_AppDelegate.swift */,
 				A1FFDE731FDCBD960048F1FD /* MyTableViewController.swift */,
 				A10C76AD1FE0518A009D11DD /* MyTableCell.swift */,
+				9F7038351EA835EB00DA5564 /* Assets.xcassets */,
 				9F7038321EA835EB00DA5564 /* Main.storyboard */,
 				9F7038371EA835EB00DA5564 /* LaunchScreen.storyboard */,
 				A1A9C9CF1FDEFF2E0019EDF5 /* Info.plist */,
-				9F7038351EA835EB00DA5564 /* Assets.xcassets */,
 				A1A190A81FB0D4DB00B030D8 /* ShepMaps files */,
 				9F60E9681EC1357B00CB9BEC /* BikeView.swift */,
 				9FC208D31EBA94A100DAD70E /* AppleSingleAnnotation.swift */,
@@ -210,6 +213,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A19B6E032020EA5F00AE2BBE /* searchRadiusViewController.swift in Sources */,
 				A1FFDE741FDCBD960048F1FD /* MyTableViewController.swift in Sources */,
 				A10B02961FE1784D004FA3B8 /* ShepDataModel.swift in Sources */,
 				9F7038311EA835EB00DA5564 /* ShepViewController.swift in Sources */,

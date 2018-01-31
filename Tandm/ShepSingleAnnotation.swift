@@ -67,6 +67,7 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
     var subtitle: String? {
         // takes the placemark.title string, which is really the address line, and cuts off the last 15 chars: ", United States"
         return String(myMapItem.placemark.title!.dropLast(_:15))
+        //return "hello"
     }
     
     var crowFliesDistance: Double = 0.0
