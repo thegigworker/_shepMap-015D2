@@ -25,6 +25,7 @@
 		A1A190A61FB0D4BA00B030D8 /* ShepMap2DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A190A31FB0D4BA00B030D8 /* ShepMap2DataSource.swift */; };
 		A1A190A71FB0D4BA00B030D8 /* ShepMap2SingleAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A190A41FB0D4BA00B030D8 /* ShepMap2SingleAnnotation.swift */; };
 		A1D66C211FD0995B0036EDAC /* SingleAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D66C201FD0995B0036EDAC /* SingleAnnotationView.swift */; };
+		A1DAD3762087C28400F9BC9C /* JUST_SOME_NOTES.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1DAD3752087C28400F9BC9C /* JUST_SOME_NOTES.swift */; };
 		A1FFDE741FDCBD960048F1FD /* MyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FFDE731FDCBD960048F1FD /* MyTableViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +52,7 @@
 		A1A190A41FB0D4BA00B030D8 /* ShepMap2SingleAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShepMap2SingleAnnotation.swift; sourceTree = "<group>"; };
 		A1A9C9CF1FDEFF2E0019EDF5 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A1D66C201FD0995B0036EDAC /* SingleAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleAnnotationView.swift; sourceTree = "<group>"; };
+		A1DAD3752087C28400F9BC9C /* JUST_SOME_NOTES.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JUST_SOME_NOTES.swift; sourceTree = "<group>"; };
 		A1FFDE731FDCBD960048F1FD /* MyTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -76,6 +78,17 @@
 		9F7038221EA835EB00DA5564 = {
 			isa = PBXGroup;
 			children = (
+				9F70382E1EA835EB00DA5564 /* AppDelegate.swift */,
+				A1A190901FB0C6AD00B030D8 /* commented_AppDelegate.swift */,
+				9F7038321EA835EB00DA5564 /* Main.storyboard */,
+				9F7038351EA835EB00DA5564 /* Assets.xcassets */,
+				9F7038371EA835EB00DA5564 /* LaunchScreen.storyboard */,
+				9FB957461ECF67850080CB0C /* Data.plist */,
+				A1DAD3752087C28400F9BC9C /* JUST_SOME_NOTES.swift */,
+				A1AC77262090B3E0008003E1 /* Model */,
+				A1AC77272090B3EE008003E1 /* Views */,
+				A1AC77282090B413008003E1 /* Controllers */,
+				A1A190A81FB0D4DB00B030D8 /* ShepMaps files */,
 				9F70382D1EA835EB00DA5564 /* Tandm */,
 				9F70382C1EA835EB00DA5564 /* Products */,
 				EE9754E817BAA3DAA2E42ACA /* Configuration */,
@@ -94,24 +107,10 @@
 		9F70382D1EA835EB00DA5564 /* Tandm */ = {
 			isa = PBXGroup;
 			children = (
-				A10B02951FE1784D004FA3B8 /* ShepDataModel.swift */,
-				9F7038301EA835EB00DA5564 /* ShepViewController.swift */,
-				A19B6E022020EA5F00AE2BBE /* searchRadiusViewController.swift */,
-				A145675C1FBCE73D0016C1A2 /* ShepSingleAnnotation.swift */,
-				A1D66C201FD0995B0036EDAC /* SingleAnnotationView.swift */,
-				9F70382E1EA835EB00DA5564 /* AppDelegate.swift */,
-				A1A190901FB0C6AD00B030D8 /* commented_AppDelegate.swift */,
-				A1FFDE731FDCBD960048F1FD /* MyTableViewController.swift */,
-				A10C76AD1FE0518A009D11DD /* MyTableCell.swift */,
-				9F7038351EA835EB00DA5564 /* Assets.xcassets */,
-				9F7038321EA835EB00DA5564 /* Main.storyboard */,
-				9F7038371EA835EB00DA5564 /* LaunchScreen.storyboard */,
 				A1A9C9CF1FDEFF2E0019EDF5 /* Info.plist */,
-				A1A190A81FB0D4DB00B030D8 /* ShepMaps files */,
 				9F60E9681EC1357B00CB9BEC /* BikeView.swift */,
 				9FC208D31EBA94A100DAD70E /* AppleSingleAnnotation.swift */,
 				9F1680731ECF57AC008B3B25 /* ClusterView.swift */,
-				9FB957461ECF67850080CB0C /* Data.plist */,
 			);
 			path = Tandm;
 			sourceTree = "<group>";
@@ -124,6 +123,34 @@
 				A1A190A41FB0D4BA00B030D8 /* ShepMap2SingleAnnotation.swift */,
 			);
 			path = "ShepMaps files";
+			sourceTree = "<group>";
+		};
+		A1AC77262090B3E0008003E1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A10B02951FE1784D004FA3B8 /* ShepDataModel.swift */,
+				A145675C1FBCE73D0016C1A2 /* ShepSingleAnnotation.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		A1AC77272090B3EE008003E1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A10C76AD1FE0518A009D11DD /* MyTableCell.swift */,
+				A1D66C201FD0995B0036EDAC /* SingleAnnotationView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A1AC77282090B413008003E1 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				9F7038301EA835EB00DA5564 /* ShepViewController.swift */,
+				A19B6E022020EA5F00AE2BBE /* searchRadiusViewController.swift */,
+				A1FFDE731FDCBD960048F1FD /* MyTableViewController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		EE9754E817BAA3DAA2E42ACA /* Configuration */ = {
@@ -214,6 +241,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A19B6E032020EA5F00AE2BBE /* searchRadiusViewController.swift in Sources */,
+				A1DAD3762087C28400F9BC9C /* JUST_SOME_NOTES.swift in Sources */,
 				A1FFDE741FDCBD960048F1FD /* MyTableViewController.swift in Sources */,
 				A10B02961FE1784D004FA3B8 /* ShepDataModel.swift in Sources */,
 				9F7038311EA835EB00DA5564 /* ShepViewController.swift in Sources */,
