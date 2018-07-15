@@ -13,7 +13,6 @@
 		9F7038311EA835EB00DA5564 /* ShepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7038301EA835EB00DA5564 /* ShepViewController.swift */; };
 		9F7038341EA835EB00DA5564 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F7038321EA835EB00DA5564 /* Main.storyboard */; };
 		9F7038361EA835EB00DA5564 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F7038351EA835EB00DA5564 /* Assets.xcassets */; };
-		9F7038391EA835EB00DA5564 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F7038371EA835EB00DA5564 /* LaunchScreen.storyboard */; };
 		9FB957471ECF67850080CB0C /* Data.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9FB957461ECF67850080CB0C /* Data.plist */; };
 		9FC208D41EBA94A100DAD70E /* AppleSingleAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC208D31EBA94A100DAD70E /* AppleSingleAnnotation.swift */; };
 		A10B02961FE1784D004FA3B8 /* ShepDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10B02951FE1784D004FA3B8 /* ShepDataModel.swift */; };
@@ -24,6 +23,7 @@
 		A1A190A51FB0D4BA00B030D8 /* ShepMap2_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A190A21FB0D4BA00B030D8 /* ShepMap2_VC.swift */; };
 		A1A190A61FB0D4BA00B030D8 /* ShepMap2DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A190A31FB0D4BA00B030D8 /* ShepMap2DataSource.swift */; };
 		A1A190A71FB0D4BA00B030D8 /* ShepMap2SingleAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A190A41FB0D4BA00B030D8 /* ShepMap2SingleAnnotation.swift */; };
+		A1AA93E620F61FEB00B7CAF1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1AA93E520F61FEB00B7CAF1 /* LaunchScreen.storyboard */; };
 		A1D66C211FD0995B0036EDAC /* SingleAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D66C201FD0995B0036EDAC /* SingleAnnotationView.swift */; };
 		A1DAD3762087C28400F9BC9C /* JUST_SOME_NOTES.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1DAD3752087C28400F9BC9C /* JUST_SOME_NOTES.swift */; };
 		A1FFDE741FDCBD960048F1FD /* MyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FFDE731FDCBD960048F1FD /* MyTableViewController.swift */; };
@@ -39,7 +39,6 @@
 		9F7038301EA835EB00DA5564 /* ShepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShepViewController.swift; sourceTree = "<group>"; };
 		9F7038331EA835EB00DA5564 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9F7038351EA835EB00DA5564 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		9F7038381EA835EB00DA5564 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9FB957461ECF67850080CB0C /* Data.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Data.plist; sourceTree = "<group>"; };
 		9FC208D31EBA94A100DAD70E /* AppleSingleAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSingleAnnotation.swift; sourceTree = "<group>"; };
 		A10B02951FE1784D004FA3B8 /* ShepDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShepDataModel.swift; sourceTree = "<group>"; };
@@ -51,6 +50,7 @@
 		A1A190A31FB0D4BA00B030D8 /* ShepMap2DataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShepMap2DataSource.swift; sourceTree = "<group>"; };
 		A1A190A41FB0D4BA00B030D8 /* ShepMap2SingleAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShepMap2SingleAnnotation.swift; sourceTree = "<group>"; };
 		A1A9C9CF1FDEFF2E0019EDF5 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A1AA93E520F61FEB00B7CAF1 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A1D66C201FD0995B0036EDAC /* SingleAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleAnnotationView.swift; sourceTree = "<group>"; };
 		A1DAD3752087C28400F9BC9C /* JUST_SOME_NOTES.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JUST_SOME_NOTES.swift; sourceTree = "<group>"; };
 		A1FFDE731FDCBD960048F1FD /* MyTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTableViewController.swift; sourceTree = "<group>"; };
@@ -81,8 +81,8 @@
 				9F70382E1EA835EB00DA5564 /* AppDelegate.swift */,
 				A1A190901FB0C6AD00B030D8 /* commented_AppDelegate.swift */,
 				9F7038321EA835EB00DA5564 /* Main.storyboard */,
+				A1AA93E520F61FEB00B7CAF1 /* LaunchScreen.storyboard */,
 				9F7038351EA835EB00DA5564 /* Assets.xcassets */,
-				9F7038371EA835EB00DA5564 /* LaunchScreen.storyboard */,
 				9FB957461ECF67850080CB0C /* Data.plist */,
 				A1DAD3752087C28400F9BC9C /* JUST_SOME_NOTES.swift */,
 				A1AC77262090B3E0008003E1 /* Model */,
@@ -188,7 +188,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0900;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = Apple;
 				TargetAttributes = {
 					9F70382A1EA835EB00DA5564 = {
@@ -226,8 +226,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9F7038391EA835EB00DA5564 /* LaunchScreen.storyboard in Resources */,
 				9FB957471ECF67850080CB0C /* Data.plist in Resources */,
+				A1AA93E620F61FEB00B7CAF1 /* LaunchScreen.storyboard in Resources */,
 				9F7038361EA835EB00DA5564 /* Assets.xcassets in Resources */,
 				9F7038341EA835EB00DA5564 /* Main.storyboard in Resources */,
 			);
@@ -270,14 +270,6 @@
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		9F7038371EA835EB00DA5564 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				9F7038381EA835EB00DA5564 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -296,6 +288,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -303,6 +296,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -353,6 +347,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -360,6 +355,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
