@@ -10,7 +10,6 @@
 		9F7038311EA835EB00DA5564 /* ShepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7038301EA835EB00DA5564 /* ShepViewController.swift */; };
 		9F7038341EA835EB00DA5564 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F7038321EA835EB00DA5564 /* Main.storyboard */; };
 		9F7038361EA835EB00DA5564 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F7038351EA835EB00DA5564 /* Assets.xcassets */; };
-		9FB957471ECF67850080CB0C /* Data.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9FB957461ECF67850080CB0C /* Data.plist */; };
 		A10B02961FE1784D004FA3B8 /* ShepDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10B02951FE1784D004FA3B8 /* ShepDataModel.swift */; };
 		A10C76AE1FE0518A009D11DD /* MyTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10C76AD1FE0518A009D11DD /* MyTableCell.swift */; };
 		A145675D1FBCE73D0016C1A2 /* ShepSingleAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A145675C1FBCE73D0016C1A2 /* ShepSingleAnnotation.swift */; };
@@ -30,7 +29,6 @@
 		9F7038301EA835EB00DA5564 /* ShepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShepViewController.swift; sourceTree = "<group>"; };
 		9F7038331EA835EB00DA5564 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9F7038351EA835EB00DA5564 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		9FB957461ECF67850080CB0C /* Data.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Data.plist; sourceTree = "<group>"; };
 		A10B02951FE1784D004FA3B8 /* ShepDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShepDataModel.swift; sourceTree = "<group>"; };
 		A10C76AD1FE0518A009D11DD /* MyTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTableCell.swift; sourceTree = "<group>"; };
 		A145675C1FBCE73D0016C1A2 /* ShepSingleAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShepSingleAnnotation.swift; sourceTree = "<group>"; };
@@ -85,7 +83,6 @@
 				9F7038351EA835EB00DA5564 /* Assets.xcassets */,
 				9F7038321EA835EB00DA5564 /* Main.storyboard */,
 				A1AA93E520F61FEB00B7CAF1 /* LaunchScreen.storyboard */,
-				9FB957461ECF67850080CB0C /* Data.plist */,
 				A1A9C9CF1FDEFF2E0019EDF5 /* Info.plist */,
 				A1DAD3752087C28400F9BC9C /* JUST_SOME_NOTES.swift */,
 				A145A37C21002AA000264934 /* shepMap_015D MAPSCREEN */,
@@ -155,10 +152,10 @@
 		A1D2036620FF9CA90089269B /* _shep TableView */ = {
 			isa = PBXGroup;
 			children = (
-				A1D2036720FF9CA90089269B /* Model */,
 				A1D2036D20FF9CA90089269B /* xtvMain.storyboard */,
-				A1D2036E20FF9CA90089269B /* Controllers */,
+				A1D2036720FF9CA90089269B /* Model */,
 				A1D2037520FF9CA90089269B /* Views */,
+				A1D2036E20FF9CA90089269B /* Controllers */,
 			);
 			path = "_shep TableView";
 			sourceTree = "<group>";
@@ -276,7 +273,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9FB957471ECF67850080CB0C /* Data.plist in Resources */,
 				A1AA93E620F61FEB00B7CAF1 /* LaunchScreen.storyboard in Resources */,
 				9F7038361EA835EB00DA5564 /* Assets.xcassets in Resources */,
 				9F7038341EA835EB00DA5564 /* Main.storyboard in Resources */,
