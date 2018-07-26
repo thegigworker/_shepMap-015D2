@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Charts-->
+        <scene sceneID="uug-Em-n1A">
+            <objects>
+                <viewController storyboardIdentifier="PageViewUIView" modalTransitionStyle="flipHorizontal" useStoryboardIdentifierAsRestorationIdentifier="YES" id="TmY-8d-iPY" customClass="myPageViewController" customModule="_shepMap_015c" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="6cX-ch-GO1"/>
+                        <viewControllerLayoutGuide type="bottom" id="Ajb-VU-PNu"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="5N5-Y0-gL2">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eCM-1b-PMA">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <connections>
+                                    <segue destination="z2m-Xw-UlC" kind="embed" id="5Es-XO-H0C"/>
+                                </connections>
+                            </containerView>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="4" translatesAutoresizingMaskIntoConstraints="NO" id="YHh-Hd-94K">
+                                <rect key="frame" x="160" y="570" width="75" height="71"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="75" id="4FE-nQ-MOH"/>
+                                </constraints>
+                                <color key="pageIndicatorTintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="currentPageIndicatorTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </pageControl>
+                        </subviews>
+                        <color key="backgroundColor" red="0.66666668650000005" green="0.66666668650000005" blue="0.66666668650000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="eCM-1b-PMA" secondAttribute="trailing" id="Lbm-Ij-TNU"/>
+                            <constraint firstItem="eCM-1b-PMA" firstAttribute="bottom" secondItem="Ajb-VU-PNu" secondAttribute="top" id="NDF-bO-PGX"/>
+                            <constraint firstItem="YHh-Hd-94K" firstAttribute="top" secondItem="6cX-ch-GO1" secondAttribute="bottom" constant="550" id="NoF-Nb-Npt"/>
+                            <constraint firstItem="YHh-Hd-94K" firstAttribute="leading" secondItem="5N5-Y0-gL2" secondAttribute="leading" constant="160" id="bhK-6c-hxL"/>
+                            <constraint firstItem="Ajb-VU-PNu" firstAttribute="top" secondItem="YHh-Hd-94K" secondAttribute="bottom" constant="26" id="qod-ZK-gvU"/>
+                            <constraint firstItem="eCM-1b-PMA" firstAttribute="leading" secondItem="5N5-Y0-gL2" secondAttribute="leading" id="vAN-yL-l8V"/>
+                            <constraint firstItem="eCM-1b-PMA" firstAttribute="top" secondItem="6cX-ch-GO1" secondAttribute="bottom" id="zRp-ZX-MV7"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Ke1-ll-CrX"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Charts" image="bar-chart-filled-40" id="QOc-JJ-X8C"/>
+                    <connections>
+                        <outlet property="containerView" destination="eCM-1b-PMA" id="19T-bf-Ydv"/>
+                        <outlet property="pageControl" destination="YHh-Hd-94K" id="eBV-db-RbR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NzJ-0M-Vqn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-742" y="1557"/>
+        </scene>
+        <!--Charts-->
+        <scene sceneID="9JA-gV-wj5">
+            <objects>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" modalTransitionStyle="flipHorizontal" useStoryboardIdentifierAsRestorationIdentifier="YES" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="none" id="z2m-Xw-UlC" customClass="myCurlingPageViewController" customModule="_shepMap_015c" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Charts" image="chart 1" selectedImage="bar-chart-filled-40" id="6QF-U7-yzo"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                </pageViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rNn-Zm-mNU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="84" y="1644"/>
+        </scene>
+        <!--Chart1VC-->
+        <scene sceneID="2xz-eK-wTz">
+            <objects>
+                <viewController storyboardIdentifier="Chart1ViewController" title="Chart1VC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="obV-Gg-gdP" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="S5E-p7-Ibt"/>
+                        <viewControllerLayoutGuide type="bottom" id="hgK-xt-dDB"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ZWc-8S-DNh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="chart 1" translatesAutoresizingMaskIntoConstraints="NO" id="l7d-XE-fqr">
+                                <rect key="frame" x="18" y="175" width="339" height="289"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="l7d-XE-fqr" secondAttribute="trailing" constant="4" id="2hR-WP-dW3"/>
+                            <constraint firstItem="hgK-xt-dDB" firstAttribute="top" secondItem="l7d-XE-fqr" secondAttribute="bottom" constant="174" id="ayk-jp-F4d"/>
+                            <constraint firstItem="l7d-XE-fqr" firstAttribute="top" secondItem="S5E-p7-Ibt" secondAttribute="bottom" constant="117" id="bWU-2W-ACP"/>
+                            <constraint firstItem="l7d-XE-fqr" firstAttribute="leading" secondItem="ZWc-8S-DNh" secondAttribute="leadingMargin" id="swC-N5-l6S"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="O9h-vG-8ec"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OqJ-ct-bXV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1430" y="2370"/>
+        </scene>
+        <!--Chart3VC-->
+        <scene sceneID="VPz-tT-OdG">
+            <objects>
+                <viewController storyboardIdentifier="Chart3ViewController" title="Chart3VC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="5z8-Yh-VWE" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="9Cz-lk-eRP"/>
+                        <viewControllerLayoutGuide type="bottom" id="xWt-LX-uGk"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="dDS-vd-gB9">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="chart 2" translatesAutoresizingMaskIntoConstraints="NO" id="cko-BZ-BgY">
+                                <rect key="frame" x="0.0" y="176" width="375" height="278"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="cko-BZ-BgY" firstAttribute="top" secondItem="9Cz-lk-eRP" secondAttribute="bottom" constant="174" id="EfR-s6-aw2"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="cko-BZ-BgY" secondAttribute="trailing" constant="5" id="KQX-bB-i18"/>
+                            <constraint firstItem="xWt-LX-uGk" firstAttribute="top" secondItem="cko-BZ-BgY" secondAttribute="bottom" constant="195" id="Q3u-rW-17u"/>
+                            <constraint firstItem="cko-BZ-BgY" firstAttribute="leading" secondItem="dDS-vd-gB9" secondAttribute="leadingMargin" constant="4" id="Zbh-xR-ZPo"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="H7k-Tf-K8D"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="l8H-ag-p3h" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="98" y="2370"/>
+        </scene>
+        <!--Chart2VC-->
+        <scene sceneID="K26-Ww-jBp">
+            <objects>
+                <viewController storyboardIdentifier="Chart2ViewController" title="Chart2VC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="alD-5k-DHD" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Nec-77-4hX"/>
+                        <viewControllerLayoutGuide type="bottom" id="g1p-O7-yy5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="RbZ-Qq-nEc">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chart 4" translatesAutoresizingMaskIntoConstraints="NO" id="6eH-8v-rMm">
+                                <rect key="frame" x="16" y="157" width="343" height="314"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="g1p-O7-yy5" firstAttribute="top" secondItem="6eH-8v-rMm" secondAttribute="bottom" constant="196" id="1ui-ZF-VAV"/>
+                            <constraint firstItem="6eH-8v-rMm" firstAttribute="trailing" secondItem="RbZ-Qq-nEc" secondAttribute="trailingMargin" id="eq8-Wk-FxQ"/>
+                            <constraint firstItem="6eH-8v-rMm" firstAttribute="leading" secondItem="RbZ-Qq-nEc" secondAttribute="leadingMargin" id="f8j-ed-Ts5"/>
+                            <constraint firstItem="6eH-8v-rMm" firstAttribute="top" secondItem="Nec-77-4hX" secondAttribute="bottom" constant="137" id="h4m-J7-K8t"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="vvq-QT-g7k"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Bde-zv-HSX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-610" y="2370"/>
+        </scene>
+        <!--Chart4VC-->
+        <scene sceneID="tb8-fP-aKD">
+            <objects>
+                <viewController storyboardIdentifier="Chart4ViewController" title="Chart4VC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="2jZ-vN-6Xn" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="AgA-Im-gVd"/>
+                        <viewControllerLayoutGuide type="bottom" id="x5A-9L-l9G"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="jpE-a9-1Fd">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="pie chart 1" translatesAutoresizingMaskIntoConstraints="NO" id="jx0-4j-ut4">
+                                <rect key="frame" x="56" y="179" width="303" height="268"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="jx0-4j-ut4" firstAttribute="trailing" secondItem="jpE-a9-1Fd" secondAttribute="trailingMargin" id="38E-VE-EJv"/>
+                            <constraint firstItem="jx0-4j-ut4" firstAttribute="leading" secondItem="jpE-a9-1Fd" secondAttribute="leadingMargin" id="cv5-cc-mbw"/>
+                            <constraint firstItem="jx0-4j-ut4" firstAttribute="top" secondItem="AgA-Im-gVd" secondAttribute="bottom" constant="131" id="uRp-be-gGY"/>
+                            <constraint firstItem="x5A-9L-l9G" firstAttribute="top" secondItem="jx0-4j-ut4" secondAttribute="bottom" constant="202" id="uhD-5G-50o"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="tCv-be-38v"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="q5n-T0-duQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="834" y="2370"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="bar-chart-filled-40" width="20" height="20"/>
+        <image name="chart 1" width="964" height="724"/>
+        <image name="chart 2" width="1306" height="716"/>
+        <image name="chart 4" width="700" height="358"/>
+        <image name="pie chart 1" width="520" height="406"/>
+    </resources>
+</document>
