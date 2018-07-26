@@ -27,7 +27,7 @@ import UIKit
 //In the Identity inspector, find the field labeled Class, and select shepProductsTVController.
 ///////////////////
 
-class ShepTVController: UITableViewController, UIPopoverPresentationControllerDelegate {
+class myTableViewController: UITableViewController, UIPopoverPresentationControllerDelegate {
     
     //MARK: Properties
     
@@ -210,7 +210,7 @@ class ShepTVController: UITableViewController, UIPopoverPresentationControllerDe
         let view = cell.contentView
         view.layer.opacity = 0.4
         print ("TRiGGERING ANIMATION")
-        view.layer.transform = ShepTVController.cellLoadTransform(cell.layer)
+        view.layer.transform = myTableViewController.cellLoadTransform(cell.layer)
         UIView.animate(withDuration: 0.5, animations: {
             view.layer.transform = CATransform3DIdentity
             view.layer.opacity = 1
@@ -231,7 +231,7 @@ class ShepTVController: UITableViewController, UIPopoverPresentationControllerDe
         
         // WAY TO SET PROPERTIES RIGHT HERE: headerCell.lblCategory.text =  BigKahunaSectionedArray[section].sectionName
         let labelText = BigKahunaSectionedArray[section].sectionName    // sectionTitles[section]
-        headerInSectionCell.configureCellWith(labelText: "---  " + labelText + "  ---") // (labelText: String, image: UIImage) etc.
+        headerInSectionCell.configureCellWith(labelText: "---   " + labelText + "   ---") // (labelText: String, image: UIImage) etc.
         return headerInSectionCell
         
         // CREATE HEADER CELL VIA CODE
@@ -296,7 +296,7 @@ class ShepTVController: UITableViewController, UIPopoverPresentationControllerDe
                     productDetailVC.product = productAtIndexPath(indexPath)
                 }
             case "Show Editable Detail":
-                let editTableVC = segue.destination as! shepEditableDetailVC_2
+                let editTableVC = segue.destination as! shepEditableDetailVC
                 if let indexPath = self.tableView.indexPath(for: sender as! UITableViewCell) {
                     editTableVC.shepProductDetail = productAtIndexPath(indexPath)
                 }

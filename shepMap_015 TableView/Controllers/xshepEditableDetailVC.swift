@@ -1,5 +1,5 @@
 //
-//  ProductDetailViewController.swift
+//  EditTableViewController.swift
 //
 //  Created by Duc Tran on 3/30/15.
 //  Copyright (c) 2015 Duc Tran. All rights reserved.
@@ -7,52 +7,26 @@
 
 import UIKit
 
-class shepSecondDetailVC: UITableViewController, UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    // Model
-    var product: ShepSingleXYZ?
-    var shepProductDetail: ShepSingleXYZ?
+class xshepEditableDetailVC: UITableViewController, UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
-    @IBOutlet weak var productImageView: UIImageView!
-    @IBOutlet weak var lblCategory: UILabel!
-    @IBOutlet weak var lblTitle: UILabel!
-    @IBOutlet weak var lblDistance: UILabel!
-    @IBOutlet weak var lblDollars: UILabel!
-    @IBOutlet weak var productDescriptionTextView: UITextView!
-    @IBOutlet weak var lblStreetAddress: UILabel!
+    // Model:
+    var shepProductDetail: ShepSingleXYZ?
     
+    @IBOutlet weak var productImageView: UIImageView!
+    @IBOutlet weak var productTitleLabel: UITextField!
+    @IBOutlet weak var productDescriptionTextView: UITextView!
+
+    // MARK: - VC Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Detail View"
-        
-        productImageView.image = product?.image
-        
         productImageView.image = shepProductDetail?.image
-        lblTitle.text = shepProductDetail?.title
+        productTitleLabel.text = shepProductDetail?.title
         productDescriptionTextView.text = shepProductDetail?.description
-        
     }
     
-    
-    ///////
-    
-    // Model:
-//    var shepProductDetail: ShepSingleXYZ?
-    
-//    @IBOutlet weak var productImageView: UIImageView!
-//    @IBOutlet weak var productTitleLabel: UITextField!
-//    @IBOutlet weak var productDescriptionTextView: UITextView!
-    
-    // MARK: - VC Lifecycle
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        title = "Editable Details"
-//        productImageView.image = shepProductDetail?.image
-//        productTitleLabel.text = shepProductDetail?.title
-//        productDescriptionTextView.text = shepProductDetail?.description
-//    }
-    
     override func viewWillDisappear(_ animated: Bool) {
-        //shepProductDetail?.title = productTitleLabel.text!
+        shepProductDetail?.title = productTitleLabel.text!
         shepProductDetail?.description = productDescriptionTextView.text
         shepProductDetail?.image = productImageView.image!
     }
@@ -65,7 +39,7 @@ class shepSecondDetailVC: UITableViewController, UITextFieldDelegate, UITextView
     }
     
     // MARK: - UIScrollViewDelegate (is a subclass of UITableViewController)
-    override func scrollViewWillBeginDragging(_ scrolcView: UIScrollView) {
+    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         // resigns keyboard whenever view scrolls
         productDescriptionTextView.resignFirstResponder()
     }
@@ -98,5 +72,33 @@ class shepSecondDetailVC: UITableViewController, UITextFieldDelegate, UITextView
         dismiss(animated: true, completion: nil)
     }
     
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

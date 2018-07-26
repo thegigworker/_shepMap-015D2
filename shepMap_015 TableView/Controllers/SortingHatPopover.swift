@@ -30,7 +30,7 @@ class sortingHatPopover: UIViewController, UIPopoverPresentationControllerDelega
     
     //let myDataModel = shepDataModel()
     
-    var myShepTVController = ShepTVController()
+    var myShepTVController = myTableViewController()
     
     @IBOutlet weak var btnDrivingDistance: UIButton!
     @IBOutlet weak var checkmark1: UIImageView!

@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -13,42 +12,42 @@
         <!--shepTest TVC-->
         <scene sceneID="YEn-DC-GsO">
             <objects>
-                <tableViewController id="WR6-dm-NuN" userLabel="shepTest TVC" customClass="ShepTVController" customModule="_shepMap_015c" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="WR6-dm-NuN" userLabel="shepTest TVC" customClass="myTableViewController" customModule="shepMapApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="106" sectionHeaderHeight="13" sectionFooterHeight="13" id="ea7-3y-PQr">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" id="ckY-BQ-mIt" userLabel="TV headerCell">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="36"/>
+                        <view key="tableHeaderView" alpha="0.84999999999999998" contentMode="scaleToFill" id="ckY-BQ-mIt" userLabel="TV headerCell">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="53"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="SHEP TABLEVIEW HEADER" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qFT-8G-B94">
-                                    <rect key="frame" x="45" y="2" width="285" height="30"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="SHEP'S TABLEVIEW HEADER" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qFT-8G-B94">
+                                    <rect key="frame" x="45" y="11" width="285" height="30"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
-                            <color key="backgroundColor" red="0.0" green="0.56031829119999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" red="0.0" green="0.98106676339999999" blue="0.57369142770000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </view>
-                        <view key="tableFooterView" contentMode="scaleToFill" id="la4-kY-HFe" userLabel="TV footerCell">
-                            <rect key="frame" x="0.0" y="290" width="375" height="36"/>
+                        <view key="tableFooterView" alpha="0.84999999999999998" contentMode="scaleToFill" id="la4-kY-HFe" userLabel="TV footerCell">
+                            <rect key="frame" x="0.0" y="307" width="375" height="53"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="SHEP TABLEVIEW FOOTER" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mBh-Xb-fgi">
-                                    <rect key="frame" x="51" y="3" width="273" height="31"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="SHEP'S TABLEVIEW FOOTER" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mBh-Xb-fgi">
+                                    <rect key="frame" x="51" y="11" width="273" height="31"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
                             <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </view>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="shepOrigProductTVCell" rowHeight="98" id="r0w-Ou-Phf" customClass="shepOrigProductTVCell" customModule="_shepMap_015c" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="49" width="375" height="98"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="shepOrigProductTVCell" rowHeight="98" id="r0w-Ou-Phf" customClass="shepOrigProductTVCell" customModule="shepMapApp" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="66" width="375" height="98"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="r0w-Ou-Phf" id="L0I-mU-Akp">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="97.5"/>
@@ -92,8 +91,8 @@
                                     <outlet property="productTitleLabel" destination="SXb-x4-mn0" id="4A9-3K-eJ2"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="top" selectionStyle="default" indentationWidth="10" reuseIdentifier="ShepTableViewCell" rowHeight="107" id="rSo-ch-43s" userLabel="shepTableViewCell" customClass="ShepTableViewCell" customModule="_shepMap_015c" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="147" width="375" height="107"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="top" selectionStyle="default" indentationWidth="10" reuseIdentifier="ShepTableViewCell" rowHeight="107" id="rSo-ch-43s" userLabel="shepTableViewCell" customClass="ShepTableViewCell" customModule="shepMapApp" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="164" width="375" height="107"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rSo-ch-43s" id="hSH-uk-yqr">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="106.5"/>
@@ -160,25 +159,24 @@
                                     <segue destination="Wfm-d3-MlK" kind="show" identifier="Show Editable Detail" id="KVo-Pn-rbj"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="HeaderInSectionTVCell" rowHeight="36" id="De3-V3-fZj" userLabel="headerInSectionTVCell" customClass="HeaderInSectionTVCell" customModule="_shepMap_015c" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="254" width="375" height="36"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="HeaderInSectionTVCell" rowHeight="36" id="De3-V3-fZj" userLabel="headerInSectionTVCell" customClass="HeaderInSectionTVCell" customModule="shepMapApp" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="271" width="375" height="36"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="De3-V3-fZj" id="8fr-mA-Ozh">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="35.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Category" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vqK-SG-hEY" userLabel="lblCategory">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Category" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vqK-SG-hEY" userLabel="lblCategory">
                                             <rect key="frame" x="0.0" y="5" width="375" height="25"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <color key="backgroundColor" red="1" green="0.57810515169999999" blue="0.0" alpha="0.70208154970000003" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="backgroundColor" red="0.77016871509999996" green="0.602715373" blue="0.57933212649999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
-                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="lblCategory" destination="vqK-SG-hEY" id="ueQ-5B-5u9"/>
                                 </connections>
@@ -205,10 +203,10 @@
             </objects>
             <point key="canvasLocation" x="738" y="83"/>
         </scene>
-        <!--Shep Editable DetailVC2-->
+        <!--Shep Editable DetailVC-->
         <scene sceneID="OfI-lm-biL">
             <objects>
-                <tableViewController id="Wfm-d3-MlK" customClass="shepEditableDetailVC_2" customModule="_shepMap_015c" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="Wfm-d3-MlK" customClass="shepEditableDetailVC" customModule="shepMapApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="dWY-yn-cRj">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -274,27 +272,27 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="defaultPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="2ZP-dy-iS4" userLabel="The Image View">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="default" translatesAutoresizingMaskIntoConstraints="NO" id="2ZP-dy-iS4" userLabel="The Image View">
                                     <rect key="frame" x="11" y="31" width="89" height="89"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </imageView>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="defaultPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="DNd-ds-oyT" userLabel="The Image View">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="default" translatesAutoresizingMaskIntoConstraints="NO" id="DNd-ds-oyT" userLabel="The Image View">
                                     <rect key="frame" x="11" y="489" width="89" height="89"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </imageView>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="defaultPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="uE8-qg-h1Z" userLabel="The Image View">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="default" translatesAutoresizingMaskIntoConstraints="NO" id="uE8-qg-h1Z" userLabel="The Image View">
                                     <rect key="frame" x="276" y="486" width="89" height="89"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </imageView>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="defaultPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="OYO-Bw-D6I" userLabel="The Image View">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="default" translatesAutoresizingMaskIntoConstraints="NO" id="OYO-Bw-D6I" userLabel="The Image View">
                                     <rect key="frame" x="276" y="26" width="89" height="89"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </imageView>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="defaultPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="dUv-Pc-8EU" userLabel="The Image View">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="default" translatesAutoresizingMaskIntoConstraints="NO" id="dUv-Pc-8EU" userLabel="The Image View">
                                     <rect key="frame" x="143" y="10" width="89" height="89"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </imageView>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="defaultPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="KUd-OK-Qzf" userLabel="The Image View">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="default" translatesAutoresizingMaskIntoConstraints="NO" id="KUd-OK-Qzf" userLabel="The Image View">
                                     <rect key="frame" x="145" y="508" width="89" height="89"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </imageView>
@@ -412,7 +410,7 @@
         <!--Sort PopOver-->
         <scene sceneID="yH4-6B-lwd">
             <objects>
-                <viewController title="Sort PopOver" id="vzd-SC-fK0" userLabel="Sort PopOver" customClass="sortingHatPopover" customModule="_shepMap_015c" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Sort PopOver" id="vzd-SC-fK0" userLabel="Sort PopOver" customClass="sortingHatPopover" customModule="shepMapApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="oly-7V-1DW"/>
                         <viewControllerLayoutGuide type="bottom" id="OIk-OK-Ldp"/>
@@ -528,7 +526,7 @@
     <resources>
         <image name="apple-watch" width="1000" height="563"/>
         <image name="checkmark" width="225" height="225"/>
-        <image name="defaultPhoto" width="540" height="540"/>
+        <image name="default" width="499" height="500"/>
         <image name="list" width="30" height="30"/>
         <image name="sort_icon" width="33" height="33"/>
     </resources>
