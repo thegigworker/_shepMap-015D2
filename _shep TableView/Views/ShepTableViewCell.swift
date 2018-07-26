@@ -25,13 +25,13 @@ import UIKit
 //You designed your custom rating control class to be interactive, but you don’t want users to be able to change the rating from the cell view. Instead, tapping anywhere in the cell should select the cell. So it’s important to disable that interaction when it’s in this context.
 //////////////////////
 
-func shepCurrencyFromDouble(shepNumber : Double) -> String  {
-    let buckaroos = shepNumber as NSNumber
-    let formatter = NumberFormatter()
-    formatter.numberStyle = .currency
-    // formatter.locale = NSLocale.currentLocale() // This is the default
-    return formatter.string(from: buckaroos)!
-}
+//func shepCurrencyFromDouble(shepNumber : Double) -> String  {
+//    let buckaroos = shepNumber as NSNumber
+//    let formatter = NumberFormatter()
+//    formatter.numberStyle = .currency
+//    // formatter.locale = NSLocale.currentLocale() // This is the default
+//    return formatter.string(from: buckaroos)!
+//}
 
 class shepOrigProductTVCell: UITableViewCell {
     

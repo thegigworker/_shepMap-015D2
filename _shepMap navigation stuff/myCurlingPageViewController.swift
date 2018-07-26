@@ -61,7 +61,7 @@ class myCurlingPageViewController: UIPageViewController {
     }
     
     fileprivate func newColoredViewController(_ color: String) -> UIViewController {
-        return UIStoryboard(name: "Main", bundle: nil) .
+        return UIStoryboard(name: "PageViewCharts", bundle: nil) .
             instantiateViewController(withIdentifier: "\(color)ViewController")
     }
     

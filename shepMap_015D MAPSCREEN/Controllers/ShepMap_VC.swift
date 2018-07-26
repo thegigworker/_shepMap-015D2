@@ -283,17 +283,17 @@ class shepMapViewController: UIViewController, MKMapViewDelegate, DataModelDeleg
             self.btnTwirlMenu.transform = CGAffineTransform(rotationAngle: 0)
             
             self.btnTarget.alpha = 0.8
-            self.btnTarget.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: -50, y: -125))
+            self.btnTarget.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: -100, y: -170))
             self.btnPark.alpha = 0.8
-            self.btnPark.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: -100, y: -70))
+            self.btnPark.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: -80, y: -100))
             self.btnPizza.alpha = 0.8
-            self.btnPizza.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: 80, y: -60))
+            self.btnPizza.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: 80, y: -110))
             self.btnGas.alpha = 0.8
-            self.btnGas.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: 100, y: -140))
+            self.btnGas.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: 100, y: -180))
             self.btnPub.alpha = 0.8
-            self.btnPub.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: 20, y: -200))
+            self.btnPub.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: 80, y: -250))
             self.btnMcD.alpha = 0.8
-            self.btnMcD.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: -115, y: -190))
+            self.btnMcD.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: -85, y: -260))
             self.twirlMenuIsUntwirled = true
         }, completion: nil)
         } else {
@@ -482,9 +482,9 @@ class shepMapViewController: UIViewController, MKMapViewDelegate, DataModelDeleg
        // scale.scaleVisibility = .visible // SCALE ALWAYS VISIBLE
         view.addSubview(scale)
         
-        NSLayoutConstraint.activate([button.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -120),
+        NSLayoutConstraint.activate([button.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -140),
                                      button.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -05),
-                                     scale.trailingAnchor.constraint(equalTo: button.leadingAnchor, constant: -150),
+                                     scale.trailingAnchor.constraint(equalTo: button.leadingAnchor, constant: -115),
                                      scale.centerYAnchor.constraint(equalTo: button.centerYAnchor)])
     }
     
