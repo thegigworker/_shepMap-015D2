@@ -6,9 +6,6 @@ import Foundation
 import MapKit
 
 import Contacts
-// This adds the Contacts framework, which contains dictionary key constants such as CNPostalAddressStreetKey,
-// for when you need to set the address, city or state fields of a location.
-
 import UIKit
 
 public enum shepProductRating {
@@ -30,6 +27,7 @@ class ShepSingleXYZ {
     var foodType: String
     var distance: Double
     var dollar: Double
+    let shepDollarValue: Double = 0.0
     
     init(titled: String, description: String, imageName: String, jobType: String, foodType: String, distance: Double, dollar: Double) {
         self.title = titled
@@ -84,90 +82,6 @@ class ShepSingleXYZ {
 //    //        }
 //    //// THIS STUFF IS CODE FROM ANOTHER DEMO RE INITIALIZING FOR A TABLEVIEWS
 //
-//
-//    //MARK:----My Properties----
-//    let myDataModel = shepDataModel()
-//    let origTitle: String?
-//    let coordinate: CLLocationCoordinate2D
-    let shepDollarValue: Double = 0.0
-//    let shepStringData: String
-//    var myMapItem: MKMapItem
-//    var currentLinkedRoute: MKRoute
-//
-//    //   The MKAnnotation protocol requires the coordinate property. If you want your annotation view to display a title and subtitle when the user taps a pin, your class also needs properties named title and subtitle.
-//    var title: String? {
-//        let temp: String?
-//        temp = self.origTitle
-//        return shepStringData + " -- " + temp!
-//    }
-//
-//    var subtitle: String? {
-//        // takes the placemark.title string, which is really the address line, and cuts off the last 15 chars: ", United States"
-//        return String(myMapItem.placemark.title!.dropLast(_:15))
-//    }
-//
-//    var crowFliesDistance: Double = 0.0
-//
-//    var routeDrivingDistance: Double {
-//        let drivingDistance = meters2miles(meters: currentLinkedRoute.distance)
-//        return drivingDistance // drivingDistance in miles
-//    }
-//
-//    var goldRouteScore: Double {
-//        let drivingDistance = meters2miles(meters: currentLinkedRoute.distance)
-//        let routeExpense = drivingDistance * Double(myDataModel.centsPerMileExpense)/100
-//        let mytheChosenRouteScore = shepDollarValue - routeExpense
-//        return mytheChosenRouteScore
-//    }
-//
-//    var drivingTime: Double {
-//        let drivingTime = currentLinkedRoute.expectedTravelTime / 60
-//        return drivingTime // drivingDistance in miles
-//    }
-//
-//
-//    /*          The if let statement takes an optional variable. If it is nil, the else block or nothing is executed. If it has a value, the value is assigned to a different variable as a non-optional type.
-//
-//     So, the following code would output the value of score1 or "No" if there is none:
-//
-//     if let score1Unwrapped = score1
-//     { print(score1Unwrapped)
-//     } else {print("No")}
-//
-//     A shorter version of the same would be:
-//     print(score1 ?? "No")
-//
-//     In your case, where you don't actually use the value stored in the optional variable, you can also check if the value is nil:
-//
-//     if score1 != nil {
-//     ...
-//     }
-//     */
-//
-//
-//    //    let searchResultCoordinates = item.placemark.coordinate
-//    //    let searchResultLocation = CLLocation(latitude: searchResultCoordinates.latitude, longitude: searchResultCoordinates.longitude)
-//    //    let mapItemDistance = myUserLocation.distance(from: searchResultLocation) // result is in meters
-//    //    //let distanceInMiles = meters2miles(meters: mapItemDistance)
-//
-//    //    let crowFliesDistance = sourceLocation.distance(from: sourceLocationLocation) // result is in meters
-//    //    let distanceInMiles = meters2miles(meters: crowFliesDistance)
-//    //    self.lblCrowFlies.text = "As crow flies: \(String(format: "%.02f", distanceInMiles)) miles"
-//
-//
-//    // Annotation right callout accessory opens this mapItem in Maps app
-//    // Here you create an MKMapItem from an MKPlacemark. The Maps app is able to read this MKMapItem, and display the right thing.
-//    //MARK:----My functions----
-//    func mapItem() -> MKMapItem {
-//        let addressDict = [CNPostalAddressStreetKey: subtitle!]
-//        let placemark = MKPlacemark(coordinate: coordinate, addressDictionary: addressDict)
-//        //var placemark = MKPlacemark(coordinate: coordinate, addressDictionary: addressDict)
-//        //placemark.title = "xyz"
-//
-//        let mapItem = MKMapItem(placemark: placemark)
-//        mapItem.name = title
-//        return mapItem
-//    }
     
     func switchTintColor() -> UIColor {
         switch shepDollarValue {

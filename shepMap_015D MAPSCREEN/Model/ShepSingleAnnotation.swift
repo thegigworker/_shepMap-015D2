@@ -36,26 +36,7 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
     let shepStringData: String
     var myMapItem: MKMapItem
     var currentLinkedRoute: MKRoute
-    //let myDataModelInstance = shepDataModel(myMapItem: myMapItem, currentLinkedRoute: currentLinkedRoute)
-    
-    
-    //    init?(json: [Any]) {
-    //        // 1
-    //        self.origTitle = json[16] as? String ?? "No Title"
-    //        self.locationName = json[12] as! String
-    //        // self.discipline = json[15] as! String
-    //        //self.shepsVariable = 0.0
-    //        //self.shepStringData = "Ain't nothing but a G thing"
-    //        self.shepsVariable = Double(arc4random_uniform(25) + 1)
-    //        self.shepStringData = shepCurrencyFromDouble(shepNumber: self.shepsVariable)
-    //
-    //        if let latitude = Double(json[18] as! String),
-    //            let longitude = Double(json[19] as! String) {
-    //            self.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-    //        } else {
-    //            self.coordinate = CLLocationCoordinate2D()
-    //        }
-    //    }
+    var crowFliesDistance: Double = 0.0
     
     //   The MKAnnotation protocol requires the coordinate property. If you want your annotation view to display a title and subtitle when the user taps a pin, your class also needs properties named title and subtitle.
     var title: String? {
@@ -69,8 +50,6 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
         return String(myMapItem.placemark.title!.dropLast(_:15))
         //return "hello"
     }
-    
-    var crowFliesDistance: Double = 0.0
     
     var routeDrivingDistance: Double {
         let drivingDistance = meters2miles(meters: currentLinkedRoute.distance)
@@ -90,35 +69,6 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
     }
     
     
-    /*          The if let statement takes an optional variable. If it is nil, the else block or nothing is executed. If it has a value, the value is assigned to a different variable as a non-optional type.
-     
-     So, the following code would output the value of score1 or "No" if there is none:
-     
-     if let score1Unwrapped = score1
-     { print(score1Unwrapped)
-     } else {print("No")}
-     
-     A shorter version of the same would be:
-     print(score1 ?? "No")
-     
-     In your case, where you don't actually use the value stored in the optional variable, you can also check if the value is nil:
-     
-     if score1 != nil {
-     ...
-     }
-     */
-    
-    
-    //    let searchResultCoordinates = item.placemark.coordinate
-    //    let searchResultLocation = CLLocation(latitude: searchResultCoordinates.latitude, longitude: searchResultCoordinates.longitude)
-    //    let mapItemDistance = myUserLocation.distance(from: searchResultLocation) // result is in meters
-    //    //let distanceInMiles = meters2miles(meters: mapItemDistance)
-    
-    //    let crowFliesDistance = sourceLocation.distance(from: sourceLocationLocation) // result is in meters
-    //    let distanceInMiles = meters2miles(meters: crowFliesDistance)
-    //    self.lblCrowFlies.text = "As crow flies: \(String(format: "%.02f", distanceInMiles)) miles"
-    
-    
     // Annotation right callout accessory opens this mapItem in Maps app
     // Here you create an MKMapItem from an MKPlacemark. The Maps app is able to read this MKMapItem, and display the right thing.
     //MARK:----My functions----
@@ -135,16 +85,18 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
     
     func switchTintColor() -> UIColor {
         switch shepDollarValue {
-        case 0..<1:
-            return .black
-        case 1...10:
-            return .darkGray
-        case 11...30:
+        case 0...10:
+            return .lightGray
+        case 11...20:
+            return .brown
+        case 21...30:
             return .orange
-        case 31...49:
+        case 31...40:
+            return .blue
+        case 41...49:
             return .green
         case 50...60:
-            return .white
+            return .magenta
         default:
             return .white
         }
@@ -152,13 +104,9 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
     
     func switchGlyph() -> String? { // marker glyph
         switch shepDollarValue {
-        case 0...10:
-            return "tricycle"
-        case 11...30:
-            return "unicycle"
-        case 31...49:
-            return "monopoly man"
-        case 50...60:
+        case 0...39:
+            return "nothing"
+        case 40...60:
             return "Flag"
         default:
             return "HMI"
@@ -167,9 +115,9 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
     
     func switchImage() -> String? { // leftCalloutAccessory image
         switch shepDollarValue {
-        case 0...10:
+        case 0...15:
             return "zzz..."
-        case 11...30:
+        case 16...30:
             return "coins"
         case 31...49:
             return "dollars"
@@ -181,21 +129,6 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
     }
     
 }
-
-
-//class ShepSingleAnnotation: NSObject, MKAnnotation {
-//
-//    var coordinate: CLLocationCoordinate2D
-//    var phone: String!
-//    var name: String!
-//    var address: String!
-//    var image: UIImage!
-//
-//    init(coordinate: CLLocationCoordinate2D) {
-//        self.coordinate = coordinate
-//    }
-//}
-
 
 //// this is where we draw an image on the leftCalloutAccessoryView
 //func myMapView(_ myMapView: MKMapView, didSelect view: MKAnnotationView) {
@@ -257,29 +190,6 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
 //}
 //
 //
-//
-//// this is where we draw an image on the leftCalloutAccessoryView
-//func myMapView(_ myMapView: MKMapView, didSelect view: MKAnnotationView) {
-//    if let thumbnailImageButton = view.leftCalloutAccessoryView as? UIButton,
-//        let url = (view.annotation as? GPX.shepShepSingleAnnotation)?.thumbnailURL,
-//        let imageData = try? Data(contentsOf: url as URL), // blocks main queue
-//        let image = UIImage(data: imageData) {
-//        thumbnailImageButton.setImage(image, for: UIControlState())
-//    }
-//}
-//
-//// calloutAccessoryControlTapped
-//func myMapView(_ myMapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-//    if control == view.leftCalloutAccessoryView {
-//        performSegue(withIdentifier: Constants.ShowImageSegue, sender: view)
-//    } else if control == view.rightCalloutAccessoryView  {
-//        myMapView.deselectAnnotation(view.annotation, animated: true)
-//        performSegue(withIdentifier: Constants.EditUserWaypoint, sender: view)
-//    }
-//}
-//
-//// MARK: Navigation
-//
 //override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 //    let destination = segue.destination.contentViewController
 //    let annotationView = sender as? MKAnnotationView
@@ -302,28 +212,51 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
 //    }
 //}
 //
+//// EditableWaypoints are draggable so their coordinate needs to be settable
+//
+//class EditableWaypoint : shepDataSource.shepSingleAnnotation
+//{
+//    override var coordinate: CLLocationCoordinate2D {
+//        get {
+//            return super.coordinate
+//        }
+//        set {
+//            latitude = newValue.latitude
+//            longitude = newValue.longitude
+//        }
+//    }
+//}
+//
 //// END OF CODE FROM TRAX
 
 
 ////UIColor functions -- DEPRECATED FORMAT
-////    public class func darkGrayColor() -> UIColor // 0.333 white
-////    public class func lightGrayColor() -> UIColor // 0.667 white
-////    public class func whiteColor() -> UIColor // 1.0 white
-////    public class func grayColor() -> UIColor // 0.5 white
-////    public class func redColor() -> UIColor // 1.0, 0.0, 0.0 RGB
-////    public class func greenColor() -> UIColor // 0.0, 1.0, 0.0 RGB
-////    public class func blueColor() -> UIColor // 0.0, 0.0, 1.0 RGB
-////    public class func cyanColor() -> UIColor // 0.0, 1.0, 1.0 RGB
-////    .yellow // 1.0, 1.0, 0.0 RGB
-//
-////     CURRENT FORMAT
-////     UIColor.magenta // 1.0, 0.0, 1.0 RGB
-////    .orange // 1.0, 0.5, 0.0 RGB
-////    .purple // 0.5, 0.0, 0.5 RGB
-////    .brown // 0.6, 0.4, 0.2 RGB
-////    .white  0.0 white, 0.0 alpha
-////    .yellow // 1.0, 1.0, 0.0 RGB
-////    .black // 0.0 white
+//    public class func darkGrayColor() -> UIColor // 0.333 white
+//    public class func lightGrayColor() -> UIColor // 0.667 white
+//    public class func whiteColor() -> UIColor // 1.0 white
+//    public class func grayColor() -> UIColor // 0.5 white
+//    public class func redColor() -> UIColor // 1.0, 0.0, 0.0 RGB
+//    public class func greenColor() -> UIColor // 0.0, 1.0, 0.0 RGB
+//    public class func blueColor() -> UIColor // 0.0, 0.0, 1.0 RGB
+//    public class func cyanColor() -> UIColor // 0.0, 1.0, 1.0 RGB
+//    .yellow // 1.0, 1.0, 0.0 RGB
+
+//     CURRENT FORMAT
+//     UIColor.magenta // 1.0, 0.0, 1.0 RGB
+//    .orange // 1.0, 0.5, 0.0 RGB
+//    .purple // 0.5, 0.0, 0.5 RGB
+//    .brown // 0.6, 0.4, 0.2 RGB
+//    .white  0.0 white, 0.0 alpha
+//    .yellow // 1.0, 1.0, 0.0 RGB
+//    .black // 0.0 white
+
+//darkGray: UIColor { get } // 0.333 white
+//lightGray: UIColor { get } // 0.667 white
+//gray: UIColor { get } // 0.5 white
+//cyan: UIColor { get } // 0.0, 1.0, 1.0 RGB
+//magenta: UIColor { get } // 1.0, 0.0, 1.0 RGB
+//clear: UIColor { get } // 0.0 white, 0.0 alpha
+
 //
 //
 ////

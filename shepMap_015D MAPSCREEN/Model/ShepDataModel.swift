@@ -1,16 +1,16 @@
-////
-////  ShepDataModel.swift
-////  Tandm
-////
-////  Created by Shepard Tamler on 12/13/17.
-////  Copyright © 2017 Apple. All rights reserved.
-////
+//
+//  ShepDataModel.swift
+//  Tandm
+//
+//  Created by Shepard Tamler on 12/13/17.
+//  Copyright © 2017 Apple. All rights reserved.
+//
 
 import Foundation
 import MapKit
 
 let initialSearch: Double = 15
-let initialDisplay: Double = 20
+let initialDisplay: Double = 50
 //let initialDisplayDistance = CLLocationDistance(miles2meters(miles: initialDisplay))
 //var currentSearchDistanceX = CLLocationDistance(miles2meters(miles: initialSearch))
 
@@ -86,14 +86,7 @@ class shepDataModel: NSObject {
         print ("end of choosetheChosenRoute(), myAnnotationsArray.count is: \(myAnnotationsArray.count)")
        return myAnnotationsArray[0]
     }
-    
-    // INTERESTING GUARD STATEMENT TEST CODE
-    //    // The rating must be between 0 and 5 inclusively
-    //    guard (rating >= 0) && (rating <= 5) else {
-    //    return nil
-    //    }
-    // INTERESTING GUARD STATEMENT TEST CODE
-    
+
     
 //    func getRouteInfoFromAppleViaLocation (sourceLocation: CLLocation, destinationAnnotation: ShepSingleAnnotation) {
 //
@@ -337,90 +330,3 @@ class shepDataModel: NSObject {
 }
 
 
-/*  CREATING AN ARRAY BY ADDING TWO ARRAYS TOGETHER
- 
- var threeDoubles = Array(repeating: 0.0, count: 3)
- // threeDoubles is of type [Double], and equals [0.0, 0.0, 0.0]
- You can create a new array by adding together two existing arrays with compatible types with the addition operator (+). The new array’s type is inferred from the type of the two arrays you add together:
- var anotherThreeDoubles = Array(repeating: 2.5, count: 3)
- // anotherThreeDoubles is of type [Double], and equals [2.5, 2.5, 2.5]
- var sixDoubles = threeDoubles + anotherThreeDoubles
- // sixDoubles is inferred as [Double], and equals [0.0, 0.0, 0.0, 2.5, 2.5, 2.5]
- */
-
-
-/*  YES, SWIFT HAS THE SET CLASS.
- 
- Check if no members same
- Set1.isDisjointWith(Set2)    Returns true if the two Sequences have no members in common.
- 
- Combine Sets
- Set1.union(Set2)    Returns a new Set containing the members of both set1 and set2.
- 
- Combine Sets In Place
- Set1.unionInPlace(Set2)    Mutates set2 to add the members of set1 to it.
- 
- Subtract One Set From Another
- set2.subtract(entreeSet)    Returns a new Set with the values of entreeSet removed from set2, if they were present.
- 
- Subtract One Set From Another In Place
- set2.subtractInPlace(entreeSet)    Mutates the set2 Set to subtract an values that were specified in the entreeSet (like above).
- 
- Create Set of Common Members
- moreFoods.intersect(entreeSet)    Returns a new Set with the values that were in common between moreFoods and entreeSet.
- 
- Create Set of Common Members In Place
- moreFoods.intersectInPlace(entreeSet)    Mutates the moreFoods Set to perform the intersect method above.
- 
- Create Set of Uncommon Members
- moreFoods.exclusiveOr(dessertsSet)    Returns a new Set containing the values that were in either moreFoods or dessertsSet, but NOT both.
- 
- Create Set of Uncommon Members In Place
- moreFoods.exclusiveOrInPlace(dessertsSet)    Mutates the moreFoods Set with the result of the exclusiveOr method above.
- 
- ///////////////////////////////////////////////////////
- //entreeSet   is {"Salad", "Sandwiches"}
- //sameFoodSet is {"Salad", "Chips", "Sandwiches"}
- //otherFoods  is {"Quiche", "Donuts"}
- 
- foodSet.contains("Chips")               //returns true
- 
- entreeSet.isSubsetOf(foodSet)           //returns true
- sameFoodSet.isStrictSubsetOf(foodSet)   //returns false
- 
- foodSet.isSupersetOf(entreeSet)         //returns true
- foodSet.isStrictSupersetOf(sameFoodSet) //returns false
- foodSet.isStrictSupersetOf(entreeSet)   //returns true
- 
- foodSet.isDisjointWith(entreeSet)       //returns false
- foodSet.isDisjointWith(otherFoods)      //returns true
- ///////////////////////////////////////////////////////
- 
- let array1 = ["a", "b", "c"]
- let array2 = ["a", "b", "d"]
- 
- let set1:Set<String> = Set(array1)
- let set2:Set<String> = Set(array2)
- 
- Swift 3.0+ can do operations on sets as:
- 
- firstSet.union(secondSet)// Union of two sets
- firstSet.intersection(secondSet)// Intersection of two sets
- firstSet.symmetricDifference(secondSet)// exclusiveOr
- 
- Swift 2.0 can calculate on array arguments:
- 
- set1.union(array2)       // {"a", "b", "c", "d"}
- set1.intersect(array2)   // {"a", "b"}
- set1.subtract(array2)    // {"c"}
- set1.exclusiveOr(array2) // {"c", "d"}
- 
- Swift 1.2+ can calculate on sets:
- 
- set1.union(set2)        // {"a", "b", "c", "d"}
- set1.intersect(set2)    // {"a", "b"}
- set1.subtract(set2)     // {"c"}
- set1.exclusiveOr(set2)  // {"c", "d"}
- 
- If you're using custom structs, you need to implement Hashable.
- */

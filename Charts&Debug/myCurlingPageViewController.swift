@@ -1,9 +1,5 @@
 //
 //  myCurlingPageViewController.swift
-//  UIPageViewController Post
-//
-//  Created by Jeffrey Burt on 12/11/15.
-//  Copyright © 2015 Atomic Object. All rights reserved.
 //
 
 import UIKit
@@ -139,11 +135,9 @@ extension myCurlingPageViewController: UIPageViewControllerDataSource {
         
             guard orderedViewControllersCount > nextIndex else {
                 return nil
-            }
-            
-            return orderedViewControllers[nextIndex]
+        }
+        return orderedViewControllers[nextIndex]
     }
-    
 }
 
 extension myCurlingPageViewController: UIPageViewControllerDelegate {

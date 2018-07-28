@@ -4,8 +4,6 @@
 //  Created by Shepard Tamler on 11/20/17.
 //
 
-// NOTE:  Now, you could keep adding code to myMapView(_:viewFor:), but that would clutter up the view controller.
-// Here’s a more elegant way, similar to what you can do for table view cells.
 
 import Foundation
 import MapKit
@@ -16,7 +14,6 @@ import MapKit
  Override the annotation view’s drawRect: method and draw your content dynamically every time.
  As with any custom drawing you do in a view, always consider performance before choosing an approach. Although custom drawing gives you the most flexibility, using images can be faster, especially if most of your content is fixed.
  */
-
 
 /*  CUSTOM FONT FOR MKAnnotationView CALLOUT
  You have to call setNeedsLayout() on didAddSubview() because otherwise when you deselect and reselect the annotation layoutSubviews() is not called and the callout has its old font.

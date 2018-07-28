@@ -2,21 +2,10 @@
 //  UI POPOVER PRESENTATION CONTROLLER
 //
 
-/*
- A NOTE RE ?? OPERATOR RE OPTIONALS
- "nil coalescing operator" (also called "default operator")
- 
- let something = myVariable ?? myOtherVariable
- Can be thought of as  "let something = UNWRAPPED myVariable if it's not nil, OTHERWISE let something = myOtherVariable"
- 
- equivalent to
- let something = myVariable != nil ? myVariable! : myOtherVariable
- */
-
 import UIKit
 import MapKit
 
-var whichSort = "distance"
+var whichSort = "jobType"
 
 //case "distance" : // SINGLE SECTION 1
 //case "title" : // SINGLE SECTION 2
@@ -90,11 +79,6 @@ class sortingHatPopover: UIViewController, UIPopoverPresentationControllerDelega
         checkmark4.isHidden = true
         checkmark5.isHidden = true
     }
-    
-//    func redrawMyTableView() {  // not quite working yet
-//        myShepTVController.BigKahunaSectionedArray = allSectionsOfData4TVC.handleAllTheSections(whichSort: whichSort)
-//        myShepTVController.tableView.reloadData()  // Reloads everything from scratch. Redisplays visible rows. Note that this will cause any existing drop placeholder rows to be removed.
-//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

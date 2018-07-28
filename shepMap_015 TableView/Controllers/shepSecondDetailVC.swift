@@ -1,8 +1,6 @@
 //
 //  ProductDetailViewController.swift
 //
-//  Created by Duc Tran on 3/30/15.
-//  Copyright (c) 2015 Duc Tran. All rights reserved.
 //
 
 import UIKit
@@ -23,33 +21,11 @@ class shepSecondDetailVC: UITableViewController, UITextFieldDelegate, UITextView
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Detail View"
-        
         productImageView.image = product?.image
-        
         productImageView.image = shepProductDetail?.image
         lblTitle.text = shepProductDetail?.title
         productDescriptionTextView.text = shepProductDetail?.description
-        
     }
-    
-    
-    ///////
-    
-    // Model:
-//    var shepProductDetail: ShepSingleXYZ?
-    
-//    @IBOutlet weak var productImageView: UIImageView!
-//    @IBOutlet weak var productTitleLabel: UITextField!
-//    @IBOutlet weak var productDescriptionTextView: UITextView!
-    
-    // MARK: - VC Lifecycle
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        title = "Editable Details"
-//        productImageView.image = shepProductDetail?.image
-//        productTitleLabel.text = shepProductDetail?.title
-//        productDescriptionTextView.text = shepProductDetail?.description
-//    }
     
     override func viewWillDisappear(_ animated: Bool) {
         //shepProductDetail?.title = productTitleLabel.text!

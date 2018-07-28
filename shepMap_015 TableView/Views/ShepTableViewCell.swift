@@ -25,14 +25,6 @@ import UIKit
 //You designed your custom rating control class to be interactive, but you don’t want users to be able to change the rating from the cell view. Instead, tapping anywhere in the cell should select the cell. So it’s important to disable that interaction when it’s in this context.
 //////////////////////
 
-//func shepCurrencyFromDouble(shepNumber : Double) -> String  {
-//    let buckaroos = shepNumber as NSNumber
-//    let formatter = NumberFormatter()
-//    formatter.numberStyle = .currency
-//    // formatter.locale = NSLocale.currentLocale() // This is the default
-//    return formatter.string(from: buckaroos)!
-//}
-
 class shepOrigProductTVCell: UITableViewCell {
     
     @IBOutlet weak var productImageView: UIImageView!
@@ -47,21 +39,17 @@ class shepOrigProductTVCell: UITableViewCell {
     }
 }
 
-
 class ShepTableViewCell: UITableViewCell {
-    
-//    The most simplest approach is to add this attribute to the LABEL YOU WANT TO HAVE ROUNDED CORNERS.
-//             layer.cornerRadius
     
     //MARK: Properties
     @IBOutlet weak var CategoryLbl1: UILabel!
     @IBOutlet weak var CategoryLbl2: UILabel!
-    //    The most simplest approach is to add this attribute to the LABEL YOU WANT TO HAVE ROUNDED CORNERS.
-    //             layer.cornerRadius
+    // The simplest approach is to add this attribute to the LABEL YOU WANT TO HAVE ROUNDED CORNERS.
+    //          layer.cornerRadius
     
     @IBOutlet weak var NameLbl: UILabel!
     @IBOutlet weak var photoImageView: UIImageView!
-    @IBOutlet weak var PayLbl: UILabel!
+   // @IBOutlet weak var PayLbl: UILabel!
     @IBOutlet weak var ExpenseLbl: UILabel!
     @IBOutlet weak var EarningLbl: UILabel!
     @IBOutlet weak var DrivingDistanceLbl: UILabel!
@@ -72,7 +60,7 @@ class ShepTableViewCell: UITableViewCell {
     
     func setupCell(_ product: ShepSingleXYZ) {
         photoImageView.image = product.image
-        PayLbl.text = product.description
+        //PayLbl.text = product.description
         NameLbl.text = product.title
         photoImageView.image = product.image
         CategoryLbl1.text = product.jobType

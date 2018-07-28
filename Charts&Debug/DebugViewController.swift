@@ -1,10 +1,8 @@
+
 //
-//  FirstViewController.swift
-//  tabcontroller_tutorial
+//DebugViewController.swift
 //
-//  Created by Zephaniah Cohen on 1/11/17.
-//  Copyright © 2017 CodePro. All rights reserved.
-//
+
 
 import Foundation
 import UIKit

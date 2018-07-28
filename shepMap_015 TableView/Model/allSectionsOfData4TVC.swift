@@ -1,25 +1,9 @@
 //
 //  sectionOfProducts_class.swift
-//  TableViewDemo
 //
-//  Created by Duc Tran on 3/22/15.
+//  Thanks to by Duc Tran on 3/22/15.
 //  Copyright (c) 2015 Duc Tran. All rights reserved.
 //
-
-/*  RE INSTANCE METHOD V CLASS METHOD
- 
- You can only call an instance method on an instance of a class. For example, you would have to create an instance of myScript, then call it:
- 
- let script = myScript()
- script.thisIsmyFunction()
- 
- You can also choose to make thisIsmyFunction a class method (which is formally known as a "type method" in Swift), and call it like the way you are doing right now:
- 
- class func thisIsmyFunction() {...}
- 
- Note the class modifier in front of func. Of course, this means you can't access self inside the function, because there is no longer an instance of the class.
- 
- */
 
 
 import Foundation
@@ -141,88 +125,6 @@ struct allSectionsOfData4TVC {
     }
 }
 
-/*
- //Swift keypaths are a way of storing uninvoked references to properties, which is a fancy way of saying they refer to a property itself rather than to that property’s value.
- 
- //Here’s an example struct storing a name and maximum warp speed of a starship:
- struct Starship {
- var name: String
- var maxWarp: Double
- }
- 
- let voyager = Starship(name: "Voyager", maxWarp: 9.975)
- //Keypaths let us refer to the name or maxWarp properties without reading them directly, like this:
- 
- let nameKeyPath = \Starship.name
- let warpKeyPath = \Starship.maxWarp
- //If you want to read those keypaths on a specific starship, Swift will return you the actual values attached to those properties:
- 
- print(voyager[keyPath: nameKeyPath])
- print(voyager[keyPath: warpKeyPath])
- //In practice, this means you can refer to the same property in multiple places all using the same keypath – and if you decide you want a different property you can change it in just one place.
- */
-
-/*
- //Let define a struct called Cavaliers and a struct called Player, then create one instance of each:
- 
- // an example struct
- struct Player {
- var name: String
- var rank: String
- }
- 
- // another example struct, this time with a method
- struct Cavaliers {
- var name: String
- var maxPoint: Double
- var captain: Player
- 
- func goTomaxPoint() {
- print("\(name) is now travelling at warp \(maxPoint)")
- }
- }
- 
- // create instances of those two structs
- let james = Player(name: "Lebron", rank: "Captain")
- let irving = Cavaliers(name: "Kyrie", maxPoint: 9.975, captain: james)
- 
- // grab a reference to the `goTomaxPoint()` method
- let score = irving.goTomaxPoint
- 
- // call that reference
- score()
- //The last lines create a reference to the goTomaxPoint() method called score. The problem is, we can't create a reference to the captain's name property but keypath can do.
- 
- let nameKeyPath = \Cavaliers.name
- let maxPointKeyPath = \Cavaliers.maxPoint
- let captainName = \Cavaliers.captain.name
- let cavaliersName = irving[keyPath: nameKeyPath]
- let cavaliersMaxPoint = irving[keyPath: maxPointKeyPath]
- let cavaliersNameCaptain = irving[keyPath: captainName]
- */
-
-////////////////////////////////
-
-/*
- //Since Swift is a statically dispatched language, dynamic features are not its strong suit. Swift 4 added support for key path and allow you to do something like this:
- 
- extension Array {
- mutating func sort<T: Comparable>(byKeyPath keyPath: KeyPath<Element, T>) {
- sort(by: { $0[keyPath: keyPath] < $1[keyPath: keyPath] })
- }
- }
- 
- struct DataModel {
- var title: String
- var dollar: Double
- }
- 
- var myArray = [DataModel(title: "A", dollar: 12), DataModel(title: "B", dollar: 10)]
- let keyPath = \DataModel.dollar
- myArray.sort(byKeyPath: keyPath)
- 
- //But there is no way to construct the key path from String. It must be known at compile time to ensure type safety.
- */
 
 
 
