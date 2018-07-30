@@ -93,8 +93,8 @@
 				A1F5D76F210A4CC6002B960F /* Storyboards */,
 				A1F5D76E210A4C25002B960F /* Navigation */,
 				A145A37C21002AA000264934 /* shepMap_015D MAPSCREEN */,
-				A1D2037920FF9E090089269B /* Charts&Debug */,
 				A1D2036620FF9CA90089269B /* shepMap_015 TableView */,
+				A1D2037920FF9E090089269B /* Charts&Debug */,
 				9F70382C1EA835EB00DA5564 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -177,9 +177,9 @@
 		A1D2036620FF9CA90089269B /* shepMap_015 TableView */ = {
 			isa = PBXGroup;
 			children = (
-				A18231D1210A6EFF00C0CF31 /* Controllers */,
 				A18231DA210A6EFF00C0CF31 /* Model */,
 				A18231D7210A6EFF00C0CF31 /* Views */,
+				A18231D1210A6EFF00C0CF31 /* Controllers */,
 			);
 			path = "shepMap_015 TableView";
 			sourceTree = "<group>";
