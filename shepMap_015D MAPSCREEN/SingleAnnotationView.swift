@@ -9,8 +9,11 @@ import Contacts
 // This adds the Contacts framework, which contains dictionary key constants such as CNPostalAddressStreetKey,
 // for when you need to set the address, city or state fields of a location.
 
+var myCurrentPinColor = UIColor()
 
 class SingleAnnotationView: MKMarkerAnnotationView {
+    
+    let myDataModel = shepDataModel()
     override var annotation: MKAnnotation? {
         willSet {
             // These lines do the same thing as your myMapView(_:viewFor:), configuring the callout.
@@ -39,7 +42,8 @@ class SingleAnnotationView: MKMarkerAnnotationView {
 //                }
 //            }
             //markerTintColor = myAnnotationData.switchTintColor()
-            markerTintColor = UIColor.gray
+            markerTintColor = myCurrentPinColor
+            //markerTintColor = myDataModel.currentPinColor
             if let imageName = myAnnotationData.switchGlyph() {
                 glyphImage = UIImage(named: imageName)
             } else {
@@ -53,7 +57,7 @@ class SingleAnnotationView: MKMarkerAnnotationView {
 //To create your own annotations, you create a class that conforms to the MKAnnotation protocol, add the annotation to the map,
 //and inform the map how the annotation should be displayed.
 class ShepSingleAnnotation: NSObject, MKAnnotation {
-    init(myMapItem: MKMapItem, currentLinkedRoute: MKRoute, shepDollarValue: Double) {
+    init(myMapItem: MKMapItem, currentLinkedRoute: MKRoute, shepDollarValue: Double, currentPinColor: UIColor) {
         self.origTitle = myMapItem.name ?? "No Title"
         //self.locationName = myMapItem.name! //searchResult.description
         self.shepDollarValue = shepDollarValue
@@ -66,6 +70,7 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
         let latitude = myMapItem.placemark.coordinate.latitude
         let longitude = myMapItem.placemark.coordinate.longitude
         self.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        self.myCurrentPinColor = currentPinColor
         super.init()
     }
     
@@ -78,6 +83,7 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
     var myMapItem: MKMapItem
     var currentLinkedRoute: MKRoute
     var crowFliesDistance: Double = 0.0
+    var myCurrentPinColor: UIColor
     
     //   The MKAnnotation protocol requires the coordinate property. If you want your annotation view to display a title and subtitle when the user taps a pin, your class also needs properties named title and subtitle.
     var title: String? {
@@ -123,30 +129,11 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
         return mapItem
     }
     
-    func switchTintColor() -> UIColor {
-        switch shepDollarValue {
-        case 0...10:
-            return .lightGray
-        case 11...20:
-            return .brown
-        case 21...30:
-            return .orange
-        case 31...40:
-            return .blue
-        case 41...49:
-            return .green
-        case 50...60:
-            return .magenta
-        default:
-            return .white
-        }
-    }
-    
     func switchGlyph() -> String? { // marker glyph
         switch shepDollarValue {
-        case 0...39:
+        case 0...49:
             return "nothing"
-        case 40...60:
+        case 50...75:
             return "Flag"
         default:
             return "HMI"
@@ -155,13 +142,13 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
     
     func switchImage() -> String? { // leftCalloutAccessory image
         switch shepDollarValue {
-        case 0...15:
+        case 0...9:
             return "zzz..."
-        case 16...30:
+        case 10...30:
             return "coins"
-        case 31...49:
+        case 31...59:
             return "dollars"
-        case 50...60:
+        case 60...75:
             return "monopoly man"
         default:
             return "superman"

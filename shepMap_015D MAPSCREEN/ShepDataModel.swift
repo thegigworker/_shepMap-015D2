@@ -278,11 +278,11 @@ class shepDataModel: NSObject {
         request.naturalLanguageQuery = searchString
         validSearchResultsArray = [ShepSingleAnnotation]()
         /////////  CONVERSION FROM COORDINATES INTO MKMAPITEM
-        let HomeLocationCoord = myUserLocation.coordinate
-        let HomeLocationPlacemark = MKPlacemark(coordinate: CLLocationCoordinate2DMake(HomeLocationCoord.latitude, HomeLocationCoord.longitude), addressDictionary: nil)
-        let HomeLocationMapItem = MKMapItem(placemark: HomeLocationPlacemark)
+        let homeLocationCoord = myUserLocation.coordinate
+        let homeLocationPlacemark = MKPlacemark(coordinate: CLLocationCoordinate2DMake(homeLocationCoord.latitude, homeLocationCoord.longitude), addressDictionary: nil)
+        let homeLocationMapItem = MKMapItem(placemark: homeLocationPlacemark)
         /////////  THEN MAKE ANNOTATION FROM MKMAPITEM
-        let HomeLocationAnnotation = ShepSingleAnnotation(myMapItem: HomeLocationMapItem, currentLinkedRoute: MKRoute(), shepDollarValue: 0.0)
+        let homeLocationAnnotation = ShepSingleAnnotation(myMapItem: homeLocationMapItem, currentLinkedRoute: MKRoute(), shepDollarValue: 0.0, currentPinColor: myCurrentPinColor)
         
         // 搜索当前区域
         // print ("in performLocalSearch searchRegion search distance: \(meters2miles(meters: self.currentSearchDistanceX))")
@@ -324,13 +324,13 @@ class shepDataModel: NSObject {
                         print ("took one down, too far away")
                         continue shepSearchResultLoop
                     } else {
-                        let shepDollarValue = Double(arc4random_uniform(60) + 1)
-                        let validResult = ShepSingleAnnotation(myMapItem: item, currentLinkedRoute: MKRoute(), shepDollarValue: shepDollarValue)
+                        let shepDollarValue = Double(arc4random_uniform(75) + 1)
+                        let validResult = ShepSingleAnnotation(myMapItem: item, currentLinkedRoute: MKRoute(), shepDollarValue: shepDollarValue, currentPinColor: myCurrentPinColor)
                         self.validSearchResultsArray.append(validResult)
                         print ("We just found a valid search result, now calling getRouteInfoVia2Annotations")
                         //self.getRouteInfoFromAppleViaLocation(sourceLocation: sourceLocation, destinationAnnotation: validResult)
                         
-                        self.getRouteInfoVia2Annotations(source: HomeLocationAnnotation, destination: validResult)
+                        self.getRouteInfoVia2Annotations(source: homeLocationAnnotation, destination: validResult)
                     }
                     print ("still inside shepSearchResultLoop, shepAnnotationsArray count is \(self.shepAnnotationsArray.count)")
                     print ("still inside shepSearchResultLoop validSearchResultsArray count: \(self.validSearchResultsArray.count) \n")

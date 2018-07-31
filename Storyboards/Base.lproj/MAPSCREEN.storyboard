@@ -11,7 +11,7 @@
         <!--ShepMap Mapscreen-->
         <scene sceneID="l0S-ly-Wl2">
             <objects>
-                <viewController storyboardIdentifier="shepMapViewController" title="ShepMap Mapscreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="gUb-df-Mug" customClass="shepMAPViewController" customModule="shepMapApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="shepMapViewController" title="ShepMap Mapscreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="gUb-df-Mug" customClass="shepMAPSCREEN_VC" customModule="shepMapApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="8N0-4S-TXm"/>
                         <viewControllerLayoutGuide type="bottom" id="5hX-fm-oFV"/>

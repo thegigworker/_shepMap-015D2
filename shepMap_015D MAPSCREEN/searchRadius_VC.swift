@@ -21,10 +21,10 @@ class searchRadiusViewController: UIViewController, UIPopoverPresentationControl
         SearchRadiusText.text = String(format: "%.01f", value) + " mi."
         myDataModel.currentSearchDistance = miles2meters(miles: Double(value))
         
-        if searchDistanceCircle != nil {shepMAPViewController().myMapView?.remove(searchDistanceCircle)}
+        if searchDistanceCircle != nil {shepMAPSCREEN_VC().myMapView?.remove(searchDistanceCircle)}
         searchDistanceCircle = MKCircle(center: myUserLocation.coordinate, radius:CLLocationDistance(myDataModel.currentSearchDistance))
         //print ("In popover myDataModel.currentSearchDistance = \(meters2miles(meters: myDataModel.currentSearchDistance))")
-        shepMAPViewController().myMapView?.add(searchDistanceCircle)
+        shepMAPSCREEN_VC().myMapView?.add(searchDistanceCircle)
     }
     
     @IBAction func touchDOWNInSearchDistanceSlider(_ sender: UISlider) {
@@ -33,7 +33,7 @@ class searchRadiusViewController: UIViewController, UIPopoverPresentationControl
     
     @IBAction func touchUPInSearchDistanceSlider(_ sender: UISlider) {
         print ("Touch UP in popover slider.")
-        if searchDistanceCircle != nil {shepMAPViewController().myMapView?.remove(searchDistanceCircle)}
+        if searchDistanceCircle != nil {shepMAPSCREEN_VC().myMapView?.remove(searchDistanceCircle)}
     }
     
     override func viewDidLoad() {
