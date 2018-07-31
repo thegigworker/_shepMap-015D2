@@ -120,7 +120,7 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.77788150310000004" green="0.90799707169999999" blue="0.91106134650000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <slider opaque="NO" alpha="0.69999998807907104" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="CustomDisplayUISlider" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="5" minValue="1" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="rU5-Q4-Qll" userLabel="DisplayDistanceSlider" customClass="CustomDisplayUISlider" customModule="shepMapApp" customModuleProvider="target">
+                            <slider opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="CustomDisplayUISlider" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="5" minValue="1" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="rU5-Q4-Qll" userLabel="DisplayDistanceSlider" customClass="CustomDisplayUISlider" customModule="shepMapApp" customModuleProvider="target">
                                 <rect key="frame" x="220" y="374" width="260" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="minimumTrackTintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -185,6 +185,11 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.74901960779999999" green="0.89411764709999997" blue="0.8980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
+                            <view alpha="0.80000000000000004" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ECn-nL-Ht5" userLabel="gigIconsBackdrop">
+                                <rect key="frame" x="32" y="159" width="306" height="202"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.77788150310000004" green="0.90799707169999999" blue="0.91106134650000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" alpha="0.55000000000000004" contentMode="scaleAspectFit" fixedFrame="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YgK-d6-yRy">
                                 <rect key="frame" x="117" y="20" width="260" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
@@ -207,81 +212,64 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aMO-xQ-PPO">
-                                <rect key="frame" x="26" y="30" width="65" height="27"/>
+                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aMO-xQ-PPO" userLabel="Btn Gigwalk">
+                                <rect key="frame" x="0.0" y="20" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.64203774930000002" green="0.80266940590000002" blue="0.99919462199999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <inset key="titleEdgeInsets" minX="2" minY="0.0" maxX="2" maxY="0.0"/>
-                                <state key="normal" title="Park">
-                                    <color key="titleColor" red="0.034757062790000001" green="0.31522077320000003" blue="0.81491315360000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="btnParkClick:" destination="gUb-df-Mug" eventType="touchUpInside" id="wtP-r2-NmK"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O5v-6n-Plj" userLabel="Btn Pizza">
-                                <rect key="frame" x="27" y="30" width="63" height="26"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <state key="normal" title="Pizza">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="btnPizza:" destination="gUb-df-Mug" eventType="touchUpInside" id="tJc-Fb-AzJ"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YWX-9W-1yD" userLabel="Btn Target">
-                                <rect key="frame" x="21" y="30" width="75" height="26"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.79863232370000004" green="0.92236149310000004" blue="0.56814754010000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <state key="normal" title="Target">
-                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                </state>
-                                <connections>
-                                    <action selector="btnTargetClick:" destination="gUb-df-Mug" eventType="touchUpInside" id="3jC-yK-9ae"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JJE-gt-K4G" userLabel="Btn Gas Station">
-                                <rect key="frame" x="16" y="29" width="85" height="27"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.88115584849999995" green="0.35495457050000001" blue="0.22894422710000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <inset key="contentEdgeInsets" minX="2" minY="1" maxX="0.0" maxY="0.0"/>
-                                <inset key="titleEdgeInsets" minX="2" minY="0.0" maxX="2" maxY="0.0"/>
-                                <state key="normal" title="Gas Stations">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="btnGasClick:" destination="gUb-df-Mug" eventType="touchUpInside" id="CKS-6d-JrT"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RT6-jI-Vcm" userLabel="Btn McDonalds">
-                                <rect key="frame" x="16" y="29" width="85" height="27"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.88115584849999995" green="0.35495457050000001" blue="0.22894422710000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <inset key="contentEdgeInsets" minX="2" minY="1" maxX="0.0" maxY="0.0"/>
-                                <inset key="titleEdgeInsets" minX="2" minY="0.0" maxX="2" maxY="0.0"/>
-                                <state key="normal" title="McDonalds">
+                                <size key="titleShadowOffset" width="2" height="2"/>
+                                <state key="normal" title="GigWalk?" image="GigWalk icon-1">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="btnMcDClick:" destination="gUb-df-Mug" eventType="touchUpInside" id="4V8-ov-AdO"/>
+                                    <action selector="btnGigwalkClick:" destination="gUb-df-Mug" eventType="touchUpInside" id="wtP-r2-NmK"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="de2-gJ-UeU" userLabel="Btn Pub">
-                                <rect key="frame" x="31" y="30" width="55" height="26"/>
+                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O5v-6n-Plj" userLabel="Btn TaskRabbit">
+                                <rect key="frame" x="0.0" y="20" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.79725265499999998" green="0.92159986500000002" blue="0.56964260339999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <state key="normal" title="Pub">
+                                <state key="normal" title="Task Rabbit?" image="Task Rabbit icon">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="btnTaskRabbit:" destination="gUb-df-Mug" eventType="touchUpInside" id="tJc-Fb-AzJ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YWX-9W-1yD" userLabel="Btn EasyShift">
+                                <rect key="frame" x="0.0" y="20" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="EasyShift?" image="EasyShift icon">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="btnEasyShiftClick:" destination="gUb-df-Mug" eventType="touchUpInside" id="3jC-yK-9ae"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JJE-gt-K4G" userLabel="Btn Field Agent">
+                                <rect key="frame" x="0.0" y="20" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <inset key="titleEdgeInsets" minX="2" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="Field Agent?" image="Field Agent icon"/>
+                                <connections>
+                                    <action selector="btnFieldAgentClick:" destination="gUb-df-Mug" eventType="touchUpInside" id="yTG-PO-exc"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RT6-jI-Vcm" userLabel="Btn Safari icon">
+                                <rect key="frame" x="0.0" y="20" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Safari icon?" image="Safari icon">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="btnSafariClick:" destination="gUb-df-Mug" eventType="touchUpInside" id="4V8-ov-AdO"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="de2-gJ-UeU" userLabel="Btn Mobee">
+                                <rect key="frame" x="0.0" y="20" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Mobee?" image="Mobee icon">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="btnPubClick:" destination="gUb-df-Mug" eventType="touchUpInside" id="ddP-kF-W7Y"/>
+                                    <action selector="btnMobeeClick:" destination="gUb-df-Mug" eventType="touchUpInside" id="ddP-kF-W7Y"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -292,16 +280,17 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="DisplayDistanceSlider" destination="rU5-Q4-Qll" id="7FE-ru-G97"/>
+                        <outlet property="GigIconsBackdrop" destination="ECn-nL-Ht5" id="Upu-Or-auO"/>
                         <outlet property="RouteDataView" destination="QPB-sl-eKh" id="fr7-YV-Ezi"/>
                         <outlet property="SearchDistanceSlider" destination="kOZ-gp-dki" id="fBq-oJ-kkc"/>
                         <outlet property="SearchRadiusText" destination="2cD-Aj-8IZ" id="lOc-S2-ufg"/>
                         <outlet property="btnClearMap" destination="Aoi-1m-6H3" id="Dc3-EU-klG"/>
-                        <outlet property="btnGas" destination="JJE-gt-K4G" id="Cmt-f9-66y"/>
-                        <outlet property="btnMcD" destination="RT6-jI-Vcm" id="1P1-MH-5pP"/>
-                        <outlet property="btnPark" destination="aMO-xQ-PPO" id="SjV-GT-AD0"/>
-                        <outlet property="btnPizza" destination="O5v-6n-Plj" id="tKM-of-txI"/>
-                        <outlet property="btnPub" destination="de2-gJ-UeU" id="5AI-Gb-zr9"/>
-                        <outlet property="btnTarget" destination="YWX-9W-1yD" id="inU-99-SzW"/>
+                        <outlet property="btnEasyShift" destination="YWX-9W-1yD" id="inU-99-SzW"/>
+                        <outlet property="btnFieldAgent" destination="JJE-gt-K4G" id="Cmt-f9-66y"/>
+                        <outlet property="btnGigWalk" destination="aMO-xQ-PPO" id="SjV-GT-AD0"/>
+                        <outlet property="btnMobee" destination="de2-gJ-UeU" id="5AI-Gb-zr9"/>
+                        <outlet property="btnSafari" destination="RT6-jI-Vcm" id="1P1-MH-5pP"/>
+                        <outlet property="btnTaskRabbit" destination="O5v-6n-Plj" id="tKM-of-txI"/>
                         <outlet property="btnTwirlMenu" destination="Ekk-yn-nJt" id="ymn-XW-0t6"/>
                         <outlet property="btnXChangeHeight" destination="5R0-6g-AuW" id="x8q-l4-jab"/>
                         <outlet property="lblCrowFlies" destination="Njf-hJ-ViV" id="qOW-be-JfZ"/>
@@ -316,7 +305,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aeZ-ph-6w7" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1841" y="-440"/>
+            <point key="canvasLocation" x="-1842.4000000000001" y="-440.32983508245883"/>
         </scene>
         <!--Search Radius PopOver-->
         <scene sceneID="Z7S-UZ-mxT">
@@ -368,6 +357,12 @@
         </scene>
     </scenes>
     <resources>
+        <image name="EasyShift icon" width="179" height="179"/>
+        <image name="Field Agent icon" width="179" height="179"/>
+        <image name="GigWalk icon-1" width="179" height="179"/>
+        <image name="Mobee icon" width="179" height="179"/>
+        <image name="Safari icon" width="216" height="216"/>
+        <image name="Task Rabbit icon" width="197" height="196"/>
         <image name="Twirl button" width="1005" height="952"/>
         <image name="paper-map" width="30" height="30"/>
         <image name="search radius" width="30" height="30"/>

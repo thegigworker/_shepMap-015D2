@@ -123,7 +123,6 @@
 				A18231D2210A6EFF00C0CF31 /* SortingHatPopover.swift */,
 				A18231D3210A6EFF00C0CF31 /* xshepEditableDetailVC.swift */,
 				A18231D4210A6EFF00C0CF31 /* myTableVC.swift */,
-				A18231D5210A6EFF00C0CF31 /* shepEditableDetailVC.swift */,
 				A18231D6210A6EFF00C0CF31 /* shepSecondDetailVC.swift */,
 			);
 			path = Controllers;
@@ -133,6 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				A18231D8210A6EFF00C0CF31 /* HeaderInSectionTVCell.swift */,
+				A18231D5210A6EFF00C0CF31 /* shepEditableDetailVC.swift */,
 				A18231D9210A6EFF00C0CF31 /* ShepTableViewCell.swift */,
 			);
 			path = Views;

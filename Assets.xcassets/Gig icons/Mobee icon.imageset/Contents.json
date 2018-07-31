@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "Mobee icon.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "circle overlay.png",
       "scale" : "2x"
     },
     {

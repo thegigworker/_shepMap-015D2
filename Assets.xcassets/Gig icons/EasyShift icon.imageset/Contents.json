@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "EasyShift icon.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "ShepMap route.png",
       "scale" : "2x"
     },
     {

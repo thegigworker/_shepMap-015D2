@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "Field Agent icon.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "tableview.png",
       "scale" : "2x"
     },
     {
