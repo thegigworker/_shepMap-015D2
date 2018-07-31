@@ -9,6 +9,28 @@
 import Foundation
 import MapKit
 
+var myUserLocation: CLLocation = CLLocation()
+
+/// THREE SLASHES above a custom method puts that comment into the Xcode quickhelp
+func miles2meters (miles: Double) -> Double {
+    let meters = miles * 1609.34
+    return meters
+}
+
+func meters2miles (meters: Double) -> Double {
+    let miles = meters * 0.00062137
+    return miles
+}
+
+func shepCurrencyFromDouble(shepNumber : Double) -> String  {
+    let buckaroos = shepNumber as NSNumber
+    let formatter = NumberFormatter()
+    formatter.numberStyle = .currency
+    // formatter.locale = NSLocale.currentLocale() // This is the default
+    return formatter.string(from: buckaroos)!
+}
+
+
 let initialSearch: Double = 15
 let initialDisplay: Double = 50
 //let initialDisplayDistance = CLLocationDistance(miles2meters(miles: initialDisplay))

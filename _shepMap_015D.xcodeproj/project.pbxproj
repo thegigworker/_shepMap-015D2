@@ -7,14 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9F7038311EA835EB00DA5564 /* ShepMAP_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7038301EA835EB00DA5564 /* ShepMAP_VC.swift */; };
+		9F7038311EA835EB00DA5564 /* ShepMAPSCREEN_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7038301EA835EB00DA5564 /* ShepMAPSCREEN_VC.swift */; };
 		9F7038341EA835EB00DA5564 /* MAPSCREEN.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F7038321EA835EB00DA5564 /* MAPSCREEN.storyboard */; };
 		9F7038361EA835EB00DA5564 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F7038351EA835EB00DA5564 /* Assets.xcassets */; };
 		A10275CF21097E88008AECDA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A10275CD21097E88008AECDA /* LaunchScreen.storyboard */; };
 		A10B02961FE1784D004FA3B8 /* ShepDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10B02951FE1784D004FA3B8 /* ShepDataModel.swift */; };
 		A11C1A4A2109497E00BA8252 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D2038420FF9E090089269B /* LoginViewController.swift */; };
 		A11C1A4E2109499200BA8252 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D2038220FF9E090089269B /* TabBarController.swift */; };
-		A145675D1FBCE73D0016C1A2 /* ShepSingleAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A145675C1FBCE73D0016C1A2 /* ShepSingleAnnotation.swift */; };
 		A16326A0210A71D70064505C /* DebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A163269D210A71D60064505C /* DebugViewController.swift */; };
 		A16326A1210A71D70064505C /* myCurlingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A163269E210A71D70064505C /* myCurlingPageViewController.swift */; };
 		A16326A2210A71D70064505C /* myPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A163269F210A71D70064505C /* myPageViewController.swift */; };
@@ -40,12 +39,11 @@
 
 /* Begin PBXFileReference section */
 		9F70382B1EA835EB00DA5564 /* shepMapApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = shepMapApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		9F7038301EA835EB00DA5564 /* ShepMAP_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShepMAP_VC.swift; path = "shepMap_015D MAPSCREEN/Controllers/ShepMAP_VC.swift"; sourceTree = SOURCE_ROOT; };
+		9F7038301EA835EB00DA5564 /* ShepMAPSCREEN_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShepMAPSCREEN_VC.swift; path = "shepMap_015D MAPSCREEN/ShepMAPSCREEN_VC.swift"; sourceTree = SOURCE_ROOT; };
 		9F7038331EA835EB00DA5564 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MAPSCREEN.storyboard; sourceTree = "<group>"; };
 		9F7038351EA835EB00DA5564 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A10275CE21097E88008AECDA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		A10B02951FE1784D004FA3B8 /* ShepDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShepDataModel.swift; path = "shepMap_015D MAPSCREEN/Model/ShepDataModel.swift"; sourceTree = SOURCE_ROOT; };
-		A145675C1FBCE73D0016C1A2 /* ShepSingleAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShepSingleAnnotation.swift; path = "shepMap_015D MAPSCREEN/Model/ShepSingleAnnotation.swift"; sourceTree = SOURCE_ROOT; };
+		A10B02951FE1784D004FA3B8 /* ShepDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShepDataModel.swift; path = "shepMap_015D MAPSCREEN/ShepDataModel.swift"; sourceTree = SOURCE_ROOT; };
 		A163269D210A71D60064505C /* DebugViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugViewController.swift; sourceTree = "<group>"; };
 		A163269E210A71D70064505C /* myCurlingPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = myCurlingPageViewController.swift; sourceTree = "<group>"; };
 		A163269F210A71D70064505C /* myPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = myPageViewController.swift; sourceTree = "<group>"; };
@@ -59,7 +57,7 @@
 		A18231DB210A6EFF00C0CF31 /* ShepSingleXYZ.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShepSingleXYZ.swift; sourceTree = "<group>"; };
 		A18231DC210A6EFF00C0CF31 /* allSectionsOfData4TVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = allSectionsOfData4TVC.swift; sourceTree = "<group>"; };
 		A18231DD210A6EFF00C0CF31 /* tempSingleArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tempSingleArray.swift; sourceTree = "<group>"; };
-		A19B6E022020EA5F00AE2BBE /* searchRadiusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = searchRadiusViewController.swift; path = "shepMap_015D MAPSCREEN/Controllers/searchRadiusViewController.swift"; sourceTree = SOURCE_ROOT; };
+		A19B6E022020EA5F00AE2BBE /* searchRadiusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = searchRadiusViewController.swift; path = "shepMap_015D MAPSCREEN/searchRadiusViewController.swift"; sourceTree = SOURCE_ROOT; };
 		A19C14C121089E850070A4B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A19C14C521089E850070A4B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/DebugStuff.storyboard; sourceTree = "<group>"; };
 		A19C14C721089E860070A4B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageViewCharts.storyboard; sourceTree = "<group>"; };
@@ -68,7 +66,7 @@
 		A1D2038220FF9E090089269B /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TabBarController.swift; path = Navigation/TabBarController.swift; sourceTree = SOURCE_ROOT; };
 		A1D2038420FF9E090089269B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = Navigation/LoginViewController.swift; sourceTree = SOURCE_ROOT; };
 		A1D2038520FF9E090089269B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A1D66C201FD0995B0036EDAC /* SingleAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SingleAnnotationView.swift; path = "shepMap_015D MAPSCREEN/Views/SingleAnnotationView.swift"; sourceTree = SOURCE_ROOT; };
+		A1D66C201FD0995B0036EDAC /* SingleAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SingleAnnotationView.swift; path = "shepMap_015D MAPSCREEN/SingleAnnotationView.swift"; sourceTree = SOURCE_ROOT; };
 		A1DAD3752087C28400F9BC9C /* JUST_SOME_NOTES.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JUST_SOME_NOTES.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -110,6 +108,10 @@
 		A145A37C21002AA000264934 /* shepMap_015D MAPSCREEN */ = {
 			isa = PBXGroup;
 			children = (
+				A10B02951FE1784D004FA3B8 /* ShepDataModel.swift */,
+				A1D66C201FD0995B0036EDAC /* SingleAnnotationView.swift */,
+				9F7038301EA835EB00DA5564 /* ShepMAPSCREEN_VC.swift */,
+				A19B6E022020EA5F00AE2BBE /* searchRadiusViewController.swift */,
 				A1AC77262090B3E0008003E1 /* Model */,
 				A1AC77272090B3EE008003E1 /* Views */,
 				A1AC77282090B413008003E1 /* Controllers */,
@@ -151,8 +153,6 @@
 		A1AC77262090B3E0008003E1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				A10B02951FE1784D004FA3B8 /* ShepDataModel.swift */,
-				A145675C1FBCE73D0016C1A2 /* ShepSingleAnnotation.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -160,7 +160,6 @@
 		A1AC77272090B3EE008003E1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				A1D66C201FD0995B0036EDAC /* SingleAnnotationView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -168,8 +167,6 @@
 		A1AC77282090B413008003E1 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				9F7038301EA835EB00DA5564 /* ShepMAP_VC.swift */,
-				A19B6E022020EA5F00AE2BBE /* searchRadiusViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -309,8 +306,7 @@
 				A16326A1210A71D70064505C /* myCurlingPageViewController.swift in Sources */,
 				A11C1A4E2109499200BA8252 /* TabBarController.swift in Sources */,
 				A1E356A82100D21C0016DF97 /* AppDelegate.swift in Sources */,
-				9F7038311EA835EB00DA5564 /* ShepMAP_VC.swift in Sources */,
-				A145675D1FBCE73D0016C1A2 /* ShepSingleAnnotation.swift in Sources */,
+				9F7038311EA835EB00DA5564 /* ShepMAPSCREEN_VC.swift in Sources */,
 				A18231E5210A6F0000C0CF31 /* ShepTableViewCell.swift in Sources */,
 				A18231E4210A6F0000C0CF31 /* HeaderInSectionTVCell.swift in Sources */,
 				A16326A2210A71D70064505C /* myPageViewController.swift in Sources */,
