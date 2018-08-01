@@ -106,8 +106,8 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
     var goldRouteScore: Double {
         let drivingDistance = meters2miles(meters: currentLinkedRoute.distance)
         let routeExpense = drivingDistance * Double(myDataModel.centsPerMileExpense)/100
-        let mytheChosenRouteScore = shepDollarValue - routeExpense
-        return mytheChosenRouteScore
+        let myGoldRouteScore = shepDollarValue - routeExpense
+        return myGoldRouteScore
     }
     
     var drivingTime: Double {

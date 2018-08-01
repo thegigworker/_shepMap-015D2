@@ -77,8 +77,23 @@ class ShepTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
     }
+}
+
+class HeaderInSectionTVCell: UITableViewCell {
+
+    @IBOutlet weak var lblCategory: UILabel!
+    func configureCellWith(labelText: String) // (labelText: String, image: UIImage) etc.
+        {
+            //productImageView.image = product.image
+            lblCategory.text = labelText
+        }
+
+//    func setupCell(_ product: shepProduct)
+//    {
+//        //productImageView.image = product.image
+//        lblCategory.text = product.title
+//    }
 
 }

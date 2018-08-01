@@ -4,9 +4,61 @@
 
 import UIKit
 
+class myPageViewControllerClass: UIViewController {
+    
+    @IBOutlet weak var pageControl: UIPageControl!
+    @IBOutlet weak var containerView: UIView!
+    
+    var myPageViewController: myCurlingPageViewController? {
+        didSet {
+            myPageViewController?.myCurlingPageDelegate = self
+        }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        pageControl.addTarget(self, action: #selector(myPageViewControllerClass.didChangePageControlValue), for: .valueChanged)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let aPageViewController = segue.destination as? myCurlingPageViewController {
+            self.myPageViewController = aPageViewController
+        }
+    }
+    
+    @IBAction func tappedNextPageIcon(_ sender: Any) {
+        myPageViewController?.scrollToNextViewController()
+    }
+    
+//    @IBAction func didTapNextButton(_ sender: UIButton) {
+//        myPageViewController?.scrollToNextViewController()
+//    }
+    
+
+    //Fired when the user taps on the pageControl to change its current page.
+    @objc func didChangePageControlValue() {
+        myPageViewController?.scrollToViewController(index: pageControl.currentPage)
+    }
+}
+
+extension myPageViewControllerClass: myPageViewControllerDelegate {
+    
+    func curlingPageViewController(_ thisPageViewController: myCurlingPageViewController,
+                                   didUpdatePageCount count: Int) {
+        pageControl.numberOfPages = count
+    }
+    
+    func curlingPageViewController(_ thisPageViewController: myCurlingPageViewController,
+                                   didUpdatePageIndex index: Int) {
+        pageControl.currentPage = index
+    }
+    
+}
+
+
 class myCurlingPageViewController: UIPageViewController {
     
-    weak var tutorialDelegate: TutorialPageViewControllerDelegate?
+    weak var myCurlingPageDelegate: myPageViewControllerDelegate?
     
     fileprivate(set) lazy var orderedViewControllers: [UIViewController] = {
         // The view controllers will be shown in this order
@@ -26,7 +78,7 @@ class myCurlingPageViewController: UIPageViewController {
             scrollToViewController(initialViewController)
         }
         
-        tutorialDelegate?.tutorialPageViewController(self,
+        myCurlingPageDelegate?.curlingPageViewController(self,
             didUpdatePageCount: orderedViewControllers.count)
     }
     
@@ -75,17 +127,17 @@ class myCurlingPageViewController: UIPageViewController {
                 // Setting the view controller programmatically does not fire
                 // any delegate methods, so we have to manually notify the
                 // 'tutorialDelegate' of the new index.
-                self.notifyTutorialDelegateOfNewIndex()
+                self.notifyCurlingDelegateOfNewIndex()
         })
     }
     
     /**
      Notifies '_tutorialDelegate' that the current page index was updated.
      */
-    fileprivate func notifyTutorialDelegateOfNewIndex() {
+    fileprivate func notifyCurlingDelegateOfNewIndex() {
         if let firstViewController = viewControllers?.first,
             let index = orderedViewControllers.index(of: firstViewController) {
-                tutorialDelegate?.tutorialPageViewController(self,
+                myCurlingPageDelegate?.curlingPageViewController(self,
                     didUpdatePageIndex: index)
         }
     }
@@ -146,29 +198,32 @@ extension myCurlingPageViewController: UIPageViewControllerDelegate {
         didFinishAnimating finished: Bool,
         previousViewControllers: [UIViewController],
         transitionCompleted completed: Bool) {
-        notifyTutorialDelegateOfNewIndex()
+        notifyCurlingDelegateOfNewIndex()
     }
     
 }
 
-protocol TutorialPageViewControllerDelegate: class {
+protocol myPageViewControllerDelegate: class {
     
     /**
      Called when the number of pages is updated.
      
-     - parameter tutorialPageViewController: the TutorialPageViewController instance
+     - parameter thisPageViewController: the TutorialPageViewController instance
      - parameter count: the total number of pages.
      */
-    func tutorialPageViewController(_ tutorialPageViewController: myCurlingPageViewController,
+    func curlingPageViewController(_ thisPageViewController: myCurlingPageViewController,
         didUpdatePageCount count: Int)
     
     /**
      Called when the current index is updated.
      
-     - parameter tutorialPageViewController: the TutorialPageViewController instance
+     - parameter thisPageViewController: the TutorialPageViewController instance
      - parameter index: the index of the currently visible page.
      */
-    func tutorialPageViewController(_ tutorialPageViewController: myCurlingPageViewController,
+    func curlingPageViewController(_ thisPageViewController: myCurlingPageViewController,
         didUpdatePageIndex index: Int)
     
 }
+
+
+

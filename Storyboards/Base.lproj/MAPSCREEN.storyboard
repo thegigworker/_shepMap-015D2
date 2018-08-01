@@ -106,7 +106,7 @@
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                         <state key="normal" title="Gold Route"/>
                                         <connections>
-                                            <action selector="btnMaketheChosenRoute:" destination="gUb-df-Mug" eventType="touchUpInside" id="1o5-Pc-orN"/>
+                                            <action selector="btnMakeGoldRoute:" destination="gUb-df-Mug" eventType="touchUpInside" id="1o5-Pc-orN"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" alpha="0.55000000000000004" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ekk-yn-nJt">
@@ -129,7 +129,7 @@
                                     <action selector="DisplayDistanceSliderMoved:" destination="gUb-df-Mug" eventType="primaryActionTriggered" id="AtW-V3-UMw"/>
                                 </connections>
                             </slider>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8tE-6s-sz3" userLabel="theChosenRoute View">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8tE-6s-sz3" userLabel="theGoldRoute View">
                                 <rect key="frame" x="70" y="179" width="253" height="71"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
@@ -300,7 +300,7 @@
                         <outlet property="lblExpense" destination="OWs-gU-qhR" id="QPC-Im-1xy"/>
                         <outlet property="lblPay" destination="1IK-AT-OBe" id="ngr-Xp-6Zs"/>
                         <outlet property="myMapView" destination="YSf-s6-G3S" id="2sF-VR-Lxe"/>
-                        <outlet property="theChosenRouteView" destination="8tE-6s-sz3" id="W6m-kZ-neK"/>
+                        <outlet property="theGoldRouteView" destination="8tE-6s-sz3" id="W6m-kZ-neK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aeZ-ph-6w7" sceneMemberID="firstResponder"/>

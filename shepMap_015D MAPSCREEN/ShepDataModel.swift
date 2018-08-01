@@ -74,16 +74,16 @@ class shepDataModel: NSObject {
     // Initializes and returns a map item object using the specified placemark object.
     //     var placemark: MKPlacemark { get }
     
-    func choosetheChosenRoute() -> ShepSingleAnnotation {
+    func choosetheGoldRoute() -> ShepSingleAnnotation {
         var myAnnotationsArray = shepAnnotationsArray
-        print ("in model choosetheChosenRoute(), myAnnotationsArray.count is: \(myAnnotationsArray.count)")
+        print ("in model choosetheGoldRoute(), myAnnotationsArray.count is: \(myAnnotationsArray.count)")
         print ("this is before sort")
         myAnnotationsArray = myAnnotationsArray.sorted {($0.goldRouteScore) > ($1.goldRouteScore) }
         print ("this is after sort \n")
         
         var fakeIndexNumber : Int = 0
         goldRouteFinder: for eachAnnotation in myAnnotationsArray {
-            print ("In model, chooseGOLDENRoute FOR LOOP ---- SORTED")
+            print ("In model, chooseGoldRoute FOR LOOP ---- SORTED")
             print ("myFakeIndexlikeNumber is \(fakeIndexNumber)")
             fakeIndexNumber = fakeIndexNumber + 1
             let myTitle = eachAnnotation.title
@@ -93,9 +93,9 @@ class shepDataModel: NSObject {
             let myDrivingDistance = eachAnnotation.routeDrivingDistance
             let routeExpense : Double = myDrivingDistance * Double(self.centsPerMileExpense)/100
             print ("routeExpense is     \(shepCurrencyFromDouble(shepNumber: routeExpense))")
-            let mytheChosenRouteScore = eachAnnotation.goldRouteScore
-            let myFormattedtheChosenRouteScore = (shepCurrencyFromDouble(shepNumber: mytheChosenRouteScore))
-            print ("-mytheChosenRouteScore \(myFormattedtheChosenRouteScore) ---  \(myFormattedtheChosenRouteScore) \n        --------------")
+            let mytheGoldRouteScore = eachAnnotation.goldRouteScore
+            let myFormattedtheGoldRouteScore = (shepCurrencyFromDouble(shepNumber: mytheGoldRouteScore))
+            print ("-mytheGoldRouteScore \(myFormattedtheGoldRouteScore) ---  \(myFormattedtheGoldRouteScore) \n        --------------")
             print ("crowFliesDistance: \(String(format: "%.02f", eachAnnotation.crowFliesDistance)) miles")
            
             print ("DrivingDistance is: \(String(format: "%.02f", myDrivingDistance)) miles")
@@ -104,8 +104,8 @@ class shepDataModel: NSObject {
             print ("drivingTime is:    \(String(format: "%.02f", myDrivingTime)) minutes \(lineBreak)")
             
         }  //  choosetheChosenRoute()  LOOP
-        print ("in Model fromTheFinalCompletionHandler : END OF choosetheChosenRoute()")
-        print ("end of choosetheChosenRoute(), myAnnotationsArray.count is: \(myAnnotationsArray.count)")
+        print ("in Model fromTheFinalCompletionHandler : END OF choosetheGoldRoute()")
+        print ("end of choosetheGoldRoute(), myAnnotationsArray.count is: \(myAnnotationsArray.count)")
        return myAnnotationsArray[0]
     }
 
@@ -245,8 +245,8 @@ class shepDataModel: NSObject {
                 //print ("mySubTitle          \(String(describing: mySubTitle!))")
                 let routeExpense : Double = myDrivingDistance * Double(self.centsPerMileExpense)/100
                 print ("routeExpense is     \(shepCurrencyFromDouble(shepNumber: routeExpense))")
-                let mytheChosenRouteScore = myAnnotation.goldRouteScore
-                print ("-mytheChosenRouteScore \(shepCurrencyFromDouble(shepNumber: mytheChosenRouteScore))\n        --------------")
+                let myGoldRouteScore = myAnnotation.goldRouteScore
+                print ("-mytheGoldRouteScore \(shepCurrencyFromDouble(shepNumber: myGoldRouteScore))\n        --------------")
                 print ("crowFliesDistance: \(String(format: "%.02f", myAnnotation.crowFliesDistance)) miles")
                 //let myDrivingDistance = myAnnotation.routeDrivingDistance
                 print ("DrivingDistance is: \(String(format: "%.02f", myDrivingDistance)) miles")
@@ -326,6 +326,7 @@ class shepDataModel: NSObject {
                     } else {
                         let shepDollarValue = Double(arc4random_uniform(75) + 1)
                         let validResult = ShepSingleAnnotation(myMapItem: item, currentLinkedRoute: MKRoute(), shepDollarValue: shepDollarValue, currentPinColor: myCurrentPinColor)
+                        print ("The validSearchResultsArray.count = \(self.validSearchResultsArray.count)")
                         self.validSearchResultsArray.append(validResult)
                         print ("We just found a valid search result, now calling getRouteInfoVia2Annotations")
                         //self.getRouteInfoFromAppleViaLocation(sourceLocation: sourceLocation, destinationAnnotation: validResult)
@@ -341,7 +342,7 @@ class shepDataModel: NSObject {
                 print ("shepSearchResultLoop is done now, validSearchResultsArray count is \(self.validSearchResultsArray.count) \n")
                 
                 self.delegate?.handleValidSearchResults(validSearchResults: self.validSearchResultsArray)
-                //self.validSearchResultsArray = []
+                //self.validSearchResultsArray.removeAll()
                 
                 //self.getRouteInfoFromApple(sourceLocation: sourceLocation, destinationAnnotation: <#T##ShepSingleAnnotation#>)
             }
