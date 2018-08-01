@@ -6,12 +6,6 @@
 
 import UIKit
 
-/*  NOTE RE THIS SYSTEM ERROR:  this class is not key value coding-compliant for the key XXX.'
- Another common cause if you are using Storyboard, your UIButton might have more then one assignings, a wrong Outlet or Action or an extra one.
- Open your storyboard and right click the XXX
- You will see that there is more than one assign/ref to this XXX. Remove one of the "Main..." greyed windows with the small "x":
- */
-
 /* To display dynamic data, a table view needs two important helpers: a data source and a delegate. A table view data source, as implied by its name, supplies the table view with the data it needs to display. A table view delegate helps the table view manage cell selection, row heights, and other aspects related to displaying the data. By default, UITableViewController and its subclasses adopt the necessary protocols to make the table view controller both a data source (UITableViewDataSource protocol) and a delegate (UITableViewDelegate protocol) for its associated table view. Your job is to implement the appropriate protocol methods in your table view controller subclass so that your table view has the correct behavior.
  
  // A functioning table view requires three table view data source methods.
@@ -19,6 +13,27 @@ import UIKit
  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
  */
+
+
+//    //// THIS STUFF IS CODE FROM ANOTHER DEMO RE INITIALIZING FOR A TABLEVIEWS
+//    //    init?(name: String, photo: UIImage?, rating: Int) {
+//    //        //Failable initializers always start with either init? or init!. These initializers return optional values or implicitly unwrapped optional values, respectively. Optionals can either contain a valid value or nil. You must check to see if the optional has a value, and then safely unwrap the value before you can use it. Implicitly unwrapped optionals are optionals, but the system implicitly unwraps them for you.
+//    //        //In this case, your initializer returns an optional Meal? object.
+//    //
+//    //        /* EXPLORE FURTHER
+//    //         As you will see in later lessons, failable initializers are harder to use because you need to unwrap the returned optional before using it. Some developers prefer to enforce an initializer’s contract using assert() or precondition() methods. These methods cause the app to terminate if the condition they are testing fails. This means that the calling code must validate the inputs before calling the initializer.
+//    //         For more information on initializers, see Initialization. For information on adding inline sanity checks and preconditions to your code, see assert(_:_:file:line:) and precondition(_:_:file:line:).
+//    //         */
+//    //        // The name must not be empty
+//    //        guard !name.isEmpty else {
+//    //            return nil
+//    //        }
+//    //        // The rating must be between 0 and 5 inclusively
+//    //        guard (rating >= 0) && (rating <= 5) else {
+//    //            return nil
+//    //        }
+//    //// THIS STUFF IS CODE FROM ANOTHER DEMO RE INITIALIZING FOR A TABLEVIEWS
+
 
 ////////////////////
 //The final step to displaying data in the user interface is to connect the code defined in shepProductsTVController.swift to the Shep TableView Scene.
@@ -43,7 +58,7 @@ class myTableViewController: UITableViewController, UIPopoverPresentationControl
     
     // This code declares a property on ShepTableViewController and initializes it with a default value (an empty array of ShepSingleItem objects)
     // var meals = [Meal]()
-    //var ShepItems = [ShepSingleXYZ]()
+    //var ShepItems = [ShepTempSingleItem]()
     
     
     // MARK: - VC Lifecycle
@@ -89,7 +104,6 @@ class myTableViewController: UITableViewController, UIPopoverPresentationControl
         super.viewWillAppear(animated)
         //tableView.reloadData()  // Reloads everything from scratch. Redisplays visible rows. Note that this will cause any existing drop placeholder rows to be removed.
     }
-    
     
     // MARK: - Table view DATASOURCE methods
     
@@ -161,7 +175,6 @@ class myTableViewController: UITableViewController, UIPopoverPresentationControl
              */
         }
     }
-    
     
     /*
      // Override to support conditional editing of the table view.
@@ -351,7 +364,7 @@ class myTableViewController: UITableViewController, UIPopoverPresentationControl
          */
     }
     
-    func productAtIndexPath(_ indexPath: IndexPath) -> ShepSingleXYZ {
+    func productAtIndexPath(_ indexPath: IndexPath) -> ShepTempSingleItem {
         print("productAtIndexPath w indexPath \(indexPath)")
         let productLine = BigKahunaSectionedArray[indexPath.section]
         return productLine.oneSectionOfData[indexPath.row]
@@ -400,15 +413,15 @@ class myTableViewController: UITableViewController, UIPopoverPresentationControl
 
 //  Because the Meal class’s init!(name:, photo:, rating:) initializer is failable, you need to check the result returned by the initializer. In this case, you are passing valid parameters, so the initializer should never fail. If the initializer does fail, you have a bug in your code. To help you identify and fix any bugs, if the initializer does fail, the fatalError() function prints the error message to the console and the app terminates.
 
-//        guard let meal1 = ShepSingleXYZ(name: "Caprese Salad", photo: photo1, rating: 4) else {
+//        guard let meal1 = ShepTempSingleItem(name: "Caprese Salad", photo: photo1, rating: 4) else {
 //            fatalError("Unable to instantiate meal1")
 //        }
 //
-//        guard let meal2 = ShepSingleXYZ(name: "Chicken and Potatoes", photo: photo2, rating: 5) else {
+//        guard let meal2 = ShepTempSingleItem(name: "Chicken and Potatoes", photo: photo2, rating: 5) else {
 //            fatalError("Unable to instantiate meal2")
 //        }
 //
-//        guard let meal3 = ShepSingleXYZ(name: "Pasta with Meatballs", photo: photo3, rating: 3) else {
+//        guard let meal3 = ShepTempSingleItem(name: "Pasta with Meatballs", photo: photo3, rating: 3) else {
 //            fatalError("Unable to instantiate meal2")
 //        }
 //

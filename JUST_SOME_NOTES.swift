@@ -30,6 +30,14 @@ Note the class modifier in front of func. Of course, this means you can't access
  */
 
 
+/*
+ NOTE RE THIS SYSTEM ERROR:  this class is not key value coding-compliant for the key XXX.'
+ Another common cause if you are using Storyboard, your UIButton might have more then one assignings, a wrong Outlet or Action or an extra one.
+ Open your storyboard and right click the XXX
+ You will see that there is more than one assign/ref to this XXX. Remove one of the "Main..." greyed windows with the small "x":
+ */
+
+
 /*  PROJECT NAVIGATOR CODES
  ? - means the file has not been added to source control
  M - Modified

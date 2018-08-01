@@ -11,9 +11,9 @@ import Foundation
 struct allSectionsOfData4TVC {
     
     var sectionName: String            // name of the product line
-    var oneSectionOfData : [ShepSingleXYZ]
+    var oneSectionOfData : [ShepTempSingleItem]
     
-    init(named: String, includeItems: [ShepSingleXYZ]) {
+    init(named: String, includeItems: [ShepTempSingleItem]) {
         sectionName = named
         oneSectionOfData = includeItems
     }
@@ -79,7 +79,7 @@ struct allSectionsOfData4TVC {
         return myBigKahunaSectionedArray
     }
     
-    static func doOneSection(sortedTempSingleArray: [ShepSingleXYZ], whichSort: String) -> [allSectionsOfData4TVC] {
+    static func doOneSection(sortedTempSingleArray: [ShepTempSingleItem], whichSort: String) -> [allSectionsOfData4TVC] {
         var tempBigKahunaSectionedArray = [allSectionsOfData4TVC]()
         //tempBigKahunaSectionedArray.append (allSectionsOfData4TVC(named: "ALL ONE SECTION", includeItems: sortedTempSingleArray))
         tempBigKahunaSectionedArray.append (allSectionsOfData4TVC(named: whichSort, includeItems: sortedTempSingleArray))
@@ -87,9 +87,9 @@ struct allSectionsOfData4TVC {
         return tempBigKahunaSectionedArray
     }
     
-    static func doMultipleSections(sortedTempSingleArray: [ShepSingleXYZ], whichSort: String) -> [allSectionsOfData4TVC] {
+    static func doMultipleSections(sortedTempSingleArray: [ShepTempSingleItem], whichSort: String) -> [allSectionsOfData4TVC] {
         var tempBigKahunaSectionedArray = [allSectionsOfData4TVC]()
-        var oneSectionOfData = [ShepSingleXYZ]()
+        var oneSectionOfData = [ShepTempSingleItem]()
         var currentSectionName = ""
         var loopCount = 0
         print("**** I'm in MultipleSections w sort \(whichSort)")

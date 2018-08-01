@@ -31,7 +31,7 @@ class shepOrigProductTVCell: UITableViewCell {
     @IBOutlet weak var productDescriptionLabel: UILabel!
     @IBOutlet weak var productTitleLabel: UILabel!
     
-    func setupCell(_ product: ShepSingleXYZ)
+    func setupCell(_ product: ShepTempSingleItem)
     {
         productImageView.image = product.image
         productDescriptionLabel.text = product.description
@@ -58,7 +58,7 @@ class ShepTableViewCell: UITableViewCell {
     //@IBOutlet weak var ratingControl: RatingControl!
     //@IBOutlet weak var namelabel2: UILabel! // shep test
     
-    func setupCell(_ product: ShepSingleXYZ) {
+    func setupCell(_ product: ShepTempSingleItem) {
         photoImageView.image = product.image
         //PayLbl.text = product.description
         NameLbl.text = product.title

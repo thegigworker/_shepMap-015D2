@@ -7,8 +7,8 @@ import UIKit
 
 class shepSecondDetailVC: UITableViewController, UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     // Model
-    var product: ShepSingleXYZ?
-    var shepProductDetail: ShepSingleXYZ?
+    var product: ShepTempSingleItem?
+    var shepProductDetail: ShepTempSingleItem?
 
     @IBOutlet weak var productImageView: UIImageView!
     @IBOutlet weak var lblCategory: UILabel!

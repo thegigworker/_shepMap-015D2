@@ -21,7 +21,7 @@
 		A18231E2210A6F0000C0CF31 /* shepEditableDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18231D5210A6EFF00C0CF31 /* shepEditableDetailVC.swift */; };
 		A18231E3210A6F0000C0CF31 /* shepSecondDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18231D6210A6EFF00C0CF31 /* shepSecondDetailVC.swift */; };
 		A18231E5210A6F0000C0CF31 /* ShepTableViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18231D9210A6EFF00C0CF31 /* ShepTableViewCells.swift */; };
-		A18231E6210A6F0000C0CF31 /* ShepSingleXYZ.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18231DB210A6EFF00C0CF31 /* ShepSingleXYZ.swift */; };
+		A18231E6210A6F0000C0CF31 /* ShepTempSingleItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18231DB210A6EFF00C0CF31 /* ShepTempSingleItem.swift */; };
 		A18231E7210A6F0000C0CF31 /* allSectionsOfData4TVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18231DC210A6EFF00C0CF31 /* allSectionsOfData4TVC.swift */; };
 		A18231E8210A6F0000C0CF31 /* tempSingleArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18231DD210A6EFF00C0CF31 /* tempSingleArray.swift */; };
 		A19B6E032020EA5F00AE2BBE /* searchRadius_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19B6E022020EA5F00AE2BBE /* searchRadius_VC.swift */; };
@@ -48,7 +48,7 @@
 		A18231D5210A6EFF00C0CF31 /* shepEditableDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = shepEditableDetailVC.swift; sourceTree = "<group>"; };
 		A18231D6210A6EFF00C0CF31 /* shepSecondDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = shepSecondDetailVC.swift; sourceTree = "<group>"; };
 		A18231D9210A6EFF00C0CF31 /* ShepTableViewCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShepTableViewCells.swift; sourceTree = "<group>"; };
-		A18231DB210A6EFF00C0CF31 /* ShepSingleXYZ.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShepSingleXYZ.swift; sourceTree = "<group>"; };
+		A18231DB210A6EFF00C0CF31 /* ShepTempSingleItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShepTempSingleItem.swift; sourceTree = "<group>"; };
 		A18231DC210A6EFF00C0CF31 /* allSectionsOfData4TVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = allSectionsOfData4TVC.swift; sourceTree = "<group>"; };
 		A18231DD210A6EFF00C0CF31 /* tempSingleArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tempSingleArray.swift; sourceTree = "<group>"; };
 		A19B6E022020EA5F00AE2BBE /* searchRadius_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = searchRadius_VC.swift; path = "shepMap_015D MAPSCREEN/searchRadius_VC.swift"; sourceTree = SOURCE_ROOT; };
@@ -132,9 +132,9 @@
 		A18231DA210A6EFF00C0CF31 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				A18231DB210A6EFF00C0CF31 /* ShepSingleXYZ.swift */,
-				A18231DC210A6EFF00C0CF31 /* allSectionsOfData4TVC.swift */,
+				A18231DB210A6EFF00C0CF31 /* ShepTempSingleItem.swift */,
 				A18231DD210A6EFF00C0CF31 /* tempSingleArray.swift */,
+				A18231DC210A6EFF00C0CF31 /* allSectionsOfData4TVC.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -278,7 +278,7 @@
 				A1D66C211FD0995B0036EDAC /* SingleAnnotationView.swift in Sources */,
 				A11C1A4A2109497E00BA8252 /* Login_VC.swift in Sources */,
 				A18231E8210A6F0000C0CF31 /* tempSingleArray.swift in Sources */,
-				A18231E6210A6F0000C0CF31 /* ShepSingleXYZ.swift in Sources */,
+				A18231E6210A6F0000C0CF31 /* ShepTempSingleItem.swift in Sources */,
 				A18231E7210A6F0000C0CF31 /* allSectionsOfData4TVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

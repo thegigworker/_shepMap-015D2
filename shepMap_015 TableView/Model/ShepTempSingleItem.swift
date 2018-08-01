@@ -1,5 +1,5 @@
 //
-//  ShepSingleXYZ.swift
+//  ShepTempSingleItem.swift
 //
 
 import Foundation
@@ -17,7 +17,7 @@ public enum shepProductRating {
 }
 
 
-class ShepSingleXYZ {
+class ShepTempSingleItem {
     
     var title: String
     var description: String
@@ -100,7 +100,7 @@ class ShepSingleXYZ {
         }
     }
     
-    func switchGlyph() -> String? { // marker glyph
+    func switchGlyph() -> String? { // marker glyph/Users/shepardtamler/Library/Mobile Documents/com~apple~CloudDocs/Developer/_shepMap 015D/shepMap_015 TableView/Model/ShepTempSingleItem.swift
         switch shepDollarValue {
         case 0...10:
             return "tricycle"

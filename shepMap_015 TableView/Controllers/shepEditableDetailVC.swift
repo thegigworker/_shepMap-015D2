@@ -10,7 +10,7 @@ import UIKit
 class shepEditableDetailVC: UITableViewController, UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     // Model:
-    var shepProductDetail: ShepSingleXYZ?
+    var shepProductDetail: ShepTempSingleItem?
     
     @IBOutlet weak var productImageView: UIImageView!
     @IBOutlet weak var productTitleLabel: UITextField!
