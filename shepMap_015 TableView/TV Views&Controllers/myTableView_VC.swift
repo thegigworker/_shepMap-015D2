@@ -61,50 +61,6 @@ class myTableViewController: UITableViewController, UIPopoverPresentationControl
     //var ShepItems = [ShepTempSingleItem]()
     
     
-    // MARK: - VC Lifecycle
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // this one line of code automatically provides all kinds of UI Edit functionality.
-        // editButtonItem only available w UITableViewController
-        // actual edit funtionality in func:  commit editingStyle: UITableViewCellEditingStyle
-        navigationItem.rightBarButtonItem = editButtonItem
-        
-        //        // Make the row height dynamic
-        //        tableView.estimatedRowHeight = tableView.rowHeight
-        //        //tableView.estimatedRowHeight = 185.0
-        //        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.contentSize.height = 150
-        
-        navigationItem.title = "Shep's TableView"
-        if #available(iOS 11.0, *) {
-            navigationController?.navigationBar.prefersLargeTitles = true
-        } else {
-            // Fallback on earlier versions
-        }
-        
-        // --------------------------------------------------------------------------
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        
-        //The template implementation of this method includes comments that were inserted by Xcode when it created MealTableViewController.swift. Code comments like this provide helpful hints and contextual information in source code files, but you don’t need them for this lesson.
-        // --------------------------------------------------------------------------
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        //tableView.reloadData()  // Reloads everything from scratch. Redisplays visible rows. Note that this will cause any existing drop placeholder rows to be removed.
-    }
-    
     // MARK: - Table view DATASOURCE methods
     
     /*
@@ -318,7 +274,7 @@ class myTableViewController: UITableViewController, UIPopoverPresentationControl
     }
     
     
-    //MARK: - ----popoverPresentationController functions----
+    //MARK: - popoverPresentationController functions
     
     //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     //        let controller = segue.destination
@@ -401,7 +357,49 @@ class myTableViewController: UITableViewController, UIPopoverPresentationControl
 //        print ("performing transformHelix CATransform3DRotate \n" )
 //        return transform
 //    }
+   
+    // MARK: - VC Lifecycle
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // this one line of code automatically provides all kinds of UI Edit functionality.
+        // editButtonItem only available w UITableViewController
+        // actual edit funtionality in func:  commit editingStyle: UITableViewCellEditingStyle
+        navigationItem.rightBarButtonItem = editButtonItem
+        
+        //        // Make the row height dynamic
+        //        tableView.estimatedRowHeight = tableView.rowHeight
+        //        //tableView.estimatedRowHeight = 185.0
+        //        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.contentSize.height = 150
+        
+        navigationItem.title = "Shep's TableView"
+        if #available(iOS 11.0, *) {
+            navigationController?.navigationBar.prefersLargeTitles = true
+        } else {
+            // Fallback on earlier versions
+        }
+        
+        // --------------------------------------------------------------------------
+        // Uncomment the following line to preserve selection between presentations
+        // self.clearsSelectionOnViewWillAppear = false
+        
+        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        //The template implementation of this method includes comments that were inserted by Xcode when it created MealTableViewController.swift. Code comments like this provide helpful hints and contextual information in source code files, but you don’t need them for this lesson.
+        // --------------------------------------------------------------------------
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        //tableView.reloadData()  // Reloads everything from scratch. Redisplays visible rows. Note that this will cause any existing drop placeholder rows to be removed.
+    }
 }
 
 

@@ -18,21 +18,6 @@ class shepSecondDetailVC: UITableViewController, UITextFieldDelegate, UITextView
     @IBOutlet weak var productDescriptionTextView: UITextView!
     @IBOutlet weak var lblStreetAddress: UILabel!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        title = "Detail View"
-        productImageView.image = product?.image
-        productImageView.image = shepProductDetail?.image
-        lblTitle.text = shepProductDetail?.title
-        productDescriptionTextView.text = shepProductDetail?.description
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        //shepProductDetail?.title = productTitleLabel.text!
-        shepProductDetail?.description = productDescriptionTextView.text
-        shepProductDetail?.image = productImageView.image!
-    }
-    
     // MARK: - UITextFieldDelegate
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         // dismiss the keyboard
@@ -74,5 +59,19 @@ class shepSecondDetailVC: UITableViewController, UITextFieldDelegate, UITextView
         dismiss(animated: true, completion: nil)
     }
     
-
+    // MARK: - VC Lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        title = "Detail View"
+        productImageView.image = product?.image
+        productImageView.image = shepProductDetail?.image
+        lblTitle.text = shepProductDetail?.title
+        productDescriptionTextView.text = shepProductDetail?.description
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        //shepProductDetail?.title = productTitleLabel.text!
+        shepProductDetail?.description = productDescriptionTextView.text
+        shepProductDetail?.image = productImageView.image!
+    }
 }

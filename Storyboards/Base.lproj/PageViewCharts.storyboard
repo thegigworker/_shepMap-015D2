@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -19,17 +16,17 @@
                         <viewControllerLayoutGuide type="bottom" id="Ajb-VU-PNu"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="5N5-Y0-gL2">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eCM-1b-PMA">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
                                 <connections>
                                     <segue destination="z2m-Xw-UlC" kind="embed" id="5Es-XO-H0C"/>
                                 </connections>
                             </containerView>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="4" translatesAutoresizingMaskIntoConstraints="NO" id="YHh-Hd-94K">
-                                <rect key="frame" x="160" y="570" width="75" height="71"/>
+                                <rect key="frame" x="160" y="570" width="75" height="4"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="75" id="4FE-nQ-MOH"/>
                                 </constraints>
@@ -65,7 +62,7 @@
         <!--Charts-->
         <scene sceneID="9JA-gV-wj5">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" modalTransitionStyle="flipHorizontal" useStoryboardIdentifierAsRestorationIdentifier="YES" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="none" id="z2m-Xw-UlC" customClass="myCurlingPageViewController" customModule="shepMapApp" customModuleProvider="target" sceneMemberID="viewController">
+                <pageViewController autoresizesArchivedViewToFullSize="NO" modalTransitionStyle="flipHorizontal" useStoryboardIdentifierAsRestorationIdentifier="YES" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="none" id="z2m-Xw-UlC" customClass="myChartsCurlingPageVC" customModule="shepMapApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Charts" image="chart 1" selectedImage="bar-chart-filled-40" id="6QF-U7-yzo"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </pageViewController>
@@ -82,7 +79,7 @@
                         <viewControllerLayoutGuide type="bottom" id="hgK-xt-dDB"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="ZWc-8S-DNh">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="chart 1" translatesAutoresizingMaskIntoConstraints="NO" id="l7d-XE-fqr">
@@ -112,7 +109,7 @@
                         <viewControllerLayoutGuide type="bottom" id="xWt-LX-uGk"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="dDS-vd-gB9">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="chart 4" translatesAutoresizingMaskIntoConstraints="NO" id="cko-BZ-BgY">
@@ -142,11 +139,11 @@
                         <viewControllerLayoutGuide type="bottom" id="g1p-O7-yy5"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="RbZ-Qq-nEc">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chart 2" highlighted="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6eH-8v-rMm" userLabel="chart 2">
-                                <rect key="frame" x="16" y="157" width="343" height="314"/>
+                                <rect key="frame" x="20" y="157" width="560" height="247"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -172,7 +169,7 @@
                         <viewControllerLayoutGuide type="bottom" id="x5A-9L-l9G"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="jpE-a9-1Fd">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="pie chart 1" translatesAutoresizingMaskIntoConstraints="NO" id="jx0-4j-ut4">

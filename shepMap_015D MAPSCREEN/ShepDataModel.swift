@@ -54,11 +54,12 @@ protocol DataModelDelegate: class {
 
 class shepDataModel: NSObject {
     //We need be sure we do not create a retain cycle between the delegate and the delegating objects, so we use a weak reference to delegate.
-    weak var delegate: DataModelDelegate?
+    weak var myDataModelDelegate: DataModelDelegate?
     let centsPerMileExpense: Int = 60
     var currentTransportType = MKDirectionsTransportType.automobile
     var shepAnnotationsArray = [ShepSingleAnnotation]()
     var validSearchResultsArray = [ShepSingleAnnotation]()
+    var howManySearchItemsFound = 0
     var currentSearchDistance = CLLocationDistance(miles2meters(miles: initialSearch))
     //print ("currentSearchDistance \(currentSearchDistance)")
     var currentDisplayDistance = CLLocationDistance(miles2meters(miles: initialDisplay))
@@ -73,6 +74,8 @@ class shepDataModel: NSObject {
     //     init(placemark: MKPlacemark)
     // Initializes and returns a map item object using the specified placemark object.
     //     var placemark: MKPlacemark { get }
+    
+    // MARK: - Methods
     
     func choosetheGoldRoute() -> ShepSingleAnnotation {
         var myAnnotationsArray = shepAnnotationsArray
@@ -264,7 +267,7 @@ class shepDataModel: NSObject {
                 
                 if self.whichRouteStyle == "random" {
                     self.currentRoute = myRoute
-                    self.delegate?.drawNewRoute(thisRoute: myRoute)
+                    self.myDataModelDelegate?.drawNewRoute(thisRoute: myRoute)
                 }
                 
                 // THIS IS THE END OF getRouteInfoVia2Annotations COMPLETION HANDLER
@@ -273,7 +276,7 @@ class shepDataModel: NSObject {
         })
     }
     
-    func populateMapViaAppleLocalSearch(searchString:String) {
+    func buildShepAnnotationsArrayViaAppleLocalSearch(searchString:String) {
         let request = MKLocalSearchRequest()
         request.naturalLanguageQuery = searchString
         validSearchResultsArray = [ShepSingleAnnotation]()
@@ -282,7 +285,7 @@ class shepDataModel: NSObject {
         let homeLocationPlacemark = MKPlacemark(coordinate: CLLocationCoordinate2DMake(homeLocationCoord.latitude, homeLocationCoord.longitude), addressDictionary: nil)
         let homeLocationMapItem = MKMapItem(placemark: homeLocationPlacemark)
         /////////  THEN MAKE ANNOTATION FROM MKMAPITEM
-        let homeLocationAnnotation = ShepSingleAnnotation(myMapItem: homeLocationMapItem, currentLinkedRoute: MKRoute(), shepDollarValue: 0.0, currentPinColor: myCurrentPinColor)
+        let homeLocationAnnotation = ShepSingleAnnotation(myMapItem: homeLocationMapItem, currentLinkedRoute: MKRoute(), shepDollarValue: 0.0, currentPinColor: whichPinColor)
         
         // 搜索当前区域
         // print ("in performLocalSearch searchRegion search distance: \(meters2miles(meters: self.currentSearchDistanceX))")
@@ -319,29 +322,35 @@ class shepDataModel: NSObject {
                     let mapItemDistance = sourceLocation.distance(from: searchResultLocation) // result is in meters
                     //let distanceInMiles = meters2miles(meters: mapItemDistance)
                     print ("Current search distance: \(meters2miles(meters: self.currentSearchDistance)) and this distance: \(meters2miles(meters: mapItemDistance))")
-                    
+                    print ("Early in shepSearchResultLoop, howManySearchItemsFound = \(self.howManySearchItemsFound)")
+                    if self.howManySearchItemsFound > 5 {
+                        print ("more than 5 found items in this search")
+                        self.howManySearchItemsFound += 1
+                        continue shepSearchResultLoop
+                    }
                     if mapItemDistance > self.currentSearchDistance {  // if SearchResult is further away than currentSearchDistanceX
                         print ("took one down, too far away")
                         continue shepSearchResultLoop
                     } else {
+                        self.howManySearchItemsFound += 1
                         let shepDollarValue = Double(arc4random_uniform(75) + 1)
-                        let validResult = ShepSingleAnnotation(myMapItem: item, currentLinkedRoute: MKRoute(), shepDollarValue: shepDollarValue, currentPinColor: myCurrentPinColor)
-                        print ("The validSearchResultsArray.count = \(self.validSearchResultsArray.count)")
+                        let validResult = ShepSingleAnnotation(myMapItem: item, currentLinkedRoute: MKRoute(), shepDollarValue: shepDollarValue, currentPinColor: whichPinColor)
+                        //print ("The validSearchResultsArray.count = \(self.validSearchResultsArray.count)")
                         self.validSearchResultsArray.append(validResult)
                         print ("We just found a valid search result, now calling getRouteInfoVia2Annotations")
-                        //self.getRouteInfoFromAppleViaLocation(sourceLocation: sourceLocation, destinationAnnotation: validResult)
-                        
                         self.getRouteInfoVia2Annotations(source: homeLocationAnnotation, destination: validResult)
+                        //self.getRouteInfoFromAppleViaLocation(sourceLocation: sourceLocation, destinationAnnotation: validResult)
                     }
                     print ("still inside shepSearchResultLoop, shepAnnotationsArray count is \(self.shepAnnotationsArray.count)")
                     print ("still inside shepSearchResultLoop validSearchResultsArray count: \(self.validSearchResultsArray.count) \n")
                 }
                 
+                self.howManySearchItemsFound = 0
                 self.shepAnnotationsArray.append(contentsOf: self.validSearchResultsArray)
                 print ("shepSearchResultLoop is done now, shepAnnotationsArray count is \(self.shepAnnotationsArray.count)")
                 print ("shepSearchResultLoop is done now, validSearchResultsArray count is \(self.validSearchResultsArray.count) \n")
                 
-                self.delegate?.handleValidSearchResults(validSearchResults: self.validSearchResultsArray)
+                self.myDataModelDelegate?.handleValidSearchResults(validSearchResults: self.validSearchResultsArray)
                 //self.validSearchResultsArray.removeAll()
                 
                 //self.getRouteInfoFromApple(sourceLocation: sourceLocation, destinationAnnotation: <#T##ShepSingleAnnotation#>)
@@ -350,6 +359,36 @@ class shepDataModel: NSObject {
         print ("OPENING GAMBIT, shepAnnotationsArray count is \(shepAnnotationsArray.count) \n")
     }
     
+//    func whichLocalSearch() -> String? { // rightCalloutAccessory image
+//        switch shepDollarValue {
+//        case 0:
+//            return "McDonalds"
+//        case 1:
+//            return "Burger King"
+//        case 2:
+//            return "Target"
+//        case 3:
+//            return "Walmart"
+//        case 4:
+//            return "gas station"
+//        case 5:
+//            return "market"
+//        case 6:
+//            return "Pub"
+//        case 7:
+//            return "Diner"
+//        case 8:
+//            return "Lowes"
+//        case 9:
+//            return "Home Depot"
+//        case 10:
+//            return "pizza"
+//        case 11:
+//            return "bbq"
+//        default:
+//            return "superman"
+//        }
+//    }
+    
 }
-
 

@@ -32,6 +32,8 @@ class sortingHatPopover: UIViewController, UIPopoverPresentationControllerDelega
     @IBOutlet weak var btnCat2_foodType: UIButton!
     @IBOutlet weak var checkmark5: UIImageView!
     
+    //MARK: - Functions
+    
     @IBAction func selected_DrivingDistance(_ sender: UIButton) {
         clearCheckMarks()
         whichSort = "distance"

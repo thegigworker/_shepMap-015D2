@@ -46,7 +46,7 @@ class ShepTempSingleItem {
     }
     
 
-//    //MARK:----Initialization----
+//    //----INITIALIZATION----
 //    init(myMapItem: MKMapItem, currentLinkedRoute: MKRoute, shepDollarValue: Double) {
 //        self.origTitle = myMapItem.name ?? "No Title"
 //        //self.locationName = myMapItem.name! //searchResult.description

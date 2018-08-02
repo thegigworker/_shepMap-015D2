@@ -9,7 +9,8 @@ import Contacts
 // This adds the Contacts framework, which contains dictionary key constants such as CNPostalAddressStreetKey,
 // for when you need to set the address, city or state fields of a location.
 
-var myCurrentPinColor = UIColor()
+var whichPinColor = UIColor()
+var whichGigIcon = ""
 
 class SingleAnnotationView: MKMarkerAnnotationView {
     
@@ -20,17 +21,25 @@ class SingleAnnotationView: MKMarkerAnnotationView {
             guard let myAnnotationData = newValue as? ShepSingleAnnotation else { return }
             canShowCallout = true
             //pinView!.animatesDrop = true
-            calloutOffset = CGPoint(x: -5, y: 5)
-            rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+            calloutOffset = CGPoint(x: -4, y: 4)
+            
+            //rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
             //rightCalloutAccessoryView = UIButton(type: .infoDark) //???
-      
-            let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 54, height: 54))
+            
+            let rightImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 54, height: 54))
             //You can try to set the UIImageView size to the created MKPinAnnotationView
             // and then call aspect fit on it like this:
-           // let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
-            imageView.image = UIImage(named: myAnnotationData.switchImage()!)
-            imageView.contentMode = .scaleAspectFit
-            leftCalloutAccessoryView = imageView
+            // let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
+            rightImageView.image = UIImage(named: myAnnotationData.switchImage()!)
+            rightImageView.contentMode = .scaleAspectFit
+            rightCalloutAccessoryView = rightImageView
+            // rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+            // //rightCalloutAccessoryView = UIButton(type: .infoDark) //???
+            //
+            let leftImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 54, height: 54))
+            leftImageView.image = UIImage(named: whichGigIcon)
+            leftImageView.contentMode = .scaleAspectFit
+            leftCalloutAccessoryView = leftImageView
             
             // Below is a function which has some stuff re setting leftCalloutAccessoryView as UIButton
 //            func myMapView(_ myMapView: MKMapView, didSelect view: MKAnnotationView) {
@@ -42,7 +51,7 @@ class SingleAnnotationView: MKMarkerAnnotationView {
 //                }
 //            }
             //markerTintColor = myAnnotationData.switchTintColor()
-            markerTintColor = myCurrentPinColor
+            markerTintColor = whichPinColor
             //markerTintColor = myDataModel.currentPinColor
             if let imageName = myAnnotationData.switchGlyph() {
                 glyphImage = UIImage(named: imageName)
@@ -70,11 +79,11 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
         let latitude = myMapItem.placemark.coordinate.latitude
         let longitude = myMapItem.placemark.coordinate.longitude
         self.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-        self.myCurrentPinColor = currentPinColor
+        self.whichPinColor = currentPinColor
         super.init()
     }
     
-    //MARK:----My Properties----
+    //MARK: - My Properties
     let myDataModel = shepDataModel()
     let origTitle: String?
     let coordinate: CLLocationCoordinate2D
@@ -83,7 +92,7 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
     var myMapItem: MKMapItem
     var currentLinkedRoute: MKRoute
     var crowFliesDistance: Double = 0.0
-    var myCurrentPinColor: UIColor
+    var whichPinColor: UIColor
     
     //   The MKAnnotation protocol requires the coordinate property. If you want your annotation view to display a title and subtitle when the user taps a pin, your class also needs properties named title and subtitle.
     var title: String? {
@@ -117,7 +126,7 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
     
     // Annotation right callout accessory opens this mapItem in Maps app
     // Here you create an MKMapItem from an MKPlacemark. The Maps app is able to read this MKMapItem, and display the right thing.
-    //MARK:----My functions----
+    //MARK: - My methods
     func mapItem() -> MKMapItem {
         let addressDict = [CNPostalAddressStreetKey: subtitle!]
         let placemark = MKPlacemark(coordinate: coordinate, addressDictionary: addressDict)
@@ -154,7 +163,6 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
             return "superman"
         }
     }
-    
 }
 
 

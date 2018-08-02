@@ -9,19 +9,14 @@ class myPageViewControllerClass: UIViewController {
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var containerView: UIView!
     
-    var myPageViewController: myCurlingPageViewController? {
+    var myPageViewController: myChartsCurlingPageVC? {
         didSet {
             myPageViewController?.myCurlingPageDelegate = self
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        pageControl.addTarget(self, action: #selector(myPageViewControllerClass.didChangePageControlValue), for: .valueChanged)
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let aPageViewController = segue.destination as? myCurlingPageViewController {
+        if let aPageViewController = segue.destination as? myChartsCurlingPageVC {
             self.myPageViewController = aPageViewController
         }
     }
@@ -39,24 +34,29 @@ class myPageViewControllerClass: UIViewController {
     @objc func didChangePageControlValue() {
         myPageViewController?.scrollToViewController(index: pageControl.currentPage)
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        pageControl.addTarget(self, action: #selector(myPageViewControllerClass.didChangePageControlValue), for: .valueChanged)
+    }
 }
 
 extension myPageViewControllerClass: myPageViewControllerDelegate {
     
-    func curlingPageViewController(_ thisPageViewController: myCurlingPageViewController,
+    func curlingPageViewController(_ thisPageViewController: myChartsCurlingPageVC,
                                    didUpdatePageCount count: Int) {
         pageControl.numberOfPages = count
     }
     
-    func curlingPageViewController(_ thisPageViewController: myCurlingPageViewController,
+    func curlingPageViewController(_ thisPageViewController: myChartsCurlingPageVC,
                                    didUpdatePageIndex index: Int) {
         pageControl.currentPage = index
     }
     
 }
 
-
-class myCurlingPageViewController: UIPageViewController {
+//MARK: -
+class myChartsCurlingPageVC: UIPageViewController {
     
     weak var myCurlingPageDelegate: myPageViewControllerDelegate?
     
@@ -68,20 +68,7 @@ class myCurlingPageViewController: UIPageViewController {
             self.newColoredViewController("Chart4")]
     }()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        dataSource = self
-        delegate = self
-        
-        if let initialViewController = orderedViewControllers.first {
-            scrollToViewController(initialViewController)
-        }
-        
-        myCurlingPageDelegate?.curlingPageViewController(self,
-            didUpdatePageCount: orderedViewControllers.count)
-    }
-    
+   
     /**
      Scrolls to the next view controller.
      */
@@ -142,11 +129,23 @@ class myCurlingPageViewController: UIPageViewController {
         }
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        dataSource = self
+        delegate = self
+        
+        if let initialViewController = orderedViewControllers.first {
+            scrollToViewController(initialViewController)
+        }
+        
+        myCurlingPageDelegate?.curlingPageViewController(self,
+                                                         didUpdatePageCount: orderedViewControllers.count)
+    }
 }
 
-// MARK: UIPageViewControllerDataSource
-
-extension myCurlingPageViewController: UIPageViewControllerDataSource {
+// MARK: - UIPageViewControllerDataSource
+extension myChartsCurlingPageVC: UIPageViewControllerDataSource {
     
     func pageViewController(_ pageViewController: UIPageViewController,
         viewControllerBefore viewController: UIViewController) -> UIViewController? {
@@ -192,7 +191,8 @@ extension myCurlingPageViewController: UIPageViewControllerDataSource {
     }
 }
 
-extension myCurlingPageViewController: UIPageViewControllerDelegate {
+// MARK: - UIPageViewControllerDelegate
+extension myChartsCurlingPageVC: UIPageViewControllerDelegate {
     
     func pageViewController(_ pageViewController: UIPageViewController,
         didFinishAnimating finished: Bool,
@@ -203,6 +203,7 @@ extension myCurlingPageViewController: UIPageViewControllerDelegate {
     
 }
 
+//MARK: - Protocol functions
 protocol myPageViewControllerDelegate: class {
     
     /**
@@ -211,7 +212,7 @@ protocol myPageViewControllerDelegate: class {
      - parameter thisPageViewController: the TutorialPageViewController instance
      - parameter count: the total number of pages.
      */
-    func curlingPageViewController(_ thisPageViewController: myCurlingPageViewController,
+    func curlingPageViewController(_ thisPageViewController: myChartsCurlingPageVC,
         didUpdatePageCount count: Int)
     
     /**
@@ -220,7 +221,7 @@ protocol myPageViewControllerDelegate: class {
      - parameter thisPageViewController: the TutorialPageViewController instance
      - parameter index: the index of the currently visible page.
      */
-    func curlingPageViewController(_ thisPageViewController: myCurlingPageViewController,
+    func curlingPageViewController(_ thisPageViewController: myChartsCurlingPageVC,
         didUpdatePageIndex index: Int)
     
 }

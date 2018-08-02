@@ -15,9 +15,9 @@
 		A11C1A4A2109497E00BA8252 /* Login_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D2038420FF9E090089269B /* Login_VC.swift */; };
 		A11C1A4E2109499200BA8252 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D2038220FF9E090089269B /* TabBarController.swift */; };
 		A16326A0210A71D70064505C /* Debug_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A163269D210A71D60064505C /* Debug_VC.swift */; };
-		A16326A1210A71D70064505C /* myCurlingPage_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A163269E210A71D70064505C /* myCurlingPage_VC.swift */; };
+		A16326A1210A71D70064505C /* myChartsCurlingPage_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A163269E210A71D70064505C /* myChartsCurlingPage_VC.swift */; };
 		A18231DF210A6F0000C0CF31 /* SortingHatPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18231D2210A6EFF00C0CF31 /* SortingHatPopover.swift */; };
-		A18231E1210A6F0000C0CF31 /* myTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18231D4210A6EFF00C0CF31 /* myTableVC.swift */; };
+		A18231E1210A6F0000C0CF31 /* myTableView_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18231D4210A6EFF00C0CF31 /* myTableView_VC.swift */; };
 		A18231E2210A6F0000C0CF31 /* shepEditableDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18231D5210A6EFF00C0CF31 /* shepEditableDetailVC.swift */; };
 		A18231E3210A6F0000C0CF31 /* shepSecondDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18231D6210A6EFF00C0CF31 /* shepSecondDetailVC.swift */; };
 		A18231E5210A6F0000C0CF31 /* ShepTableViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18231D9210A6EFF00C0CF31 /* ShepTableViewCells.swift */; };
@@ -42,9 +42,9 @@
 		A10275CE21097E88008AECDA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A10B02951FE1784D004FA3B8 /* ShepDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShepDataModel.swift; path = "shepMap_015D MAPSCREEN/ShepDataModel.swift"; sourceTree = SOURCE_ROOT; };
 		A163269D210A71D60064505C /* Debug_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Debug_VC.swift; sourceTree = "<group>"; };
-		A163269E210A71D70064505C /* myCurlingPage_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = myCurlingPage_VC.swift; sourceTree = "<group>"; };
+		A163269E210A71D70064505C /* myChartsCurlingPage_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = myChartsCurlingPage_VC.swift; sourceTree = "<group>"; };
 		A18231D2210A6EFF00C0CF31 /* SortingHatPopover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortingHatPopover.swift; sourceTree = "<group>"; };
-		A18231D4210A6EFF00C0CF31 /* myTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = myTableVC.swift; sourceTree = "<group>"; };
+		A18231D4210A6EFF00C0CF31 /* myTableView_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = myTableView_VC.swift; sourceTree = "<group>"; };
 		A18231D5210A6EFF00C0CF31 /* shepEditableDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = shepEditableDetailVC.swift; sourceTree = "<group>"; };
 		A18231D6210A6EFF00C0CF31 /* shepSecondDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = shepSecondDetailVC.swift; sourceTree = "<group>"; };
 		A18231D9210A6EFF00C0CF31 /* ShepTableViewCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShepTableViewCells.swift; sourceTree = "<group>"; };
@@ -110,41 +110,33 @@
 			path = "shepMap_015D MAPSCREEN";
 			sourceTree = "<group>";
 		};
-		A18231D1210A6EFF00C0CF31 /* Controllers */ = {
+		A18231D7210A6EFF00C0CF31 /* TV Views&Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				A18231D4210A6EFF00C0CF31 /* myTableView_VC.swift */,
+				A18231D9210A6EFF00C0CF31 /* ShepTableViewCells.swift */,
 				A18231D2210A6EFF00C0CF31 /* SortingHatPopover.swift */,
 				A18231D6210A6EFF00C0CF31 /* shepSecondDetailVC.swift */,
-				A18231D4210A6EFF00C0CF31 /* myTableVC.swift */,
 				A18231D5210A6EFF00C0CF31 /* shepEditableDetailVC.swift */,
 			);
-			path = Controllers;
+			path = "TV Views&Controllers";
 			sourceTree = "<group>";
 		};
-		A18231D7210A6EFF00C0CF31 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				A18231D9210A6EFF00C0CF31 /* ShepTableViewCells.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		A18231DA210A6EFF00C0CF31 /* Model */ = {
+		A18231DA210A6EFF00C0CF31 /* TV Model */ = {
 			isa = PBXGroup;
 			children = (
 				A18231DB210A6EFF00C0CF31 /* ShepTempSingleItem.swift */,
 				A18231DD210A6EFF00C0CF31 /* tempSingleArray.swift */,
 				A18231DC210A6EFF00C0CF31 /* allSectionsOfData4TVC.swift */,
 			);
-			path = Model;
+			path = "TV Model";
 			sourceTree = "<group>";
 		};
 		A1D2036620FF9CA90089269B /* shepMap_015 TableView */ = {
 			isa = PBXGroup;
 			children = (
-				A18231DA210A6EFF00C0CF31 /* Model */,
-				A18231D7210A6EFF00C0CF31 /* Views */,
-				A18231D1210A6EFF00C0CF31 /* Controllers */,
+				A18231DA210A6EFF00C0CF31 /* TV Model */,
+				A18231D7210A6EFF00C0CF31 /* TV Views&Controllers */,
 			);
 			path = "shepMap_015 TableView";
 			sourceTree = "<group>";
@@ -153,7 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				A163269D210A71D60064505C /* Debug_VC.swift */,
-				A163269E210A71D70064505C /* myCurlingPage_VC.swift */,
+				A163269E210A71D70064505C /* myChartsCurlingPage_VC.swift */,
 			);
 			path = "Charts&Debug";
 			sourceTree = "<group>";
@@ -262,14 +254,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A18231E1210A6F0000C0CF31 /* myTableVC.swift in Sources */,
+				A18231E1210A6F0000C0CF31 /* myTableView_VC.swift in Sources */,
 				A19B6E032020EA5F00AE2BBE /* searchRadius_VC.swift in Sources */,
 				A1DAD3762087C28400F9BC9C /* JUST_SOME_NOTES.swift in Sources */,
 				A18231E3210A6F0000C0CF31 /* shepSecondDetailVC.swift in Sources */,
 				A18231DF210A6F0000C0CF31 /* SortingHatPopover.swift in Sources */,
 				A18231E2210A6F0000C0CF31 /* shepEditableDetailVC.swift in Sources */,
 				A10B02961FE1784D004FA3B8 /* ShepDataModel.swift in Sources */,
-				A16326A1210A71D70064505C /* myCurlingPage_VC.swift in Sources */,
+				A16326A1210A71D70064505C /* myChartsCurlingPage_VC.swift in Sources */,
 				A11C1A4E2109499200BA8252 /* TabBarController.swift in Sources */,
 				A1E356A82100D21C0016DF97 /* AppDelegate.swift in Sources */,
 				9F7038311EA835EB00DA5564 /* ShepMAPSCREEN_VC.swift in Sources */,

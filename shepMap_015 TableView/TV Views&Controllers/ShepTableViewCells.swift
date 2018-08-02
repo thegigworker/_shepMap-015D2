@@ -58,6 +58,7 @@ class ShepTableViewCell: UITableViewCell {
     //@IBOutlet weak var ratingControl: RatingControl!
     //@IBOutlet weak var namelabel2: UILabel! // shep test
     
+    //MARK: - Functions
     func setupCell(_ product: ShepTempSingleItem) {
         photoImageView.image = product.image
         //PayLbl.text = product.description

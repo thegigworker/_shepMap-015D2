@@ -28,37 +28,6 @@ class shepEditableDetailVC: UITableViewController, UITextFieldDelegate, UITextVi
     @IBOutlet weak var lblJobType: UILabel!
     @IBOutlet weak var lblFoodType: UILabel!
     
-    // MARK: - VC Lifecycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        title = "Detail View"
-        myImage1.image = shepProductDetail?.image
-        myImage2.image = shepProductDetail?.image
-        myImage3.image = shepProductDetail?.image
-        myImage4.image = shepProductDetail?.image
-        myImage5.image = shepProductDetail?.image
-        myImage6.image = shepProductDetail?.image
-        lblPay2.text = "Dollars: \(shepCurrencyFromDouble(shepNumber : (shepProductDetail?.dollar)!))"
-        lblDistance.text = "\(String(describing: shepProductDetail!.distance)) miles"
-        lblJobType.text = shepProductDetail?.jobType
-        lblFoodType.text = shepProductDetail?.foodType
-        //productImageView.image = shepProductDetail?.image
-        lbTitle.text = shepProductDetail?.title
-        productTitleLabel.text = shepProductDetail?.title
-        productDescriptionTextView.text = shepProductDetail?.description
-        if #available(iOS 11.0, *) {
-            self.navigationItem.largeTitleDisplayMode = .never
-        } else {
-            // Fallback on earlier versions
-        }
-    }
-    
-//    override func viewWillDisappear(_ animated: Bool) {
-//        shepProductDetail?.title = productTitleLabel.text!
-//        shepProductDetail?.description = productDescriptionTextView.text
-//        shepProductDetail?.image = productImageView.image!
-//    }
-    
     // MARK: - UITextFieldDelegate
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         // dismiss the keyboard
@@ -100,6 +69,36 @@ class shepEditableDetailVC: UITableViewController, UITextFieldDelegate, UITextVi
         dismiss(animated: true, completion: nil)
     }
     
+    // MARK: - VC Lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        title = "Detail View"
+        myImage1.image = shepProductDetail?.image
+        myImage2.image = shepProductDetail?.image
+        myImage3.image = shepProductDetail?.image
+        myImage4.image = shepProductDetail?.image
+        myImage5.image = shepProductDetail?.image
+        myImage6.image = shepProductDetail?.image
+        lblPay2.text = "Dollars: \(shepCurrencyFromDouble(shepNumber : (shepProductDetail?.dollar)!))"
+        lblDistance.text = "\(String(describing: shepProductDetail!.distance)) miles"
+        lblJobType.text = shepProductDetail?.jobType
+        lblFoodType.text = shepProductDetail?.foodType
+        //productImageView.image = shepProductDetail?.image
+        lbTitle.text = shepProductDetail?.title
+        productTitleLabel.text = shepProductDetail?.title
+        productDescriptionTextView.text = shepProductDetail?.description
+        if #available(iOS 11.0, *) {
+            self.navigationItem.largeTitleDisplayMode = .never
+        } else {
+            // Fallback on earlier versions
+        }
+    }
+    
+    //    override func viewWillDisappear(_ animated: Bool) {
+    //        shepProductDetail?.title = productTitleLabel.text!
+    //        shepProductDetail?.description = productDescriptionTextView.text
+    //        shepProductDetail?.image = productImageView.image!
+    //    }
 }
 
 

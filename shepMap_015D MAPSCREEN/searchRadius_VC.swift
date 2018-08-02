@@ -16,6 +16,8 @@ class searchRadiusViewController: UIViewController, UIPopoverPresentationControl
     @IBOutlet weak var SearchRadiusText: UILabel!
    // @IBOutlet weak var myMapView: MKMapView!
     
+    //MARK: - Functions
+    
     @IBAction func SearchDistanceSliderMoved(_ sender: UISlider) {
         let value = SearchDistanceSlider.value
         SearchRadiusText.text = String(format: "%.01f", value) + " mi."
