@@ -67,7 +67,7 @@ class shepDataModel: NSObject {
     var crowFliesDistance : Double = 1.0
     var howManyRouteInfosCompleted: Int = 0
     var whichRouteStyle : String = ""
-    
+ 
     // MKPlacemark is a subclass of CLPlacemark, therefore you cannot just cast it. You can instantiate an MKPlacemark from a CLPlacemark using the code below
     //     if let addressDict = clPlacemark.addressDictionary, coordinate = clPlacemark.location.coordinate {
     //     let mkPlacemark = MKPlacemark(coordinate: coordinate, addressDictionary: addressDict)
@@ -285,7 +285,7 @@ class shepDataModel: NSObject {
         let homeLocationPlacemark = MKPlacemark(coordinate: CLLocationCoordinate2DMake(homeLocationCoord.latitude, homeLocationCoord.longitude), addressDictionary: nil)
         let homeLocationMapItem = MKMapItem(placemark: homeLocationPlacemark)
         /////////  THEN MAKE ANNOTATION FROM MKMAPITEM
-        let homeLocationAnnotation = ShepSingleAnnotation(myMapItem: homeLocationMapItem, currentLinkedRoute: MKRoute(), shepDollarValue: 0.0, currentPinColor: whichPinColor)
+        let homeLocationAnnotation = ShepSingleAnnotation(myMapItem: homeLocationMapItem, currentLinkedRoute: MKRoute(), shepDollarValue: 0.0, myGigSource: myGigSource)
         
         // 搜索当前区域
         // print ("in performLocalSearch searchRegion search distance: \(meters2miles(meters: self.currentSearchDistanceX))")
@@ -334,7 +334,7 @@ class shepDataModel: NSObject {
                     } else {
                         self.howManySearchItemsFound += 1
                         let shepDollarValue = Double(arc4random_uniform(75) + 1)
-                        let validResult = ShepSingleAnnotation(myMapItem: item, currentLinkedRoute: MKRoute(), shepDollarValue: shepDollarValue, currentPinColor: whichPinColor)
+                        let validResult = ShepSingleAnnotation(myMapItem: item, currentLinkedRoute: MKRoute(), shepDollarValue: shepDollarValue, myGigSource: myGigSource)
                         //print ("The validSearchResultsArray.count = \(self.validSearchResultsArray.count)")
                         self.validSearchResultsArray.append(validResult)
                         print ("We just found a valid search result, now calling getRouteInfoVia2Annotations")

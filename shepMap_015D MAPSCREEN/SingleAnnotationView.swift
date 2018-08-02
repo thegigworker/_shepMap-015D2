@@ -9,8 +9,16 @@ import Contacts
 // This adds the Contacts framework, which contains dictionary key constants such as CNPostalAddressStreetKey,
 // for when you need to set the address, city or state fields of a location.
 
-var whichPinColor = UIColor()
-var whichGigIcon = ""
+var myGigSource = GigSource.GigWalk
+
+enum GigSource {
+    case GigWalk
+    case EasyShift
+    case FieldAgent
+    case Mobee
+    case TaskRabbit
+    case Safari
+}
 
 class SingleAnnotationView: MKMarkerAnnotationView {
     
@@ -37,7 +45,7 @@ class SingleAnnotationView: MKMarkerAnnotationView {
             // //rightCalloutAccessoryView = UIButton(type: .infoDark) //???
             //
             let leftImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 54, height: 54))
-            leftImageView.image = UIImage(named: whichGigIcon)
+            leftImageView.image = UIImage(named: myAnnotationData.switchGigIcon())
             leftImageView.contentMode = .scaleAspectFit
             leftCalloutAccessoryView = leftImageView
             
@@ -51,7 +59,7 @@ class SingleAnnotationView: MKMarkerAnnotationView {
 //                }
 //            }
             //markerTintColor = myAnnotationData.switchTintColor()
-            markerTintColor = whichPinColor
+            markerTintColor = myAnnotationData.switchPinColor()
             //markerTintColor = myDataModel.currentPinColor
             if let imageName = myAnnotationData.switchGlyph() {
                 glyphImage = UIImage(named: imageName)
@@ -66,7 +74,7 @@ class SingleAnnotationView: MKMarkerAnnotationView {
 //To create your own annotations, you create a class that conforms to the MKAnnotation protocol, add the annotation to the map,
 //and inform the map how the annotation should be displayed.
 class ShepSingleAnnotation: NSObject, MKAnnotation {
-    init(myMapItem: MKMapItem, currentLinkedRoute: MKRoute, shepDollarValue: Double, currentPinColor: UIColor) {
+    init(myMapItem: MKMapItem, currentLinkedRoute: MKRoute, shepDollarValue: Double, myGigSource: GigSource) {
         self.origTitle = myMapItem.name ?? "No Title"
         //self.locationName = myMapItem.name! //searchResult.description
         self.shepDollarValue = shepDollarValue
@@ -79,7 +87,7 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
         let latitude = myMapItem.placemark.coordinate.latitude
         let longitude = myMapItem.placemark.coordinate.longitude
         self.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-        self.whichPinColor = currentPinColor
+        self.myGigSource = myGigSource
         super.init()
     }
     
@@ -92,7 +100,7 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
     var myMapItem: MKMapItem
     var currentLinkedRoute: MKRoute
     var crowFliesDistance: Double = 0.0
-    var whichPinColor: UIColor
+    var myGigSource : GigSource
     
     //   The MKAnnotation protocol requires the coordinate property. If you want your annotation view to display a title and subtitle when the user taps a pin, your class also needs properties named title and subtitle.
     var title: String? {
@@ -124,18 +132,51 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
         return drivingTime // drivingDistance in miles
     }
     
-    // Annotation right callout accessory opens this mapItem in Maps app
-    // Here you create an MKMapItem from an MKPlacemark. The Maps app is able to read this MKMapItem, and display the right thing.
     //MARK: - My methods
+    
+    // Annotation right callout accessory opens this mapItem in Maps app
+    // Here you create an MKMapItem from an MKPlacemark. The Maps app is able to read this MKMapItem, and display the correcct thing.
     func mapItem() -> MKMapItem {
         let addressDict = [CNPostalAddressStreetKey: subtitle!]
         let placemark = MKPlacemark(coordinate: coordinate, addressDictionary: addressDict)
         //var placemark = MKPlacemark(coordinate: coordinate, addressDictionary: addressDict)
-        //placemark.title = "xyz"
-        
         let mapItem = MKMapItem(placemark: placemark)
         mapItem.name = title
         return mapItem
+    }
+    
+    func switchGigIcon() -> String { // leftCalloutAccessory image
+        switch myGigSource {
+        case .EasyShift :
+            return "EasyShift icon"
+        case .GigWalk :
+            return "GigWalk icon"
+        case .FieldAgent :
+            return "Field Agent icon"
+        case .Mobee :
+            return "Mobee icon"
+        case .TaskRabbit :
+            return "Task Rabbit icon"
+        case .Safari :
+            return "Safari icon"
+        }
+    }
+    
+    func switchPinColor() -> UIColor {
+        switch myGigSource {
+        case .EasyShift :
+            return .green
+        case .GigWalk :
+            return .lightGray
+        case .FieldAgent :
+            return .orange
+        case .Mobee :
+            return .brown
+        case .TaskRabbit :
+            return .magenta
+        case .Safari :
+            return .blue
+        }
     }
     
     func switchGlyph() -> String? { // marker glyph
@@ -149,7 +190,7 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
         }
     }
     
-    func switchImage() -> String? { // leftCalloutAccessory image
+    func switchImage() -> String? { // right CalloutAccessory image
         switch shepDollarValue {
         case 0...9:
             return "zzz..."
@@ -164,7 +205,6 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
         }
     }
 }
-
 
 /*
  If you were interested in CHANGING THE HEIGHT OF THE ANNOTATION CALLOUT here is the simple way. And I am just making the height to 200 units.
@@ -353,17 +393,7 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
 //// END OF CODE FROM TRAX
 
 
-////UIColor functions -- DEPRECATED FORMAT
-//    public class func darkGrayColor() -> UIColor // 0.333 white
-//    public class func lightGrayColor() -> UIColor // 0.667 white
-//    public class func whiteColor() -> UIColor // 1.0 white
-//    public class func grayColor() -> UIColor // 0.5 white
-//    public class func redColor() -> UIColor // 1.0, 0.0, 0.0 RGB
-//    public class func greenColor() -> UIColor // 0.0, 1.0, 0.0 RGB
-//    public class func blueColor() -> UIColor // 0.0, 0.0, 1.0 RGB
-//    public class func cyanColor() -> UIColor // 0.0, 1.0, 1.0 RGB
-//    .yellow // 1.0, 1.0, 0.0 RGB
-
+////UIColors
 //     CURRENT FORMAT
 //     UIColor.magenta // 1.0, 0.0, 1.0 RGB
 //    .orange // 1.0, 0.5, 0.0 RGB
