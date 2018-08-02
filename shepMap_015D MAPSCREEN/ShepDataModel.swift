@@ -187,7 +187,7 @@ class shepDataModel: NSObject {
 //        })
 //    }
     
-    //func getRouteInfoVia2Annotations (source: ShepSingleAnnotation, destination: ShepSingleAnnotation) {
+
     func getRouteInfoVia2Annotations (source: ShepSingleAnnotation, destination: ShepSingleAnnotation) -> () {
         let sourceAnnotation = MKPointAnnotation()
         let destinationAnnotation = MKPointAnnotation()
@@ -285,7 +285,7 @@ class shepDataModel: NSObject {
         let homeLocationPlacemark = MKPlacemark(coordinate: CLLocationCoordinate2DMake(homeLocationCoord.latitude, homeLocationCoord.longitude), addressDictionary: nil)
         let homeLocationMapItem = MKMapItem(placemark: homeLocationPlacemark)
         /////////  THEN MAKE ANNOTATION FROM MKMAPITEM
-        let homeLocationAnnotation = ShepSingleAnnotation(myMapItem: homeLocationMapItem, currentLinkedRoute: MKRoute(), shepDollarValue: 0.0, myGigSource: myGigSource)
+        let homeLocationAnnotation = ShepSingleAnnotation(myMapItem: homeLocationMapItem, currentLinkedRoute: MKRoute(), shepDollarValue: 0.0, myGigSource: myGigSource!)
         
         // 搜索当前区域
         // print ("in performLocalSearch searchRegion search distance: \(meters2miles(meters: self.currentSearchDistanceX))")
@@ -334,7 +334,7 @@ class shepDataModel: NSObject {
                     } else {
                         self.howManySearchItemsFound += 1
                         let shepDollarValue = Double(arc4random_uniform(75) + 1)
-                        let validResult = ShepSingleAnnotation(myMapItem: item, currentLinkedRoute: MKRoute(), shepDollarValue: shepDollarValue, myGigSource: myGigSource)
+                        let validResult = ShepSingleAnnotation(myMapItem: item, currentLinkedRoute: MKRoute(), shepDollarValue: shepDollarValue, myGigSource: myGigSource!)
                         //print ("The validSearchResultsArray.count = \(self.validSearchResultsArray.count)")
                         self.validSearchResultsArray.append(validResult)
                         print ("We just found a valid search result, now calling getRouteInfoVia2Annotations")
@@ -359,7 +359,7 @@ class shepDataModel: NSObject {
         print ("OPENING GAMBIT, shepAnnotationsArray count is \(shepAnnotationsArray.count) \n")
     }
     
-//    func whichLocalSearch() -> String? { // rightCalloutAccessory image
+//    func whichLocalSearch() -> String? {
 //        switch shepDollarValue {
 //        case 0:
 //            return "McDonalds"
@@ -392,3 +392,26 @@ class shepDataModel: NSObject {
     
 }
 
+
+//Part 1. CALLBACK AS COMPLETION HANDLER
+///////////////////////////////////////////////////
+//This way is very easy to setup. First, we create a requestData method that takes completion (a block):
+
+//Completion here is a method, that takes a String as a data and has a Void return type.
+//Inside requestData, we run the code to request the data from any source:
+
+//All we need to do now is to call completion with the data we have just received:
+//    class DataModel {
+//        func performDataRequest(completion: ((_ shepdata: String) -> Void)) {
+//            // the data was received and parsed to String
+//            let myDataRequestData = "xyData from wherever"
+//            let myotherDataReqData = "second " + myDataRequestData
+//            completion(myotherDataReqData)
+//        }
+//    }
+
+//The next step is to create an instance of DataModel in ViewController class and call requestData method. In completion, we call a private method useData:
+//class ViewController: UIViewController {  //UIViewController {
+//let dataModel = DataModel()
+//dataModel.performDataRequest { [weak self] (data: String) in self?.useData(data: data)
+    

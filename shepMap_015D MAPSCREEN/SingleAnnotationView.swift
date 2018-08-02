@@ -9,7 +9,7 @@ import Contacts
 // This adds the Contacts framework, which contains dictionary key constants such as CNPostalAddressStreetKey,
 // for when you need to set the address, city or state fields of a location.
 
-var myGigSource = GigSource.GigWalk
+var myGigSource : GigSource?
 
 enum GigSource {
     case GigWalk
