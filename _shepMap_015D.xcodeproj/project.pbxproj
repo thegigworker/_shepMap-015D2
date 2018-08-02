@@ -11,7 +11,7 @@
 		9F7038341EA835EB00DA5564 /* MAPSCREEN.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F7038321EA835EB00DA5564 /* MAPSCREEN.storyboard */; };
 		9F7038361EA835EB00DA5564 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F7038351EA835EB00DA5564 /* Assets.xcassets */; };
 		A10275CF21097E88008AECDA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A10275CD21097E88008AECDA /* LaunchScreen.storyboard */; };
-		A103692B21134F2A00FB9B3F /* MAPSCREEN_VC2.swift in Sources */ = {isa = PBXBuildFile; fileRef = A103692A21134F2900FB9B3F /* MAPSCREEN_VC2.swift */; };
+		A103692B21134F2A00FB9B3F /* MAPSCREEN_VC_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A103692A21134F2900FB9B3F /* MAPSCREEN_VC_extension.swift */; };
 		A10B02961FE1784D004FA3B8 /* ShepDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10B02951FE1784D004FA3B8 /* ShepDataModel.swift */; };
 		A11C1A4A2109497E00BA8252 /* Login_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D2038420FF9E090089269B /* Login_VC.swift */; };
 		A11C1A4E2109499200BA8252 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D2038220FF9E090089269B /* TabBarController.swift */; };
@@ -41,7 +41,7 @@
 		9F7038331EA835EB00DA5564 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MAPSCREEN.storyboard; sourceTree = "<group>"; };
 		9F7038351EA835EB00DA5564 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A10275CE21097E88008AECDA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		A103692A21134F2900FB9B3F /* MAPSCREEN_VC2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MAPSCREEN_VC2.swift; sourceTree = "<group>"; };
+		A103692A21134F2900FB9B3F /* MAPSCREEN_VC_extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MAPSCREEN_VC_extension.swift; sourceTree = "<group>"; };
 		A10B02951FE1784D004FA3B8 /* ShepDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShepDataModel.swift; path = "shepMap_015D MAPSCREEN/ShepDataModel.swift"; sourceTree = SOURCE_ROOT; };
 		A163269D210A71D60064505C /* Debug_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Debug_VC.swift; sourceTree = "<group>"; };
 		A163269E210A71D70064505C /* myChartsCurlingPage_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = myChartsCurlingPage_VC.swift; sourceTree = "<group>"; };
@@ -107,7 +107,7 @@
 				A10B02951FE1784D004FA3B8 /* ShepDataModel.swift */,
 				A1D66C201FD0995B0036EDAC /* SingleAnnotationView.swift */,
 				9F7038301EA835EB00DA5564 /* MAPSCREEN_VC.swift */,
-				A103692A21134F2900FB9B3F /* MAPSCREEN_VC2.swift */,
+				A103692A21134F2900FB9B3F /* MAPSCREEN_VC_extension.swift */,
 				A19B6E022020EA5F00AE2BBE /* searchRadius_VC.swift */,
 			);
 			path = "shepMap_015D MAPSCREEN";
@@ -265,7 +265,7 @@
 				A18231E2210A6F0000C0CF31 /* shepEditableDetailVC.swift in Sources */,
 				A10B02961FE1784D004FA3B8 /* ShepDataModel.swift in Sources */,
 				A16326A1210A71D70064505C /* myChartsCurlingPage_VC.swift in Sources */,
-				A103692B21134F2A00FB9B3F /* MAPSCREEN_VC2.swift in Sources */,
+				A103692B21134F2A00FB9B3F /* MAPSCREEN_VC_extension.swift in Sources */,
 				A11C1A4E2109499200BA8252 /* TabBarController.swift in Sources */,
 				A1E356A82100D21C0016DF97 /* AppDelegate.swift in Sources */,
 				9F7038311EA835EB00DA5564 /* MAPSCREEN_VC.swift in Sources */,
