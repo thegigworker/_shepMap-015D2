@@ -119,13 +119,12 @@ class myChartsCurlingPageVC: UIPageViewController {
     }
     
     /**
-     Notifies '_tutorialDelegate' that the current page index was updated.
+     Notifies myPageViewControllerDelegate (myCurlingPageDelegate) that the current page index was updated.
      */
     fileprivate func notifyCurlingDelegateOfNewIndex() {
         if let firstViewController = viewControllers?.first,
             let index = orderedViewControllers.index(of: firstViewController) {
-                myCurlingPageDelegate?.curlingPageViewController(self,
-                    didUpdatePageIndex: index)
+                myCurlingPageDelegate?.curlingPageViewController(self, didUpdatePageIndex: index)
         }
     }
     
@@ -139,8 +138,7 @@ class myChartsCurlingPageVC: UIPageViewController {
             scrollToViewController(initialViewController)
         }
         
-        myCurlingPageDelegate?.curlingPageViewController(self,
-                                                         didUpdatePageCount: orderedViewControllers.count)
+        myCurlingPageDelegate?.curlingPageViewController(self, didUpdatePageCount: orderedViewControllers.count)
     }
 }
 

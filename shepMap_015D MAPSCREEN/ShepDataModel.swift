@@ -39,14 +39,7 @@ let initialDisplay: Double = 50
 
 //The class keyword in the Swift protocol definition limits protocol adoption to class types (and not structures or enums). This is important if we want to use a weak reference to the delegate. We need be sure we do not create a retain cycle between the delegate and the delegating objects, so we use a weak reference to delegate (see below).
 protocol DataModelDelegate: class {
-    
-    //func didReceiveMethodCallFromDataModel()
-    //func didReceiveDataUpdate(data: String)
-   // func entireSearchDirectionsLoopSuccessful(myAnnotationsArray: [ShepSingleAnnotation])
-    
-    //func didReceiveMethodCallFromDataModel()
-    //func didReceiveDataUpdate(data: String)
-    func handleValidSearchResults(validSearchResults: [ShepSingleAnnotation])
+    func showValidSearchResults(validSearchResults: [ShepSingleAnnotation])
     func drawNewRoute(thisRoute: MKRoute)
     //func handletheChosenRoute(thisRoute: MKRoute)
 }
@@ -333,7 +326,7 @@ class shepDataModel: NSObject {
                         continue shepSearchResultLoop
                     } else {
                         self.howManySearchItemsFound += 1
-                        let shepDollarValue = Double(arc4random_uniform(75) + 1)
+                        let shepDollarValue = Double(arc4random_uniform(100) + 1)
                         let validResult = ShepSingleAnnotation(myMapItem: item, currentLinkedRoute: MKRoute(), shepDollarValue: shepDollarValue, myGigSource: myGigSource!)
                         //print ("The validSearchResultsArray.count = \(self.validSearchResultsArray.count)")
                         self.validSearchResultsArray.append(validResult)
@@ -350,7 +343,7 @@ class shepDataModel: NSObject {
                 print ("shepSearchResultLoop is done now, shepAnnotationsArray count is \(self.shepAnnotationsArray.count)")
                 print ("shepSearchResultLoop is done now, validSearchResultsArray count is \(self.validSearchResultsArray.count) \n")
                 
-                self.myDataModelDelegate?.handleValidSearchResults(validSearchResults: self.validSearchResultsArray)
+                self.myDataModelDelegate?.showValidSearchResults(validSearchResults: self.validSearchResultsArray)
                 //self.validSearchResultsArray.removeAll()
                 
                 //self.getRouteInfoFromApple(sourceLocation: sourceLocation, destinationAnnotation: <#T##ShepSingleAnnotation#>)

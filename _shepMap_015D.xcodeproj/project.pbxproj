@@ -105,10 +105,10 @@
 			isa = PBXGroup;
 			children = (
 				A10B02951FE1784D004FA3B8 /* ShepDataModel.swift */,
-				A1D66C201FD0995B0036EDAC /* SingleAnnotationView.swift */,
 				9F7038301EA835EB00DA5564 /* MAPSCREEN_VC.swift */,
 				A103692A21134F2900FB9B3F /* MAPSCREEN_VC_extension.swift */,
 				A19B6E022020EA5F00AE2BBE /* searchRadius_VC.swift */,
+				A1D66C201FD0995B0036EDAC /* SingleAnnotationView.swift */,
 			);
 			path = "shepMap_015D MAPSCREEN";
 			sourceTree = "<group>";

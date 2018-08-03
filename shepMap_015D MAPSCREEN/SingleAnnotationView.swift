@@ -81,7 +81,7 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
         self.myMapItem = myMapItem
         self.currentLinkedRoute = currentLinkedRoute
         //self.currentLinkedRoute = currentLinkedRoute
-        self.shepStringData = shepCurrencyFromDouble(shepNumber: self.shepDollarValue)
+        self.shepStringTitle = shepCurrencyFromDouble(shepNumber: self.shepDollarValue)
         //        self.shepsVariable = Double(arc4random_uniform(25) + 1)
         //        self.shepStringData = shepCurrencyFromDouble(shepNumber: self.shepsVariable)
         let latitude = myMapItem.placemark.coordinate.latitude
@@ -96,23 +96,23 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
     let origTitle: String?
     let coordinate: CLLocationCoordinate2D
     let shepDollarValue: Double
-    let shepStringData: String
+    let shepStringTitle: String
     var myMapItem: MKMapItem
     var currentLinkedRoute: MKRoute
     var crowFliesDistance: Double = 0.0
     var myGigSource : GigSource
     
-    //   The MKAnnotation protocol requires the coordinate property. If you want your annotation view to display a title and subtitle when the user taps a pin, your class also needs properties named title and subtitle.
+    //   The MKAnnotation protocol requires the coordinate property. If you want your annotation view to display a title and subtitle when the user taps a pin,
+    //   your class also needs properties named title and subtitle.
     var title: String? {
         let temp: String?
         temp = self.origTitle
-        return shepStringData + " -- " + temp!
+        return shepStringTitle + " -- " + temp!
     }
     
     var subtitle: String? {
-        // takes the placemark.title string, which is really the address line, and cuts off the last 15 chars: ", United States"
+        // takes the placemark.title string, which is really THE ADDRESS LINE, and cuts off the last 15 chars: ", United States"
         return String(myMapItem.placemark.title!.dropLast(_:15))
-        //return "hello"
     }
     
     var routeDrivingDistance: Double {
@@ -183,7 +183,7 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
         switch shepDollarValue {
         case 0...49:
             return "nothing"
-        case 50...75:
+        case 80...100:
             return "Flag"
         default:
             return "HMI"
@@ -194,11 +194,11 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
         switch shepDollarValue {
         case 0...9:
             return "zzz..."
-        case 10...30:
+        case 10...50:
             return "coins"
-        case 31...59:
+        case 51...79:
             return "dollars"
-        case 60...75:
+        case 80...100:
             return "monopoly man"
         default:
             return "superman"
