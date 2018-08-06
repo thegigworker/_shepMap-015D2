@@ -63,25 +63,6 @@ class ShepTempSingleItem {
 //        super.init()
 //    }
 //
-//    //// THIS STUFF IS CODE FROM ANOTHER DEMO RE INITIALIZING FOR A TABLEVIEWS
-//    //    init?(name: String, photo: UIImage?, rating: Int) {
-//    //        //Failable initializers always start with either init? or init!. These initializers return optional values or implicitly unwrapped optional values, respectively. Optionals can either contain a valid value or nil. You must check to see if the optional has a value, and then safely unwrap the value before you can use it. Implicitly unwrapped optionals are optionals, but the system implicitly unwraps them for you.
-//    //        //In this case, your initializer returns an optional Meal? object.
-//    //
-//    //        /* EXPLORE FURTHER
-//    //         As you will see in later lessons, failable initializers are harder to use because you need to unwrap the returned optional before using it. Some developers prefer to enforce an initializer’s contract using assert() or precondition() methods. These methods cause the app to terminate if the condition they are testing fails. This means that the calling code must validate the inputs before calling the initializer.
-//    //         For more information on initializers, see Initialization. For information on adding inline sanity checks and preconditions to your code, see assert(_:_:file:line:) and precondition(_:_:file:line:).
-//    //         */
-//    //        // The name must not be empty
-//    //        guard !name.isEmpty else {
-//    //            return nil
-//    //        }
-//    //        // The rating must be between 0 and 5 inclusively
-//    //        guard (rating >= 0) && (rating <= 5) else {
-//    //            return nil
-//    //        }
-//    //// THIS STUFF IS CODE FROM ANOTHER DEMO RE INITIALIZING FOR A TABLEVIEWS
-//
     
     func switchTintColor() -> UIColor {
         switch shepDollarValue {

@@ -20,56 +20,6 @@ enum GigSource {
     case Safari
 }
 
-class SingleAnnotationView: MKMarkerAnnotationView {
-    
-    let myDataModel = shepDataModel()
-    override var annotation: MKAnnotation? {
-        willSet {
-            // These lines do the same thing as your myMapView(_:viewFor:), configuring the callout.
-            guard let myAnnotationData = newValue as? ShepSingleAnnotation else { return }
-            canShowCallout = true
-            //pinView!.animatesDrop = true
-            calloutOffset = CGPoint(x: -4, y: 4)
-            
-            //rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
-            //rightCalloutAccessoryView = UIButton(type: .infoDark) //???
-            
-            let rightImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 54, height: 54))
-            //You can try to set the UIImageView size to the created MKPinAnnotationView
-            // and then call aspect fit on it like this:
-            // let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
-            rightImageView.image = UIImage(named: myAnnotationData.switchImage()!)
-            rightImageView.contentMode = .scaleAspectFit
-            rightCalloutAccessoryView = rightImageView
-            // rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
-            // //rightCalloutAccessoryView = UIButton(type: .infoDark) //???
-            //
-            let leftImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 54, height: 54))
-            leftImageView.image = UIImage(named: myAnnotationData.switchGigIcon())
-            leftImageView.contentMode = .scaleAspectFit
-            leftCalloutAccessoryView = leftImageView
-            
-            // Below is a function which has some stuff re setting leftCalloutAccessoryView as UIButton
-//            func myMapView(_ myMapView: MKMapView, didSelect view: MKAnnotationView) {
-//                if let thumbnailImageButton = view.leftCalloutAccessoryView as? UIButton,
-//                    //let url = (view.annotation as? GPX.Waypoint)?.thumbnailURL,
-//                    //let imageData = try? Data(contentsOf: url), // blocks main queue
-//                    let image = UIImage(data: imageData) {
-//                    thumbnailImageButton.setImage(image, for: UIControlState())
-//                }
-//            }
-            //markerTintColor = myAnnotationData.switchTintColor()
-            markerTintColor = myAnnotationData.switchPinColor()
-            //markerTintColor = myDataModel.currentPinColor
-            if let imageName = myAnnotationData.switchGlyph() {
-                glyphImage = UIImage(named: imageName)
-            } else {
-                glyphImage = nil
-            }
-        }
-    }
-}
-
 
 //To create your own annotations, you create a class that conforms to the MKAnnotation protocol, add the annotation to the map,
 //and inform the map how the annotation should be displayed.
@@ -94,7 +44,6 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
     //MARK: - My Properties
     let myDataModel = shepDataModel()
     let origTitle: String?
-    let coordinate: CLLocationCoordinate2D
     let shepDollarValue: Double
     let shepStringTitle: String
     var myMapItem: MKMapItem
@@ -104,6 +53,8 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
     
     //   The MKAnnotation protocol requires the coordinate property. If you want your annotation view to display a title and subtitle when the user taps a pin,
     //   your class also needs properties named title and subtitle.
+    let coordinate: CLLocationCoordinate2D
+    
     var title: String? {
         let temp: String?
         temp = self.origTitle
@@ -113,6 +64,25 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
     var subtitle: String? {
         // takes the placemark.title string, which is really THE ADDRESS LINE, and cuts off the last 15 chars: ", United States"
         return String(myMapItem.placemark.title!.dropLast(_:15))
+    }
+    
+     var StreetAddressLine: String? {
+        return myMapItem.placemark.postalAddress?.street
+    }
+    
+    var City: String? {
+        return myMapItem.placemark.postalAddress?.city
+    }
+    
+    var ZipCode: String? {
+        return myMapItem.placemark.postalAddress?.postalCode
+    }
+    
+    var formattedFullAddress : String {
+        let streetAddressLine = self.StreetAddressLine!
+        let state = myMapItem.placemark.postalAddress?.state
+        let CityStateZipLine = self.City! + ", " + state! + ", " + self.ZipCode!
+        return streetAddressLine + "\n" + CityStateZipLine
     }
     
     var routeDrivingDistance: Double {
@@ -135,7 +105,7 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
     //MARK: - My methods
     
     // Annotation right callout accessory opens this mapItem in Maps app
-    // Here you create an MKMapItem from an MKPlacemark. The Maps app is able to read this MKMapItem, and display the correcct thing.
+    // Here you create an MKMapItem from an MKPlacemark. The Maps app is able to read this MKMapItem, and display the correct thing.
     func mapItem() -> MKMapItem {
         let addressDict = [CNPostalAddressStreetKey: subtitle!]
         let placemark = MKPlacemark(coordinate: coordinate, addressDictionary: addressDict)
@@ -205,6 +175,80 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
         }
     }
 }
+
+
+//I THINK YOU WANT TO SET AN IMAGE FOR BUTTON SO TRY THIS WAY:
+//
+//let playButton  = UIButton(type: .Custom)
+//if let image = UIImage(named: "play.png") {
+//    playButton.setImage(image, forState: .Normal)
+//}
+//In Short:
+//playButton.setImage(UIImage(named: "play.png"), forState: UIControlState.Normal)
+//
+//For Swift 3:
+//let playButton  = UIButton(type: .custom)
+//playButton.setImage(UIImage(named: "play.png"), for: .normal)
+
+
+// MARK: -
+class SingleAnnotationView: MKMarkerAnnotationView {
+    
+    let myDataModel = shepDataModel()
+    override var annotation: MKAnnotation? {
+        willSet {
+            // These lines do the same thing as your myMapView(_:viewFor:), configuring the callout.
+            guard let myAnnotationData = newValue as? ShepSingleAnnotation else { return }
+            canShowCallout = true
+            //pinView!.animatesDrop = true
+            calloutOffset = CGPoint(x: -4, y: 4)
+            
+//            let rightButtonView = UIButton()
+//            let rightButtonImage = UIImage(named: myAnnotationData.switchImage()!)
+//            rightButtonView.setImage(rightButtonImage, for: .normal)
+//            //setImage(_ image: UIImage?, for state: UIControlState) // default is nil. should be same size if different for different states
+//            rightCalloutAccessoryView = rightButtonView
+            
+            //CODE BELOW DOESN'T ALLOW FOR ACCESSORYVIEW TO BE A BUTTON.  NEED TO HAVE CODE WITH IMAGE AND BUTTON
+            let rightImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 51, height: 51))
+            rightImageView.image = UIImage(named: myAnnotationData.switchImage()!)
+            rightImageView.contentMode = .scaleAspectFit
+            rightCalloutAccessoryView = rightImageView
+            // CODE BELOW TURNS BUTTON ON BUT KILLS THE IMAGEVIEW
+            //rightCalloutAccessoryView = UIButton(type: .infoLight)
+            
+            
+            //You can try to set the UIImageView size to the created MKPinAnnotationView
+            // and then call aspect fit on it like this:
+            // let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
+            //
+            let leftImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 51, height: 51))
+            leftImageView.image = UIImage(named: myAnnotationData.switchGigIcon())
+            leftImageView.contentMode = .scaleAspectFit
+            leftCalloutAccessoryView = leftImageView
+            
+            // Below is a function which has some stuff re setting leftCalloutAccessoryView as UIButton
+            //            func myMapView(_ myMapView: MKMapView, didSelect view: MKAnnotationView) {
+            //                if let thumbnailImageButton = view.leftCalloutAccessoryView as? UIButton,
+            //                    //let url = (view.annotation as? GPX.Waypoint)?.thumbnailURL,
+            //                    //let imageData = try? Data(contentsOf: url), // blocks main queue
+            //                    let image = UIImage(data: imageData) {
+            //                    thumbnailImageButton.setImage(image, for: UIControlState())
+            //                }
+            //            }
+            
+            //markerTintColor = myAnnotationData.switchTintColor()
+            markerTintColor = myAnnotationData.switchPinColor()
+            //markerTintColor = myDataModel.currentPinColor
+            if let imageName = myAnnotationData.switchGlyph() {
+                glyphImage = UIImage(named: imageName)
+            } else {
+                glyphImage = nil
+            }
+        }
+    }
+}
+
 
 /*
  If you were interested in CHANGING THE HEIGHT OF THE ANNOTATION CALLOUT here is the simple way. And I am just making the height to 200 units.

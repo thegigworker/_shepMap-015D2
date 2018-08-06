@@ -36,7 +36,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		9F70382B1EA835EB00DA5564 /* shepMapApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = shepMapApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9F70382B1EA835EB00DA5564 /* shepMap 015.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "shepMap 015.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F7038301EA835EB00DA5564 /* MAPSCREEN_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MAPSCREEN_VC.swift; path = "shepMap_015D MAPSCREEN/MAPSCREEN_VC.swift"; sourceTree = SOURCE_ROOT; };
 		9F7038331EA835EB00DA5564 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MAPSCREEN.storyboard; sourceTree = "<group>"; };
 		9F7038351EA835EB00DA5564 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -96,7 +96,7 @@
 		9F70382C1EA835EB00DA5564 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9F70382B1EA835EB00DA5564 /* shepMapApp.app */,
+				9F70382B1EA835EB00DA5564 /* shepMap 015.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -192,7 +192,7 @@
 			);
 			name = shepMapTARGET;
 			productName = Tandm;
-			productReference = 9F70382B1EA835EB00DA5564 /* shepMapApp.app */;
+			productReference = 9F70382B1EA835EB00DA5564 /* shepMap 015.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -452,7 +452,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.Tandm${SAMPLE_CODE_DISAMBIGUATOR}";
-				PRODUCT_NAME = shepMapApp;
+				PRODUCT_NAME = "shepMap 015";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
@@ -470,7 +470,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.Tandm${SAMPLE_CODE_DISAMBIGUATOR}";
-				PRODUCT_NAME = shepMapApp;
+				PRODUCT_NAME = "shepMap 015";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;

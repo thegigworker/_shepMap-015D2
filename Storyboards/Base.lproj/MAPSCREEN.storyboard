@@ -11,7 +11,7 @@
         <!--ShepMap Mapscreen-->
         <scene sceneID="l0S-ly-Wl2">
             <objects>
-                <viewController storyboardIdentifier="shepMapViewController" title="ShepMap Mapscreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="gUb-df-Mug" customClass="MAPSCREEN_VC" customModule="shepMapApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="shepMapViewController" title="ShepMap Mapscreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="gUb-df-Mug" customClass="MAPSCREEN_VC" customModule="shepMap_015" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="8N0-4S-TXm"/>
                         <viewControllerLayoutGuide type="bottom" id="5hX-fm-oFV"/>
@@ -54,8 +54,17 @@
                                             <action selector="btnMakeRandomRoute:" destination="gUb-df-Mug" eventType="touchUpInside" id="S3M-IH-kgW"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gco-ci-Q1v">
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qFE-j8-Szq">
                                         <rect key="frame" x="4" y="70" width="120" height="20"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                        <state key="normal" title="Gold Route"/>
+                                        <connections>
+                                            <action selector="btnMakeGoldRoute:" destination="gUb-df-Mug" eventType="touchUpInside" id="1o5-Pc-orN"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gco-ci-Q1v">
+                                        <rect key="frame" x="135" y="46" width="120" height="20"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                         <state key="normal" title="Clear Route"/>
@@ -72,15 +81,32 @@
                                             <action selector="btnClearMap:" destination="gUb-df-Mug" eventType="touchUpInside" id="Am6-SA-Q5D"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5R0-6g-AuW">
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wcu-g7-Pma">
                                         <rect key="frame" x="264" y="70" width="106" height="20"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                        <state key="normal" title="Button 6">
+                                        <state key="normal" title="Map Type"/>
+                                        <connections>
+                                            <action selector="btnToggleMapType:" destination="gUb-df-Mug" eventType="touchUpInside" id="Xdl-ed-lSN"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5R0-6g-AuW" userLabel="BtnX">
+                                        <rect key="frame" x="264" y="46" width="106" height="20"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                        <state key="normal" title="Button">
                                             <color key="titleColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
                                             <action selector="btnXChangeHeight:" destination="gUb-df-Mug" eventType="touchUpInside" id="8Am-eE-mVk"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" alpha="0.55000000000000004" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ekk-yn-nJt">
+                                        <rect key="frame" x="41" y="6" width="32" height="32"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Button" image="Twirl button"/>
+                                        <connections>
+                                            <action selector="twirlButtonTapped:" destination="gUb-df-Mug" eventType="touchUpInside" id="syu-dg-z8r"/>
                                         </connections>
                                     </button>
                                     <slider opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="1" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="kOZ-gp-dki" userLabel="SearchDistanceSlider">
@@ -92,36 +118,10 @@
                                             <action selector="touchUPInSearchDistanceSlider:" destination="gUb-df-Mug" eventType="touchUpInside" id="5MK-Nw-Qfl"/>
                                         </connections>
                                     </slider>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wcu-g7-Pma">
-                                        <rect key="frame" x="264" y="46" width="106" height="20"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                        <state key="normal" title="Map Type"/>
-                                        <connections>
-                                            <action selector="btnToggleMapType:" destination="gUb-df-Mug" eventType="touchUpInside" id="Xdl-ed-lSN"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qFE-j8-Szq">
-                                        <rect key="frame" x="135" y="46" width="120" height="20"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                        <state key="normal" title="Gold Route"/>
-                                        <connections>
-                                            <action selector="btnMakeGoldRoute:" destination="gUb-df-Mug" eventType="touchUpInside" id="1o5-Pc-orN"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" alpha="0.55000000000000004" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ekk-yn-nJt">
-                                        <rect key="frame" x="41" y="6" width="32" height="32"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Button" image="Twirl button"/>
-                                        <connections>
-                                            <action selector="twirlButtonTapped:" destination="gUb-df-Mug" eventType="touchUpInside" id="syu-dg-z8r"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.77788150310000004" green="0.90799707169999999" blue="0.91106134650000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <slider opaque="NO" alpha="0.90000000000000002" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="CustomDisplayUISlider" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="50" minValue="1" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="rU5-Q4-Qll" userLabel="DisplayDistanceSlider" customClass="CustomDisplayUISlider" customModule="shepMapApp" customModuleProvider="target">
+                            <slider opaque="NO" alpha="0.90000000000000002" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="CustomDisplayUISlider" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="50" minValue="1" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="rU5-Q4-Qll" userLabel="DisplayDistanceSlider" customClass="CustomDisplayUISlider" customModule="shepMap_015" customModuleProvider="target">
                                 <rect key="frame" x="230" y="374" width="240" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="minimumTrackTintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -356,7 +356,7 @@
         <!--Search Radius PopOver-->
         <scene sceneID="Z7S-UZ-mxT">
             <objects>
-                <viewController storyboardIdentifier="searchRadiusViewController" title="Search Radius PopOver" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0Mv-Gj-0fX" customClass="searchRadiusViewController" customModule="shepMapApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="searchRadiusViewController" title="Search Radius PopOver" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0Mv-Gj-0fX" customClass="searchRadiusViewController" customModule="shepMap_015" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="LvI-mO-NoG"/>
                         <viewControllerLayoutGuide type="bottom" id="l4Y-wF-NJA"/>
