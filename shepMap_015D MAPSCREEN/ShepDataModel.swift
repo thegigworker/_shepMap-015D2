@@ -74,7 +74,7 @@ class shepDataModel: NSObject {
         var myAnnotationsArray = shepAnnotationsArray
         print ("in model choosetheGoldRoute(), myAnnotationsArray.count is: \(myAnnotationsArray.count)")
         print ("this is before sort")
-        myAnnotationsArray = myAnnotationsArray.sorted {($0.goldRouteScore) > ($1.goldRouteScore) }
+        myAnnotationsArray = myAnnotationsArray.sorted {($0.routeProfit) > ($1.routeProfit) }
         print ("this is after sort \n")
         
         var fakeIndexNumber : Int = 0
@@ -89,7 +89,7 @@ class shepDataModel: NSObject {
             let myDrivingDistance = eachAnnotation.routeDrivingDistance
             let routeExpense : Double = myDrivingDistance * Double(self.centsPerMileExpense)/100
             print ("routeExpense is     \(shepCurrencyFromDouble(shepNumber: routeExpense))")
-            let mytheGoldRouteScore = eachAnnotation.goldRouteScore
+            let mytheGoldRouteScore = eachAnnotation.routeProfit
             let myFormattedtheGoldRouteScore = (shepCurrencyFromDouble(shepNumber: mytheGoldRouteScore))
             print ("-mytheGoldRouteScore \(myFormattedtheGoldRouteScore) ---  \(myFormattedtheGoldRouteScore) \n        --------------")
             print ("crowFliesDistance: \(String(format: "%.02f", eachAnnotation.crowFliesDistance)) miles")
@@ -241,7 +241,7 @@ class shepDataModel: NSObject {
                 //print ("mySubTitle          \(String(describing: mySubTitle!))")
                 let routeExpense : Double = myDrivingDistance * Double(self.centsPerMileExpense)/100
                 print ("routeExpense is     \(shepCurrencyFromDouble(shepNumber: routeExpense))")
-                let myGoldRouteScore = myAnnotation.goldRouteScore
+                let myGoldRouteScore = myAnnotation.routeProfit
                 print ("-mytheGoldRouteScore \(shepCurrencyFromDouble(shepNumber: myGoldRouteScore))\n        --------------")
                 print ("crowFliesDistance: \(String(format: "%.02f", myAnnotation.crowFliesDistance)) miles")
                 //let myDrivingDistance = myAnnotation.routeDrivingDistance
