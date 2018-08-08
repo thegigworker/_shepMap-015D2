@@ -5,109 +5,153 @@
 import UIKit
 import MapKit
 
-var whichSort = "jobType"
+//var mySort = whichSort_enum.
+var mySort = whichSort_enum.JobSource
 
-//case "distance" : // SINGLE SECTION 1
-//case "title" : // SINGLE SECTION 2
-//case "dollars" : // SINGLE SECTION 3
-//case "jobType" :   // CATEGORY !
-//case "foodType" :   // CATEGORY 2
+enum whichSort_enum : String {
+    case JobTitle
+    case JobPay
+    case DrivingDistance
+    case JobProfit
+    case CrowFliesDistance
+    case ZIPCode
+    case City
+    case JobSource
+}
 
 class sortingHatPopover: UIViewController, UIPopoverPresentationControllerDelegate {
-    
-    //@IBOutlet weak var xyz: UIButton!
-    
+
     //let myDataModel = shepDataModel()
     
     var myShepTVController = myTableViewController()
     
-    @IBOutlet weak var btnDrivingDistance: UIButton!
+    @IBOutlet weak var checkmark0: UIImageView!
+    @IBOutlet weak var btnjobTitle: UIButton!
     @IBOutlet weak var checkmark1: UIImageView!
-    @IBOutlet weak var btnTitle: UIButton!
+    @IBOutlet weak var btnJobPay: UIButton!
     @IBOutlet weak var checkmark2: UIImageView!
-    @IBOutlet weak var btnDollars: UIButton!
+    @IBOutlet weak var btnDrivingDistance: UIButton!
     @IBOutlet weak var checkmark3: UIImageView!
-    @IBOutlet weak var btnCat1_jobType: UIButton!
+    @IBOutlet weak var btnJobProfit: UIButton!
     @IBOutlet weak var checkmark4: UIImageView!
-    @IBOutlet weak var btnCat2_foodType: UIButton!
+    @IBOutlet weak var btnCrowFliesDistance: UIButton!
     @IBOutlet weak var checkmark5: UIImageView!
+    @IBOutlet weak var btnZIPCode: UIButton!
+    @IBOutlet weak var checkmark6: UIImageView!
+    @IBOutlet weak var btnCity: UIButton!
+    @IBOutlet weak var checkmark7: UIImageView!
+    @IBOutlet weak var btnJobSource: UIButton!
     
     //MARK: - Functions
     
-    @IBAction func selected_DrivingDistance(_ sender: UIButton) {
+    @IBAction func selected_JobTitle(_ sender: UIButton) {
         clearCheckMarks()
-        whichSort = "distance"
-        checkmark1.isHidden = false
-        print ("whichSort tapped: \(whichSort)")
-       myShepTVController.redrawTableView()
-    }
-    
-    @IBAction func selected_Title(_ sender: UIButton) {
-        clearCheckMarks()
-        whichSort = "title"
-        checkmark2.isHidden = false
-        print ("whichSort tapped: \(whichSort)")
-       myShepTVController.redrawTableView()
-    }
-    
-    @IBAction func selected_Dollars(_ sender: UIButton) {
-        clearCheckMarks()
-        whichSort = "dollars"
-        checkmark3.isHidden = false
-        print ("whichSort tapped: \(whichSort)")
-       myShepTVController.redrawTableView()
-    }
-    
-    @IBAction func selected_Cat1_jobType(_ sender: UIButton) {
-        clearCheckMarks()
-        whichSort = "jobType"
-        checkmark4.isHidden = false
-        print ("whichSort tapped: \(whichSort)")
+        mySort = whichSort_enum.JobTitle
+        checkmark0.isHidden = false
+        print ("whichSort tapped: \(mySort)")
         myShepTVController.redrawTableView()
     }
     
-    @IBAction func selected_Cat2_foodType(_ sender: UIButton) {
+    @IBAction func selected_JobPay(_ sender: UIButton) {
         clearCheckMarks()
-        whichSort = "foodType"
+        mySort = whichSort_enum.JobPay
+        checkmark1.isHidden = false
+        print ("whichSort tapped: \(mySort)")
+        myShepTVController.redrawTableView()
+    }
+    
+    @IBAction func selected_DrivingDistance(_ sender: UIButton) {
+        clearCheckMarks()
+        mySort = whichSort_enum.DrivingDistance
+        checkmark2.isHidden = false
+        print ("whichSort tapped: \(mySort)")
+        myShepTVController.redrawTableView()
+    }
+    
+    @IBAction func selected_JobProfit(_ sender: UIButton) {
+        clearCheckMarks()
+        mySort = whichSort_enum.JobProfit
+        checkmark3.isHidden = false
+        print ("whichSort tapped: \(mySort)")
+        myShepTVController.redrawTableView()
+    }
+    
+    @IBAction func selected_CrowFliesDistance(_ sender: UIButton) {
+        clearCheckMarks()
+        mySort = whichSort_enum.CrowFliesDistance
+        checkmark4.isHidden = false
+        print ("whichSort tapped: \(mySort)")
+        myShepTVController.redrawTableView()
+    }
+    
+    @IBAction func selected_ZIPCode(_ sender: UIButton) {
+        clearCheckMarks()
+        mySort = whichSort_enum.ZIPCode
         checkmark5.isHidden = false
-        print ("whichSort tapped: \(whichSort)")
+        print ("whichSort tapped: \(mySort)")
+        myShepTVController.redrawTableView()
+    }
+    
+    @IBAction func selected_City(_ sender: UIButton) {
+        clearCheckMarks()
+        mySort = whichSort_enum.City
+        checkmark6.isHidden = false
+        print ("whichSort tapped: \(mySort)")
+        myShepTVController.redrawTableView()
+    }
+    
+    @IBAction func selected_JobSource(_ sender: UIButton) {
+        clearCheckMarks()
+        mySort = whichSort_enum.JobSource
+        checkmark7.isHidden = false
+        print ("whichSort tapped: \(mySort)")
         myShepTVController.redrawTableView()
     }
     
     func clearCheckMarks() {
+        checkmark0.isHidden = true
         checkmark1.isHidden = true
         checkmark2.isHidden = true
         checkmark3.isHidden = true
         checkmark4.isHidden = true
         checkmark5.isHidden = true
+        checkmark6.isHidden = true
+        checkmark7.isHidden = true
+        //BELOW FOR LOOP NOT WORKING.  WHY?
+        //      for i in 0...7 {
+        //          let checkmarkName = UIImage(named: "checkmark + \(i)")
+        //          //let whichCheckmarkName = "checkmark + \(i)"
+        //          let whichImageView = UIImageView(image: checkmarkName)
+        //          //let whichImageView = UIImageView(
+        //          whichImageView.isHidden = true
+        //      }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         clearCheckMarks()
-        switch whichSort{
-        case "distance" : // SINGLE SECTION 2
+        
+        switch mySort{
+        case .JobTitle :
+            checkmark0.isHidden = false
+        case .JobPay :
             checkmark1.isHidden = false
-        case "title" : // SINGLE SECTION 3
+        case .DrivingDistance :
             checkmark2.isHidden = false
-        case "dollars" : // SINGLE SECTION 1
+        case .JobProfit :
             checkmark3.isHidden = false
-        case "jobType" :   // CATEGORY !
+        case .CrowFliesDistance :
             checkmark4.isHidden = false
-        case "foodType" :   // CATEGORY 2
+        case .ZIPCode :
             checkmark5.isHidden = false
-        default:
-            checkmark5.isHidden = false  // "foodType"
+        case .City :
+            checkmark6.isHidden = false
+        case .JobSource :
+            checkmark7.isHidden = false
         }
         
-        //checkmark1.isHidden = false
-        // Do any additional setup after loading the view, typically from a nib.
-        //        SearchDistanceSlider.value = Float(meters2miles(meters: myDataModel.currentSearchDistance))
-        //        let value = SearchDistanceSlider.value
-        //        print ("UIPopover SearchDistanceSlider.value: \(value)")
-        //        SearchRadiusText.text = String(format: "%.01f", value) + " mi."
-        
-        print ("UIPopover viewDidLoad")
+        print ("sortingHatPopover viewDidLoad")
     }
     
     override func didReceiveMemoryWarning() {

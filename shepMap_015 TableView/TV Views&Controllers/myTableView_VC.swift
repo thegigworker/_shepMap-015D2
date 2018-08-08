@@ -44,11 +44,11 @@ class myTableViewController: UITableViewController, UIPopoverPresentationControl
     
     //MARK: Properties
     
-    lazy var BigKahunaSectionedArray: [allSectionsOfData4TVC] = {
+    lazy var BigKahunaSectionedArray: [allSectionsOfData4TVC_NEW] = {
         print("I think I'm changing BigKahunaSectionedArray")
         // Line above declares as an array of sectionOfProducts_class
         // then in line below, populates this array by using allSectionsOfData4TVC_class.getAllTheSections method
-        return allSectionsOfData4TVC.handleAllTheSections(whichSort: whichSort)
+        return allSectionsOfData4TVC_NEW.handleAllTheSections(whichSort: mySort.rawValue)
         //case "distance" : // SINGLE SECTION 1
         //case "title" : // SINGLE SECTION 2
         //case "dollars" : // SINGLE SECTION 3
@@ -71,16 +71,14 @@ class myTableViewController: UITableViewController, UIPopoverPresentationControl
         //Because you created a custom cell class that you want to use, downcast the type of the cell to your custom cell subclass, shepOrigProductTVCell.
         //let cell = tableView.dequeueReusableCell(withIdentifier: "shepOrigProductTVCell", for: indexPath) as! shepOrigProductTVCell
         let cell = tableView.dequeueReusableCell(withIdentifier: "ShepTableViewCell", for: indexPath) as! ShepTableViewCell
-        let productLine = BigKahunaSectionedArray[indexPath.section]
-        let temp = productLine
-        let product = productLine.oneSectionOfData[indexPath.row]
-        let temp2 = product
+        let mySectionOfData = BigKahunaSectionedArray[indexPath.section]
+        let mySingleAnnotationData = mySectionOfData.oneSectionOfData[indexPath.row]
         print("DATASOURCE CALLED cellForRowAt indexPath w indexPath \(indexPath)")
         // print("cellForRowAt w sort \(whichSort)")
-        print("cellForRowAt indexPath w SECTION NAME \(temp.sectionName)")
-        print("temp2 = \(temp2.title)       \(temp2.foodType)         \(temp2.jobType)")
-        print("distance = \(temp2.distance)     dollars = \(temp2.dollar) \n")
-        cell.setupCell(product)
+        print("cellForRowAt indexPath w SECTION NAME \(mySectionOfData.sectionName)")
+        print("mySingleAnnotationData = \(String(describing: mySingleAnnotationData.title))       \(mySingleAnnotationData.myGigSource)")
+        print("distance = \(mySingleAnnotationData.routeDrivingDistance)     PAY = \(mySingleAnnotationData.shepDollarValue) \n")
+        cell.setupCell(mySingleAnnotationData)
         
         return cell
     }
@@ -92,21 +90,21 @@ class myTableViewController: UITableViewController, UIPopoverPresentationControl
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let productLine = BigKahunaSectionedArray[section]
-        let temp = productLine
-        print("DATASOURCE CALLED numberOfRowsInSection  oneSectionOfData.count is \(productLine.oneSectionOfData.count)")
+        let mySectionOfData = BigKahunaSectionedArray[section]
+        let temp = mySectionOfData
+        print("DATASOURCE CALLED numberOfRowsInSection  oneSectionOfData.count is \(mySectionOfData.oneSectionOfData.count)")
         //print("numberOfRowsInSection of BigKahunaSectionedArray w sort \(whichSort)")
         print("numberOfRowsInSection of BigKahunaSectionedArray w SECTION NAME \(temp.sectionName)")
         print("numberOfRowsInSection of BigKahunaSectionedArray w SECTION ??? \(section) \n")
-        return productLine.oneSectionOfData.count   // the number of products in the section
+        return mySectionOfData.oneSectionOfData.count   // the number of products in the section
         //productLine.oneSectionOfData
     }
     
     // Override to support EDITING the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == UITableViewCellEditingStyle.delete {
-            var productLine = BigKahunaSectionedArray[indexPath.section]
-            productLine.oneSectionOfData.remove(at: indexPath.row)
+            var mySectionOfData = BigKahunaSectionedArray[indexPath.section]
+            mySectionOfData.oneSectionOfData.remove(at: indexPath.row)
             
             //            // tell the table view to update with new data source
             //            // tableView.reloadData()    Bad way!
@@ -257,15 +255,15 @@ class myTableViewController: UITableViewController, UIPopoverPresentationControl
             switch identifier {
                 // Get the new view controller using segue.destination.
             // Pass the selected object to the new view controller.
-            case "Second Detail View":
-                let productDetailVC = segue.destination as! shepSecondDetailVC
-                if let indexPath = self.tableView.indexPath(for: sender as! UITableViewCell) {
-                    productDetailVC.product = productAtIndexPath(indexPath)
-                }
+//            case "Second Detail View":
+//                let productDetailVC = segue.destination as! shepSecondDetailVC
+//                if let indexPath = self.tableView.indexPath(for: sender as! UITableViewCell) {
+//                    productDetailVC.product = productAtIndexPath(indexPath)
+//                }
             case "Show Editable Detail":
                 let editTableVC = segue.destination as! shepEditableDetailVC
                 if let indexPath = self.tableView.indexPath(for: sender as! UITableViewCell) {
-                    editTableVC.shepProductDetail = productAtIndexPath(indexPath)
+                    editTableVC.mySingleAnnotation = theAnnotationAtIndexPath(indexPath)
                 }
                 
             default: break
@@ -309,7 +307,7 @@ class myTableViewController: UITableViewController, UIPopoverPresentationControl
     // MARK: - Helper Methods
     
     func redrawTableView() {
-        BigKahunaSectionedArray = allSectionsOfData4TVC.handleAllTheSections(whichSort: whichSort)
+        BigKahunaSectionedArray = allSectionsOfData4TVC_NEW.handleAllTheSections(whichSort: whichSort)
         print("I'm in redrawTableView w sort \(whichSort)")
         self.tableView.reloadData()  // Reloads everything from scratch. Redisplays visible rows. Note that this will cause any existing drop placeholder rows to be removed.
         /*
@@ -320,10 +318,10 @@ class myTableViewController: UITableViewController, UIPopoverPresentationControl
          */
     }
     
-    func productAtIndexPath(_ indexPath: IndexPath) -> ShepTempSingleItem {
+    func theAnnotationAtIndexPath(_ indexPath: IndexPath) -> ShepSingleAnnotation {
         print("productAtIndexPath w indexPath \(indexPath)")
-        let productLine = BigKahunaSectionedArray[indexPath.section]
-        return productLine.oneSectionOfData[indexPath.row]
+        let myAnnotationsSection = BigKahunaSectionedArray[indexPath.section]
+        return myAnnotationsSection.oneSectionOfData[indexPath.row]
     }
    
 ////    transformDropdown

@@ -11,7 +11,7 @@
         <!--shepTest TVC-->
         <scene sceneID="YEn-DC-GsO">
             <objects>
-                <tableViewController id="WR6-dm-NuN" userLabel="shepTest TVC" customClass="myTableViewController" customModule="shepMapApp" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="WR6-dm-NuN" userLabel="shepTest TVC" customClass="myTableViewController" customModule="shepMap_015" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="59" sectionHeaderHeight="13" sectionFooterHeight="13" id="ea7-3y-PQr">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -45,7 +45,7 @@
                             <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="HeaderInSectionTVCell" rowHeight="36" id="De3-V3-fZj" userLabel="headerInSectionTVCell" customClass="HeaderInSectionTVCell" customModule="shepMapApp" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="HeaderInSectionTVCell" rowHeight="36" id="De3-V3-fZj" userLabel="headerInSectionTVCell" customClass="HeaderInSectionTVCell" customModule="shepMap_015" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="66" width="375" height="36"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="De3-V3-fZj" id="8fr-mA-Ozh">
@@ -67,10 +67,10 @@
                                     <outlet property="lblCategory" destination="vqK-SG-hEY" id="ueQ-5B-5u9"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="top" selectionStyle="default" indentationWidth="10" reuseIdentifier="ShepTableViewCell" rowHeight="59" id="rSo-ch-43s" userLabel="shepTableViewCell" customClass="ShepTableViewCell" customModule="shepMapApp" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="top" selectionStyle="default" indentationWidth="10" reuseIdentifier="ShepTableViewCell" rowHeight="59" id="rSo-ch-43s" userLabel="shepTableViewCell" customClass="ShepTableViewCell" customModule="shepMap_015" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="102" width="375" height="59"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rSo-ch-43s" id="hSH-uk-yqr" customClass="ShepTableViewCell" customModule="shepMapApp" customModuleProvider="target">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rSo-ch-43s" id="hSH-uk-yqr" customClass="ShepTableViewCell" customModule="shepMap_015" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="58.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
@@ -137,8 +137,8 @@
                     <navigationItem key="navigationItem" title="shepTest TVC" id="fc8-Br-6dL" userLabel="shepTest TVC">
                         <barButtonItem key="leftBarButtonItem" title="sort_icon item" image="sort_icon" springLoaded="YES" id="hgE-42-amt" userLabel="sort_icon item">
                             <connections>
-                                <segue destination="vzd-SC-fK0" kind="popoverPresentation" popoverAnchorBarButtonItem="hgE-42-amt" id="Kmb-ab-14R">
-                                    <popoverArrowDirection key="popoverArrowDirection" up="YES"/>
+                                <segue destination="D63-js-UZ9" kind="popoverPresentation" popoverAnchorBarButtonItem="hgE-42-amt" id="1lo-NG-p9k">
+                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                                 </segue>
                             </connections>
                         </barButtonItem>
@@ -152,7 +152,7 @@
         <!--Shep Editable DetailVC-->
         <scene sceneID="OfI-lm-biL">
             <objects>
-                <tableViewController id="Wfm-d3-MlK" customClass="shepEditableDetailVC" customModule="shepMapApp" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="Wfm-d3-MlK" customClass="shepEditableDetailVC" customModule="shepMap_015" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="dWY-yn-cRj">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -309,19 +309,19 @@
                     </tableView>
                     <connections>
                         <outlet property="lbTitle" destination="iW7-7J-xnD" id="IxV-WU-fnt"/>
+                        <outlet property="lblCity" destination="TWv-Bp-ali" id="BdY-Dp-d4P"/>
                         <outlet property="lblDistance" destination="QCv-NA-sKh" id="ywG-9F-eNt"/>
-                        <outlet property="lblFoodType" destination="TWv-Bp-ali" id="BdY-Dp-d4P"/>
-                        <outlet property="lblJobType" destination="Dpf-11-iRB" id="ezl-04-WIQ"/>
+                        <outlet property="lblGigSource" destination="Dpf-11-iRB" id="ezl-04-WIQ"/>
                         <outlet property="lblPay2" destination="Z9d-pV-936" id="hzD-5j-YuW"/>
                         <outlet property="lblStreetAddress" destination="V5E-ym-968" id="FeI-5q-B9C"/>
+                        <outlet property="myDescriptionTextView" destination="Iv8-Il-594" id="4pL-eK-db9"/>
                         <outlet property="myImage1" destination="OYO-Bw-D6I" id="JVK-72-S4g"/>
                         <outlet property="myImage2" destination="dUv-Pc-8EU" id="QDP-dC-2eF"/>
                         <outlet property="myImage3" destination="2ZP-dy-iS4" id="YBk-tm-fib"/>
                         <outlet property="myImage4" destination="uE8-qg-h1Z" id="iMX-4z-CIh"/>
                         <outlet property="myImage5" destination="DNd-ds-oyT" id="Jgi-KG-SNI"/>
                         <outlet property="myImage6" destination="KUd-OK-Qzf" id="YKl-Cl-mm0"/>
-                        <outlet property="productDescriptionTextView" destination="Iv8-Il-594" id="4pL-eK-db9"/>
-                        <outlet property="productTitleLabel" destination="27Y-hQ-pab" id="IpI-Yb-WAX"/>
+                        <outlet property="myTitleLabel" destination="27Y-hQ-pab" id="IpI-Yb-WAX"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0q6-Y1-goN" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -351,7 +351,7 @@
         <!--Sort PopOver-->
         <scene sceneID="yH4-6B-lwd">
             <objects>
-                <viewController title="Sort PopOver" id="vzd-SC-fK0" userLabel="Sort PopOver" customClass="sortingHatPopover" customModule="shepMapApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Sort PopOver" id="vzd-SC-fK0" customClass="sortPopover" customModule="shepMap_015" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="oly-7V-1DW"/>
                         <viewControllerLayoutGuide type="bottom" id="OIk-OK-Ldp"/>
@@ -462,6 +462,192 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="exP-vL-fMt" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="308" y="-613"/>
+        </scene>
+        <!--Sorting Hat PopOver-->
+        <scene sceneID="gLm-GI-zos">
+            <objects>
+                <viewController title="Sorting Hat PopOver" id="D63-js-UZ9" customClass="sortingHatPopover" customModule="shepMap_015" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="2DJ-PC-9Pu"/>
+                        <viewControllerLayoutGuide type="bottom" id="zJZ-uq-fdQ"/>
+                    </layoutGuides>
+                    <view key="view" opaque="NO" alpha="0.60000002384185791" contentMode="scaleToFill" id="tlU-7Q-qzC" customClass="SCNView">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sort By :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pnn-qJ-8iJ">
+                                <rect key="frame" x="36" y="0.0" width="141" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Copperplate-Bold" family="Copperplate" pointSize="18"/>
+                                <color key="textColor" red="1" green="0.1857388616" blue="0.57339501380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="checkmark" translatesAutoresizingMaskIntoConstraints="NO" id="YL2-Es-U3J" userLabel="checkmark1">
+                                <rect key="frame" x="17" y="55" width="18" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="checkmark" translatesAutoresizingMaskIntoConstraints="NO" id="taP-aL-PRR" userLabel="checkmark2">
+                                <rect key="frame" x="17" y="74" width="18" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="checkmark" translatesAutoresizingMaskIntoConstraints="NO" id="JmT-aP-zJY" userLabel="checkmark3">
+                                <rect key="frame" x="17" y="93" width="18" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="checkmark" translatesAutoresizingMaskIntoConstraints="NO" id="1w0-NH-QDB" userLabel="checkmark4">
+                                <rect key="frame" x="17" y="126" width="18" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="checkmark" translatesAutoresizingMaskIntoConstraints="NO" id="eLX-Mk-edD" userLabel="checkmark5">
+                                <rect key="frame" x="16" y="159" width="18" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="checkmark" translatesAutoresizingMaskIntoConstraints="NO" id="SeA-Oy-FFQ" userLabel="checkmark6">
+                                <rect key="frame" x="16" y="178" width="18" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="checkmark" translatesAutoresizingMaskIntoConstraints="NO" id="tXG-Br-dgV" userLabel="checkmark7">
+                                <rect key="frame" x="16" y="211" width="18" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yXG-Fg-EeX" userLabel="Btn Job Title">
+                                <rect key="frame" x="38" y="23" width="164" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Copperplate-Bold" family="Copperplate" pointSize="15"/>
+                                <state key="normal" title="Job Title">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="selected_JobTitle:" destination="D63-js-UZ9" eventType="touchUpInside" id="AcY-HM-fdT"/>
+                                </connections>
+                            </button>
+                            <view alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mOI-tz-qvq" userLabel="line separator">
+                                <rect key="frame" x="16" y="48" width="284" height="1"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Zk-PF-Gnp" userLabel="Btn Job Pay">
+                                <rect key="frame" x="38" y="55" width="164" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Copperplate-Bold" family="Copperplate" pointSize="15"/>
+                                <state key="normal" title="Job Pay">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="selected_JobPay:" destination="D63-js-UZ9" eventType="touchUpInside" id="uEG-gf-V2B"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sCI-yv-o03" userLabel="Btn Driving Distance">
+                                <rect key="frame" x="38" y="74" width="164" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Copperplate-Bold" family="Copperplate" pointSize="15"/>
+                                <state key="normal" title="driving distance">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="selected_DrivingDistance:" destination="D63-js-UZ9" eventType="touchUpInside" id="G5Z-Za-vdx"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pxv-ru-Vw0" userLabel="Btn Job Profit">
+                                <rect key="frame" x="38" y="93" width="164" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Copperplate-Bold" family="Copperplate" pointSize="15"/>
+                                <state key="normal" title="job profit">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="selected_JobProfit:" destination="D63-js-UZ9" eventType="touchUpInside" id="rnO-Z4-E2Y"/>
+                                </connections>
+                            </button>
+                            <view alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2wF-r1-iJC" userLabel="line separator">
+                                <rect key="frame" x="17" y="119" width="284" height="1"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="67P-vK-SkF" userLabel="Btn Crow-flies distance">
+                                <rect key="frame" x="38" y="126" width="179" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Copperplate-Bold" family="Copperplate" pointSize="15"/>
+                                <state key="normal" title="Crow-flies distance">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="selected_CrowFliesDistance:" destination="D63-js-UZ9" eventType="touchUpInside" id="GaG-Px-GI2"/>
+                                </connections>
+                            </button>
+                            <view alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ugd-Y2-uhO" userLabel="line separator">
+                                <rect key="frame" x="17" y="152" width="284" height="1"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wZK-BD-eLI" userLabel="Btn ZIP Code">
+                                <rect key="frame" x="37" y="159" width="164" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Copperplate-Bold" family="Copperplate" pointSize="15"/>
+                                <state key="normal" title="Zip Code">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="selected_ZIPCode:" destination="D63-js-UZ9" eventType="touchUpInside" id="JN3-mF-LJS"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WpT-tm-ngr" userLabel="Btn City">
+                                <rect key="frame" x="37" y="178" width="164" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Copperplate-Bold" family="Copperplate" pointSize="15"/>
+                                <state key="normal" title="City">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="selected_City:" destination="D63-js-UZ9" eventType="touchUpInside" id="dv8-9f-eU0"/>
+                                </connections>
+                            </button>
+                            <view alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="apA-k2-jxe" userLabel="line separator">
+                                <rect key="frame" x="17" y="204" width="284" height="1"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wQ0-Lu-S1B">
+                                <rect key="frame" x="37" y="211" width="164" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Copperplate-Bold" family="Copperplate" pointSize="15"/>
+                                <state key="normal" title="Job Source">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="selected_JobSource:" destination="D63-js-UZ9" eventType="touchUpInside" id="C7I-Gt-Ezb"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="checkmark" translatesAutoresizingMaskIntoConstraints="NO" id="NOt-FN-nAD" userLabel="checkmark0">
+                                <rect key="frame" x="17" y="23" width="18" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                    <value key="contentSizeForViewInPopover" type="size" width="210" height="236"/>
+                    <connections>
+                        <outlet property="btnCity" destination="WpT-tm-ngr" id="dYO-dM-335"/>
+                        <outlet property="btnCrowFliesDistance" destination="67P-vK-SkF" id="Byo-8c-IuR"/>
+                        <outlet property="btnDrivingDistance" destination="sCI-yv-o03" id="y3t-Vg-hLe"/>
+                        <outlet property="btnJobPay" destination="5Zk-PF-Gnp" id="Hos-DC-qdG"/>
+                        <outlet property="btnJobProfit" destination="pxv-ru-Vw0" id="rHq-rW-zEq"/>
+                        <outlet property="btnJobSource" destination="wQ0-Lu-S1B" id="mpm-b5-IsH"/>
+                        <outlet property="btnZIPCode" destination="wZK-BD-eLI" id="Z42-gj-kSK"/>
+                        <outlet property="btnjobTitle" destination="yXG-Fg-EeX" id="Ltw-KM-WsU"/>
+                        <outlet property="checkmark0" destination="NOt-FN-nAD" id="NMy-6Y-kHn"/>
+                        <outlet property="checkmark1" destination="YL2-Es-U3J" id="hYx-Uq-pob"/>
+                        <outlet property="checkmark2" destination="taP-aL-PRR" id="WPu-oZ-y45"/>
+                        <outlet property="checkmark3" destination="JmT-aP-zJY" id="jDG-05-1em"/>
+                        <outlet property="checkmark4" destination="1w0-NH-QDB" id="kY0-RV-APs"/>
+                        <outlet property="checkmark5" destination="eLX-Mk-edD" id="7VR-HS-bli"/>
+                        <outlet property="checkmark6" destination="SeA-Oy-FFQ" id="s3M-8m-0N7"/>
+                        <outlet property="checkmark7" destination="tXG-Br-dgV" id="QB3-06-JdU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wRs-yQ-8xY" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1150" y="-702"/>
         </scene>
     </scenes>
     <resources>

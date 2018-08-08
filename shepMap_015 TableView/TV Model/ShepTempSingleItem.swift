@@ -8,13 +8,13 @@ import MapKit
 import Contacts
 import UIKit
 
-public enum shepProductRating {
-    case unrated
-    case average
-    case ok
-    case good
-    case brilliant
-}
+//public enum shepProductRating {
+//    case unrated
+//    case average
+//    case ok
+//    case good
+//    case brilliant
+//}
 
 
 class ShepTempSingleItem {
@@ -22,7 +22,7 @@ class ShepTempSingleItem {
     var title: String
     var description: String
     var image: UIImage
-    var rating: shepProductRating
+   // var rating: shepProductRating
     var jobType: String
     var foodType: String
     var distance: Double
@@ -42,7 +42,7 @@ class ShepTempSingleItem {
         } else {
             image = UIImage(named: "default")!
         }
-        rating = .unrated
+        //rating = .unrated
     }
     
 

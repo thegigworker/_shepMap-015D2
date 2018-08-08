@@ -10,11 +10,12 @@ import UIKit
 class shepEditableDetailVC: UITableViewController, UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     // Model:
+    var mySingleAnnotation: ShepSingleAnnotation?
     var shepProductDetail: ShepTempSingleItem?
     
-    @IBOutlet weak var productImageView: UIImageView!
-    @IBOutlet weak var productTitleLabel: UITextField!
-    @IBOutlet weak var productDescriptionTextView: UITextView!
+    @IBOutlet weak var myImageView: UIImageView!
+    @IBOutlet weak var myTitleLabel: UITextField!
+    @IBOutlet weak var myDescriptionTextView: UITextView!
     @IBOutlet weak var myImage1: UIImageView!
     @IBOutlet weak var myImage2: UIImageView!
     @IBOutlet weak var myImage3: UIImageView!
@@ -25,8 +26,8 @@ class shepEditableDetailVC: UITableViewController, UITextFieldDelegate, UITextVi
     @IBOutlet weak var lblStreetAddress: UILabel!
     @IBOutlet weak var lblPay2: UILabel!
     @IBOutlet weak var lblDistance: UILabel!
-    @IBOutlet weak var lblJobType: UILabel!
-    @IBOutlet weak var lblFoodType: UILabel!
+    @IBOutlet weak var lblGigSource: UILabel!
+    @IBOutlet weak var lblCity: UILabel!
     
     // MARK: - UITextFieldDelegate
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -38,7 +39,7 @@ class shepEditableDetailVC: UITableViewController, UITextFieldDelegate, UITextVi
     // MARK: - UIScrollViewDelegate (is a subclass of UITableViewController)
     override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         // resigns keyboard whenever view scrolls
-        productDescriptionTextView.resignFirstResponder()
+        myDescriptionTextView.resignFirstResponder()
     }
     
     // MARK: - Table View Interaction
@@ -64,8 +65,9 @@ class shepEditableDetailVC: UITableViewController, UITextFieldDelegate, UITextVi
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
         let image = info[UIImagePickerControllerOriginalImage] as! UIImage
-        shepProductDetail?.image = image
-        productImageView.image = image
+        //why does line below require so much force unwrapping?
+        shepProductDetail?.image = UIImage(named: (mySingleAnnotation?.switchGigIcon())!)!
+        myImageView.image = image
         dismiss(animated: true, completion: nil)
     }
     
@@ -73,20 +75,20 @@ class shepEditableDetailVC: UITableViewController, UITextFieldDelegate, UITextVi
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Detail View"
-        myImage1.image = shepProductDetail?.image
-        myImage2.image = shepProductDetail?.image
-        myImage3.image = shepProductDetail?.image
-        myImage4.image = shepProductDetail?.image
-        myImage5.image = shepProductDetail?.image
-        myImage6.image = shepProductDetail?.image
-        lblPay2.text = "Dollars: \(shepCurrencyFromDouble(shepNumber : (shepProductDetail?.dollar)!))"
-        lblDistance.text = "\(String(describing: shepProductDetail!.distance)) miles"
-        lblJobType.text = shepProductDetail?.jobType
-        lblFoodType.text = shepProductDetail?.foodType
+        myImage1.image = UIImage(named: (mySingleAnnotation?.switchGigIcon())!)
+        myImage2.image = UIImage(named: (mySingleAnnotation?.switchGigIcon())!)
+        myImage3.image = UIImage(named: (mySingleAnnotation?.switchGigIcon())!)
+        myImage4.image = UIImage(named: (mySingleAnnotation?.switchGigIcon())!)
+        myImage5.image = UIImage(named: (mySingleAnnotation?.switchGigIcon())!)
+        myImage6.image = UIImage(named: (mySingleAnnotation?.switchGigIcon())!)
+        lblPay2.text = "Dollars: \(shepCurrencyFromDouble(shepNumber : (mySingleAnnotation?.shepDollarValue)!))"
+        lblDistance.text = "\(String(describing: mySingleAnnotation!.routeDrivingDistance)) miles"
+        lblGigSource.text = mySingleAnnotation?.myGigSource.rawValue
+        lblCity.text = mySingleAnnotation?.City
         //productImageView.image = shepProductDetail?.image
-        lbTitle.text = shepProductDetail?.title
-        productTitleLabel.text = shepProductDetail?.title
-        productDescriptionTextView.text = shepProductDetail?.description
+        lbTitle.text = mySingleAnnotation?.title
+        myTitleLabel.text = mySingleAnnotation?.title
+        myDescriptionTextView.text = mySingleAnnotation?.description
         if #available(iOS 11.0, *) {
             self.navigationItem.largeTitleDisplayMode = .never
         } else {

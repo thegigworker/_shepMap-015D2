@@ -5,13 +5,14 @@
 
 import Foundation
 import MapKit
+import UIKit
 import Contacts
 // This adds the Contacts framework, which contains dictionary key constants such as CNPostalAddressStreetKey,
 // for when you need to set the address, city or state fields of a location.
 
 var myGigSource : GigSource?
 
-enum GigSource {
+enum GigSource: String {
     case GigWalk
     case EasyShift
     case FieldAgent
@@ -20,12 +21,11 @@ enum GigSource {
     case Safari
 }
 
-
 //To create your own annotations, you create a class that conforms to the MKAnnotation protocol, add the annotation to the map,
 //and inform the map how the annotation should be displayed.
 class ShepSingleAnnotation: NSObject, MKAnnotation {
     init(myMapItem: MKMapItem, currentLinkedRoute: MKRoute, shepDollarValue: Double, myGigSource: GigSource) {
-        self.origTitle = myMapItem.name ?? "No Title"
+        self.mapItem_Name = myMapItem.name ?? "No Title"
         //self.locationName = myMapItem.name! //searchResult.description
         self.shepDollarValue = shepDollarValue
         self.myMapItem = myMapItem
@@ -43,7 +43,7 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
     
     //MARK: - My Properties
     let myDataModel = shepDataModel()
-    let origTitle: String?
+    let mapItem_Name: String?
     let shepDollarValue: Double
     let shepStringTitle: String
     var myMapItem: MKMapItem
@@ -57,7 +57,7 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
     
     var title: String? {
         let temp: String?
-        temp = self.origTitle
+        temp = self.mapItem_Name
         return shepStringTitle + " -- " + temp!
     }
     

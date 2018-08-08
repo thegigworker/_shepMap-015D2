@@ -38,7 +38,7 @@ let initialDisplay: Double = 50
 
 
 //The class keyword in the Swift protocol definition limits protocol adoption to class types (and not structures or enums). This is important if we want to use a weak reference to the delegate. We need be sure we do not create a retain cycle between the delegate and the delegating objects, so we use a weak reference to delegate (see below).
-protocol DataModelDelegate: class {
+protocol DataModel4MapScreenDelegate: class {
     func showValidSearchResults(validSearchResults: [ShepSingleAnnotation])
     func drawNewRoute(thisRoute: MKRoute)
     //func handletheChosenRoute(thisRoute: MKRoute)
@@ -47,7 +47,7 @@ protocol DataModelDelegate: class {
 
 class shepDataModel: NSObject {
     //We need be sure we do not create a retain cycle between the delegate and the delegating objects, so we use a weak reference to delegate.
-    weak var myDataModelDelegate: DataModelDelegate?
+    weak var myDataModel4MapScreenDelegate: DataModel4MapScreenDelegate?
     let centsPerMileExpense: Int = 60
     var currentTransportType = MKDirectionsTransportType.automobile
     var shepAnnotationsArray = [ShepSingleAnnotation]()
@@ -260,7 +260,7 @@ class shepDataModel: NSObject {
                 
                 if self.whichRouteStyle == "random" {
                     self.currentRoute = myRoute
-                    self.myDataModelDelegate?.drawNewRoute(thisRoute: myRoute)
+                    self.myDataModel4MapScreenDelegate?.drawNewRoute(thisRoute: myRoute)
                 }
                 
                 // THIS IS THE END OF getRouteInfoVia2Annotations COMPLETION HANDLER
@@ -343,46 +343,12 @@ class shepDataModel: NSObject {
                 print ("shepSearchResultLoop is done now, shepAnnotationsArray count is \(self.shepAnnotationsArray.count)")
                 print ("shepSearchResultLoop is done now, validSearchResultsArray count is \(self.validSearchResultsArray.count) \n")
                 
-                self.myDataModelDelegate?.showValidSearchResults(validSearchResults: self.validSearchResultsArray)
-                //self.validSearchResultsArray.removeAll()
-                
-                //self.getRouteInfoFromApple(sourceLocation: sourceLocation, destinationAnnotation: <#T##ShepSingleAnnotation#>)
+                self.myDataModel4MapScreenDelegate?.showValidSearchResults(validSearchResults: self.validSearchResultsArray)
+
             }
         })
         print ("OPENING GAMBIT, shepAnnotationsArray count is \(shepAnnotationsArray.count) \n")
     }
-    
-//    func whichLocalSearch() -> String? {
-//        switch shepDollarValue {
-//        case 0:
-//            return "McDonalds"
-//        case 1:
-//            return "Burger King"
-//        case 2:
-//            return "Target"
-//        case 3:
-//            return "Walmart"
-//        case 4:
-//            return "gas station"
-//        case 5:
-//            return "market"
-//        case 6:
-//            return "Pub"
-//        case 7:
-//            return "Diner"
-//        case 8:
-//            return "Lowes"
-//        case 9:
-//            return "Home Depot"
-//        case 10:
-//            return "pizza"
-//        case 11:
-//            return "bbq"
-//        default:
-//            return "superman"
-//        }
-//    }
-    
 }
 
 

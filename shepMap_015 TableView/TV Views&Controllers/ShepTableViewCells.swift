@@ -27,15 +27,15 @@ import UIKit
 
 class shepOrigProductTVCell: UITableViewCell {
     
-    @IBOutlet weak var productImageView: UIImageView!
+    @IBOutlet weak var myGigSourceImageView: UIImageView!
     @IBOutlet weak var productDescriptionLabel: UILabel!
     @IBOutlet weak var productTitleLabel: UILabel!
     
-    func setupCell(_ product: ShepTempSingleItem)
+    func setupCell(_ mySingleAnnotation: ShepSingleAnnotation)
     {
-        productImageView.image = product.image
-        productDescriptionLabel.text = product.description
-        productTitleLabel.text = product.title
+        myGigSourceImageView.image = UIImage(named: mySingleAnnotation.switchGigIcon())
+        productDescriptionLabel.text = mySingleAnnotation.description
+        productTitleLabel.text = mySingleAnnotation.title
     }
 }
 
@@ -59,15 +59,15 @@ class ShepTableViewCell: UITableViewCell {
     //@IBOutlet weak var namelabel2: UILabel! // shep test
     
     //MARK: - Functions
-    func setupCell(_ product: ShepTempSingleItem) {
-        photoImageView.image = product.image
+    func setupCell(_ myShepSingleAnnotation: ShepSingleAnnotation) {
+        //photoImageView.image = myShepSingleAnnotation.image
         //PayLbl.text = product.description
-        NameLbl.text = product.title
-        photoImageView.image = product.image
-        CategoryLbl1.text = product.jobType
-        CategoryLbl2.text = product.foodType
-        EarningLbl.text = "Dollars: \(shepCurrencyFromDouble(shepNumber : product.dollar))"
-        DrivingDistanceLbl.text = String(product.distance) + " miles"
+        NameLbl.text = myShepSingleAnnotation.title
+        photoImageView.image = UIImage(named: myShepSingleAnnotation.switchGigIcon())
+        CategoryLbl1.text = myShepSingleAnnotation.myGigSource.rawValue
+        CategoryLbl2.text = myShepSingleAnnotation.City
+        EarningLbl.text = "Dollars: \(shepCurrencyFromDouble(shepNumber : myShepSingleAnnotation.shepDollarValue))"
+        DrivingDistanceLbl.text = String(myShepSingleAnnotation.routeDrivingDistance) + " miles"
        //self.selectionStyle = UITableViewCellSelectionStyle.blue // not working?
     }
     
