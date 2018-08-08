@@ -11,20 +11,20 @@ import Foundation
 struct allSectionsOfData4TVC_NEW {
     
     var sectionName: String            // name of the product line
-    var oneSectionOfData : [ShepSingleAnnotation]
+    var oneSectionOfData : [fakeShepSingleAnnotation]
     //let myDataModel = shepDataModel()
     
     
-    init(named: String, includeItems: [ShepSingleAnnotation]) {
+    init(named: String, includeItems: [fakeShepSingleAnnotation]) {
         sectionName = named
         oneSectionOfData = includeItems
     }
     
     static func handleAllTheSections(whichSort: String) -> [allSectionsOfData4TVC_NEW] {
         var myBigKahunaSectionedArray = [allSectionsOfData4TVC_NEW]()
-        //let mySingleArray = tempSingleArray_class.buildSingleTableArray()
-        let myDataModel = shepDataModel()
-        let mySingleArray = myDataModel.shepAnnotationsArray
+        let mySingleArray = tempAnnotationsSingleArray_class.buildSingleTableArray()
+//        let myDataModel = shepDataModel()
+//        let mySingleArray = myDataModel.shepAnnotationsArray
         
         switch mySort { // mySort.rawValue = String of mySort
         case .JobTitle :
@@ -88,7 +88,7 @@ struct allSectionsOfData4TVC_NEW {
         return myBigKahunaSectionedArray
     }
     
-    static func doOneSection(sortedSingleArray: [ShepSingleAnnotation], whichSort: String) -> [allSectionsOfData4TVC_NEW] {
+    static func doOneSection(sortedSingleArray: [fakeShepSingleAnnotation], whichSort: String) -> [allSectionsOfData4TVC_NEW] {
         var tempBigKahunaSectionedArray = [allSectionsOfData4TVC_NEW]()
         //tempBigKahunaSectionedArray.append (allSectionsOfData4TVC_NEW(named: "ALL ONE SECTION", includeItems: sortedTempSingleArray))
         tempBigKahunaSectionedArray.append (allSectionsOfData4TVC_NEW(named: whichSort, includeItems: sortedSingleArray))
@@ -96,9 +96,9 @@ struct allSectionsOfData4TVC_NEW {
         return tempBigKahunaSectionedArray
     }
     
-    static func doMultipleSections(sortedSingleArray: [ShepSingleAnnotation], whichSort: String) -> [allSectionsOfData4TVC_NEW] {
+    static func doMultipleSections(sortedSingleArray: [fakeShepSingleAnnotation], whichSort: String) -> [allSectionsOfData4TVC_NEW] {
         var tempBigKahunaSectionedArray = [allSectionsOfData4TVC_NEW]()
-        var oneSectionOfData = [ShepSingleAnnotation]()
+        var oneSectionOfData = [fakeShepSingleAnnotation]()
         var currentSectionName = ""
         var loopCount = 0
         print("**** I'm in MultipleSections w sort \(whichSort)")

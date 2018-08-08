@@ -292,7 +292,7 @@ class myTableViewController: UITableViewController, UIPopoverPresentationControl
     
     func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
         print ("\n")
-        print ("SORT BY MENU DISMISSED. \n" + "You chose: \(whichSort)")
+        print ("SORT BY MENU DISMISSED. \n" + "You chose: \(mySort)")
         redrawTableView()
         
         //        BigKahunaSectionedArray = allSectionsOfData4TVC.handleAllTheSections(whichSort: whichSort)
@@ -307,8 +307,8 @@ class myTableViewController: UITableViewController, UIPopoverPresentationControl
     // MARK: - Helper Methods
     
     func redrawTableView() {
-        BigKahunaSectionedArray = allSectionsOfData4TVC_NEW.handleAllTheSections(whichSort: whichSort)
-        print("I'm in redrawTableView w sort \(whichSort)")
+        BigKahunaSectionedArray = allSectionsOfData4TVC_NEW.handleAllTheSections(whichSort: mySort.rawValue)
+        print("I'm in redrawTableView w sort \(mySort)")
         self.tableView.reloadData()  // Reloads everything from scratch. Redisplays visible rows. Note that this will cause any existing drop placeholder rows to be removed.
         /*
          The UITableView's reloadData() method is explicitly a force reload of the entire tableView. It works well, but is usually jarring and a bad user experience if you're going to do that with a tableview that the user is currently looking at.
@@ -318,7 +318,7 @@ class myTableViewController: UITableViewController, UIPopoverPresentationControl
          */
     }
     
-    func theAnnotationAtIndexPath(_ indexPath: IndexPath) -> ShepSingleAnnotation {
+    func theAnnotationAtIndexPath(_ indexPath: IndexPath) -> fakeShepSingleAnnotation {
         print("productAtIndexPath w indexPath \(indexPath)")
         let myAnnotationsSection = BigKahunaSectionedArray[indexPath.section]
         return myAnnotationsSection.oneSectionOfData[indexPath.row]

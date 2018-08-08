@@ -31,7 +31,7 @@ class shepOrigProductTVCell: UITableViewCell {
     @IBOutlet weak var productDescriptionLabel: UILabel!
     @IBOutlet weak var productTitleLabel: UILabel!
     
-    func setupCell(_ mySingleAnnotation: ShepSingleAnnotation)
+    func setupCell(_ mySingleAnnotation: fakeShepSingleAnnotation)
     {
         myGigSourceImageView.image = UIImage(named: mySingleAnnotation.switchGigIcon())
         productDescriptionLabel.text = mySingleAnnotation.description
@@ -59,7 +59,7 @@ class ShepTableViewCell: UITableViewCell {
     //@IBOutlet weak var namelabel2: UILabel! // shep test
     
     //MARK: - Functions
-    func setupCell(_ myShepSingleAnnotation: ShepSingleAnnotation) {
+    func setupCell(_ myShepSingleAnnotation: fakeShepSingleAnnotation) {
         //photoImageView.image = myShepSingleAnnotation.image
         //PayLbl.text = product.description
         NameLbl.text = myShepSingleAnnotation.title

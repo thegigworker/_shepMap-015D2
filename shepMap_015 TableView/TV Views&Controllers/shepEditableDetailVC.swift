@@ -10,8 +10,8 @@ import UIKit
 class shepEditableDetailVC: UITableViewController, UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     // Model:
-    var mySingleAnnotation: ShepSingleAnnotation?
-    var shepProductDetail: ShepTempSingleItem?
+    var mySingleAnnotation: fakeShepSingleAnnotation?
+    //var shepProductDetail: ShepTempSingleItem?
     
     @IBOutlet weak var myImageView: UIImageView!
     @IBOutlet weak var myTitleLabel: UITextField!
@@ -66,7 +66,7 @@ class shepEditableDetailVC: UITableViewController, UITextFieldDelegate, UITextVi
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
         let image = info[UIImagePickerControllerOriginalImage] as! UIImage
         //why does line below require so much force unwrapping?
-        shepProductDetail?.image = UIImage(named: (mySingleAnnotation?.switchGigIcon())!)!
+        //mySingleAnnotation?.image = UIImage(named: (mySingleAnnotation?.switchGigIcon())!)!
         myImageView.image = image
         dismiss(animated: true, completion: nil)
     }
