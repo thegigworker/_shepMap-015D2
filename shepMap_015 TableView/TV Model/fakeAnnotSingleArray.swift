@@ -6,26 +6,27 @@
 import Foundation
 import MapKit
 
-class tempAnnotationsSingleArray_class {
+class fakeAnnotationsSingleArray_class {
     
     class func buildSingleTableArray() -> [fakeShepSingleAnnotation] {
-        
         var tempSingleArray = [fakeShepSingleAnnotation]()
-        tempSingleArray.append(fakeShepSingleAnnotation(myMapItem: MKMapItem(), currentLinkedRoute: MKRoute(),
-                                                        shepDollarValue: 12.4, myGigSource: GigSource.EasyShift))
-        tempSingleArray.append(fakeShepSingleAnnotation(myMapItem: MKMapItem(), currentLinkedRoute: MKRoute(),
-                                                        shepDollarValue: 13.4, myGigSource: GigSource.EasyShift))
-        tempSingleArray.append(fakeShepSingleAnnotation(myMapItem: MKMapItem(), currentLinkedRoute: MKRoute(),
-                                                        shepDollarValue: 14.4, myGigSource: GigSource.GigWalk))
-        tempSingleArray.append(fakeShepSingleAnnotation(myMapItem: MKMapItem(), currentLinkedRoute: MKRoute(),
-                                                        shepDollarValue: 15.4, myGigSource: GigSource.GigWalk))
-        tempSingleArray.append(fakeShepSingleAnnotation(myMapItem: MKMapItem(), currentLinkedRoute: MKRoute(),
-                                                        shepDollarValue: 16.4, myGigSource: GigSource.FieldAgent))
-        tempSingleArray.append(fakeShepSingleAnnotation(myMapItem: MKMapItem(), currentLinkedRoute: MKRoute(),
-                                                        shepDollarValue: 17.4, myGigSource: GigSource.Safari))
-        tempSingleArray.append(fakeShepSingleAnnotation(myMapItem: MKMapItem(), currentLinkedRoute: MKRoute(),
-                                                        shepDollarValue: 18.4, myGigSource: GigSource.Safari))
-
+        
+        var mySingleAnnotation = fakeShepSingleAnnotation(myMapItem: MKMapItem(), currentLinkedRoute: MKRoute(), shepDollarValue: 05.0, myGigSource: GigSource.EasyShift, title: "Temp Name 1", subtitle: "this is a 1 subtitle", StreetAddressLine: "123 main st.", City: "Thompson", routeDrivingDistance: 3.0, ZipCode: "06277")
+        tempSingleArray.append(mySingleAnnotation)
+        mySingleAnnotation = fakeShepSingleAnnotation(myMapItem: MKMapItem(), currentLinkedRoute: MKRoute(), shepDollarValue: 27.0, myGigSource: GigSource.EasyShift, title: "Temp Name 2", subtitle: "this is a 2 subtitle", StreetAddressLine: "123 main st.", City: "Thompson", routeDrivingDistance: 22.0, ZipCode: "06277")
+        tempSingleArray.append(mySingleAnnotation)
+       mySingleAnnotation = fakeShepSingleAnnotation(myMapItem: MKMapItem(), currentLinkedRoute: MKRoute(), shepDollarValue: 24.0, myGigSource: GigSource.GigWalk, title: "Temp Name 3", subtitle: "this is a 3 subtitle", StreetAddressLine: "123 main st.", City: "Webster", routeDrivingDistance: 13.0, ZipCode: "06278")
+        tempSingleArray.append(mySingleAnnotation)
+        mySingleAnnotation = fakeShepSingleAnnotation(myMapItem: MKMapItem(), currentLinkedRoute: MKRoute(), shepDollarValue: 25.0, myGigSource: GigSource.FieldAgent, title: "Temp Name 4", subtitle: "this is a 4 subtitle", StreetAddressLine: "123 main st.", City: "Webster", routeDrivingDistance: 24.0, ZipCode: "06278")
+        tempSingleArray.append(mySingleAnnotation)
+        mySingleAnnotation = fakeShepSingleAnnotation(myMapItem: MKMapItem(), currentLinkedRoute: MKRoute(), shepDollarValue: 3.0, myGigSource: GigSource.GigWalk, title: "Temp Name 5", subtitle: "this is a 5 subtitle", StreetAddressLine: "123 main st.", City: "Webster", routeDrivingDistance: 25.0, ZipCode: "06278")
+        tempSingleArray.append(mySingleAnnotation)
+        mySingleAnnotation = fakeShepSingleAnnotation(myMapItem: MKMapItem(), currentLinkedRoute: MKRoute(), shepDollarValue: 22.0, myGigSource: GigSource.FieldAgent, title: "Temp Name 6", subtitle: "this is a 6 subtitle", StreetAddressLine: "123 main st.", City: "Putnam", routeDrivingDistance: 25.0, ZipCode: "06279")
+        tempSingleArray.append(mySingleAnnotation)
+        mySingleAnnotation = fakeShepSingleAnnotation(myMapItem: MKMapItem(), currentLinkedRoute: MKRoute(), shepDollarValue: 100.0, myGigSource: GigSource.FieldAgent, title: "Temp Name 22", subtitle: "this is a 7 subtitle", StreetAddressLine: "123 main st.", City: "Putnam", routeDrivingDistance: 36.0, ZipCode: "06280")
+        tempSingleArray.append(mySingleAnnotation)
+        mySingleAnnotation = fakeShepSingleAnnotation(myMapItem: MKMapItem(), currentLinkedRoute: MKRoute(), shepDollarValue: 20.0, myGigSource: GigSource.Safari, title: "Temp Name 21", subtitle: "this is a 8 subtitle", StreetAddressLine: "123 main st.", City: "Pomfret", routeDrivingDistance: 09.0, ZipCode: "06281")
+        tempSingleArray.append(mySingleAnnotation)
         return tempSingleArray
         
     }

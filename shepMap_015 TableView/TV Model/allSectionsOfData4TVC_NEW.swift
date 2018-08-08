@@ -22,16 +22,16 @@ struct allSectionsOfData4TVC_NEW {
     
     static func handleAllTheSections(whichSort: String) -> [allSectionsOfData4TVC_NEW] {
         var myBigKahunaSectionedArray = [allSectionsOfData4TVC_NEW]()
-        let mySingleArray = tempAnnotationsSingleArray_class.buildSingleTableArray()
+        let mySingleArray = fakeAnnotationsSingleArray_class.buildSingleTableArray()
 //        let myDataModel = shepDataModel()
 //        let mySingleArray = myDataModel.shepAnnotationsArray
         
         switch mySort { // mySort.rawValue = String of mySort
         case .JobTitle :
             let sortedSingleArray = mySingleArray.sorted(by: { $0.title! < $1.title! })
-            myBigKahunaSectionedArray = doMultipleSections(sortedSingleArray: sortedSingleArray, whichSort: mySort.rawValue)
+            myBigKahunaSectionedArray = doOneSection(sortedSingleArray: sortedSingleArray, whichSort: mySort.rawValue)
         case .JobPay :
-            let sortedSingleArray = mySingleArray.sorted(by: { $0.shepDollarValue < $1.shepDollarValue })
+            let sortedSingleArray = mySingleArray.sorted(by: { $0.shepDollarValue > $1.shepDollarValue })
             myBigKahunaSectionedArray = doOneSection(sortedSingleArray: sortedSingleArray, whichSort: mySort.rawValue)
         case .DrivingDistance :
             let sortedSingleArray = mySingleArray.sorted(by: { $0.routeDrivingDistance < $1.routeDrivingDistance })

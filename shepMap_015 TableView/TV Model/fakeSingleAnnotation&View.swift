@@ -13,7 +13,8 @@ import Contacts
 //To create your own annotations, you create a class that conforms to the MKAnnotation protocol, add the annotation to the map,
 //and inform the map how the annotation should be displayed.
 class fakeShepSingleAnnotation: NSObject, MKAnnotation {
-    init(myMapItem: MKMapItem, currentLinkedRoute: MKRoute, shepDollarValue: Double, myGigSource: GigSource) {
+    init(myMapItem: MKMapItem, currentLinkedRoute: MKRoute, shepDollarValue: Double, myGigSource: GigSource, title: String?, subtitle: String?,
+         StreetAddressLine: String?, City: String?, routeDrivingDistance: Double, ZipCode: String?) {
         self.mapItem_Name = myMapItem.name ?? "No Title"
         //self.locationName = myMapItem.name! //searchResult.description
         self.shepDollarValue = shepDollarValue
@@ -27,6 +28,12 @@ class fakeShepSingleAnnotation: NSObject, MKAnnotation {
         let longitude = myMapItem.placemark.coordinate.longitude
         self.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         self.myGigSource = myGigSource
+        self.title = title
+        self.subtitle = subtitle
+        self.StreetAddressLine = StreetAddressLine
+        self.City = City
+        self.routeDrivingDistance = routeDrivingDistance
+        self.ZipCode = ZipCode
         super.init()
     }
     
@@ -44,28 +51,40 @@ class fakeShepSingleAnnotation: NSObject, MKAnnotation {
     //   your class also needs properties named title and subtitle.
     let coordinate: CLLocationCoordinate2D
     
-    var title: String? {
-        let temp: String?
-        temp = self.mapItem_Name
-        return shepStringTitle + " -- " + temp!
-    }
+    var title: String?
+    var subtitle: String?
+    var StreetAddressLine: String?
+    var City: String?
+    var routeDrivingDistance: Double
+    var ZipCode: String?
     
-    var subtitle: String? {
-        // takes the placemark.title string, which is really THE ADDRESS LINE, and cuts off the last 15 chars: ", United States"
-        return String(myMapItem.placemark.title!.dropLast(_:15))
-    }
-    
-     var StreetAddressLine: String? {
-        return myMapItem.placemark.postalAddress?.street
-    }
-    
-    var City: String? {
-        return myMapItem.placemark.postalAddress?.city
-    }
-    
-    var ZipCode: String? {
-        return myMapItem.placemark.postalAddress?.postalCode
-    }
+//    var title: String? {
+//        let temp: String?
+//        temp = self.mapItem_Name
+//        return shepStringTitle + " -- " + temp!
+//    }
+//
+//    var subtitle: String? {
+//        // takes the placemark.title string, which is really THE ADDRESS LINE, and cuts off the last 15 chars: ", United States"
+//        return String(myMapItem.placemark.title!.dropLast(_:15))
+//    }
+//
+//     var StreetAddressLine: String? {
+//        return myMapItem.placemark.postalAddress?.street
+//    }
+//
+//    var City: String? {
+//        return myMapItem.placemark.postalAddress?.city
+//    }
+//
+//    var ZipCode: String? {
+//        return myMapItem.placemark.postalAddress?.postalCode
+//    }
+//
+//    var routeDrivingDistance: Double {
+//        let drivingDistance = meters2miles(meters: currentLinkedRoute.distance)
+//        return drivingDistance // drivingDistance in miles
+//    }
     
     var formattedFullAddress : String {
         let streetAddressLine = self.StreetAddressLine!
@@ -73,11 +92,7 @@ class fakeShepSingleAnnotation: NSObject, MKAnnotation {
         let CityStateZipLine = self.City! + ", " + state! + ", " + self.ZipCode!
         return streetAddressLine + "\n" + CityStateZipLine
     }
-    
-    var routeDrivingDistance: Double {
-        let drivingDistance = meters2miles(meters: currentLinkedRoute.distance)
-        return drivingDistance // drivingDistance in miles
-    }
+
     
     var routeProfit: Double {
         let drivingDistance = meters2miles(meters: currentLinkedRoute.distance)

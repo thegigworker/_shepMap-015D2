@@ -42,17 +42,19 @@ class shepOrigProductTVCell: UITableViewCell {
 class ShepTableViewCell: UITableViewCell {
     
     //MARK: Properties
-    @IBOutlet weak var CategoryLbl1: UILabel!
-    @IBOutlet weak var CategoryLbl2: UILabel!
+    @IBOutlet weak var lblCity: UILabel!
+    @IBOutlet weak var lblJobSource: UILabel!
     // The simplest approach is to add this attribute to the LABEL YOU WANT TO HAVE ROUNDED CORNERS.
     //          layer.cornerRadius
     
     @IBOutlet weak var NameLbl: UILabel!
     @IBOutlet weak var photoImageView: UIImageView!
    // @IBOutlet weak var PayLbl: UILabel!
-    @IBOutlet weak var ExpenseLbl: UILabel!
+    @IBOutlet weak var UNKNOWN_Label: UILabel!
+    //@IBOutlet weak var ExpenseLbl: UILabel!
     @IBOutlet weak var EarningLbl: UILabel!
     @IBOutlet weak var DrivingDistanceLbl: UILabel!
+    @IBOutlet weak var lblZIPCode: UILabel!
     //@IBOutlet weak var DrivingTimeLbl: UILabel!
     //@IBOutlet weak var CrowFliesLbl: UILabel!
     //@IBOutlet weak var ratingControl: RatingControl!
@@ -64,8 +66,10 @@ class ShepTableViewCell: UITableViewCell {
         //PayLbl.text = product.description
         NameLbl.text = myShepSingleAnnotation.title
         photoImageView.image = UIImage(named: myShepSingleAnnotation.switchGigIcon())
-        CategoryLbl1.text = myShepSingleAnnotation.myGigSource.rawValue
-        CategoryLbl2.text = myShepSingleAnnotation.City
+        lblCity.text = myShepSingleAnnotation.City
+        lblJobSource.text = myShepSingleAnnotation.myGigSource.rawValue
+        lblZIPCode.text = myShepSingleAnnotation.ZipCode
+        UNKNOWN_Label.text = "who knows"
         EarningLbl.text = "Dollars: \(shepCurrencyFromDouble(shepNumber : myShepSingleAnnotation.shepDollarValue))"
         DrivingDistanceLbl.text = String(myShepSingleAnnotation.routeDrivingDistance) + " miles"
        //self.selectionStyle = UITableViewCellSelectionStyle.blue // not working?
