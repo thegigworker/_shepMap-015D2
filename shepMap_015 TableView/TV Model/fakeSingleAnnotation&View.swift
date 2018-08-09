@@ -88,8 +88,10 @@ class fakeShepSingleAnnotation: NSObject, MKAnnotation {
     
     var formattedFullAddress : String {
         let streetAddressLine = self.StreetAddressLine!
-        let state = myMapItem.placemark.postalAddress?.state
-        let CityStateZipLine = self.City! + ", " + state! + ", " + self.ZipCode!
+        //let state = myMapItem.placemark.postalAddress?.state
+        //let CityStateZipLine = self.City! + ", " + state! + ", " + self.ZipCode!
+        let state = "XX"
+        let CityStateZipLine = self.City! + ", " + state + ", " + self.ZipCode!
         return streetAddressLine + "\n" + CityStateZipLine
     }
 

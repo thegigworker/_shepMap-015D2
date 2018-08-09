@@ -5,8 +5,7 @@
 import UIKit
 import MapKit
 
-//var mySort = whichSort_enum.
-var mySort = whichSort_enum.JobSource
+var mySort = whichSort_enum.JobTitle
 
 enum whichSort_enum : String {
     case JobTitle

@@ -261,7 +261,7 @@ class myTableViewController: UITableViewController, UIPopoverPresentationControl
 //                    productDetailVC.product = productAtIndexPath(indexPath)
 //                }
             case "Show Editable Detail":
-                let editTableVC = segue.destination as! shepEditableDetailVC
+                let editTableVC = segue.destination as! shepDetailScreenVC
                 if let indexPath = self.tableView.indexPath(for: sender as! UITableViewCell) {
                     editTableVC.mySingleAnnotation = theAnnotationAtIndexPath(indexPath)
                 }

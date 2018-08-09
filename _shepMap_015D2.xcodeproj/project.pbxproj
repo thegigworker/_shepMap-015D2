@@ -18,7 +18,7 @@
 		A16326A0210A71D70064505C /* Debug_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A163269D210A71D60064505C /* Debug_VC.swift */; };
 		A16326A1210A71D70064505C /* myChartsCurlingPage_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A163269E210A71D70064505C /* myChartsCurlingPage_VC.swift */; };
 		A16F818A211B3673004C36ED /* allSectionsOfData4TVC_NEW.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16F8189211B3673004C36ED /* allSectionsOfData4TVC_NEW.swift */; };
-		A16F818C211B678B004C36ED /* shepEditableDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16F818B211B678A004C36ED /* shepEditableDetailVC.swift */; };
+		A16F818C211B678B004C36ED /* DetailScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16F818B211B678A004C36ED /* DetailScreenVC.swift */; };
 		A16F818E211B8A44004C36ED /* fakeSingleAnnotation&View.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16F818D211B8A44004C36ED /* fakeSingleAnnotation&View.swift */; };
 		A16F8190211B8C42004C36ED /* fakeAnnotSingleArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16F818F211B8C42004C36ED /* fakeAnnotSingleArray.swift */; };
 		A18231E1210A6F0000C0CF31 /* myTableView_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18231D4210A6EFF00C0CF31 /* myTableView_VC.swift */; };
@@ -48,7 +48,7 @@
 		A163269D210A71D60064505C /* Debug_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Debug_VC.swift; sourceTree = "<group>"; };
 		A163269E210A71D70064505C /* myChartsCurlingPage_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = myChartsCurlingPage_VC.swift; sourceTree = "<group>"; };
 		A16F8189211B3673004C36ED /* allSectionsOfData4TVC_NEW.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = allSectionsOfData4TVC_NEW.swift; sourceTree = "<group>"; };
-		A16F818B211B678A004C36ED /* shepEditableDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shepEditableDetailVC.swift; sourceTree = "<group>"; };
+		A16F818B211B678A004C36ED /* DetailScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailScreenVC.swift; sourceTree = "<group>"; };
 		A16F818D211B8A44004C36ED /* fakeSingleAnnotation&View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "fakeSingleAnnotation&View.swift"; sourceTree = "<group>"; };
 		A16F818F211B8C42004C36ED /* fakeAnnotSingleArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fakeAnnotSingleArray.swift; sourceTree = "<group>"; };
 		A18231D4210A6EFF00C0CF31 /* myTableView_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = myTableView_VC.swift; sourceTree = "<group>"; };
@@ -120,10 +120,10 @@
 		A18231D7210A6EFF00C0CF31 /* TV Views&Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				A16F818B211B678A004C36ED /* DetailScreenVC.swift */,
 				A18231D4210A6EFF00C0CF31 /* myTableView_VC.swift */,
 				A18231D9210A6EFF00C0CF31 /* ShepTableViewCells.swift */,
 				A1E7A346211B065500DB36E5 /* SortingHatPopover.swift */,
-				A16F818B211B678A004C36ED /* shepEditableDetailVC.swift */,
 			);
 			path = "TV Views&Controllers";
 			sourceTree = "<group>";
@@ -267,7 +267,7 @@
 				A19B6E032020EA5F00AE2BBE /* searchRadius_VC.swift in Sources */,
 				A1DAD3762087C28400F9BC9C /* JUST_SOME_NOTES.swift in Sources */,
 				A10B02961FE1784D004FA3B8 /* ShepDataModel.swift in Sources */,
-				A16F818C211B678B004C36ED /* shepEditableDetailVC.swift in Sources */,
+				A16F818C211B678B004C36ED /* DetailScreenVC.swift in Sources */,
 				A16326A1210A71D70064505C /* myChartsCurlingPage_VC.swift in Sources */,
 				A103692B21134F2A00FB9B3F /* MAPSCREEN_VC_extension.swift in Sources */,
 				A11C1A4E2109499200BA8252 /* TabBarController.swift in Sources */,

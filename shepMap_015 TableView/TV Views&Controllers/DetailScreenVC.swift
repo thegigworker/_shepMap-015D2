@@ -7,14 +7,14 @@
 
 import UIKit
 
-class shepEditableDetailVC: UITableViewController, UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class shepDetailScreenVC: UITableViewController, UITextFieldDelegate, UITextViewDelegate, UINavigationControllerDelegate {
 
     // Model:
     var mySingleAnnotation: fakeShepSingleAnnotation?
     //var shepProductDetail: ShepTempSingleItem?
     
-    @IBOutlet weak var myImageView: UIImageView!
-    @IBOutlet weak var myTitleLabel: UITextField!
+    //@IBOutlet weak var myImageView: UIImageView!
+    //@IBOutlet weak var myTitleLabel: UITextField!
     @IBOutlet weak var myDescriptionTextView: UITextView!
     @IBOutlet weak var myImage1: UIImageView!
     @IBOutlet weak var myImage2: UIImageView!
@@ -28,6 +28,13 @@ class shepEditableDetailVC: UITableViewController, UITextFieldDelegate, UITextVi
     @IBOutlet weak var lblDistance: UILabel!
     @IBOutlet weak var lblGigSource: UILabel!
     @IBOutlet weak var lblCity: UILabel!
+    @IBOutlet weak var lblExpense: UILabel!
+    @IBOutlet weak var lblPay: UILabel!
+    @IBOutlet weak var lblProfit: UILabel!
+    @IBOutlet weak var lblCrowFlies: UILabel!
+    @IBOutlet weak var lblDrivingTime: UILabel!
+    @IBOutlet weak var lblDrivingDistance: UILabel!
+    
     
     // MARK: - UITextFieldDelegate
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -51,26 +58,6 @@ class shepEditableDetailVC: UITableViewController, UITextFieldDelegate, UITextVi
         }
     }
     
-    // MARK: - Image Picker Controller
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 0 && indexPath.row == 0
-        {
-            let picker = UIImagePickerController()
-            picker.sourceType = UIImagePickerControllerSourceType.photoLibrary  // .Camera
-            picker.allowsEditing = false
-            picker.delegate = self
-            present(picker, animated: true, completion: nil)
-        }
-    }
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
-        let image = info[UIImagePickerControllerOriginalImage] as! UIImage
-        //why does line below require so much force unwrapping?
-        //mySingleAnnotation?.image = UIImage(named: (mySingleAnnotation?.switchGigIcon())!)!
-        myImageView.image = image
-        dismiss(animated: true, completion: nil)
-    }
-    
     // MARK: - VC Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,11 +71,18 @@ class shepEditableDetailVC: UITableViewController, UITextFieldDelegate, UITextVi
         lblPay2.text = "Dollars: \(shepCurrencyFromDouble(shepNumber : (mySingleAnnotation?.shepDollarValue)!))"
         lblDistance.text = "\(String(describing: mySingleAnnotation!.routeDrivingDistance)) miles"
         lblGigSource.text = mySingleAnnotation?.myGigSource.rawValue
+        lblStreetAddress.text = mySingleAnnotation?.formattedFullAddress
         lblCity.text = mySingleAnnotation?.City
         //productImageView.image = shepProductDetail?.image
         lbTitle.text = mySingleAnnotation?.title
-        myTitleLabel.text = mySingleAnnotation?.title
-        myDescriptionTextView.text = mySingleAnnotation?.description
+        //myTitleLabel.text = mySingleAnnotation?.title
+        lblExpense.text = "Expense Label NOT DONE"
+        lblPay.text = "Dollars: \(shepCurrencyFromDouble(shepNumber : (mySingleAnnotation?.shepDollarValue)!))"
+        lblProfit.text = "Profit Label NOT DONE"
+        lblCrowFlies.text = "As the Crow Flies: \(String(describing: mySingleAnnotation!.crowFliesDistance)) miles"
+        lblDrivingTime.text = "Driving Time: \(String(describing: mySingleAnnotation!.drivingTime)) minutes"
+        lblDrivingDistance.text = "Driving Distance: \(String(describing: mySingleAnnotation!.routeDrivingDistance)) miles"
+        myDescriptionTextView.text = mySingleAnnotation!.description
         if #available(iOS 11.0, *) {
             self.navigationItem.largeTitleDisplayMode = .never
         } else {
