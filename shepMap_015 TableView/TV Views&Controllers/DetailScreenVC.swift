@@ -72,7 +72,7 @@ class shepDetailScreenVC: UITableViewController, UITextFieldDelegate, UITextView
         lblDistance.text = "\(String(describing: mySingleAnnotation!.routeDrivingDistance)) miles"
         lblGigSource.text = mySingleAnnotation?.myGigSource.rawValue
         lblStreetAddress.text = mySingleAnnotation?.formattedFullAddress
-        lblCity.text = mySingleAnnotation?.City
+        //lblCity.text = mySingleAnnotation?.City
         //productImageView.image = shepProductDetail?.image
         lbTitle.text = mySingleAnnotation?.title
         //myTitleLabel.text = mySingleAnnotation?.title
