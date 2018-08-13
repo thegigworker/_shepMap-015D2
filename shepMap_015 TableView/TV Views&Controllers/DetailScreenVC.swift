@@ -24,16 +24,12 @@ class shepDetailScreenVC: UITableViewController, UITextFieldDelegate, UITextView
     @IBOutlet weak var myImage6: UIImageView!
     @IBOutlet weak var lbTitle: UILabel!
     @IBOutlet weak var lblStreetAddress: UILabel!
-    @IBOutlet weak var lblPay2: UILabel!
-    @IBOutlet weak var lblDistance: UILabel!
-    @IBOutlet weak var lblGigSource: UILabel!
-    @IBOutlet weak var lblCity: UILabel!
-    @IBOutlet weak var lblExpense: UILabel!
     @IBOutlet weak var lblPay: UILabel!
+    @IBOutlet weak var lblDrivingDistance: UILabel!
+    @IBOutlet weak var lblExpense: UILabel!
     @IBOutlet weak var lblProfit: UILabel!
     @IBOutlet weak var lblCrowFlies: UILabel!
     @IBOutlet weak var lblDrivingTime: UILabel!
-    @IBOutlet weak var lblDrivingDistance: UILabel!
     
     
     // MARK: - UITextFieldDelegate
@@ -68,20 +64,16 @@ class shepDetailScreenVC: UITableViewController, UITextFieldDelegate, UITextView
         myImage4.image = UIImage(named: (mySingleAnnotation?.switchGigIcon())!)
         myImage5.image = UIImage(named: (mySingleAnnotation?.switchGigIcon())!)
         myImage6.image = UIImage(named: (mySingleAnnotation?.switchGigIcon())!)
-        lblPay2.text = "Dollars: \(shepCurrencyFromDouble(shepNumber : (mySingleAnnotation?.shepDollarValue)!))"
-        lblDistance.text = "\(String(describing: mySingleAnnotation!.routeDrivingDistance)) miles"
-        lblGigSource.text = mySingleAnnotation?.myGigSource.rawValue
-        lblStreetAddress.text = mySingleAnnotation?.formattedFullAddress
-        //lblCity.text = mySingleAnnotation?.City
+        lblPay.text = "Dollars: \(shepCurrencyFromDouble(shepNumber : (mySingleAnnotation?.shepDollarValue)!))"
+
         //productImageView.image = shepProductDetail?.image
         lbTitle.text = mySingleAnnotation?.title
-        //myTitleLabel.text = mySingleAnnotation?.title
         lblExpense.text = "Expense Label NOT DONE"
-        lblPay.text = "Dollars: \(shepCurrencyFromDouble(shepNumber : (mySingleAnnotation?.shepDollarValue)!))"
         lblProfit.text = "Profit Label NOT DONE"
         lblCrowFlies.text = "As the Crow Flies: \(String(describing: mySingleAnnotation!.crowFliesDistance)) miles"
-        lblDrivingTime.text = "Driving Time: \(String(describing: mySingleAnnotation!.drivingTime)) minutes"
+        lblDrivingTime.text = "Driving Time:     \(String(describing: mySingleAnnotation!.drivingTime)) minutes"
         lblDrivingDistance.text = "Driving Distance: \(String(describing: mySingleAnnotation!.routeDrivingDistance)) miles"
+        lblStreetAddress.text = mySingleAnnotation?.formattedFullAddress
         myDescriptionTextView.text = mySingleAnnotation!.description
         if #available(iOS 11.0, *) {
             self.navigationItem.largeTitleDisplayMode = .never
@@ -96,9 +88,6 @@ class shepDetailScreenVC: UITableViewController, UITextFieldDelegate, UITextView
     //        shepProductDetail?.image = productImageView.image!
     //    }
 }
-
-
-
 
 
 
