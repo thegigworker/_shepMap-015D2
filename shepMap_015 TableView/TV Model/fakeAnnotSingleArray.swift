@@ -13,7 +13,7 @@ class fakeAnnotationsSingleArray_class {
         
         var mySingleAnnotation = fakeShepSingleAnnotation(myMapItem: MKMapItem(), currentLinkedRoute: MKRoute(), shepDollarValue: 05.0, myGigSource: GigSource.EasyShift, title: "Temp Name 1", subtitle: "this is a 1 subtitle", StreetAddressLine: "123 Main St.", City: "Thompson", routeDrivingDistance: 3.0, ZipCode: "06277")
         tempSingleArray.append(mySingleAnnotation)
-        mySingleAnnotation = fakeShepSingleAnnotation(myMapItem: MKMapItem(), currentLinkedRoute: MKRoute(), shepDollarValue: 27.0, myGigSource: GigSource.EasyShift, title: "Temp Name 2", subtitle: "this is a 2 subtitle", StreetAddressLine: "123 Main St.", City: "Thompson", routeDrivingDistance: 22.0, ZipCode: "06277")
+        mySingleAnnotation = fakeShepSingleAnnotation(myMapItem: MKMapItem(), currentLinkedRoute: MKRoute(), shepDollarValue: 27.0, myGigSource: GigSource.TaskRabbit, title: "Temp Name 2", subtitle: "this is a 2 subtitle", StreetAddressLine: "123 Main St.", City: "Thompson", routeDrivingDistance: 22.0, ZipCode: "06277")
         tempSingleArray.append(mySingleAnnotation)
        mySingleAnnotation = fakeShepSingleAnnotation(myMapItem: MKMapItem(), currentLinkedRoute: MKRoute(), shepDollarValue: 24.0, myGigSource: GigSource.GigWalk, title: "Temp Name 3", subtitle: "this is a 3 subtitle", StreetAddressLine: "123 Main St.", City: "Webster", routeDrivingDistance: 13.0, ZipCode: "06278")
         tempSingleArray.append(mySingleAnnotation)
@@ -21,7 +21,7 @@ class fakeAnnotationsSingleArray_class {
         tempSingleArray.append(mySingleAnnotation)
         mySingleAnnotation = fakeShepSingleAnnotation(myMapItem: MKMapItem(), currentLinkedRoute: MKRoute(), shepDollarValue: 3.0, myGigSource: GigSource.GigWalk, title: "Temp Name 5", subtitle: "this is a 5 subtitle", StreetAddressLine: "123 Main St.", City: "Webster", routeDrivingDistance: 25.0, ZipCode: "06278")
         tempSingleArray.append(mySingleAnnotation)
-        mySingleAnnotation = fakeShepSingleAnnotation(myMapItem: MKMapItem(), currentLinkedRoute: MKRoute(), shepDollarValue: 22.0, myGigSource: GigSource.FieldAgent, title: "Temp Name 6", subtitle: "this is a 6 subtitle", StreetAddressLine: "123 Main St.", City: "Putnam", routeDrivingDistance: 25.0, ZipCode: "06279")
+        mySingleAnnotation = fakeShepSingleAnnotation(myMapItem: MKMapItem(), currentLinkedRoute: MKRoute(), shepDollarValue: 22.0, myGigSource: GigSource.EasyShift, title: "Temp Name 6", subtitle: "this is a 6 subtitle", StreetAddressLine: "123 Main St.", City: "Putnam", routeDrivingDistance: 25.0, ZipCode: "06279")
         tempSingleArray.append(mySingleAnnotation)
         mySingleAnnotation = fakeShepSingleAnnotation(myMapItem: MKMapItem(), currentLinkedRoute: MKRoute(), shepDollarValue: 100.0, myGigSource: GigSource.FieldAgent, title: "Temp Name 22", subtitle: "this is a 7 subtitle", StreetAddressLine: "123 Main St.", City: "Putnam", routeDrivingDistance: 36.0, ZipCode: "06280")
         tempSingleArray.append(mySingleAnnotation)
@@ -29,7 +29,7 @@ class fakeAnnotationsSingleArray_class {
         tempSingleArray.append(mySingleAnnotation)
         mySingleAnnotation = fakeShepSingleAnnotation(myMapItem: MKMapItem(), currentLinkedRoute: MKRoute(), shepDollarValue: 21.0, myGigSource: GigSource.TaskRabbit, title: "Temp Name 50", subtitle: "this is a 8 subtitle", StreetAddressLine: "123 Main St.", City: "Killingly", routeDrivingDistance: 06.0, ZipCode: "06276")
         tempSingleArray.append(mySingleAnnotation)
-        mySingleAnnotation = fakeShepSingleAnnotation(myMapItem: MKMapItem(), currentLinkedRoute: MKRoute(), shepDollarValue: 31.0, myGigSource: GigSource.TaskRabbit, title: "Temp Name 51", subtitle: "this is a 8 subtitle", StreetAddressLine: "123 Main St.", City: "Killingly", routeDrivingDistance: 16.0, ZipCode: "06276")
+        mySingleAnnotation = fakeShepSingleAnnotation(myMapItem: MKMapItem(), currentLinkedRoute: MKRoute(), shepDollarValue: 31.0, myGigSource: GigSource.FieldAgent, title: "Temp Name 51", subtitle: "this is a 8 subtitle", StreetAddressLine: "123 Main St.", City: "Killingly", routeDrivingDistance: 16.0, ZipCode: "06276")
         tempSingleArray.append(mySingleAnnotation)
         return tempSingleArray
         

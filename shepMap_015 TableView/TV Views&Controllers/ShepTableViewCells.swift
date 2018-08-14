@@ -43,18 +43,18 @@ class ShepTableViewCell: UITableViewCell {
     
     //MARK: Properties
     @IBOutlet weak var lblCity: UILabel!
-    @IBOutlet weak var lblJobSource: UILabel!
+    @IBOutlet weak var UNKNOWN_label2: UILabel!
     // The simplest approach is to add this attribute to the LABEL YOU WANT TO HAVE ROUNDED CORNERS.
     //          layer.cornerRadius
     
     @IBOutlet weak var NameLbl: UILabel!
     @IBOutlet weak var photoImageView: UIImageView!
    // @IBOutlet weak var PayLbl: UILabel!
-    @IBOutlet weak var UNKNOWN_Label: UILabel!
+    @IBOutlet weak var UNKNOWN_label: UILabel!
     //@IBOutlet weak var ExpenseLbl: UILabel!
-    @IBOutlet weak var EarningLbl: UILabel!
+    @IBOutlet weak var lblEarning: UILabel!
     @IBOutlet weak var DrivingDistanceLbl: UILabel!
-    @IBOutlet weak var lblZIPCode: UILabel!
+    @IBOutlet weak var lblStreetAddress: UILabel!
     //@IBOutlet weak var DrivingTimeLbl: UILabel!
     //@IBOutlet weak var CrowFliesLbl: UILabel!
     //@IBOutlet weak var ratingControl: RatingControl!
@@ -66,12 +66,12 @@ class ShepTableViewCell: UITableViewCell {
         //PayLbl.text = product.description
         NameLbl.text = myShepSingleAnnotation.title
         photoImageView.image = UIImage(named: myShepSingleAnnotation.switchGigIcon())
-        lblCity.text = myShepSingleAnnotation.City
-        lblJobSource.text = myShepSingleAnnotation.myGigSource.rawValue
-        lblZIPCode.text = myShepSingleAnnotation.ZipCode
-        UNKNOWN_Label.text = "who knows"
-        EarningLbl.text = "Dollars: \(shepCurrencyFromDouble(shepNumber : myShepSingleAnnotation.shepDollarValue))"
-        DrivingDistanceLbl.text = String(myShepSingleAnnotation.routeDrivingDistance) + " miles"
+        lblCity.text = myShepSingleAnnotation.City! + ", XX"
+        UNKNOWN_label2.text = "who knows"
+        lblStreetAddress.text = myShepSingleAnnotation.StreetAddressLine! + ","
+        UNKNOWN_label.text = "who knows"
+        lblEarning.text = "\(shepCurrencyFromDouble(shepNumber : myShepSingleAnnotation.shepDollarValue))"
+        DrivingDistanceLbl.text = String(myShepSingleAnnotation.routeDrivingDistance) + " mi."
        //self.selectionStyle = UITableViewCellSelectionStyle.blue // not working?
     }
     
