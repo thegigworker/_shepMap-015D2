@@ -203,20 +203,25 @@ class SingleAnnotationView: MKMarkerAnnotationView {
             //pinView!.animatesDrop = true
             calloutOffset = CGPoint(x: -4, y: 4)
             
-//            let rightButtonView = UIButton()
-//            let rightButtonImage = UIImage(named: myAnnotationData.switchImage()!)
-//            rightButtonView.setImage(rightButtonImage, for: .normal)
-//            //setImage(_ image: UIImage?, for state: UIControlState) // default is nil. should be same size if different for different states
-//            rightCalloutAccessoryView = rightButtonView
+        //            let rightButtonView = UIButton()
+        //            let rightButtonImage = UIImage(named: myAnnotationData.switchImage()!)
+        //            rightButtonView.setImage(rightButtonImage, for: .normal)
+        //            //setImage(_ image: UIImage?, for state: UIControlState) // default is nil. should be same size if different for different states
+        //            rightCalloutAccessoryView = rightButtonView
             
             //CODE BELOW DOESN'T ALLOW FOR ACCESSORYVIEW TO BE A BUTTON.  NEED TO HAVE CODE WITH IMAGE AND BUTTON
             let rightImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 51, height: 51))
             rightImageView.image = UIImage(named: myAnnotationData.switchImage()!)
             rightImageView.contentMode = .scaleAspectFit
             rightCalloutAccessoryView = rightImageView
-            // CODE BELOW TURNS BUTTON ON BUT KILLS THE IMAGEVIEW
-            //rightCalloutAccessoryView = UIButton(type: .infoLight)
             
+            // CODE BELOW TURNS THE BUTTON ON BUT KILLS THE IMAGEVIEW
+            rightCalloutAccessoryView = UIButton(type: .infoLight)
+            
+        //            let myButton = UIButton()
+        //            myButton.imageView?.image = UIImage(named: myAnnotationData.switchImage()!)
+        //            //myButton.setBackgroundImage(UIImage(named: myAnnotationData.switchImage()!), for: UIControlState.normal)
+        //            rightCalloutAccessoryView = myButton
             
             //You can try to set the UIImageView size to the created MKPinAnnotationView
             // and then call aspect fit on it like this:

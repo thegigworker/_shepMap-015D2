@@ -24,12 +24,13 @@ class shepDetailScreenVC: UITableViewController, UITextFieldDelegate, UITextView
     @IBOutlet weak var myImage6: UIImageView!
     @IBOutlet weak var lbTitle: UILabel!
     @IBOutlet weak var lblStreetAddress: UILabel!
-    @IBOutlet weak var lblPay: UILabel!
-    @IBOutlet weak var lblDrivingDistance: UILabel!
+    @IBOutlet weak var lblDollars: UILabel!
+    @IBOutlet weak var lblCents: UILabel!
+    @IBOutlet weak var lblDriveDistance: UILabel!
     @IBOutlet weak var lblExpense: UILabel!
     @IBOutlet weak var lblProfit: UILabel!
     @IBOutlet weak var lblCrowFlies: UILabel!
-    @IBOutlet weak var lblDrivingTime: UILabel!
+    @IBOutlet weak var lblDriveTime: UILabel!
     
     
     // MARK: - UITextFieldDelegate
@@ -64,15 +65,19 @@ class shepDetailScreenVC: UITableViewController, UITextFieldDelegate, UITextView
         myImage4.image = UIImage(named: (mySingleAnnotation?.switchGigIcon())!)
         myImage5.image = UIImage(named: (mySingleAnnotation?.switchGigIcon())!)
         myImage6.image = UIImage(named: (mySingleAnnotation?.switchGigIcon())!)
-        lblPay.text = "Dollars: \(shepCurrencyFromDouble(shepNumber : (mySingleAnnotation?.shepDollarValue)!))"
+        //lblDollars.text = "Dollars: \(shepCurrencyFromDouble(shepNumber : (mySingleAnnotation?.shepDollarValue)!))"
 
+        let shepCurrency = shepCurrencyFromDouble(shepNumber : (mySingleAnnotation?.shepDollarValue)!)
+        lblDollars.text = String(shepCurrency.dropLast(3)) // justTheDollars
+        lblCents.text = String(shepCurrency.suffix(2)) // justTheCents
+        
         //productImageView.image = shepProductDetail?.image
         lbTitle.text = mySingleAnnotation?.title
-        lblExpense.text = "Expense Label NOT DONE"
-        lblProfit.text = "Profit Label NOT DONE"
-        lblCrowFlies.text = "As the Crow Flies: \(String(describing: mySingleAnnotation!.crowFliesDistance)) miles"
-        lblDrivingTime.text = "Driving Time:     \(String(describing: mySingleAnnotation!.drivingTime)) minutes"
-        lblDrivingDistance.text = "Driving Distance: \(String(describing: mySingleAnnotation!.routeDrivingDistance)) miles"
+        lblExpense.text = "Expense"
+        lblProfit.text = "Profit"
+        lblCrowFlies.text = "Crow Flies \(String(describing: mySingleAnnotation!.crowFliesDistance)) miles"
+        lblDriveTime.text = "Drive Time \(String(describing: mySingleAnnotation!.drivingTime)) minutes"
+        lblDriveDistance.text = "Drive Distance \(String(describing: mySingleAnnotation!.routeDrivingDistance)) miles"
         lblStreetAddress.text = mySingleAnnotation?.formattedFullAddress
         myDescriptionTextView.text = mySingleAnnotation!.description
         if #available(iOS 11.0, *) {

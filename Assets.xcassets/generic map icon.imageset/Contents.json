@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "generic map icon.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "Directions icon.png",
       "scale" : "2x"
     },
     {
