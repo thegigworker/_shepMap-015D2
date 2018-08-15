@@ -49,29 +49,24 @@ class ShepTableViewCell: UITableViewCell {
     
     @IBOutlet weak var NameLbl: UILabel!
     @IBOutlet weak var photoImageView: UIImageView!
-   // @IBOutlet weak var PayLbl: UILabel!
     @IBOutlet weak var UNKNOWN_label: UILabel!
-    //@IBOutlet weak var ExpenseLbl: UILabel!
-    @IBOutlet weak var lblEarning: UILabel!
+    @IBOutlet weak var lblDollars: UILabel!
+    @IBOutlet weak var lblCents: UILabel!
     @IBOutlet weak var DrivingDistanceLbl: UILabel!
     @IBOutlet weak var lblStreetAddress: UILabel!
-    //@IBOutlet weak var DrivingTimeLbl: UILabel!
-    //@IBOutlet weak var CrowFliesLbl: UILabel!
-    //@IBOutlet weak var ratingControl: RatingControl!
-    //@IBOutlet weak var namelabel2: UILabel! // shep test
     
     //MARK: - Functions
     func setupCell(_ myShepSingleAnnotation: fakeShepSingleAnnotation) {
-        //photoImageView.image = myShepSingleAnnotation.image
-        //PayLbl.text = product.description
+        let shepCurrency = shepCurrencyFromDouble(shepNumber : myShepSingleAnnotation.shepDollarValue)
+        lblDollars.text = String(shepCurrency.dropLast(3)) // justTheDollars
+        lblCents.text = String(shepCurrency.suffix(2)) // justTheCents
+        DrivingDistanceLbl.text = String(myShepSingleAnnotation.routeDrivingDistance)
         NameLbl.text = myShepSingleAnnotation.title
-        photoImageView.image = UIImage(named: myShepSingleAnnotation.switchGigIcon())
         lblCity.text = myShepSingleAnnotation.City! + ", XX"
-        UNKNOWN_label2.text = "who knows"
         lblStreetAddress.text = myShepSingleAnnotation.StreetAddressLine! + ","
-        UNKNOWN_label.text = "who knows"
-        lblEarning.text = "\(shepCurrencyFromDouble(shepNumber : myShepSingleAnnotation.shepDollarValue))"
-        DrivingDistanceLbl.text = String(myShepSingleAnnotation.routeDrivingDistance) + " mi."
+        UNKNOWN_label2.text = "who knows what?"
+        UNKNOWN_label.text = "more fields here"
+        photoImageView.image = UIImage(named: myShepSingleAnnotation.switchGigIcon())
        //self.selectionStyle = UITableViewCellSelectionStyle.blue // not working?
     }
     
@@ -102,3 +97,43 @@ class HeaderInSectionTVCell: UITableViewCell {
 //    }
 
 }
+
+
+/*  STRING MANIPULATION BY SEARCHING FOR SPACES
+For example, to retrieve the first word of a longer string, you can search for a space and then create a substring from a prefix of the string up to that point:
+
+let name = "Marie Curie"
+let firstSpace = name.index(of: " ") ?? name.endIndex
+let firstName = name[..<firstSpace]
+// firstName == "Marie"
+*/
+
+
+/* STRING FUNCTIONS
+ 
+ func drop(while: (Character) -> Bool)
+    Returns a subsequence by skipping elements while predicate returns true and returning the remaining elements.
+
+ func dropFirst(_ k: Int) -> Substring
+    Returns a subsequence containing all but the given number of initial elements.
+         let numbers = [1, 2, 3, 4, 5]
+         print(numbers.dropFirst(2))
+         // Prints "[3, 4, 5]"
+         print(numbers.dropFirst(10))
+         // Prints "[]"
+ 
+ func dropLast(_ k: Int) -> Substring
+    Returns a subsequence containing all but the specified number of final elements.
+         let numbers = [1, 2, 3, 4, 5]
+         print(numbers.dropLast(2))
+         // Prints "[1, 2, 3]"
+         print(numbers.dropLast(10))
+         // Prints "[]"
+ 
+ STRING SUFFIX FUNCTION
+ let last4 = a.suffix(4)
+        The type of the result is a new type Substring which behaves as a String in many cases. However if the substring is supposed to leave the scope where it's created in
+            you have to create a new String instance.
+ let last4 = String(a.suffix(4))
+ 
+*/
