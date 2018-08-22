@@ -8,23 +8,24 @@
 
 import Foundation
 
-struct allSectionsOfData4TVC_NEW {
+struct allTheSectionsOfData4TVC_struct {
     
     var sectionName: String            // name of the product line
-    var oneSectionOfData : [fakeShepSingleAnnotation]
-    //let myDataModel = shepDataModel()
-    
-    
-    init(named: String, includeItems: [fakeShepSingleAnnotation]) {
+    var oneSectionOfData : [ShepSingleAnnotation]
+
+    init(named: String, includeItems: [ShepSingleAnnotation]) {
         sectionName = named
         oneSectionOfData = includeItems
     }
     
-    static func handleAllTheSections(whichSort: String) -> [allSectionsOfData4TVC_NEW] {
-        var myBigKahunaSectionedArray = [allSectionsOfData4TVC_NEW]()
-        let mySingleArray = fakeAnnotationsSingleArray_class.buildSingleTableArray()
-//        let myDataModel = shepDataModel()
-//        let mySingleArray = myDataModel.shepAnnotationsArray
+    static func handleAllTheSections(whichSort: String) -> [allTheSectionsOfData4TVC_struct] {
+        //let mySingleArray = fakeAnnotationsSingleArray_class.buildSingleTableArray()
+        let mySingleArray = shepDataModel.theMASTERAnnotationsArray
+        print("theMASTERAnnotationsArray.count =  \(shepDataModel.theMASTERAnnotationsArray.count)")
+        print ("mySingleArray.count =  \(mySingleArray.count)")
+        
+        
+        var myBigKahunaSectionedArray = [allTheSectionsOfData4TVC_struct]()
         
         switch mySort { // mySort.rawValue = String of mySort
         case .JobTitle :
@@ -83,22 +84,22 @@ struct allSectionsOfData4TVC_NEW {
              
              // MORE NOTES BELOW
              */
-        }
+      }
         print(" \n I'm done building myBigKahunaSectionedArray w sort \(whichSort)")
         return myBigKahunaSectionedArray
     }
     
-    static func doOneSection(sortedSingleArray: [fakeShepSingleAnnotation], whichSort: String) -> [allSectionsOfData4TVC_NEW] {
-        var tempBigKahunaSectionedArray = [allSectionsOfData4TVC_NEW]()
+    static func doOneSection(sortedSingleArray: [ShepSingleAnnotation], whichSort: String) -> [allTheSectionsOfData4TVC_struct] {
+        var tempBigKahunaSectionedArray = [allTheSectionsOfData4TVC_struct]()
         //tempBigKahunaSectionedArray.append (allSectionsOfData4TVC_NEW(named: "ALL ONE SECTION", includeItems: sortedTempSingleArray))
-        tempBigKahunaSectionedArray.append (allSectionsOfData4TVC_NEW(named: whichSort, includeItems: sortedSingleArray))
+        tempBigKahunaSectionedArray.append (allTheSectionsOfData4TVC_struct(named: whichSort, includeItems: sortedSingleArray))
         print("****  I'm in doOneSection w sort \(whichSort)")
         return tempBigKahunaSectionedArray
     }
     
-    static func doMultipleSections(sortedSingleArray: [fakeShepSingleAnnotation], whichSort: String) -> [allSectionsOfData4TVC_NEW] {
-        var tempBigKahunaSectionedArray = [allSectionsOfData4TVC_NEW]()
-        var oneSectionOfData = [fakeShepSingleAnnotation]()
+    static func doMultipleSections(sortedSingleArray: [ShepSingleAnnotation], whichSort: String) -> [allTheSectionsOfData4TVC_struct] {
+        var tempBigKahunaSectionedArray = [allTheSectionsOfData4TVC_struct]()
+        var oneSectionOfData = [ShepSingleAnnotation]()
         var currentSectionName = ""
         var loopCount = 0
         print("**** I'm in MultipleSections w sort \(whichSort)")
@@ -119,7 +120,7 @@ struct allSectionsOfData4TVC_NEW {
                 } else { // is new category/section
                     // so append to myBigKahunaSectionedArray and start clean oneSectionOfData
                     //SORT ONE SECTION AT A TIME -- if needed???
-                    tempBigKahunaSectionedArray.append (allSectionsOfData4TVC_NEW(named: currentSectionName, includeItems: oneSectionOfData))
+                    tempBigKahunaSectionedArray.append (allTheSectionsOfData4TVC_struct(named: currentSectionName, includeItems: oneSectionOfData))
                     oneSectionOfData.removeAll()
                     currentSectionName = thisItemSectionName
                     oneSectionOfData.append(item)
@@ -127,7 +128,7 @@ struct allSectionsOfData4TVC_NEW {
             }
             if loopCount == sortedSingleArray.count {  // last iteration
                 //SORT ONE SECTION AT A TIME -- if needed???
-                tempBigKahunaSectionedArray.append (allSectionsOfData4TVC_NEW(named: currentSectionName, includeItems: oneSectionOfData))
+                tempBigKahunaSectionedArray.append (allTheSectionsOfData4TVC_struct(named: currentSectionName, includeItems: oneSectionOfData))
             }
         }
         return tempBigKahunaSectionedArray

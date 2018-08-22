@@ -24,10 +24,11 @@ import os.log
 //For more information on the unified logging system, see Logging Reference.
 
 
-class MAPSCREEN_VC: UIViewController, MKMapViewDelegate, DataModel4MapScreenDelegate, UIPopoverPresentationControllerDelegate {
+class MAPSCREEN_VC: UIViewController, MKMapViewDelegate, DataModelMapScreenDelegate, UIPopoverPresentationControllerDelegate {
     
     //MARK: - Properties
     let myDataModel = shepDataModel()
+    let myShepTVController = shepMapTableViewController()
     var twirlMenuIsUntwirled: Bool = false
     var searchDistanceCircle:MKCircle!
     var doTheSearchAgain = true
@@ -87,7 +88,9 @@ class MAPSCREEN_VC: UIViewController, MKMapViewDelegate, DataModel4MapScreenDele
         RouteDataView.alpha = 0.0
         theGoldRouteView.alpha = 0.0
         myDataModel.whichRouteStyle = ""
-        myDataModel.shepAnnotationsArray.removeAll()
+        shepDataModel.theMASTERAnnotationsArray.removeAll()
+        //myShepTVController.redrawTableView()
+        shepDataModel.MASTERAnnotationsArrayUpdated = true
     }
     
     @IBAction func btnClearRoute(_ sender: Any) {
@@ -110,19 +113,19 @@ class MAPSCREEN_VC: UIViewController, MKMapViewDelegate, DataModel4MapScreenDele
     }
     
     @IBAction func btnMakeRandomRoute(_ sender: UIButton) {
-        if myDataModel.shepAnnotationsArray.count < 2 {
-            print ("less than 2 items in shepAnnotationsArray \n")
+        if shepDataModel.theMASTERAnnotationsArray.count < 2 {
+            print ("less than 2 items in theMASTERAnnotationsArray \n")
             return
         }
-        let howMany = UInt32(myDataModel.shepAnnotationsArray.count)
-        //for _ in shepAnnotationsArray {
+        let howMany = UInt32(shepDataModel.theMASTERAnnotationsArray.count)
+        //for _ in theMASTERAnnotationsArray {
         let sourceAnnotation = Int(arc4random_uniform(howMany))
         let destinationItem = Int(arc4random_uniform(howMany))
         if sourceAnnotation != destinationItem {
             myDataModel.whichRouteStyle = "random"
             //print ("thisisCrowFliesDistanceInMiles:  \(myRouteData.thisisCrowFliesDistanceInMiles)")
             myDataModel.howManyRouteInfosCompleted = 0
-            myDataModel.getRouteInfoVia2Annotations(source: myDataModel.shepAnnotationsArray[sourceAnnotation], destination: myDataModel.shepAnnotationsArray[destinationItem])
+            myDataModel.getRouteInfoVia2Annotations(source: shepDataModel.theMASTERAnnotationsArray[sourceAnnotation], destination: shepDataModel.theMASTERAnnotationsArray[destinationItem])
             theGoldRouteView.alpha = 0.0
             RouteDataView.alpha = 0.9
             //let myRoute = myDataModel.currentRoute
@@ -139,13 +142,13 @@ class MAPSCREEN_VC: UIViewController, MKMapViewDelegate, DataModel4MapScreenDele
 //    }
  
     @IBAction func btnMakeGoldRoute(_ sender: UIButton) {
-        if myDataModel.shepAnnotationsArray.count < 1 {
-            print ("in btnMaketheGoldRoute NO items in shepAnnotationsArray \n")
+        if shepDataModel.theMASTERAnnotationsArray.count < 1 {
+            print ("in btnMaketheGoldRoute NO items in theMASTERAnnotationsArray \n")
             return
         }
 
-        if myDataModel.shepAnnotationsArray.count < 2 {
-            print ("less than 2 items in shepAnnotationsArray \n")
+        if shepDataModel.theMASTERAnnotationsArray.count < 2 {
+            print ("less than 2 items in theMASTERAnnotationsArray \n")
             return
         }
         
@@ -197,43 +200,43 @@ class MAPSCREEN_VC: UIViewController, MKMapViewDelegate, DataModel4MapScreenDele
     
     @IBAction func btnGigwalkClick(_ sender: AnyObject) {
         myGigSource = GigSource.GigWalk
-        myDataModel.buildShepAnnotationsArrayViaAppleLocalSearch (searchString: "McDonalds")
-        myDataModel.buildShepAnnotationsArrayViaAppleLocalSearch (searchString: "Burger King")
+        myDataModel.buildMASTERAnnotationsArrayViaAppleLocalSearch (searchString: "McDonalds")
+        myDataModel.buildMASTERAnnotationsArrayViaAppleLocalSearch (searchString: "Burger King")
         resetTwirlButtons()
     }
     
     @IBAction func btnEasyShiftClick(_ sender: AnyObject) {
         myGigSource = GigSource.EasyShift
-        myDataModel.buildShepAnnotationsArrayViaAppleLocalSearch (searchString: "Target")
-        myDataModel.buildShepAnnotationsArrayViaAppleLocalSearch (searchString: "Walmart")
+        myDataModel.buildMASTERAnnotationsArrayViaAppleLocalSearch (searchString: "Target")
+        myDataModel.buildMASTERAnnotationsArrayViaAppleLocalSearch (searchString: "Walmart")
         resetTwirlButtons()
     }
     
     @IBAction func btnFieldAgentClick(_ sender: AnyObject) {
         myGigSource = GigSource.FieldAgent
-        myDataModel.buildShepAnnotationsArrayViaAppleLocalSearch (searchString: "gas station")
-        myDataModel.buildShepAnnotationsArrayViaAppleLocalSearch (searchString: "market")
+        myDataModel.buildMASTERAnnotationsArrayViaAppleLocalSearch (searchString: "gas station")
+        myDataModel.buildMASTERAnnotationsArrayViaAppleLocalSearch (searchString: "market")
         resetTwirlButtons()
     }
     
     @IBAction func btnSafariClick(_ sender: AnyObject) {
         myGigSource = GigSource.Safari
-        myDataModel.buildShepAnnotationsArrayViaAppleLocalSearch (searchString: "Pub")
-        myDataModel.buildShepAnnotationsArrayViaAppleLocalSearch (searchString: "Diner")
+        myDataModel.buildMASTERAnnotationsArrayViaAppleLocalSearch (searchString: "Pub")
+        myDataModel.buildMASTERAnnotationsArrayViaAppleLocalSearch (searchString: "Diner")
         resetTwirlButtons()
     }
     
     @IBAction func btnMobeeClick(_ sender: AnyObject) {
         myGigSource = GigSource.Mobee
-        myDataModel.buildShepAnnotationsArrayViaAppleLocalSearch (searchString: "Lowes")
-        myDataModel.buildShepAnnotationsArrayViaAppleLocalSearch (searchString: "Home Depot")
+        myDataModel.buildMASTERAnnotationsArrayViaAppleLocalSearch (searchString: "Lowes")
+        myDataModel.buildMASTERAnnotationsArrayViaAppleLocalSearch (searchString: "Home Depot")
         resetTwirlButtons()
     }
     
     @IBAction func btnTaskRabbit(_ sender: AnyObject) {
         myGigSource = GigSource.TaskRabbit
-        myDataModel.buildShepAnnotationsArrayViaAppleLocalSearch (searchString: "pizza")
-        myDataModel.buildShepAnnotationsArrayViaAppleLocalSearch (searchString: "bbq")
+        myDataModel.buildMASTERAnnotationsArrayViaAppleLocalSearch (searchString: "pizza")
+        myDataModel.buildMASTERAnnotationsArrayViaAppleLocalSearch (searchString: "bbq")
         resetTwirlButtons()
     }
     
@@ -314,10 +317,10 @@ class MAPSCREEN_VC: UIViewController, MKMapViewDelegate, DataModel4MapScreenDele
         // "Setting ViewController as the delegate of the map view.  You can do this in Main.storyboard, but I prefer to do it in code, where it’s more visible."
         myMapView.delegate = self
         
-        //        print ("in **viewDidLoad** shepAnnotationsArray count is \(myDataModel.shepAnnotationsArray.count) \n")
+        //        print ("in **viewDidLoad** theMASTERAnnotationsArray count is \(myDataModel.theMASTERAnnotationsArray.count) \n")
         //        print ("in ***viewDidLoad BEFORE SEARCH Current search distance: \(meters2miles(meters: myDataModel.currentSearchDistance))")
-       // myDataModel.buildShepAnnotationsArrayViaAppleLocalSearch(searchString: "park")
-        //        print ("in viewDidLoad AFTER SEARCH shepAnnotationsArray count is \(myDataModel.shepAnnotationsArray.count)")
+       // myDataModel.buildMASTERAnnotationsArrayViaAppleLocalSearch(searchString: "park")
+        //        print ("in viewDidLoad AFTER SEARCH theMASTERAnnotationsArray count is \(myDataModel.theMASTERAnnotationsArray.count)")
         //        print ("in ***viewDidLoad AFTER SEARCH Current search distance: \(meters2miles(meters: myDataModel.currentSearchDistance))")
         
         setupUserTrackingButtonAndScaleView()

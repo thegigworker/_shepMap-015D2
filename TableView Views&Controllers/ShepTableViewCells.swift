@@ -31,7 +31,7 @@ class shepOrigProductTVCell: UITableViewCell {
     @IBOutlet weak var productDescriptionLabel: UILabel!
     @IBOutlet weak var productTitleLabel: UILabel!
     
-    func setupCell(_ mySingleAnnotation: fakeShepSingleAnnotation)
+    func setupCell(_ mySingleAnnotation: ShepSingleAnnotation)
     {
         myGigSourceImageView.image = UIImage(named: mySingleAnnotation.switchGigIcon())
         productDescriptionLabel.text = mySingleAnnotation.description
@@ -52,17 +52,17 @@ class ShepTableViewCell: UITableViewCell {
     @IBOutlet weak var UNKNOWN_label: UILabel!
     @IBOutlet weak var lblDollars: UILabel!
     @IBOutlet weak var lblCents: UILabel!
-    @IBOutlet weak var DrivingDistanceLbl: UILabel!
+    @IBOutlet weak var DriveDistanceLbl: UILabel!
     @IBOutlet weak var lblStreetAddress: UILabel!
     
     //MARK: - Functions
-    func setupCell(_ myShepSingleAnnotation: fakeShepSingleAnnotation) {
+    func setupCell(_ myShepSingleAnnotation: ShepSingleAnnotation) {
         let shepCurrency = shepCurrencyFromDouble(shepNumber : myShepSingleAnnotation.shepDollarValue)
         lblDollars.text = String(shepCurrency.dropLast(3)) // justTheDollars
         lblCents.text = String(shepCurrency.suffix(2)) // justTheCents
-        DrivingDistanceLbl.text = String(myShepSingleAnnotation.routeDrivingDistance)
-        NameLbl.text = myShepSingleAnnotation.title
-        lblCity.text = myShepSingleAnnotation.City! + ", XX"
+        DriveDistanceLbl.text = String(format: "%.02f", myShepSingleAnnotation.routeDrivingDistance)
+        NameLbl.text = myShepSingleAnnotation.mapItem_Name
+        lblCity.text = myShepSingleAnnotation.City! + ", " + myShepSingleAnnotation.ZipCode!
         lblStreetAddress.text = myShepSingleAnnotation.StreetAddressLine! + ","
         UNKNOWN_label2.text = "who knows what?"
         UNKNOWN_label.text = "more fields here"

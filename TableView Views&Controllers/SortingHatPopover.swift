@@ -22,7 +22,7 @@ class sortingHatPopover: UIViewController, UIPopoverPresentationControllerDelega
 
     //let myDataModel = shepDataModel()
     
-    var myShepTVController = myTableViewController()
+    var myShepTVController = shepMapTableViewController()
     
     @IBOutlet weak var checkmark0: UIImageView!
     @IBOutlet weak var btnjobTitle: UIButton!

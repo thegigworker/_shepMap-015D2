@@ -10,7 +10,7 @@ import UIKit
 class shepDetailScreenVC: UITableViewController, UITextFieldDelegate, UITextViewDelegate, UINavigationControllerDelegate {
 
     // Model:
-    var mySingleAnnotation: fakeShepSingleAnnotation?
+    var mySingleAnnotation: ShepSingleAnnotation?
     //var shepProductDetail: ShepTempSingleItem?
     
     //@IBOutlet weak var myImageView: UIImageView!
@@ -72,12 +72,15 @@ class shepDetailScreenVC: UITableViewController, UITextFieldDelegate, UITextView
         lblCents.text = String(shepCurrency.suffix(2)) // justTheCents
         
         //productImageView.image = shepProductDetail?.image
-        lbTitle.text = mySingleAnnotation?.title
+        lbTitle.text = mySingleAnnotation?.mapItem_Name
         lblExpense.text = "Expense"
         lblProfit.text = "Profit"
-        lblCrowFlies.text = "Crow Flies \(String(describing: mySingleAnnotation!.crowFliesDistance)) miles"
-        lblDriveTime.text = "Drive Time \(String(describing: mySingleAnnotation!.drivingTime)) minutes"
-        lblDriveDistance.text = "Drive Distance \(String(describing: mySingleAnnotation!.routeDrivingDistance)) miles"
+        var temp = String(describing: mySingleAnnotation!.crowFliesDistance)
+        lblCrowFlies.text = "As Crow Flies \(String(format: "%.02f", temp)) miles"
+        temp = String(describing: mySingleAnnotation!.drivingTime)
+        lblDriveTime.text = "Drive Time \(String(format: "%.02f", temp)) minutes"
+        let myDrivingDistance = mySingleAnnotation!.routeDrivingDistance
+        lblDriveDistance.text = "Drive Distance: \(String(format: "%.02f", myDrivingDistance)) miles"
         lblStreetAddress.text = mySingleAnnotation?.formattedFullAddress
         myDescriptionTextView.text = mySingleAnnotation!.description
         if #available(iOS 11.0, *) {
@@ -93,8 +96,6 @@ class shepDetailScreenVC: UITableViewController, UITextFieldDelegate, UITextView
     //        shepProductDetail?.image = productImageView.image!
     //    }
 }
-
-
 
 
 

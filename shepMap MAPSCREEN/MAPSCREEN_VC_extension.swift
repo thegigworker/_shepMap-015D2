@@ -35,16 +35,16 @@ extension MAPSCREEN_VC {
     //MARK: - Protocol functions
     func showValidSearchResults(validSearchResults: [ShepSingleAnnotation]) {
         print ("In showValidSearchResults, showValidSearchResults count was: \(validSearchResults.count)")
-        print ("In showValidSearchResults, myDataModel.shepAnnotationsArray count was: \(myDataModel.shepAnnotationsArray.count) \n")
+        print ("In showValidSearchResults, myDataModel.theMASTERAnnotationsArray count was: \(shepDataModel.theMASTERAnnotationsArray.count)")
         //myMapView.addAnnotations(validSearchResults)
         print ("in showValidSearchResults and doTheSearchAgain == \(doTheSearchAgain)")
-        print ("in showValidSearchResults and myDataModel.shepAnnotationsArray.count == \(myDataModel.shepAnnotationsArray.count)")
-        if doTheSearchAgain == true && myDataModel.shepAnnotationsArray.count > 0 { // do two searches before showAnnotations
+        print ("in showValidSearchResults and myDataModel.theMASTERAnnotationsArray.count == \(shepDataModel.theMASTERAnnotationsArray.count) \n")
+        if doTheSearchAgain == true && shepDataModel.theMASTERAnnotationsArray.count > 0 { // do two searches before showAnnotations
             doTheSearchAgain = false
         } else {
             doTheSearchAgain = true
             //myMapView.addAnnotations(validSearchResults)
-            myMapView.showAnnotations(myDataModel.shepAnnotationsArray, animated: true)
+            myMapView.showAnnotations(shepDataModel.theMASTERAnnotationsArray, animated: true)
         }
     }
     

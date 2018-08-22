@@ -40,15 +40,16 @@ import UIKit
 //In the Identity inspector, find the field labeled Class, and select shepProductsTVController.
 ///////////////////
 
-class myTableViewController: UITableViewController, UIPopoverPresentationControllerDelegate {
+class shepMapTableViewController: UITableViewController, UIPopoverPresentationControllerDelegate {
     
     //MARK: Properties
-    
-    lazy var BigKahunaSectionedArray: [allSectionsOfData4TVC_NEW] = {
-        print("I think I'm changing BigKahunaSectionedArray")
+    let myDataModel = shepDataModel()
+    lazy var BigKahunaSectionedArray: [allTheSectionsOfData4TVC_struct] = {
+        print("I think I'm first building BigKahunaSectionedArray")
+        
         // Line above declares as an array of sectionOfProducts_class
         // then in line below, populates this array by using allSectionsOfData4TVC_class.getAllTheSections method
-        return allSectionsOfData4TVC_NEW.handleAllTheSections(whichSort: mySort.rawValue)
+        return allTheSectionsOfData4TVC_struct.handleAllTheSections(whichSort: mySort.rawValue)
         //case "distance" : // SINGLE SECTION 1
         //case "title" : // SINGLE SECTION 2
         //case "dollars" : // SINGLE SECTION 3
@@ -175,7 +176,7 @@ class myTableViewController: UITableViewController, UIPopoverPresentationControl
         let view = cell.contentView
         view.layer.opacity = 0.4
         print ("TRiGGERING ANIMATION")
-        view.layer.transform = myTableViewController.cellLoadTransform(cell.layer)
+        view.layer.transform = shepMapTableViewController.cellLoadTransform(cell.layer)
         UIView.animate(withDuration: 0.5, animations: {
             view.layer.transform = CATransform3DIdentity
             view.layer.opacity = 1
@@ -307,7 +308,7 @@ class myTableViewController: UITableViewController, UIPopoverPresentationControl
     // MARK: - Helper Methods
     
     func redrawTableView() {
-        BigKahunaSectionedArray = allSectionsOfData4TVC_NEW.handleAllTheSections(whichSort: mySort.rawValue)
+        BigKahunaSectionedArray = allTheSectionsOfData4TVC_struct.handleAllTheSections(whichSort: mySort.rawValue)
         print("I'm in redrawTableView w sort \(mySort)")
         self.tableView.reloadData()  // Reloads everything from scratch. Redisplays visible rows. Note that this will cause any existing drop placeholder rows to be removed.
         /*
@@ -318,13 +319,13 @@ class myTableViewController: UITableViewController, UIPopoverPresentationControl
          */
     }
     
-    func theAnnotationAtIndexPath(_ indexPath: IndexPath) -> fakeShepSingleAnnotation {
+    func theAnnotationAtIndexPath(_ indexPath: IndexPath) -> ShepSingleAnnotation {
         print("productAtIndexPath w indexPath \(indexPath)")
         let myAnnotationsSection = BigKahunaSectionedArray[indexPath.section]
         return myAnnotationsSection.oneSectionOfData[indexPath.row]
     }
-   
-////    transformDropdown
+    
+    ////    transformDropdown
     private static let cellLoadTransform = { (layer: CALayer) -> CATransform3D in
         print ("performing transformFlip CATransform3DRotate \n" )
         var transform = CATransform3DIdentity
@@ -334,28 +335,28 @@ class myTableViewController: UITableViewController, UIPopoverPresentationControl
         return transform
     }
     
-////    transformCurl
-//         private static let cellLoadTransform = { (layer: CALayer) -> CATransform3D in
-//        var transform = CATransform3DIdentity
-//        //transform.m34 = 1.0 / -500 // orig setting
-//        transform.m34 = -1.0 / 1500
-//        transform = CATransform3DTranslate(transform, -layer.bounds.size.width/2.0, 0.0, 0.0)
-//        transform = CATransform3DRotate(transform, CGFloat(Double.pi)/2.0, 0.0, 1.0, 0.0)
-//        transform = CATransform3DTranslate(transform, layer.bounds.size.width/2.0, 0.0, 0.0)
-//        print ("performing transformCurl CATransform3DRotate \n" )
-//        return transform
-//    }
-
-////   transformHelix
- //       private static let cellLoadTransform = { (layer: CALayer) -> CATransform3D in
-//        var transform = CATransform3DIdentity
-//        transform = CATransform3DTranslate(transform, 0.0, layer.bounds.size.height/2.0, 0.0)
-//        transform = CATransform3DRotate(transform, CGFloat(Double.pi), 0.0, 1.0, 0.0)
-//        transform = CATransform3DTranslate(transform, 0.0, -layer.bounds.size.height/2.0, 0.0)
-//        print ("performing transformHelix CATransform3DRotate \n" )
-//        return transform
-//    }
-   
+    ////    transformCurl
+    //         private static let cellLoadTransform = { (layer: CALayer) -> CATransform3D in
+    //        var transform = CATransform3DIdentity
+    //        //transform.m34 = 1.0 / -500 // orig setting
+    //        transform.m34 = -1.0 / 1500
+    //        transform = CATransform3DTranslate(transform, -layer.bounds.size.width/2.0, 0.0, 0.0)
+    //        transform = CATransform3DRotate(transform, CGFloat(Double.pi)/2.0, 0.0, 1.0, 0.0)
+    //        transform = CATransform3DTranslate(transform, layer.bounds.size.width/2.0, 0.0, 0.0)
+    //        print ("performing transformCurl CATransform3DRotate \n" )
+    //        return transform
+    //    }
+    
+    ////   transformHelix
+    //       private static let cellLoadTransform = { (layer: CALayer) -> CATransform3D in
+    //        var transform = CATransform3DIdentity
+    //        transform = CATransform3DTranslate(transform, 0.0, layer.bounds.size.height/2.0, 0.0)
+    //        transform = CATransform3DRotate(transform, CGFloat(Double.pi), 0.0, 1.0, 0.0)
+    //        transform = CATransform3DTranslate(transform, 0.0, -layer.bounds.size.height/2.0, 0.0)
+    //        print ("performing transformHelix CATransform3DRotate \n" )
+    //        return transform
+    //    }
+    
     // MARK: - VC Lifecycle
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -396,7 +397,11 @@ class myTableViewController: UITableViewController, UIPopoverPresentationControl
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //tableView.reloadData()  // Reloads everything from scratch. Redisplays visible rows. Note that this will cause any existing drop placeholder rows to be removed.
+        if shepDataModel.MASTERAnnotationsArrayUpdated == true {
+            redrawTableView()
+            shepDataModel.MASTERAnnotationsArrayUpdated = false
+            //tableView.reloadData()  // Reloads everything from scratch. Redisplays visible rows. Note that this will cause any existing drop placeholder rows to be removed.
+        }
     }
 }
 
