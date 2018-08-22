@@ -24,13 +24,16 @@ class shepDetailScreenVC: UITableViewController, UITextFieldDelegate, UITextView
     @IBOutlet weak var lblStreetAddress: UILabel!
     @IBOutlet weak var lblPay: UILabel!
     @IBOutlet weak var lblPayCents: UILabel!
-    @IBOutlet weak var lblDriveDistance: UILabel!
     @IBOutlet weak var lblExpense: UILabel!
     @IBOutlet weak var lblExpenseCents: UILabel!
     @IBOutlet weak var lblProfit: UILabel!
     @IBOutlet weak var lblProfitCents: UILabel!
     @IBOutlet weak var lblCrowFlies: UILabel!
+    @IBOutlet weak var lblCrowFlies2: UILabel!
+    @IBOutlet weak var lblDriveDistance: UILabel!
+    @IBOutlet weak var lblDriveDistance2: UILabel!
     @IBOutlet weak var lblDriveTime: UILabel!
+    @IBOutlet weak var lblDriveTime2: UILabel!
     
     
     // MARK: - UITextFieldDelegate
@@ -65,7 +68,6 @@ class shepDetailScreenVC: UITableViewController, UITextFieldDelegate, UITextView
         myImage4.image = UIImage(named: (mySingleAnnotation?.switchGigIcon())!)
         myImage5.image = UIImage(named: (mySingleAnnotation?.switchGigIcon())!)
         myImage6.image = UIImage(named: (mySingleAnnotation?.switchGigIcon())!)
-        //lblDollars.text = "Dollars: \(shepCurrencyFromDouble(shepNumber : (mySingleAnnotation?.shepDollarValue)!))"
 
         var tempCurrency = shepCurrencyFromDouble(shepNumber : (mySingleAnnotation?.shepDollarValue)!)
         lblPay.text = String(tempCurrency.dropLast(3)) // justTheDollars
@@ -84,11 +86,14 @@ class shepDetailScreenVC: UITableViewController, UITextFieldDelegate, UITextView
         lblProfit.text = String(tempCurrency.dropLast(3)) // justTheDollars
         lblProfitCents.text = String(tempCurrency.suffix(2)) // justTheCents
   
-        var temp = String(describing: mySingleAnnotation!.crowFliesDistance)
-        lblCrowFlies.text = "As Crow Flies \(String(format: "%.02f", temp)) miles"
-        temp = String(describing: mySingleAnnotation!.drivingTime)
-        lblDriveTime.text = "Drive Time \(String(format: "%.02f", temp)) minutes"
-        lblDriveDistance.text = "Drive Distance: \(String(format: "%.02f", myDrivingDistance)) miles"
+        var temp = mySingleAnnotation!.crowFliesDistance
+        lblCrowFlies.text = "As Crow Flies:"
+        lblCrowFlies2.text = "\(String(format: "%.02f", temp)) miles"
+        temp = mySingleAnnotation!.drivingTime
+        lblDriveTime.text = "Drive Time:"
+        lblDriveTime2.text = "\(String(format: "%.02f", temp)) minutes"
+        lblDriveDistance.text = "Drive Distance:"
+        lblDriveDistance2.text = "\(String(format: "%.02f", myDrivingDistance)) miles"
         lblStreetAddress.text = mySingleAnnotation?.formattedFullAddress
         myDescriptionTextView.text = mySingleAnnotation!.description
         if #available(iOS 11.0, *) {
