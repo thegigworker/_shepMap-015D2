@@ -11,10 +11,8 @@ class shepDetailScreenVC: UITableViewController, UITextFieldDelegate, UITextView
 
     // Model:
     var mySingleAnnotation: ShepSingleAnnotation?
-    //var shepProductDetail: ShepTempSingleItem?
-    
-    //@IBOutlet weak var myImageView: UIImageView!
-    //@IBOutlet weak var myTitleLabel: UITextField!
+    let myDataModel = shepDataModel()
+
     @IBOutlet weak var myDescriptionTextView: UITextView!
     @IBOutlet weak var myImage1: UIImageView!
     @IBOutlet weak var myImage2: UIImageView!
@@ -24,11 +22,13 @@ class shepDetailScreenVC: UITableViewController, UITextFieldDelegate, UITextView
     @IBOutlet weak var myImage6: UIImageView!
     @IBOutlet weak var lbTitle: UILabel!
     @IBOutlet weak var lblStreetAddress: UILabel!
-    @IBOutlet weak var lblDollars: UILabel!
-    @IBOutlet weak var lblCents: UILabel!
+    @IBOutlet weak var lblPay: UILabel!
+    @IBOutlet weak var lblPayCents: UILabel!
     @IBOutlet weak var lblDriveDistance: UILabel!
     @IBOutlet weak var lblExpense: UILabel!
+    @IBOutlet weak var lblExpenseCents: UILabel!
     @IBOutlet weak var lblProfit: UILabel!
+    @IBOutlet weak var lblProfitCents: UILabel!
     @IBOutlet weak var lblCrowFlies: UILabel!
     @IBOutlet weak var lblDriveTime: UILabel!
     
@@ -67,19 +67,27 @@ class shepDetailScreenVC: UITableViewController, UITextFieldDelegate, UITextView
         myImage6.image = UIImage(named: (mySingleAnnotation?.switchGigIcon())!)
         //lblDollars.text = "Dollars: \(shepCurrencyFromDouble(shepNumber : (mySingleAnnotation?.shepDollarValue)!))"
 
-        let shepCurrency = shepCurrencyFromDouble(shepNumber : (mySingleAnnotation?.shepDollarValue)!)
-        lblDollars.text = String(shepCurrency.dropLast(3)) // justTheDollars
-        lblCents.text = String(shepCurrency.suffix(2)) // justTheCents
-        
-        //productImageView.image = shepProductDetail?.image
+        var tempCurrency = shepCurrencyFromDouble(shepNumber : (mySingleAnnotation?.shepDollarValue)!)
+        lblPay.text = String(tempCurrency.dropLast(3)) // justTheDollars
+        lblPayCents.text = String(tempCurrency.suffix(2)) // justTheCents
         lbTitle.text = mySingleAnnotation?.mapItem_Name
-        lblExpense.text = "Expense"
-        lblProfit.text = "Profit"
+        
+        let myDrivingDistance = mySingleAnnotation!.routeDrivingDistance
+        
+        let routeExpense : Double = myDrivingDistance * Double(myDataModel.centsPerMileExpense)/100
+        tempCurrency = shepCurrencyFromDouble(shepNumber: routeExpense)
+        lblExpense.text = String(tempCurrency.dropLast(3)) // justTheDollars
+        lblExpenseCents.text = String(tempCurrency.suffix(2)) // justTheCents
+        
+        let myGoldRouteScore = mySingleAnnotation!.routeProfit
+        tempCurrency = shepCurrencyFromDouble(shepNumber: myGoldRouteScore)
+        lblProfit.text = String(tempCurrency.dropLast(3)) // justTheDollars
+        lblProfitCents.text = String(tempCurrency.suffix(2)) // justTheCents
+  
         var temp = String(describing: mySingleAnnotation!.crowFliesDistance)
         lblCrowFlies.text = "As Crow Flies \(String(format: "%.02f", temp)) miles"
         temp = String(describing: mySingleAnnotation!.drivingTime)
         lblDriveTime.text = "Drive Time \(String(format: "%.02f", temp)) minutes"
-        let myDrivingDistance = mySingleAnnotation!.routeDrivingDistance
         lblDriveDistance.text = "Drive Distance: \(String(format: "%.02f", myDrivingDistance)) miles"
         lblStreetAddress.text = mySingleAnnotation?.formattedFullAddress
         myDescriptionTextView.text = mySingleAnnotation!.description

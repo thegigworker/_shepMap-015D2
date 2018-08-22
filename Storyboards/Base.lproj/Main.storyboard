@@ -11,7 +11,7 @@
         <!--Login View Controller-->
         <scene sceneID="O2F-SH-LsK">
             <objects>
-                <viewController storyboardIdentifier="LoginViewController" modalTransitionStyle="crossDissolve" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0rV-mm-sGk" customClass="LoginViewController" customModule="shepMapApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" modalTransitionStyle="crossDissolve" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0rV-mm-sGk" customClass="LoginViewController" customModule="shepMap_015" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="OoW-N7-ei2"/>
                         <viewControllerLayoutGuide type="bottom" id="ZRa-MG-lsx"/>
@@ -43,7 +43,7 @@
                                                 <rect key="frame" x="108" y="22" width="148" height="117"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </imageView>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="_shepMap 015" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="sOO-4f-tOP">
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="_shepMap 019" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="sOO-4f-tOP">
                                                 <rect key="frame" x="59" y="147" width="256" height="51"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
@@ -81,7 +81,7 @@
         <!--Main Tab Controller-->
         <scene sceneID="BeM-Pt-ByU">
             <objects>
-                <tabBarController storyboardIdentifier="MainTabController" modalTransitionStyle="flipHorizontal" useStoryboardIdentifierAsRestorationIdentifier="YES" id="tz4-ms-Gm9" customClass="MainTabController" customModule="shepMapApp" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="MainTabController" modalTransitionStyle="flipHorizontal" useStoryboardIdentifierAsRestorationIdentifier="YES" id="tz4-ms-Gm9" customClass="MainTabController" customModule="shepMap_015" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleAspectFit" barStyle="black" id="pPc-XW-wjT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
