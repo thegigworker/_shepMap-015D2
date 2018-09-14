@@ -31,6 +31,17 @@
 		A1DAD3762087C28400F9BC9C /* JUST_SOME_NOTES.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1DAD3752087C28400F9BC9C /* JUST_SOME_NOTES.swift */; };
 		A1E356A82100D21C0016DF97 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D2038520FF9E090089269B /* AppDelegate.swift */; };
 		A1E7A347211B065500DB36E5 /* SortingHatPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E7A346211B065500DB36E5 /* SortingHatPopover.swift */; };
+		A1FD9163214C120800B44A17 /* UIPickerViewX.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FD9158214C120800B44A17 /* UIPickerViewX.swift */; };
+		A1FD9164214C120800B44A17 /* UIViewXRadialGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FD9159214C120800B44A17 /* UIViewXRadialGradient.swift */; };
+		A1FD9165214C120800B44A17 /* UITextFieldX.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FD915A214C120800B44A17 /* UITextFieldX.swift */; };
+		A1FD9166214C120800B44A17 /* UIButtonX.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FD915B214C120800B44A17 /* UIButtonX.swift */; };
+		A1FD9167214C120800B44A17 /* UILabelX.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FD915C214C120800B44A17 /* UILabelX.swift */; };
+		A1FD9168214C120800B44A17 /* UIViewAnchorPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FD915D214C120800B44A17 /* UIViewAnchorPoint.swift */; };
+		A1FD9169214C120800B44A17 /* UIViewControllerX.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FD915E214C120800B44A17 /* UIViewControllerX.swift */; };
+		A1FD916A214C120800B44A17 /* UIImageViewX.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FD915F214C120800B44A17 /* UIImageViewX.swift */; };
+		A1FD916B214C120800B44A17 /* UIViewX.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FD9160214C120800B44A17 /* UIViewX.swift */; };
+		A1FD916C214C120800B44A17 /* UIVisualEffectViewX.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FD9161214C120800B44A17 /* UIVisualEffectViewX.swift */; };
+		A1FD916D214C120800B44A17 /* UISliderX.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FD9162214C120800B44A17 /* UISliderX.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +71,17 @@
 		A1D2038520FF9E090089269B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A1DAD3752087C28400F9BC9C /* JUST_SOME_NOTES.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JUST_SOME_NOTES.swift; sourceTree = "<group>"; };
 		A1E7A346211B065500DB36E5 /* SortingHatPopover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortingHatPopover.swift; sourceTree = "<group>"; };
+		A1FD9158214C120800B44A17 /* UIPickerViewX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIPickerViewX.swift; sourceTree = "<group>"; };
+		A1FD9159214C120800B44A17 /* UIViewXRadialGradient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewXRadialGradient.swift; sourceTree = "<group>"; };
+		A1FD915A214C120800B44A17 /* UITextFieldX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextFieldX.swift; sourceTree = "<group>"; };
+		A1FD915B214C120800B44A17 /* UIButtonX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButtonX.swift; sourceTree = "<group>"; };
+		A1FD915C214C120800B44A17 /* UILabelX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabelX.swift; sourceTree = "<group>"; };
+		A1FD915D214C120800B44A17 /* UIViewAnchorPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewAnchorPoint.swift; sourceTree = "<group>"; };
+		A1FD915E214C120800B44A17 /* UIViewControllerX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerX.swift; sourceTree = "<group>"; };
+		A1FD915F214C120800B44A17 /* UIImageViewX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewX.swift; sourceTree = "<group>"; };
+		A1FD9160214C120800B44A17 /* UIViewX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewX.swift; sourceTree = "<group>"; };
+		A1FD9161214C120800B44A17 /* UIVisualEffectViewX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIVisualEffectViewX.swift; sourceTree = "<group>"; };
+		A1FD9162214C120800B44A17 /* UISliderX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UISliderX.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,8 +179,27 @@
 				A19C14C621089E860070A4B3 /* PageViewCharts.storyboard */,
 				A101E6CC214B56C6006CD4CD /* LaunchScreen.storyboard */,
 				A19C14C421089E850070A4B3 /* DebugStuff.storyboard */,
+				A1FD9157214C120800B44A17 /* DesignableX */,
 			);
 			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		A1FD9157214C120800B44A17 /* DesignableX */ = {
+			isa = PBXGroup;
+			children = (
+				A1FD9158214C120800B44A17 /* UIPickerViewX.swift */,
+				A1FD9159214C120800B44A17 /* UIViewXRadialGradient.swift */,
+				A1FD915A214C120800B44A17 /* UITextFieldX.swift */,
+				A1FD915B214C120800B44A17 /* UIButtonX.swift */,
+				A1FD915C214C120800B44A17 /* UILabelX.swift */,
+				A1FD915D214C120800B44A17 /* UIViewAnchorPoint.swift */,
+				A1FD915E214C120800B44A17 /* UIViewControllerX.swift */,
+				A1FD915F214C120800B44A17 /* UIImageViewX.swift */,
+				A1FD9160214C120800B44A17 /* UIViewX.swift */,
+				A1FD9161214C120800B44A17 /* UIVisualEffectViewX.swift */,
+				A1FD9162214C120800B44A17 /* UISliderX.swift */,
+			);
+			path = DesignableX;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -243,22 +284,33 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1FD9168214C120800B44A17 /* UIViewAnchorPoint.swift in Sources */,
 				A18231E1210A6F0000C0CF31 /* shepMapTableView_VC.swift in Sources */,
 				A1A75F61212DD1390036403A /* SingleAnnotation&View.swift in Sources */,
+				A1FD9166214C120800B44A17 /* UIButtonX.swift in Sources */,
+				A1FD9163214C120800B44A17 /* UIPickerViewX.swift in Sources */,
 				A1DAD3762087C28400F9BC9C /* JUST_SOME_NOTES.swift in Sources */,
 				A16F818C211B678B004C36ED /* DetailScreenVC.swift in Sources */,
 				A16326A1210A71D70064505C /* myChartsCurlingPage_VC.swift in Sources */,
 				A103692B21134F2A00FB9B3F /* MAPSCREEN_VC_extension.swift in Sources */,
+				A1FD9169214C120800B44A17 /* UIViewControllerX.swift in Sources */,
 				A11C1A4E2109499200BA8252 /* TabBarController.swift in Sources */,
 				A18906B721318DEE008D8CDD /* ViewLifeCycleLoggingController.swift in Sources */,
 				A1E356A82100D21C0016DF97 /* AppDelegate.swift in Sources */,
 				A1A75F60212DD1390036403A /* MAPSCREEN_VC.swift in Sources */,
 				A16F818A211B3673004C36ED /* allTheSectionsOfData4TVC_struct.swift in Sources */,
 				A18231E5210A6F0000C0CF31 /* ShepTableViewCells.swift in Sources */,
+				A1FD916B214C120800B44A17 /* UIViewX.swift in Sources */,
+				A1FD916D214C120800B44A17 /* UISliderX.swift in Sources */,
+				A1FD916A214C120800B44A17 /* UIImageViewX.swift in Sources */,
 				A1A75F62212DD1390036403A /* ShepDataModel.swift in Sources */,
 				A16326A0210A71D70064505C /* Debug_VC.swift in Sources */,
 				A11C1A4A2109497E00BA8252 /* Login_VC.swift in Sources */,
+				A1FD916C214C120800B44A17 /* UIVisualEffectViewX.swift in Sources */,
 				A1A75F63212DD1390036403A /* searchRadius_VC.swift in Sources */,
+				A1FD9167214C120800B44A17 /* UILabelX.swift in Sources */,
+				A1FD9165214C120800B44A17 /* UITextFieldX.swift in Sources */,
+				A1FD9164214C120800B44A17 /* UIViewXRadialGradient.swift in Sources */,
 				A1E7A347211B065500DB36E5 /* SortingHatPopover.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
