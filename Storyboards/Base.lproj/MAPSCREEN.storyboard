@@ -21,30 +21,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="YSf-s6-G3S">
-                                <rect key="frame" x="1" y="142" width="375" height="476"/>
+                                <rect key="frame" x="1" y="115" width="375" height="503"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <connections>
                                     <outlet property="delegate" destination="gUb-df-Mug" id="DC1-dU-Rrv"/>
                                 </connections>
                             </mapView>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g5N-iF-wTI" userLabel="ShepTestView">
-                                <rect key="frame" x="1" y="20" width="376" height="122"/>
+                                <rect key="frame" x="1" y="20" width="376" height="97"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Search Radius" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XFj-sK-tSp">
-                                        <rect key="frame" x="4" y="96" width="104" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2cD-Aj-8IZ">
-                                        <rect key="frame" x="298" y="96" width="74" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
-                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eTS-VB-tZm" userLabel="Make Route">
                                         <rect key="frame" x="4" y="46" width="120" height="20"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -98,7 +84,7 @@
                                             <color key="titleColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <action selector="btnXChangeHeight:" destination="gUb-df-Mug" eventType="touchUpInside" id="8Am-eE-mVk"/>
+                                            <action selector="btnTempButton:" destination="gUb-df-Mug" eventType="touchUpInside" id="8Am-eE-mVk"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" alpha="0.55000000000000004" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ekk-yn-nJt">
@@ -109,14 +95,6 @@
                                             <action selector="twirlButtonTapped:" destination="gUb-df-Mug" eventType="touchUpInside" id="syu-dg-z8r"/>
                                         </connections>
                                     </button>
-                                    <slider opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="1" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="kOZ-gp-dki" userLabel="SearchDistanceSlider">
-                                        <rect key="frame" x="113" y="92" width="176" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <connections>
-                                            <action selector="SearchDistanceSliderMoved:" destination="gUb-df-Mug" eventType="valueChanged" id="HSm-uC-iDm"/>
-                                            <action selector="touchUPInSearchDistanceSlider:" destination="gUb-df-Mug" eventType="touchUpInside" id="5MK-Nw-Qfl"/>
-                                        </connections>
-                                    </slider>
                                 </subviews>
                                 <color key="backgroundColor" red="0.77788150310000004" green="0.90799707169999999" blue="0.91106134650000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
@@ -326,8 +304,6 @@
                         <outlet property="DisplayDistanceSlider" destination="rU5-Q4-Qll" id="7FE-ru-G97"/>
                         <outlet property="GigIconsBackdrop" destination="ECn-nL-Ht5" id="Upu-Or-auO"/>
                         <outlet property="RouteDataView" destination="QPB-sl-eKh" id="fr7-YV-Ezi"/>
-                        <outlet property="SearchDistanceSlider" destination="kOZ-gp-dki" id="fBq-oJ-kkc"/>
-                        <outlet property="SearchRadiusText" destination="2cD-Aj-8IZ" id="lOc-S2-ufg"/>
                         <outlet property="btnClearMap" destination="Aoi-1m-6H3" id="Dc3-EU-klG"/>
                         <outlet property="btnEasyShift" destination="YWX-9W-1yD" id="inU-99-SzW"/>
                         <outlet property="btnFieldAgent" destination="JJE-gt-K4G" id="Cmt-f9-66y"/>
@@ -336,7 +312,6 @@
                         <outlet property="btnSafari" destination="RT6-jI-Vcm" id="1P1-MH-5pP"/>
                         <outlet property="btnTaskRabbit" destination="O5v-6n-Plj" id="tKM-of-txI"/>
                         <outlet property="btnTwirlMenu" destination="Ekk-yn-nJt" id="ymn-XW-0t6"/>
-                        <outlet property="btnXChangeHeight" destination="5R0-6g-AuW" id="x8q-l4-jab"/>
                         <outlet property="lblCrowFlies" destination="Njf-hJ-ViV" id="qOW-be-JfZ"/>
                         <outlet property="lblDrivingDistance" destination="6zk-WJ-FXl" id="X1D-kI-vpO"/>
                         <outlet property="lblDrivingTime" destination="Eqt-X4-ITk" id="kTu-1O-e5j"/>
@@ -365,31 +340,31 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Search Radius:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Y9-p2-C1c">
-                                <rect key="frame" x="16" y="11" width="142" height="31"/>
+                                <rect key="frame" x="16" y="15" width="142" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UBU-nI-bHU">
-                                <rect key="frame" x="172" y="16" width="70" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="1" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="pMZ-eJ-Sie" userLabel="SearchDistanceSlider">
-                                <rect key="frame" x="17" y="50" width="227" height="30"/>
+                                <rect key="frame" x="17" y="53" width="233" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="SearchDistanceSliderMoved:" destination="0Mv-Gj-0fX" eventType="valueChanged" id="Gag-HE-XoH"/>
                                     <action selector="touchUPInSearchDistanceSlider:" destination="0Mv-Gj-0fX" eventType="touchUpInside" id="OER-HY-o2p"/>
                                 </connections>
                             </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UBU-nI-bHU">
+                                <rect key="frame" x="177" y="15" width="71" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
-                    <value key="contentSizeForViewInPopover" type="size" width="250" height="100"/>
+                    <value key="contentSizeForViewInPopover" type="size" width="270" height="100"/>
                     <connections>
                         <outlet property="SearchDistanceSlider" destination="pMZ-eJ-Sie" id="2IC-CY-F4H"/>
                         <outlet property="SearchRadiusText" destination="UBU-nI-bHU" id="Q6f-SW-c4Z"/>
@@ -397,7 +372,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k0r-q8-73b" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-996" y="-506"/>
+            <point key="canvasLocation" x="-996" y="-506.89655172413796"/>
         </scene>
     </scenes>
     <resources>

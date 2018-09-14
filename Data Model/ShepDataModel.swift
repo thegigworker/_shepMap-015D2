@@ -55,8 +55,7 @@ class shepDataModel: NSObject {
     var validSearchResultsArray = [ShepSingleAnnotation]()
     var howManySearchItemsFound = 0
     var currentSearchDistance = CLLocationDistance(miles2meters(miles: initialSearch))
-    //print ("currentSearchDistance \(currentSearchDistance)")
-    var currentDisplayDistance = CLLocationDistance(miles2meters(miles: initialDisplay * 2))
+    var currentDisplayDistance = CLLocationDistance(miles2meters(miles: initialDisplay))
     var currentRoute = MKRoute()
     var crowFliesDistance : Double = 1.0
     var howManyRouteInfosCompleted: Int = 0

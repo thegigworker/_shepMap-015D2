@@ -24,7 +24,7 @@ import os.log
 //For more information on the unified logging system, see Logging Reference.
 
 
-class MAPSCREEN_VC: UIViewController, MKMapViewDelegate, UIPopoverPresentationControllerDelegate, SearchDistanceSliderDelegate {
+class MAPSCREEN_VC: UIViewController, MKMapViewDelegate {
     
     //MARK: - Properties
     let myDataModel = shepDataModel()
@@ -36,33 +36,12 @@ class MAPSCREEN_VC: UIViewController, MKMapViewDelegate, UIPopoverPresentationCo
     
     //MARK: - @IBActions
     
-//    @IBAction func showPopOver(){
-//       // popoverView.contentViewController.preferredContentSize =  CGSizeMake(320, 1400)
-//        self.performSegue(withIdentifier: "popoverViewSegue", sender: self)
-//    }
-    
     @IBAction func DisplayDistanceSliderMoved(_ sender: UISlider) {
         // Get Float value from Slider when it is moved.
         let value = DisplayDistanceSlider.value * 2
         myDataModel.currentDisplayDistance = miles2meters(miles: Double(value))
         let mapRegion1 = MKCoordinateRegionMakeWithDistance(myMapView.centerCoordinate, myDataModel.currentDisplayDistance, myDataModel.currentDisplayDistance)
-        //let mapRegion1 = MKCoordinateRegionMakeWithDistance(myMapView.centerCoordinate, myDataModel.currentDisplayDistance * 20, myDataModel.currentDisplayDistance * 20)
-//        let mapRegion1 = MKCoordinateRegionMakeWithDistance(myUserLocation.coordinate, myDataModel.currentDisplayDistance * 2, myDataModel.currentDisplayDistance * 2)
         myMapView.setRegion(mapRegion1, animated: true)
-    }
-    
-    @IBAction func SearchDistanceSliderMoved(_ sender: UISlider) {
-        let value = SearchDistanceSlider.value
-        SearchRadiusText.text = String(format: "%.01f", value) + " mi."
-        let mySearchDistance = miles2meters(miles: Double(value))
-        //print ("in MAPSCREEN @IBAction, myDataModel.currentSearchDistance: \(myDataModel.currentSearchDistance)")
-        drawSearchDistanceCircle(searchDistance: mySearchDistance)
-    }
-
-    @IBAction func touchUPInSearchDistanceSlider(_ sender: UISlider) {
-        print ("Touch UP in slider.")
-        //if searchDistanceCircle != nil {myMapView.remove(searchDistanceCircle)}
-        clearSearchDistanceCircle()
     }
     
     @IBAction func btnToggleMapType(_ sender: UIButton) {
@@ -82,7 +61,6 @@ class MAPSCREEN_VC: UIViewController, MKMapViewDelegate, UIPopoverPresentationCo
         theGoldRouteView.alpha = 0.0
         myDataModel.whichRouteStyle = ""
         shepDataModel.theMASTERAnnotationsArray.removeAll()
-        //myShepTVController.redrawTableView()
         shepDataModel.MASTERAnnotationsArrayUpdated = true
     }
     
@@ -92,17 +70,8 @@ class MAPSCREEN_VC: UIViewController, MKMapViewDelegate, UIPopoverPresentationCo
         theGoldRouteView.alpha = 0.0
     }
     
-    @IBAction func btnXChangeHeight(_ sender: Any) {
-//        let tempTranslator = Double(CLLocationDistance(DisplayDistanceSlider.value))
-//        print ("currentDisplayDistance is \(String(format: "%.02f", tempTranslator))")
-//        let tempTranslator2 = meters2miles(meters: myDataModel.currentDisplayDistance)
-//        print ("currentDisplayDistance is \(String(format: "%.02f", tempTranslator2))")
+    @IBAction func btnTempButton(_ sender: Any) {
 
-//        // create region for map
-        
-//        let mapRegion1 = MKCoordinateRegionMakeWithDistance(myUserLocation.coordinate, myDataModel.currentDisplayDistance, myDataModel.currentDisplayDistance)
-//
-//        myMapView.setRegion(mapRegion1, animated: true)
     }
     
     @IBAction func btnMakeRandomRoute(_ sender: UIButton) {
@@ -125,14 +94,6 @@ class MAPSCREEN_VC: UIViewController, MKMapViewDelegate, UIPopoverPresentationCo
             //drawNewRoute(thisRoute: myRoute)
         } else { print ("\n source and destination are the same \n") }
     }
-
-//    func didReceiveMethodCallFromDataModel() {
-//        print("In ViewController, didReceiveMethodCallFromDataModel happenned")
-//    }
-//
-//    func didReceiveDataUpdate(data: String) {
-//        print ("In ViewController, didReceiveDataUpdate was: \(data)")
-//    }
  
     @IBAction func btnMakeGoldRoute(_ sender: UIButton) {
         if shepDataModel.theMASTERAnnotationsArray.count < 1 {
@@ -233,35 +194,8 @@ class MAPSCREEN_VC: UIViewController, MKMapViewDelegate, UIPopoverPresentationCo
         resetTwirlButtons()
     }
     
-    //MARK: - popoverPresentationController functions
-    func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) -> Bool {
-        return true
-    }
-
-    func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
-        print ("SearchDistanceRadiusPopover Dismissed")
-         //if searchDistanceCircle != nil {myMapView.remove(searchDistanceCircle)}
-        clearSearchDistanceCircle()
-    }
-
-    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
-        return .none
-    }
-    
-    func drawSearchDistanceCircle(searchDistance: Double) {
-        clearSearchDistanceCircle()
-        //if searchDistanceCircle != nil {myMapView.remove(searchDistanceCircle)}
-        myDataModel.currentSearchDistance = searchDistance
-        searchDistanceCircle = MKCircle(center: myUserLocation.coordinate, radius:CLLocationDistance(myDataModel.currentSearchDistance))
-        print ("in drawSearchDistance, myDataModel.currentSearchDistance: \(myDataModel.currentSearchDistance) \n")
-        myMapView.add(searchDistanceCircle)
-    }
-    
-    func clearSearchDistanceCircle() {
-        if searchDistanceCircle != nil {myMapView.remove(searchDistanceCircle)}
-    }
-    
 //    //MARK: - Location functions
+    
     // Create a location manager to trigger user tracking
     let locationManager: CLLocationManager = {
         let manager = CLLocationManager()
@@ -341,9 +275,9 @@ class MAPSCREEN_VC: UIViewController, MKMapViewDelegate, UIPopoverPresentationCo
         
         DisplayDistanceSlider.value = Float(initialDisplay)
         print ("initialDisplay is: \(initialDisplay)")
-        SearchDistanceSlider.value = Float(initialSearch)
-        print ("SearchDistanceSlider.value: \(SearchDistanceSlider.value)")
-        SearchRadiusText.text = String(initialSearch) + " mi."
+        //SearchDistanceSlider.value = Float(initialSearch)
+        //print ("SearchDistanceSlider.value: \(SearchDistanceSlider.value)")
+        //SearchRadiusText.text = String(initialSearch) + " mi."
         theGoldRouteView.layer.cornerRadius = 10
         RouteDataView.layer.cornerRadius = 10
         GigIconsBackdrop.layer.cornerRadius = 10
@@ -375,15 +309,12 @@ class MAPSCREEN_VC: UIViewController, MKMapViewDelegate, UIPopoverPresentationCo
     @IBOutlet weak var btnMobee: UIButton!
     @IBOutlet weak var btnSafari: UIButton!
     @IBOutlet weak var btnTwirlMenu: UIButton!
-    @IBOutlet weak var btnXChangeHeight: UIButton!
     @IBOutlet weak var btnClearMap: UIButton!
-    @IBOutlet weak var SearchDistanceSlider: UISlider!
     @IBOutlet weak var DisplayDistanceSlider: UISlider! {
         didSet{       // rotate slider
             DisplayDistanceSlider.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi/2))
         }
     }
-    @IBOutlet weak var SearchRadiusText: UILabel!
     @IBOutlet weak var RouteDataView: UIView!
     @IBOutlet weak var GigIconsBackdrop: UIView!
     @IBOutlet weak var theGoldRouteView: UIView!

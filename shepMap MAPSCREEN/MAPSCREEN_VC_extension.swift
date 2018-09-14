@@ -26,13 +26,13 @@ class CustomDisplayUISlider : UISlider {
 
 
 //MARK: - MAPSCREEN_VC  EXTENSION
-extension MAPSCREEN_VC : DataModelMapScreenDelegate {
+extension MAPSCREEN_VC : DataModelMapScreenDelegate, UIPopoverPresentationControllerDelegate, SearchDistanceSliderDelegate {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
-    //MARK: - Protocol functions
+    //MARK: - DataModelMapScreen DELEGATE
     func showValidSearchResults(validSearchResults: [ShepSingleAnnotation]) {
         print ("In showValidSearchResults, showValidSearchResults count was: \(validSearchResults.count)")
         print ("In showValidSearchResults, myDataModel.theMASTERAnnotationsArray count was: \(shepDataModel.theMASTERAnnotationsArray.count)")
@@ -60,6 +60,35 @@ extension MAPSCREEN_VC : DataModelMapScreenDelegate {
         lblCrowFlies.text = "As crow flies: \(String(format: "%.02f", myDataModel.crowFliesDistance)) miles"
         lblDrivingDistance.text = "Driving distance: \(String(format: "%.02f", drivingDistance)) miles"
         lblDrivingTime.text = "Driving time: \(String(format: "%.02f", drivingTime)) minutes"
+    }
+    
+    //MARK: - popoverPresentationController DELEGATE
+    func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) -> Bool {
+        return true
+    }
+    
+    func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
+        print ("SearchDistanceRadiusPopover Dismissed")
+        //if searchDistanceCircle != nil {myMapView.remove(searchDistanceCircle)}
+        clearSearchDistanceCircle()
+    }
+    
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
+    }
+    
+    //MARK: - SearchDistanceSliderDelegate DELEGATE
+    func drawSearchDistanceCircle(searchDistance: Double) {
+        clearSearchDistanceCircle()
+        //if searchDistanceCircle != nil {myMapView.remove(searchDistanceCircle)}
+        myDataModel.currentSearchDistance = searchDistance
+        searchDistanceCircle = MKCircle(center: myUserLocation.coordinate, radius:CLLocationDistance(myDataModel.currentSearchDistance))
+        //print ("in drawSearchDistance, myDataModel.currentSearchDistance: \(myDataModel.currentSearchDistance) \n")
+        myMapView.add(searchDistanceCircle)
+    }
+    
+    func clearSearchDistanceCircle() {
+        if searchDistanceCircle != nil {myMapView.remove(searchDistanceCircle)}
     }
     
     
@@ -168,6 +197,7 @@ extension MAPSCREEN_VC : DataModelMapScreenDelegate {
         if segue.identifier == "popoverViewSegue" {
             let mySearchRadiusViewController: searchRadiusViewController = segue.destination as! searchRadiusViewController
             mySearchRadiusViewController.mySearchDistanceSliderDelegate = self
+            mySearchRadiusViewController.openingSearchDistanceSliderValue = Float(meters2miles(meters: (myDataModel.currentSearchDistance)))
         }
     }
     
@@ -222,7 +252,7 @@ extension MAPSCREEN_VC : DataModelMapScreenDelegate {
      */
     
     func centerMapOnLocation(location: CLLocation) {
-        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, myDataModel.currentDisplayDistance, myDataModel.currentDisplayDistance)
+        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, myDataModel.currentDisplayDistance * 2, myDataModel.currentDisplayDistance * 2)
         myMapView.setRegion(coordinateRegion, animated: true)
     }
     
