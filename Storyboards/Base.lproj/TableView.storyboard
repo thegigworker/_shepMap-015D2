@@ -172,7 +172,7 @@
                     <navigationItem key="navigationItem" title="shepTest TVC" id="fc8-Br-6dL" userLabel="shepTest TVC">
                         <barButtonItem key="leftBarButtonItem" title="sort_icon item" image="sort_icon" springLoaded="YES" id="hgE-42-amt" userLabel="sort_icon item">
                             <connections>
-                                <segue destination="D63-js-UZ9" kind="popoverPresentation" popoverAnchorBarButtonItem="hgE-42-amt" id="1lo-NG-p9k">
+                                <segue destination="D63-js-UZ9" kind="popoverPresentation" identifier="openSortingHatSegue" popoverAnchorBarButtonItem="hgE-42-amt" id="1lo-NG-p9k">
                                     <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                                 </segue>
                             </connections>

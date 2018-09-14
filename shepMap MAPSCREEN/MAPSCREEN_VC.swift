@@ -24,7 +24,7 @@ import os.log
 //For more information on the unified logging system, see Logging Reference.
 
 
-class MAPSCREEN_VC: UIViewController, MKMapViewDelegate, DataModelMapScreenDelegate, UIPopoverPresentationControllerDelegate {
+class MAPSCREEN_VC: UIViewController, MKMapViewDelegate, UIPopoverPresentationControllerDelegate, SearchDistanceSliderDelegate {
     
     //MARK: - Properties
     let myDataModel = shepDataModel()
@@ -32,7 +32,6 @@ class MAPSCREEN_VC: UIViewController, MKMapViewDelegate, DataModelMapScreenDeleg
     var twirlMenuIsUntwirled: Bool = false
     var searchDistanceCircle:MKCircle!
     var doTheSearchAgain = true
-    //var myMAPSCREEN_VC2 = MAPSCREEN_VC2()
 
     
     //MARK: - @IBActions
@@ -44,7 +43,7 @@ class MAPSCREEN_VC: UIViewController, MKMapViewDelegate, DataModelMapScreenDeleg
     
     @IBAction func DisplayDistanceSliderMoved(_ sender: UISlider) {
         // Get Float value from Slider when it is moved.
-        let value = DisplayDistanceSlider.value
+        let value = DisplayDistanceSlider.value * 2
         myDataModel.currentDisplayDistance = miles2meters(miles: Double(value))
         let mapRegion1 = MKCoordinateRegionMakeWithDistance(myMapView.centerCoordinate, myDataModel.currentDisplayDistance, myDataModel.currentDisplayDistance)
         //let mapRegion1 = MKCoordinateRegionMakeWithDistance(myMapView.centerCoordinate, myDataModel.currentDisplayDistance * 20, myDataModel.currentDisplayDistance * 20)
@@ -55,21 +54,15 @@ class MAPSCREEN_VC: UIViewController, MKMapViewDelegate, DataModelMapScreenDeleg
     @IBAction func SearchDistanceSliderMoved(_ sender: UISlider) {
         let value = SearchDistanceSlider.value
         SearchRadiusText.text = String(format: "%.01f", value) + " mi."
-        myDataModel.currentSearchDistance = miles2meters(miles: Double(value))
-        //myDataModel.currentSearchDistance = miles2meters(miles: Double(value))
-        if searchDistanceCircle != nil {myMapView.remove(searchDistanceCircle)}
-        searchDistanceCircle = MKCircle(center: myUserLocation.coordinate, radius:CLLocationDistance(myDataModel.currentSearchDistance))
-        myMapView.add(searchDistanceCircle)
-        
-    }
-    
-    @IBAction func touchDOWNInSearchDistanceSlider(_ sender: UISlider) {
-        print ("Touch DOWN in slider.")
+        let mySearchDistance = miles2meters(miles: Double(value))
+        //print ("in MAPSCREEN @IBAction, myDataModel.currentSearchDistance: \(myDataModel.currentSearchDistance)")
+        drawSearchDistanceCircle(searchDistance: mySearchDistance)
     }
 
     @IBAction func touchUPInSearchDistanceSlider(_ sender: UISlider) {
         print ("Touch UP in slider.")
-        if searchDistanceCircle != nil {myMapView.remove(searchDistanceCircle)}
+        //if searchDistanceCircle != nil {myMapView.remove(searchDistanceCircle)}
+        clearSearchDistanceCircle()
     }
     
     @IBAction func btnToggleMapType(_ sender: UIButton) {
@@ -246,16 +239,27 @@ class MAPSCREEN_VC: UIViewController, MKMapViewDelegate, DataModelMapScreenDeleg
     }
 
     func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
-        print ("Dismissed")
+        print ("SearchDistanceRadiusPopover Dismissed")
+         //if searchDistanceCircle != nil {myMapView.remove(searchDistanceCircle)}
+        clearSearchDistanceCircle()
     }
 
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
         return .none
     }
     
-    //    internal func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
-    //        return .none
-    //    }
+    func drawSearchDistanceCircle(searchDistance: Double) {
+        clearSearchDistanceCircle()
+        //if searchDistanceCircle != nil {myMapView.remove(searchDistanceCircle)}
+        myDataModel.currentSearchDistance = searchDistance
+        searchDistanceCircle = MKCircle(center: myUserLocation.coordinate, radius:CLLocationDistance(myDataModel.currentSearchDistance))
+        print ("in drawSearchDistance, myDataModel.currentSearchDistance: \(myDataModel.currentSearchDistance) \n")
+        myMapView.add(searchDistanceCircle)
+    }
+    
+    func clearSearchDistanceCircle() {
+        if searchDistanceCircle != nil {myMapView.remove(searchDistanceCircle)}
+    }
     
 //    //MARK: - Location functions
     // Create a location manager to trigger user tracking

@@ -261,6 +261,9 @@ class shepMapTableViewController: UITableViewController, UIPopoverPresentationCo
 //                if let indexPath = self.tableView.indexPath(for: sender as! UITableViewCell) {
 //                    productDetailVC.product = productAtIndexPath(indexPath)
 //                }
+            case "openSortingHatSegue" :
+                let mySortingHatPopover: sortingHatPopover = segue.destination as! sortingHatPopover
+                mySortingHatPopover.myTableViewSortingHatDelegate = self
             case "Show Editable Detail":
                 let editTableVC = segue.destination as! shepDetailScreenVC
                 if let indexPath = self.tableView.indexPath(for: sender as! UITableViewCell) {
@@ -291,33 +294,11 @@ class shepMapTableViewController: UITableViewController, UIPopoverPresentationCo
         return true
     }
     
-    func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
-        print ("\n")
-        print ("SORT BY MENU DISMISSED. \n" + "You chose: \(mySort)")
-        redrawTableView()
-        
-        //        BigKahunaSectionedArray = allSectionsOfData4TVC.handleAllTheSections(whichSort: whichSort)
-        //        tableView.reloadData()  // Reloads everything from scratch. Redisplays visible rows. Note that this will cause any existing drop placeholder rows to be removed.
-    }
-    
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
         return .none
     }
     
-    
     // MARK: - Helper Methods
-    
-    func redrawTableView() {
-        BigKahunaSectionedArray = allTheSectionsOfData4TVC_struct.handleAllTheSections(whichSort: mySort.rawValue)
-        print("I'm in redrawTableView w sort \(mySort)")
-        self.tableView.reloadData()  // Reloads everything from scratch. Redisplays visible rows. Note that this will cause any existing drop placeholder rows to be removed.
-        /*
-         The UITableView's reloadData() method is explicitly a force reload of the entire tableView. It works well, but is usually jarring and a bad user experience if you're going to do that with a tableview that the user is currently looking at.
-         
-         Instead, take a look at reloadRowsAtIndexPaths(_:withRowAnimation:) and
-         reloadSections(_:withRowAnimation:) in the documentation.
-         */
-    }
     
     func theAnnotationAtIndexPath(_ indexPath: IndexPath) -> ShepSingleAnnotation {
         print("productAtIndexPath w indexPath \(indexPath)")
@@ -402,6 +383,25 @@ class shepMapTableViewController: UITableViewController, UIPopoverPresentationCo
             shepDataModel.MASTERAnnotationsArrayUpdated = false
             //tableView.reloadData()  // Reloads everything from scratch. Redisplays visible rows. Note that this will cause any existing drop placeholder rows to be removed.
         }
+    }
+}
+
+
+//MARK: - TableViewSortingHatDelegate methods
+extension shepMapTableViewController : TableViewSortingHatDelegate {
+    
+    func redrawTableView() {
+        BigKahunaSectionedArray = allTheSectionsOfData4TVC_struct.handleAllTheSections(whichSort: mySort.rawValue)
+        print("I'm in redrawTableView w sort \(mySort)")
+        tableView.reloadData()  // Reloads everything from scratch. Redisplays visible rows. Note that this will cause any existing drop placeholder rows to be removed.
+        /*
+         The UITableView's reloadData() method is explicitly a force reload of the entire tableView. It works well, but is usually jarring and a bad user experience if you're going to do that with a tableview that the user is currently looking at.
+         
+         Instead, take a look at reloadRowsAtIndexPaths(_:withRowAnimation:) and
+         reloadSections(_:withRowAnimation:) in the documentation.
+         */
+        
+        self.presentedViewController?.dismiss(animated: true, completion: nil)
     }
 }
 

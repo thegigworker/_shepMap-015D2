@@ -18,11 +18,16 @@ enum whichSort_enum : String {
     case JobSource
 }
 
+protocol TableViewSortingHatDelegate: class {
+    func redrawTableView()
+}
+
 class sortingHatPopover: UIViewController, UIPopoverPresentationControllerDelegate {
 
     //let myDataModel = shepDataModel()
     
-    var myShepTVController = shepMapTableViewController()
+    //var myShepTVController = shepMapTableViewController()
+    weak var myTableViewSortingHatDelegate: TableViewSortingHatDelegate!
     
     @IBOutlet weak var checkmark0: UIImageView!
     @IBOutlet weak var btnjobTitle: UIButton!
@@ -48,7 +53,6 @@ class sortingHatPopover: UIViewController, UIPopoverPresentationControllerDelega
         mySort = whichSort_enum.JobTitle
         checkmark0.isHidden = false
         print ("whichSort tapped: \(mySort)")
-        myShepTVController.redrawTableView()
     }
     
     @IBAction func selected_JobPay(_ sender: UIButton) {
@@ -56,7 +60,7 @@ class sortingHatPopover: UIViewController, UIPopoverPresentationControllerDelega
         mySort = whichSort_enum.JobPay
         checkmark1.isHidden = false
         print ("whichSort tapped: \(mySort)")
-        myShepTVController.redrawTableView()
+        myTableViewSortingHatDelegate.redrawTableView()
     }
     
     @IBAction func selected_DrivingDistance(_ sender: UIButton) {
@@ -64,7 +68,7 @@ class sortingHatPopover: UIViewController, UIPopoverPresentationControllerDelega
         mySort = whichSort_enum.DrivingDistance
         checkmark2.isHidden = false
         print ("whichSort tapped: \(mySort)")
-        myShepTVController.redrawTableView()
+        myTableViewSortingHatDelegate.redrawTableView()
     }
     
     @IBAction func selected_JobProfit(_ sender: UIButton) {
@@ -72,7 +76,7 @@ class sortingHatPopover: UIViewController, UIPopoverPresentationControllerDelega
         mySort = whichSort_enum.JobProfit
         checkmark3.isHidden = false
         print ("whichSort tapped: \(mySort)")
-        myShepTVController.redrawTableView()
+        myTableViewSortingHatDelegate.redrawTableView()
     }
     
     @IBAction func selected_CrowFliesDistance(_ sender: UIButton) {
@@ -80,7 +84,7 @@ class sortingHatPopover: UIViewController, UIPopoverPresentationControllerDelega
         mySort = whichSort_enum.CrowFliesDistance
         checkmark4.isHidden = false
         print ("whichSort tapped: \(mySort)")
-        myShepTVController.redrawTableView()
+        myTableViewSortingHatDelegate.redrawTableView()
     }
     
     @IBAction func selected_ZIPCode(_ sender: UIButton) {
@@ -88,7 +92,7 @@ class sortingHatPopover: UIViewController, UIPopoverPresentationControllerDelega
         mySort = whichSort_enum.ZIPCode
         checkmark5.isHidden = false
         print ("whichSort tapped: \(mySort)")
-        myShepTVController.redrawTableView()
+        myTableViewSortingHatDelegate.redrawTableView()
     }
     
     @IBAction func selected_City(_ sender: UIButton) {
@@ -96,7 +100,7 @@ class sortingHatPopover: UIViewController, UIPopoverPresentationControllerDelega
         mySort = whichSort_enum.City
         checkmark6.isHidden = false
         print ("whichSort tapped: \(mySort)")
-        myShepTVController.redrawTableView()
+        myTableViewSortingHatDelegate.redrawTableView()
     }
     
     @IBAction func selected_JobSource(_ sender: UIButton) {
@@ -104,7 +108,7 @@ class sortingHatPopover: UIViewController, UIPopoverPresentationControllerDelega
         mySort = whichSort_enum.JobSource
         checkmark7.isHidden = false
         print ("whichSort tapped: \(mySort)")
-        myShepTVController.redrawTableView()
+        myTableViewSortingHatDelegate?.redrawTableView()
     }
     
     func clearCheckMarks() {

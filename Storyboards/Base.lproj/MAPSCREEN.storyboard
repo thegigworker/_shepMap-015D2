@@ -11,7 +11,7 @@
         <!--ShepMap Mapscreen-->
         <scene sceneID="l0S-ly-Wl2">
             <objects>
-                <viewController storyboardIdentifier="shepMapViewController" title="ShepMap Mapscreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="gUb-df-Mug" customClass="MAPSCREEN_VC" customModule="shepMap_015" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="shepMapViewController" title="ShepMap Mapscreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="gUb-df-Mug" customClass="MAPSCREEN_VC" customModule="shepMap_019" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="8N0-4S-TXm"/>
                         <viewControllerLayoutGuide type="bottom" id="5hX-fm-oFV"/>
@@ -114,14 +114,13 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <connections>
                                             <action selector="SearchDistanceSliderMoved:" destination="gUb-df-Mug" eventType="valueChanged" id="HSm-uC-iDm"/>
-                                            <action selector="touchDOWNInSearchDistanceSlider:" destination="gUb-df-Mug" eventType="touchDown" id="czB-Zj-Vtz"/>
                                             <action selector="touchUPInSearchDistanceSlider:" destination="gUb-df-Mug" eventType="touchUpInside" id="5MK-Nw-Qfl"/>
                                         </connections>
                                     </slider>
                                 </subviews>
                                 <color key="backgroundColor" red="0.77788150310000004" green="0.90799707169999999" blue="0.91106134650000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <slider opaque="NO" alpha="0.90000000000000002" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="CustomDisplayUISlider" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="50" minValue="1" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="rU5-Q4-Qll" userLabel="DisplayDistanceSlider" customClass="CustomDisplayUISlider" customModule="shepMap_015" customModuleProvider="target">
+                            <slider opaque="NO" alpha="0.90000000000000002" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="CustomDisplayUISlider" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="50" minValue="1" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="rU5-Q4-Qll" userLabel="DisplayDistanceSlider" customClass="CustomDisplayUISlider" customModule="shepMap_019" customModuleProvider="target">
                                 <rect key="frame" x="230" y="374" width="240" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="minimumTrackTintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -356,7 +355,7 @@
         <!--Search Radius PopOver-->
         <scene sceneID="Z7S-UZ-mxT">
             <objects>
-                <viewController storyboardIdentifier="searchRadiusViewController" title="Search Radius PopOver" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0Mv-Gj-0fX" customClass="searchRadiusViewController" customModule="shepMap_015" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="searchRadiusViewController" title="Search Radius PopOver" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0Mv-Gj-0fX" customClass="searchRadiusViewController" customModule="shepMap_019" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="LvI-mO-NoG"/>
                         <viewControllerLayoutGuide type="bottom" id="l4Y-wF-NJA"/>
@@ -384,8 +383,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="SearchDistanceSliderMoved:" destination="0Mv-Gj-0fX" eventType="valueChanged" id="Gag-HE-XoH"/>
-                                    <action selector="touchDOWNInSearchDistanceSlider:" destination="0Mv-Gj-0fX" eventType="touchDown" id="xny-F7-VmE"/>
-                                    <action selector="touchUPInSearchDistanceSlider:" destination="0Mv-Gj-0fX" eventType="touchUpInside" id="nSy-Ez-nFT"/>
+                                    <action selector="touchUPInSearchDistanceSlider:" destination="0Mv-Gj-0fX" eventType="touchUpInside" id="OER-HY-o2p"/>
                                 </connections>
                             </slider>
                         </subviews>

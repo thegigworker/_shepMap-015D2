@@ -26,7 +26,7 @@ class CustomDisplayUISlider : UISlider {
 
 
 //MARK: - MAPSCREEN_VC  EXTENSION
-extension MAPSCREEN_VC {
+extension MAPSCREEN_VC : DataModelMapScreenDelegate {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -164,6 +164,10 @@ extension MAPSCREEN_VC {
         if let searchRadiusPopOver = controller.popoverPresentationController{
             //nv.delegate = self
             searchRadiusPopOver.delegate = self
+        }
+        if segue.identifier == "popoverViewSegue" {
+            let mySearchRadiusViewController: searchRadiusViewController = segue.destination as! searchRadiusViewController
+            mySearchRadiusViewController.mySearchDistanceSliderDelegate = self
         }
     }
     

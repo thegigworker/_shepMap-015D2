@@ -32,7 +32,7 @@ func shepCurrencyFromDouble(shepNumber : Double) -> String  {
 
 
 let initialSearch: Double = 15
-let initialDisplay: Double = 50
+let initialDisplay: Double = 25
 //let initialDisplayDistance = CLLocationDistance(miles2meters(miles: initialDisplay))
 //var currentSearchDistanceX = CLLocationDistance(miles2meters(miles: initialSearch))
 
@@ -41,13 +41,13 @@ let initialDisplay: Double = 50
 protocol DataModelMapScreenDelegate: class {
     func showValidSearchResults(validSearchResults: [ShepSingleAnnotation])
     func drawNewRoute(thisRoute: MKRoute)
-    //func handletheChosenRoute(thisRoute: MKRoute)
 }
+
 //Comparing to the callback way, Delegation pattern is easier to reuse across the app: you can create a base class that conforms to the protocol delegate and avoid code redundancy. However, delegation is harder to implement: you need to create a protocol, set the protocol methods, create Delegate property, assign Delegate to ViewController, and make this ViewController conform to the protocol. Also, the Delegate has to implement every method of the protocol by default.
 
 class shepDataModel: NSObject {
     //We need be sure we do not create a retain cycle between the delegate and the delegating objects, so we use a weak reference to delegate.
-    weak var myDataModel4MapScreenDelegate: DataModelMapScreenDelegate?
+    weak var myDataModel4MapScreenDelegate: DataModelMapScreenDelegate!
     //let myShepTVController = shepMapTableViewController()
     let centsPerMileExpense: Int = 60
     var currentTransportType = MKDirectionsTransportType.automobile
@@ -56,7 +56,7 @@ class shepDataModel: NSObject {
     var howManySearchItemsFound = 0
     var currentSearchDistance = CLLocationDistance(miles2meters(miles: initialSearch))
     //print ("currentSearchDistance \(currentSearchDistance)")
-    var currentDisplayDistance = CLLocationDistance(miles2meters(miles: initialDisplay))
+    var currentDisplayDistance = CLLocationDistance(miles2meters(miles: initialDisplay * 2))
     var currentRoute = MKRoute()
     var crowFliesDistance : Double = 1.0
     var howManyRouteInfosCompleted: Int = 0

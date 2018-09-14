@@ -6,11 +6,18 @@
 import UIKit
 import MapKit
 
+protocol SearchDistanceSliderDelegate: class {
+    func drawSearchDistanceCircle(searchDistance: Double)
+    func clearSearchDistanceCircle()
+}
+
 class searchRadiusViewController: UIViewController, UIPopoverPresentationControllerDelegate {
     
-    let myDataModel = shepDataModel()
-    //let myMapView = shepMapViewController().myMapView
-    var searchDistanceCircle:MKCircle!
+    //let myDataModel = shepDataModel()
+    weak var mySearchDistanceSliderDelegate : SearchDistanceSliderDelegate!
+    let myMAPSCREEN_VC = MAPSCREEN_VC()
+    
+    //var searchDistanceCircle:MKCircle!
 
     @IBOutlet weak var SearchDistanceSlider: UISlider!
     @IBOutlet weak var SearchRadiusText: UILabel!
@@ -21,30 +28,29 @@ class searchRadiusViewController: UIViewController, UIPopoverPresentationControl
     @IBAction func SearchDistanceSliderMoved(_ sender: UISlider) {
         let value = SearchDistanceSlider.value
         SearchRadiusText.text = String(format: "%.01f", value) + " mi."
-        myDataModel.currentSearchDistance = miles2meters(miles: Double(value))
-        
-        if searchDistanceCircle != nil {MAPSCREEN_VC().myMapView?.remove(searchDistanceCircle)}
-        searchDistanceCircle = MKCircle(center: myUserLocation.coordinate, radius:CLLocationDistance(myDataModel.currentSearchDistance))
-        //print ("In popover myDataModel.currentSearchDistance = \(meters2miles(meters: myDataModel.currentSearchDistance))")
-        MAPSCREEN_VC().myMapView?.add(searchDistanceCircle)
+        let mySearchDistance = miles2meters(miles: Double(value))
+        //print ("in SearchDistanceSliderMoved,mySearchDistance: \(mySearchDistance)")
+        mySearchDistanceSliderDelegate.drawSearchDistanceCircle(searchDistance: mySearchDistance)
     }
     
-    @IBAction func touchDOWNInSearchDistanceSlider(_ sender: UISlider) {
-        print ("Touch DOWN in popover slider.")
-    }
+//    @IBAction func touchDOWNInSearchDistanceSlider(_ sender: UISlider) {
+//        print ("Touch DOWN in popover slider.")
+//    }
     
     @IBAction func touchUPInSearchDistanceSlider(_ sender: UISlider) {
-        print ("Touch UP in popover slider.")
-        if searchDistanceCircle != nil {MAPSCREEN_VC().myMapView?.remove(searchDistanceCircle)}
+        //print ("Touch UP in popover slider.")
+        mySearchDistanceSliderDelegate.clearSearchDistanceCircle()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        SearchDistanceSlider.value = Float(meters2miles(meters: myDataModel.currentSearchDistance))
+        SearchDistanceSlider.value = Float(meters2miles(meters: (myMAPSCREEN_VC.myDataModel.currentSearchDistance)))
         let value = SearchDistanceSlider.value
-        print ("UIPopover SearchDistanceSlider.value: \(value)") 
+        //print ("In viewDidLoad, UIPopover SearchDistanceSlider.value: \(value)")
+        mySearchDistanceSliderDelegate.drawSearchDistanceCircle(searchDistance: miles2meters(miles: Double(value)))
         SearchRadiusText.text = String(format: "%.01f", value) + " mi."
+        
     }
 
     override func didReceiveMemoryWarning() {
