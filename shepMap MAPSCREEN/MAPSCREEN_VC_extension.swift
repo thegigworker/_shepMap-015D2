@@ -56,10 +56,11 @@ extension MAPSCREEN_VC : DataModelMapScreenDelegate, UIPopoverPresentationContro
         drawPolyline(theRoute: thisRoute)
         let drivingDistance = meters2miles(meters: (thisRoute.distance)) // response distance in meters
         let drivingTime = ((thisRoute.expectedTravelTime) / 60)  //expectedTravelTime is in secs
-        RouteDataView.alpha = 0.9
-        lblCrowFlies.text = "As crow flies: \(String(format: "%.02f", myDataModel.crowFliesDistance)) miles"
-        lblDrivingDistance.text = "Driving distance: \(String(format: "%.02f", drivingDistance)) miles"
-        lblDrivingTime.text = "Driving time: \(String(format: "%.02f", drivingTime)) minutes"
+        
+//        RouteDataView.alpha = 0.9
+//        lblCrowFlies.text = "As crow flies: \(String(format: "%.02f", myDataModel.crowFliesDistance)) miles"
+//        lblDrivingDistance.text = "Driving distance: \(String(format: "%.02f", drivingDistance)) miles"
+//        lblDrivingTime.text = "Driving time: \(String(format: "%.02f", drivingTime)) minutes"
     }
     
     //MARK: - popoverPresentationController DELEGATE
@@ -159,8 +160,10 @@ extension MAPSCREEN_VC : DataModelMapScreenDelegate, UIPopoverPresentationContro
             self.btnSafari.transform = CGAffineTransform(scaleX: 1, y: 1).concatenating(CGAffineTransform(translationX: 0, y: 0))
             self.twirlMenuIsUntwirled = false
         }, completion: nil)
-        RouteDataView.alpha = 0.0
-        theGoldRouteView.alpha = 0.0
+        
+//        RouteDataView.alpha = 0.0
+//        theGoldRouteView.alpha = 0.0
+        
         GigIconsBackdrop.alpha = 0.0
     }
     

@@ -57,8 +57,8 @@ class MAPSCREEN_VC: UIViewController, MKMapViewDelegate {
     @IBAction func btnClearMap(_ sender: UIButton) {
         myMapView.removeOverlays(myMapView.overlays)
         myMapView.removeAnnotations(myMapView.annotations)
-        RouteDataView.alpha = 0.0
-        theGoldRouteView.alpha = 0.0
+        //RouteDataView.alpha = 0.0
+        //theGoldRouteView.alpha = 0.0
         myDataModel.whichRouteStyle = ""
         shepDataModel.theMASTERAnnotationsArray.removeAll()
         shepDataModel.MASTERAnnotationsArrayUpdated = true
@@ -66,8 +66,8 @@ class MAPSCREEN_VC: UIViewController, MKMapViewDelegate {
     
     @IBAction func btnClearRoute(_ sender: Any) {
         myMapView.removeOverlays(myMapView.overlays)
-        RouteDataView.alpha = 0.0
-        theGoldRouteView.alpha = 0.0
+        //RouteDataView.alpha = 0.0
+        //theGoldRouteView.alpha = 0.0
     }
     
     @IBAction func btnTempButton(_ sender: Any) {
@@ -88,8 +88,9 @@ class MAPSCREEN_VC: UIViewController, MKMapViewDelegate {
             //print ("thisisCrowFliesDistanceInMiles:  \(myRouteData.thisisCrowFliesDistanceInMiles)")
             myDataModel.howManyRouteInfosCompleted = 0
             myDataModel.getRouteInfoVia2Annotations(source: shepDataModel.theMASTERAnnotationsArray[sourceAnnotation], destination: shepDataModel.theMASTERAnnotationsArray[destinationItem])
-            theGoldRouteView.alpha = 0.0
-            RouteDataView.alpha = 0.9
+            //theGoldRouteView.alpha = 0.0
+            //RouteDataView.alpha = 0.9
+            
             //let myRoute = myDataModel.currentRoute
             //drawNewRoute(thisRoute: myRoute)
         } else { print ("\n source and destination are the same \n") }
@@ -112,17 +113,15 @@ class MAPSCREEN_VC: UIViewController, MKMapViewDelegate {
         let myDrivingDistance = myChosenGoldAnnotation.routeDrivingDistance
         let routeExpense : Double = myDrivingDistance * Double(myDataModel.centsPerMileExpense)/100
         let myGoldRouteScore = myChosenGoldAnnotation.routeProfit
-        //getRouteInfoVia2Annotations
-        //let myFormattedtheChosenRouteScore = (shepCurrencyFromDouble(shepNumber: mytheChosenRouteScore))
-        //print ("-mytheChosenRouteScore \(myFormattedtheChosenRouteScore) ---  \(myFormattedtheChosenRouteScore) \n        --------------")
-        lblPay.text = "PAY:           \(String(describing: myTitle!))"
-        lblExpense.text = "EXPENSE:  \(shepCurrencyFromDouble(shepNumber: routeExpense))      (60¢ / mile)"
-        lblEarning.text = "EARNING: \(shepCurrencyFromDouble(shepNumber: myGoldRouteScore))"
         myDataModel.whichRouteStyle = "gold"
-        //myDataModel.getRouteInfoVia2Annotations(source: sourceAnnotation, destination: mytheChosenRoute)
+        
+//        lblPay.text = "PAY:           \(String(describing: myTitle!))"
+//        lblExpense.text = "EXPENSE:  \(shepCurrencyFromDouble(shepNumber: routeExpense))      (60¢ / mile)"
+//        lblEarning.text = "EARNING: \(shepCurrencyFromDouble(shepNumber: myGoldRouteScore))"
+//        theGoldRouteView.alpha = 0.9
+//        RouteDataView.alpha = 0.9
+        
         drawNewRoute(thisRoute: myChosenGoldAnnotation.currentLinkedRoute)
-        theGoldRouteView.alpha = 0.9
-        RouteDataView.alpha = 0.9
     }
     
     //MARK: - @IBActions re twirl button
@@ -275,15 +274,14 @@ class MAPSCREEN_VC: UIViewController, MKMapViewDelegate {
         
         DisplayDistanceSlider.value = Float(initialDisplay)
         print ("initialDisplay is: \(initialDisplay)")
-        //SearchDistanceSlider.value = Float(initialSearch)
-        //print ("SearchDistanceSlider.value: \(SearchDistanceSlider.value)")
-        //SearchRadiusText.text = String(initialSearch) + " mi."
-        theGoldRouteView.layer.cornerRadius = 10
-        RouteDataView.layer.cornerRadius = 10
+
         GigIconsBackdrop.layer.cornerRadius = 10
         GigIconsBackdrop.alpha = 0.0
-        theGoldRouteView.alpha = 0.0
-        RouteDataView.alpha = 0.0
+        
+//        theGoldRouteView.layer.cornerRadius = 10
+//        RouteDataView.layer.cornerRadius = 10
+//        theGoldRouteView.alpha = 0.0
+//        RouteDataView.alpha = 0.0
         
         //set up the twirl button
         UIView.animate(withDuration: 0.2, delay: 0.2, options: UIViewAnimationOptions.curveEaseOut, animations: {
@@ -301,6 +299,7 @@ class MAPSCREEN_VC: UIViewController, MKMapViewDelegate {
     //        }
     //    }
     
+    @IBOutlet weak var GigIconsBackdrop: UIView!
     @IBOutlet weak var btnGigWalk: UIButton!
     @IBOutlet weak var lblGigwalk: UILabel!
     @IBOutlet weak var btnEasyShift: UIButton!
@@ -315,14 +314,13 @@ class MAPSCREEN_VC: UIViewController, MKMapViewDelegate {
             DisplayDistanceSlider.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi/2))
         }
     }
-    @IBOutlet weak var RouteDataView: UIView!
-    @IBOutlet weak var GigIconsBackdrop: UIView!
-    @IBOutlet weak var theGoldRouteView: UIView!
-    @IBOutlet weak var lblCrowFlies: UILabel!
-    @IBOutlet weak var lblDrivingDistance: UILabel!
-    @IBOutlet weak var lblDrivingTime: UILabel!
-    @IBOutlet weak var lblPay: UILabel!
-    @IBOutlet weak var lblExpense: UILabel!
-    @IBOutlet weak var lblEarning: UILabel!
+//    @IBOutlet weak var RouteDataView: UIView!
+//    @IBOutlet weak var theGoldRouteView: UIView!
+//    @IBOutlet weak var lblCrowFlies: UILabel!
+//    @IBOutlet weak var lblDrivingDistance: UILabel!
+//    @IBOutlet weak var lblDrivingTime: UILabel!
+//    @IBOutlet weak var lblPay: UILabel!
+//    @IBOutlet weak var lblExpense: UILabel!
+//    @IBOutlet weak var lblEarning: UILabel!
     
 }

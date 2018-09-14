@@ -107,62 +107,6 @@
                                     <action selector="DisplayDistanceSliderMoved:" destination="gUb-df-Mug" eventType="primaryActionTriggered" id="AtW-V3-UMw"/>
                                 </connections>
                             </slider>
-                            <view alpha="0.90000000000000002" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8tE-6s-sz3" userLabel="theGoldRoute View">
-                                <rect key="frame" x="60" y="378" width="257" height="87"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Expense" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OWs-gU-qhR" userLabel="lblExpense">
-                                        <rect key="frame" x="10" y="34" width="245" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
-                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <color key="highlightedColor" red="0.0" green="0.56904578210000001" blue="0.57461684940000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Earning" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EGE-Jr-uzV" userLabel="lblEarning">
-                                        <rect key="frame" x="10" y="57" width="245" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.56904578210000001" blue="0.57461684940000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <color key="highlightedColor" red="0.0" green="0.56904578210000001" blue="0.57461684940000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Pay" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1IK-AT-OBe" userLabel="lblPay">
-                                        <rect key="frame" x="10" y="10" width="245" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
-                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <color key="highlightedColor" red="0.0" green="0.56904578210000001" blue="0.57461684940000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" red="0.74901960779999999" green="0.89411764709999997" blue="0.8980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </view>
-                            <view alpha="0.59999999999999998" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QPB-sl-eKh" userLabel="Route Data View">
-                                <rect key="frame" x="85" y="468" width="207" height="78"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Crow Flies" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Njf-hJ-ViV" userLabel="Crow Flies">
-                                        <rect key="frame" x="13" y="10" width="195" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Driving Distance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6zk-WJ-FXl">
-                                        <rect key="frame" x="13" y="28" width="195" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Driving Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eqt-X4-ITk">
-                                        <rect key="frame" x="13" y="47" width="195" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" red="0.74901960779999999" green="0.89411764709999997" blue="0.8980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </view>
                             <view alpha="0.80000000000000004" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ECn-nL-Ht5" userLabel="gigIconsBackdrop">
                                 <rect key="frame" x="32" y="159" width="306" height="227"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -303,7 +247,6 @@
                     <connections>
                         <outlet property="DisplayDistanceSlider" destination="rU5-Q4-Qll" id="7FE-ru-G97"/>
                         <outlet property="GigIconsBackdrop" destination="ECn-nL-Ht5" id="Upu-Or-auO"/>
-                        <outlet property="RouteDataView" destination="QPB-sl-eKh" id="fr7-YV-Ezi"/>
                         <outlet property="btnClearMap" destination="Aoi-1m-6H3" id="Dc3-EU-klG"/>
                         <outlet property="btnEasyShift" destination="YWX-9W-1yD" id="inU-99-SzW"/>
                         <outlet property="btnFieldAgent" destination="JJE-gt-K4G" id="Cmt-f9-66y"/>
@@ -312,15 +255,8 @@
                         <outlet property="btnSafari" destination="RT6-jI-Vcm" id="1P1-MH-5pP"/>
                         <outlet property="btnTaskRabbit" destination="O5v-6n-Plj" id="tKM-of-txI"/>
                         <outlet property="btnTwirlMenu" destination="Ekk-yn-nJt" id="ymn-XW-0t6"/>
-                        <outlet property="lblCrowFlies" destination="Njf-hJ-ViV" id="qOW-be-JfZ"/>
-                        <outlet property="lblDrivingDistance" destination="6zk-WJ-FXl" id="X1D-kI-vpO"/>
-                        <outlet property="lblDrivingTime" destination="Eqt-X4-ITk" id="kTu-1O-e5j"/>
-                        <outlet property="lblEarning" destination="EGE-Jr-uzV" id="PoH-2L-xjB"/>
-                        <outlet property="lblExpense" destination="OWs-gU-qhR" id="QPC-Im-1xy"/>
                         <outlet property="lblGigwalk" destination="Faa-IL-hx9" id="Zdk-Sl-bkB"/>
-                        <outlet property="lblPay" destination="1IK-AT-OBe" id="ngr-Xp-6Zs"/>
                         <outlet property="myMapView" destination="YSf-s6-G3S" id="2sF-VR-Lxe"/>
-                        <outlet property="theGoldRouteView" destination="8tE-6s-sz3" id="W6m-kZ-neK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aeZ-ph-6w7" sceneMemberID="firstResponder"/>
