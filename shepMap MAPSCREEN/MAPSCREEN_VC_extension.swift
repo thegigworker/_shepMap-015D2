@@ -7,7 +7,7 @@ import MapKit
 import Contacts
 // This adds the Contacts framework, which contains dictionary key constants such as CNPostalAddressStreetKey,
 // for when you need to set the address, city or state fields of a location.
-
+    
 class CustomDisplayUISlider : UISlider {
     
     override func trackRect(forBounds bounds: CGRect) -> CGRect {
@@ -53,14 +53,8 @@ extension MAPSCREEN_VC : DataModelMapScreenDelegate, UIPopoverPresentationContro
         myDataModel.currentRoute = thisRoute
         print ("\n drawNewRoute.thisRoute:  \(String(describing: myDataModel.currentRoute))\n")
         myMapView.removeOverlays(myMapView.overlays)
-        drawPolyline(theRoute: thisRoute)
-        let drivingDistance = meters2miles(meters: (thisRoute.distance)) // response distance in meters
-        let drivingTime = ((thisRoute.expectedTravelTime) / 60)  //expectedTravelTime is in secs
-        
-//        RouteDataView.alpha = 0.9
-//        lblCrowFlies.text = "As crow flies: \(String(format: "%.02f", myDataModel.crowFliesDistance)) miles"
-//        lblDrivingDistance.text = "Driving distance: \(String(format: "%.02f", drivingDistance)) miles"
-//        lblDrivingTime.text = "Driving time: \(String(format: "%.02f", drivingTime)) minutes"
+        drawPolyline(theRoute: myDataModel.currentRoute)
+        //myMAPSCREENRouteInfo = .Route
     }
     
     //MARK: - popoverPresentationController DELEGATE
@@ -106,7 +100,7 @@ extension MAPSCREEN_VC : DataModelMapScreenDelegate, UIPopoverPresentationContro
         }
         // not a circle, therefore is MKPolylineRenderer
         let myLineRenderer = MKPolylineRenderer(polyline: myDataModel.currentRoute.polyline)
-        if myDataModel.whichRouteStyle == "random" {
+        if myDataModel.whichRouteStyle == "route" {
             myLineRenderer.lineWidth = 5
             myLineRenderer.strokeColor = .blue
         } else { // "gold" or anything else right now

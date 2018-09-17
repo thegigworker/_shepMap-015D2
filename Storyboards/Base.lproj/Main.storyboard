@@ -64,7 +64,7 @@
                                         <color key="tintColor" red="0.0" green="0.56031829119999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="rounded Alfred" translatesAutoresizingMaskIntoConstraints="NO" id="GC5-NF-h9o">
-                                        <rect key="frame" x="21" y="603" width="50" height="50"/>
+                                        <rect key="frame" x="303" y="602" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                     </imageView>
                                 </subviews>

@@ -24,15 +24,22 @@ import os.log
 //For more information on the unified logging system, see Logging Reference.
 
 
+protocol showRouteInfoDelegate {
+    func showRouteInfo (asCrowFlies: String, DrivingDistance: String, DrivingTime: String)
+    func showGoldRouteInfo (Pay: String, Expense: String, Earning: String)
+    func clearRouteInfo()
+}
+
 class MAPSCREEN_VC: UIViewController, MKMapViewDelegate {
     
     //MARK: - Properties
     let myDataModel = shepDataModel()
-    let myShepTVController = shepMapTableViewController()
+    var myshowRouteInfoDelegate: showRouteInfoDelegate?  // wouldn't let me make this a "weak" variable.  Why?
     var twirlMenuIsUntwirled: Bool = false
     var searchDistanceCircle:MKCircle!
     var doTheSearchAgain = true
-
+    //var myMAPSCREENRouteInfo : whichRouteInfo = .Route
+    var myChosenGoldAnnotation : ShepSingleAnnotation?
     
     //MARK: - @IBActions
     
@@ -57,17 +64,16 @@ class MAPSCREEN_VC: UIViewController, MKMapViewDelegate {
     @IBAction func btnClearMap(_ sender: UIButton) {
         myMapView.removeOverlays(myMapView.overlays)
         myMapView.removeAnnotations(myMapView.annotations)
-        //RouteDataView.alpha = 0.0
-        //theGoldRouteView.alpha = 0.0
+        //myMAPSCREENRouteInfo = .None
         myDataModel.whichRouteStyle = ""
         shepDataModel.theMASTERAnnotationsArray.removeAll()
         shepDataModel.MASTERAnnotationsArrayUpdated = true
+        myshowRouteInfoDelegate?.clearRouteInfo()
     }
     
     @IBAction func btnClearRoute(_ sender: Any) {
         myMapView.removeOverlays(myMapView.overlays)
-        //RouteDataView.alpha = 0.0
-        //theGoldRouteView.alpha = 0.0
+        myshowRouteInfoDelegate?.clearRouteInfo()
     }
     
     @IBAction func btnTempButton(_ sender: Any) {
@@ -84,18 +90,24 @@ class MAPSCREEN_VC: UIViewController, MKMapViewDelegate {
         let sourceAnnotation = Int(arc4random_uniform(howMany))
         let destinationItem = Int(arc4random_uniform(howMany))
         if sourceAnnotation != destinationItem {
-            myDataModel.whichRouteStyle = "random"
+            myDataModel.whichRouteStyle = "route"
             //print ("thisisCrowFliesDistanceInMiles:  \(myRouteData.thisisCrowFliesDistanceInMiles)")
             myDataModel.howManyRouteInfosCompleted = 0
             myDataModel.getRouteInfoVia2Annotations(source: shepDataModel.theMASTERAnnotationsArray[sourceAnnotation], destination: shepDataModel.theMASTERAnnotationsArray[destinationItem])
-            //theGoldRouteView.alpha = 0.0
-            //RouteDataView.alpha = 0.9
-            
-            //let myRoute = myDataModel.currentRoute
-            //drawNewRoute(thisRoute: myRoute)
+            //myMAPSCREENRouteInfo = .Route
+            if (myshowRouteInfoDelegate) != nil {
+                let thisRoute = myDataModel.currentRoute
+                let drivingDistance = meters2miles(meters: (thisRoute.distance)) // response distance in meters
+                let drivingTime = ((thisRoute.expectedTravelTime) / 60)  //expectedTravelTime is in secs
+                let crowFlies = "As crow flies: \(String(format: "%.02f", myDataModel.crowFliesDistance)) miles"
+                let theDrivingDistance = "Driving distance: \(String(format: "%.02f", drivingDistance)) miles"
+                let theDrivingTime = "Driving time: \(String(format: "%.02f", drivingTime)) minutes"
+                myshowRouteInfoDelegate?.showRouteInfo(asCrowFlies: crowFlies, DrivingDistance: theDrivingDistance, DrivingTime: theDrivingTime)
+            }
         } else { print ("\n source and destination are the same \n") }
     }
  
+
     @IBAction func btnMakeGoldRoute(_ sender: UIButton) {
         if shepDataModel.theMASTERAnnotationsArray.count < 1 {
             print ("in btnMaketheGoldRoute NO items in theMASTERAnnotationsArray \n")
@@ -107,21 +119,19 @@ class MAPSCREEN_VC: UIViewController, MKMapViewDelegate {
             return
         }
         
-        let myChosenGoldAnnotation = myDataModel.choosetheGoldRoute()
-        //let destinationAnnotation_location = CLLocation(latitude: mytheChosenRoute.coordinate.latitude, longitude: mytheChosenRoute.coordinate.longitude)
-        let myTitle = myChosenGoldAnnotation.title
-        let myDrivingDistance = myChosenGoldAnnotation.routeDrivingDistance
-        let routeExpense : Double = myDrivingDistance * Double(myDataModel.centsPerMileExpense)/100
-        let myGoldRouteScore = myChosenGoldAnnotation.routeProfit
+        myChosenGoldAnnotation = myDataModel.choosetheGoldRoute()
         myDataModel.whichRouteStyle = "gold"
+        drawNewRoute(thisRoute: (myChosenGoldAnnotation?.currentLinkedRoute)!)
         
-//        lblPay.text = "PAY:           \(String(describing: myTitle!))"
-//        lblExpense.text = "EXPENSE:  \(shepCurrencyFromDouble(shepNumber: routeExpense))      (60¢ / mile)"
-//        lblEarning.text = "EARNING: \(shepCurrencyFromDouble(shepNumber: myGoldRouteScore))"
-//        theGoldRouteView.alpha = 0.9
-//        RouteDataView.alpha = 0.9
+        let myTitle = myChosenGoldAnnotation?.title
+        let myDrivingDistance = myChosenGoldAnnotation?.routeDrivingDistance
+        let routeExpense : Double = (myDrivingDistance)! * Double(myDataModel.centsPerMileExpense)/100
+        let myGoldRouteScore = myChosenGoldAnnotation?.routeProfit
+        let thePay = "PAY:           \(String(describing: myTitle!))"
+        let theExpense = "EXPENSE:  \(shepCurrencyFromDouble(shepNumber: routeExpense))      (60¢ / mile)"
+        let theEarning = "EARNING: \(shepCurrencyFromDouble(shepNumber: myGoldRouteScore!))"
+        myshowRouteInfoDelegate?.showGoldRouteInfo(Pay: thePay, Expense: theExpense, Earning: theEarning)
         
-        drawNewRoute(thisRoute: myChosenGoldAnnotation.currentLinkedRoute)
     }
     
     //MARK: - @IBActions re twirl button
@@ -247,7 +257,7 @@ class MAPSCREEN_VC: UIViewController, MKMapViewDelegate {
     // When a view controller is loaded from a storyboard, the system instantiates the view hierarchy and assigns the appropriate values to all the view controller’s outlets. By the time the view controller’s viewDidLoad() method is called, the system has assigned valid values to all of the controller’s outlets, and you can safely access their contents.
     override func viewDidLoad() {
         super.viewDidLoad()
-        myDataModel.myDataModel4MapScreenDelegate = self
+        myDataModel.myDataModelMapScreenDelegate = self
         //Comparing to the callback way, Delegation pattern is easier to reuse across the app: you can create a base class that conforms to the protocol delegate and avoid code redundancy. However, delegation is harder to implement: you need to create a protocol, set the protocol methods, create Delegate property, assign Delegate to ViewController, and make this ViewController conform to the protocol. Also, the Delegate has to implement every method of the protocol by default.
         
         // A DELEGATE is an object that acts on behalf of, or in coordination with, another object. The delegating object—in this case, the text field—keeps a reference to the other object—the delegate—and at the appropriate time, the delegating object sends a message to the delegate. The message tells the delegate about an event that the delegating object is about to handle or has just handled.
@@ -264,24 +274,18 @@ class MAPSCREEN_VC: UIViewController, MKMapViewDelegate {
         registerAnnotationViewClasses()
         centerMapOnLocation(location: myUserLocation)
         
-        btnGigWalk.layer.cornerRadius = 10
-        btnEasyShift.layer.cornerRadius = 10
-        btnTaskRabbit.layer.cornerRadius = 10
-        btnFieldAgent.layer.cornerRadius = 10
-        btnTwirlMenu.layer.cornerRadius = 10
-        btnMobee.layer.cornerRadius = 10
-        btnSafari.layer.cornerRadius = 10
+//        btnGigWalk.layer.cornerRadius = 10
+//        btnEasyShift.layer.cornerRadius = 10
+//        btnTaskRabbit.layer.cornerRadius = 10
+//        btnFieldAgent.layer.cornerRadius = 10
+//        btnTwirlMenu.layer.cornerRadius = 10
+//        btnMobee.layer.cornerRadius = 10
+//        btnSafari.layer.cornerRadius = 10
         
         DisplayDistanceSlider.value = Float(initialDisplay)
         print ("initialDisplay is: \(initialDisplay)")
 
-        GigIconsBackdrop.layer.cornerRadius = 10
         GigIconsBackdrop.alpha = 0.0
-        
-//        theGoldRouteView.layer.cornerRadius = 10
-//        RouteDataView.layer.cornerRadius = 10
-//        theGoldRouteView.alpha = 0.0
-//        RouteDataView.alpha = 0.0
         
         //set up the twirl button
         UIView.animate(withDuration: 0.2, delay: 0.2, options: UIViewAnimationOptions.curveEaseOut, animations: {
@@ -314,13 +318,5 @@ class MAPSCREEN_VC: UIViewController, MKMapViewDelegate {
             DisplayDistanceSlider.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi/2))
         }
     }
-//    @IBOutlet weak var RouteDataView: UIView!
-//    @IBOutlet weak var theGoldRouteView: UIView!
-//    @IBOutlet weak var lblCrowFlies: UILabel!
-//    @IBOutlet weak var lblDrivingDistance: UILabel!
-//    @IBOutlet weak var lblDrivingTime: UILabel!
-//    @IBOutlet weak var lblPay: UILabel!
-//    @IBOutlet weak var lblExpense: UILabel!
-//    @IBOutlet weak var lblEarning: UILabel!
     
 }

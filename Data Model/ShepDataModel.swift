@@ -30,11 +30,17 @@ func shepCurrencyFromDouble(shepNumber : Double) -> String  {
     return formatter.string(from: buckaroos)!
 }
 
-
 let initialSearch: Double = 15
 let initialDisplay: Double = 25
 //let initialDisplayDistance = CLLocationDistance(miles2meters(miles: initialDisplay))
 //var currentSearchDistanceX = CLLocationDistance(miles2meters(miles: initialSearch))
+
+
+//enum whichRouteInfo: String {
+//    case Route
+//    case GoldRoute
+//    case None
+//}
 
 
 //The class keyword in the Swift protocol definition limits protocol adoption to class types (and not structures or enums). This is important if we want to use a weak reference to the delegate. We need be sure we do not create a retain cycle between the delegate and the delegating objects, so we use a weak reference to delegate (see below).
@@ -47,8 +53,8 @@ protocol DataModelMapScreenDelegate: class {
 
 class shepDataModel: NSObject {
     //We need be sure we do not create a retain cycle between the delegate and the delegating objects, so we use a weak reference to delegate.
-    weak var myDataModel4MapScreenDelegate: DataModelMapScreenDelegate!
-    //let myShepTVController = shepMapTableViewController()
+    weak var myDataModelMapScreenDelegate: DataModelMapScreenDelegate!
+
     let centsPerMileExpense: Int = 60
     var currentTransportType = MKDirectionsTransportType.automobile
     static var theMASTERAnnotationsArray = [ShepSingleAnnotation]()
@@ -263,9 +269,9 @@ class shepDataModel: NSObject {
                     self.howManyRouteInfosCompleted = 0
                 }
                 
-                if self.whichRouteStyle == "random" {
+                if self.whichRouteStyle == "route" {
                     self.currentRoute = myRoute
-                    self.myDataModel4MapScreenDelegate?.drawNewRoute(thisRoute: myRoute)
+                    self.myDataModelMapScreenDelegate?.drawNewRoute(thisRoute: myRoute)
                 }
                 
                 // THIS IS THE END OF getRouteInfoVia2Annotations COMPLETION HANDLER
@@ -348,7 +354,7 @@ class shepDataModel: NSObject {
                 shepDataModel.theMASTERAnnotationsArray.append(contentsOf: self.validSearchResultsArray)
                 print ("shepSearchResultLoop is done now, theMASTERAnnotationsArray count is \(shepDataModel.theMASTERAnnotationsArray.count)")
                 print ("shepSearchResultLoop is done now, validSearchResultsArray count is \(self.validSearchResultsArray.count) \n")
-                self.myDataModel4MapScreenDelegate?.showValidSearchResults(validSearchResults: self.validSearchResultsArray)
+                self.myDataModelMapScreenDelegate?.showValidSearchResults(validSearchResults: self.validSearchResultsArray)
                 if self.validSearchResultsArray.count > 0 {
                     shepDataModel.MASTERAnnotationsArrayUpdated = true
                     self.validSearchResultsArray.removeAll()

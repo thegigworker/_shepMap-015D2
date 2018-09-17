@@ -24,9 +24,6 @@ protocol TableViewSortingHatDelegate: class {
 
 class sortingHatPopover: UIViewController, UIPopoverPresentationControllerDelegate {
 
-    //let myDataModel = shepDataModel()
-    
-    //var myShepTVController = shepMapTableViewController()
     weak var myTableViewSortingHatDelegate: TableViewSortingHatDelegate!
     
     @IBOutlet weak var checkmark0: UIImageView!
@@ -53,6 +50,7 @@ class sortingHatPopover: UIViewController, UIPopoverPresentationControllerDelega
         mySort = whichSort_enum.JobTitle
         checkmark0.isHidden = false
         print ("whichSort tapped: \(mySort)")
+        myTableViewSortingHatDelegate.redrawTableView()
     }
     
     @IBAction func selected_JobPay(_ sender: UIButton) {

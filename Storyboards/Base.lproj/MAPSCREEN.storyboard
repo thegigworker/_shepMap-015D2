@@ -137,7 +137,7 @@
                                     <action selector="DisplayDistanceSliderMoved:" destination="gUb-df-Mug" eventType="primaryActionTriggered" id="AtW-V3-UMw"/>
                                 </connections>
                             </slider>
-                            <view alpha="0.80000000000000004" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ECn-nL-Ht5" userLabel="gigIconsBackdrop">
+                            <view alpha="0.80000000000000004" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ECn-nL-Ht5" userLabel="gigIconsBackdrop" customClass="UIViewX" customModule="shepMap_019" customModuleProvider="target">
                                 <rect key="frame" x="32" y="159" width="306" height="227"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
@@ -215,6 +215,11 @@
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.77788150310000004" green="0.90799707169999999" blue="0.91106134650000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" alpha="0.55000000000000004" contentMode="scaleAspectFit" fixedFrame="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YgK-d6-yRy">
                                 <rect key="frame" x="117" y="20" width="260" height="44"/>
