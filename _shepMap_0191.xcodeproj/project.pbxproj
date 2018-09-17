@@ -58,7 +58,7 @@
 		A16F818B211B678A004C36ED /* DetailScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailScreenVC.swift; sourceTree = "<group>"; };
 		A18231D4210A6EFF00C0CF31 /* shepTableView_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = shepTableView_VC.swift; sourceTree = "<group>"; };
 		A18231D9210A6EFF00C0CF31 /* ShepTableViewCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShepTableViewCells.swift; sourceTree = "<group>"; };
-		A18906B621318DEE008D8CDD /* ViewLifeCycleLoggingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewLifeCycleLoggingController.swift; path = Storyboards/ViewLifeCycleLoggingController.swift; sourceTree = SOURCE_ROOT; };
+		A18906B621318DEE008D8CDD /* ViewLifeCycleLoggingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewLifeCycleLoggingController.swift; sourceTree = SOURCE_ROOT; };
 		A19C14C121089E850070A4B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A19C14C521089E850070A4B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/DebugStuff.storyboard; sourceTree = "<group>"; };
 		A19C14C721089E860070A4B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageViewCharts.storyboard; sourceTree = "<group>"; };
@@ -110,6 +110,7 @@
 				A18231D7210A6EFF00C0CF31 /* TableView Views&Controllers */,
 				A1D2037920FF9E090089269B /* Charts&Debug */,
 				A1DAD3752087C28400F9BC9C /* JUST_SOME_NOTES.swift */,
+				A18906B621318DEE008D8CDD /* ViewLifeCycleLoggingController.swift */,
 				9F70382C1EA835EB00DA5564 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -182,7 +183,6 @@
 				A101E6CC214B56C6006CD4CD /* LaunchScreen.storyboard */,
 				A19C14C421089E850070A4B3 /* DebugStuff.storyboard */,
 				A1FD9157214C120800B44A17 /* DesignableX */,
-				A18906B621318DEE008D8CDD /* ViewLifeCycleLoggingController.swift */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -247,7 +247,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 9F7038261EA835EB00DA5564 /* Build configuration list for PBXProject "_shepMap_019" */;
+			buildConfigurationList = 9F7038261EA835EB00DA5564 /* Build configuration list for PBXProject "_shepMap_0191" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -521,7 +521,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		9F7038261EA835EB00DA5564 /* Build configuration list for PBXProject "_shepMap_019" */ = {
+		9F7038261EA835EB00DA5564 /* Build configuration list for PBXProject "_shepMap_0191" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9F70383B1EA835EB00DA5564 /* Debug */,

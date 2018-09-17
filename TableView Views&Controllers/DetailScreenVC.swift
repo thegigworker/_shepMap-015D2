@@ -12,6 +12,7 @@ class shepDetailScreenVC: UITableViewController, UITextFieldDelegate, UITextView
     // Model:
     var mySingleAnnotation: ShepSingleAnnotation?
     let myDataModel = shepDataModel()
+    let mySlideInBounce_AnimTransition = slideInBounce_AnimTransition()
 
     @IBOutlet weak var myDescriptionTextView: UITextView!
     @IBOutlet weak var myImage1: UIImageView!
@@ -36,6 +37,13 @@ class shepDetailScreenVC: UITableViewController, UITextFieldDelegate, UITextView
     @IBOutlet weak var lblDriveTime2: UILabel!
     @IBOutlet weak var lblForBelow: UILabel!
     
+    @IBAction func doDirections(_ sender: Any) {
+        print ("doDirections tapped")
+    }
+    
+    @IBAction func goToMap(_ sender: Any) {
+        print ("goToMap tapped")
+    }
     
     // MARK: - UITextFieldDelegate
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

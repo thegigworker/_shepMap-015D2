@@ -40,10 +40,12 @@ import UIKit
 //In the Identity inspector, find the field labeled Class, and select shepProductsTVController.
 ///////////////////
 
-class shepTableViewController: UITableViewController, UIPopoverPresentationControllerDelegate {
+class shepTableViewController: UITableViewController, UIPopoverPresentationControllerDelegate, UIViewControllerTransitioningDelegate, UINavigationControllerDelegate {
     
     //MARK: Properties
     let myDataModel = shepDataModel()
+    let mySlideInBounce_AnimTransition = slideInBounce_AnimTransition()
+    
     lazy var BigKahunaSectionedArray: [allTheSectionsOfData4TVC_struct] = {
         print("I think I'm first building BigKahunaSectionedArray")
         
@@ -274,6 +276,23 @@ class shepTableViewController: UITableViewController, UIPopoverPresentationContr
             }
         }
     }
+    
+    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        print (MainTabController.tableviewDirectionLeft)
+        MainTabController.tableviewDirectionLeft = !MainTabController.tableviewDirectionLeft
+        print (MainTabController.tableviewDirectionLeft)
+        print ("\n")
+        //return myOrigRotatingCUBE_AnimTransition
+        return mySlideInBounce_AnimTransition
+    }
+    
+//    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+//        return mySlideDownFromCorner_AnimTransition
+//    }
+//    
+//    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+//        return mySlideDownFromCorner_AnimTransition
+//    }
     
     
     //MARK: - popoverPresentationController functions

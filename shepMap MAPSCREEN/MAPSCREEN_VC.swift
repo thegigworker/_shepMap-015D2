@@ -76,7 +76,7 @@ class MAPSCREEN_VC: UIViewController, MKMapViewDelegate {
         //clearRouteInfo()
     }
     
-    @IBAction func btnTempButton(_ sender: Any) {
+    @IBAction func btnTempGenericButton(_ sender: Any) {
 
     }
     
