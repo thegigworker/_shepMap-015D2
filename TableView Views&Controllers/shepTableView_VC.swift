@@ -40,7 +40,7 @@ import UIKit
 //In the Identity inspector, find the field labeled Class, and select shepProductsTVController.
 ///////////////////
 
-class shepMapTableViewController: UITableViewController, UIPopoverPresentationControllerDelegate {
+class shepTableViewController: UITableViewController, UIPopoverPresentationControllerDelegate {
     
     //MARK: Properties
     let myDataModel = shepDataModel()
@@ -176,7 +176,7 @@ class shepMapTableViewController: UITableViewController, UIPopoverPresentationCo
         let view = cell.contentView
         view.layer.opacity = 0.4
         print ("TRiGGERING ANIMATION")
-        view.layer.transform = shepMapTableViewController.cellLoadTransform(cell.layer)
+        view.layer.transform = shepTableViewController.cellLoadTransform(cell.layer)
         UIView.animate(withDuration: 0.5, animations: {
             view.layer.transform = CATransform3DIdentity
             view.layer.opacity = 1
@@ -346,10 +346,12 @@ class shepMapTableViewController: UITableViewController, UIPopoverPresentationCo
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //print ("TableView viewDidLoad")
         
-        // this one line of code automatically provides all kinds of UI Edit functionality.
+        // this line of code below automatically provides all kinds of UI Edit functionality.
         // editButtonItem only available w UITableViewController
         // actual edit funtionality in func:  commit editingStyle: UITableViewCellEditingStyle
+        
         navigationItem.rightBarButtonItem = editButtonItem
         
         //        // Make the row height dynamic
@@ -381,18 +383,18 @@ class shepMapTableViewController: UITableViewController, UIPopoverPresentationCo
         if shepDataModel.MASTERAnnotationsArrayUpdated == true {
             redrawTableView()
             shepDataModel.MASTERAnnotationsArrayUpdated = false
-            //tableView.reloadData()  // Reloads everything from scratch. Redisplays visible rows. Note that this will cause any existing drop placeholder rows to be removed.
         }
+        //print ("TableView ViewWillAppear \n")
     }
 }
 
 
 //MARK: - TableViewSortingHatDelegate methods
-extension shepMapTableViewController : TableViewSortingHatDelegate {
+extension shepTableViewController : TableViewSortingHatDelegate {
     
     func redrawTableView() {
         BigKahunaSectionedArray = allTheSectionsOfData4TVC_struct.handleAllTheSections(whichSort: mySort.rawValue)
-        print("I'm in redrawTableView w sort \(mySort)")
+
         tableView.reloadData()  // Reloads everything from scratch. Redisplays visible rows. Note that this will cause any existing drop placeholder rows to be removed.
         /*
          The UITableView's reloadData() method is explicitly a force reload of the entire tableView. It works well, but is usually jarring and a bad user experience if you're going to do that with a tableview that the user is currently looking at.

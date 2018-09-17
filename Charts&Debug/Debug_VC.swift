@@ -6,10 +6,24 @@ import Foundation
 import UIKit
 
 
-class DebugViewController : UIViewController, showRouteInfoDelegate {
+class DebugViewController : UIViewController {
     
     var myMAPSCREEN_VC = MAPSCREEN_VC()
     var myDataModel = shepDataModel()
+    
+    
+    @IBAction func logout(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @IBOutlet weak var RouteDataView: UIView!
+    @IBOutlet weak var theGoldRouteView: UIView!
+    @IBOutlet weak var lblCrowFlies: UILabel!
+    @IBOutlet weak var lblDrivingDistance: UILabel!
+    @IBOutlet weak var lblDrivingTime: UILabel!
+    @IBOutlet weak var lblPay: UILabel!
+    @IBOutlet weak var lblExpense: UILabel!
+    @IBOutlet weak var lblEarning: UILabel!
     
     func showRouteInfo (asCrowFlies: String, DrivingDistance: String, DrivingTime: String) {
         RouteDataView.alpha = 1
@@ -32,11 +46,15 @@ class DebugViewController : UIViewController, showRouteInfoDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        myMAPSCREEN_VC.myshowRouteInfoDelegate = self
+        //print ("DebugViewController ViewDidLoad")
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        print ("in DebugViewController.ViewWillAppear \n")
     }
     
     //override func viewWillAppear(_ animated: Bool) {
-        //print ("in DebugViewController.viewWillAppear")
+        //print ("in DebugViewController.ViewWillAppear \n")
 //        switch myRouteInfo {
 //        case .None :
 //            RouteDataView.alpha = 0
@@ -66,17 +84,5 @@ class DebugViewController : UIViewController, showRouteInfoDelegate {
         
     //}
     
-    
-    @IBAction func logout(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    @IBOutlet weak var RouteDataView: UIView!
-    @IBOutlet weak var theGoldRouteView: UIView!
-    @IBOutlet weak var lblCrowFlies: UILabel!
-    @IBOutlet weak var lblDrivingDistance: UILabel!
-    @IBOutlet weak var lblDrivingTime: UILabel!
-    @IBOutlet weak var lblPay: UILabel!
-    @IBOutlet weak var lblExpense: UILabel!
-    @IBOutlet weak var lblEarning: UILabel!
+
 }

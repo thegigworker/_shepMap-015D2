@@ -18,7 +18,7 @@
 		A16326A1210A71D70064505C /* myChartsCurlingPage_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A163269E210A71D70064505C /* myChartsCurlingPage_VC.swift */; };
 		A16F818A211B3673004C36ED /* allTheSectionsOfData4TVC_struct.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16F8189211B3673004C36ED /* allTheSectionsOfData4TVC_struct.swift */; };
 		A16F818C211B678B004C36ED /* DetailScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16F818B211B678A004C36ED /* DetailScreenVC.swift */; };
-		A18231E1210A6F0000C0CF31 /* shepMapTableView_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18231D4210A6EFF00C0CF31 /* shepMapTableView_VC.swift */; };
+		A18231E1210A6F0000C0CF31 /* shepTableView_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18231D4210A6EFF00C0CF31 /* shepTableView_VC.swift */; };
 		A18231E5210A6F0000C0CF31 /* ShepTableViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18231D9210A6EFF00C0CF31 /* ShepTableViewCells.swift */; };
 		A18906B721318DEE008D8CDD /* ViewLifeCycleLoggingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18906B621318DEE008D8CDD /* ViewLifeCycleLoggingController.swift */; };
 		A19C14CC21089E860070A4B3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A19C14C021089E850070A4B3 /* Main.storyboard */; };
@@ -56,9 +56,9 @@
 		A163269E210A71D70064505C /* myChartsCurlingPage_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = myChartsCurlingPage_VC.swift; sourceTree = "<group>"; };
 		A16F8189211B3673004C36ED /* allTheSectionsOfData4TVC_struct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = allTheSectionsOfData4TVC_struct.swift; sourceTree = "<group>"; };
 		A16F818B211B678A004C36ED /* DetailScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailScreenVC.swift; sourceTree = "<group>"; };
-		A18231D4210A6EFF00C0CF31 /* shepMapTableView_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = shepMapTableView_VC.swift; sourceTree = "<group>"; };
+		A18231D4210A6EFF00C0CF31 /* shepTableView_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = shepTableView_VC.swift; sourceTree = "<group>"; };
 		A18231D9210A6EFF00C0CF31 /* ShepTableViewCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShepTableViewCells.swift; sourceTree = "<group>"; };
-		A18906B621318DEE008D8CDD /* ViewLifeCycleLoggingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewLifeCycleLoggingController.swift; sourceTree = SOURCE_ROOT; };
+		A18906B621318DEE008D8CDD /* ViewLifeCycleLoggingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewLifeCycleLoggingController.swift; path = Storyboards/ViewLifeCycleLoggingController.swift; sourceTree = SOURCE_ROOT; };
 		A19C14C121089E850070A4B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A19C14C521089E850070A4B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/DebugStuff.storyboard; sourceTree = "<group>"; };
 		A19C14C721089E860070A4B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageViewCharts.storyboard; sourceTree = "<group>"; };
@@ -109,7 +109,6 @@
 				A145A37C21002AA000264934 /* shepMap MAPSCREEN */,
 				A18231D7210A6EFF00C0CF31 /* TableView Views&Controllers */,
 				A1D2037920FF9E090089269B /* Charts&Debug */,
-				A18906B621318DEE008D8CDD /* ViewLifeCycleLoggingController.swift */,
 				A1DAD3752087C28400F9BC9C /* JUST_SOME_NOTES.swift */,
 				9F70382C1EA835EB00DA5564 /* Products */,
 			);
@@ -137,7 +136,7 @@
 		A18231D7210A6EFF00C0CF31 /* TableView Views&Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				A18231D4210A6EFF00C0CF31 /* shepMapTableView_VC.swift */,
+				A18231D4210A6EFF00C0CF31 /* shepTableView_VC.swift */,
 				A16F818B211B678A004C36ED /* DetailScreenVC.swift */,
 				A18231D9210A6EFF00C0CF31 /* ShepTableViewCells.swift */,
 				A1E7A346211B065500DB36E5 /* SortingHatPopover.swift */,
@@ -167,8 +166,8 @@
 			isa = PBXGroup;
 			children = (
 				A1D2038420FF9E090089269B /* Login_VC.swift */,
-				A1204C84214FE65700DC1E20 /* AnimatedTransitions.swift */,
 				A1D2038220FF9E090089269B /* MainTabBarController.swift */,
+				A1204C84214FE65700DC1E20 /* AnimatedTransitions.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -183,6 +182,7 @@
 				A101E6CC214B56C6006CD4CD /* LaunchScreen.storyboard */,
 				A19C14C421089E850070A4B3 /* DebugStuff.storyboard */,
 				A1FD9157214C120800B44A17 /* DesignableX */,
+				A18906B621318DEE008D8CDD /* ViewLifeCycleLoggingController.swift */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -288,7 +288,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1FD9168214C120800B44A17 /* UIViewAnchorPoint.swift in Sources */,
-				A18231E1210A6F0000C0CF31 /* shepMapTableView_VC.swift in Sources */,
+				A18231E1210A6F0000C0CF31 /* shepTableView_VC.swift in Sources */,
 				A1A75F61212DD1390036403A /* SingleAnnotation&View.swift in Sources */,
 				A1FD9166214C120800B44A17 /* UIButtonX.swift in Sources */,
 				A1FD9163214C120800B44A17 /* UIPickerViewX.swift in Sources */,

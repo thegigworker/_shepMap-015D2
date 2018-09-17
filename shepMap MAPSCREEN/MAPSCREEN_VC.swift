@@ -24,17 +24,17 @@ import os.log
 //For more information on the unified logging system, see Logging Reference.
 
 
-protocol showRouteInfoDelegate {
-    func showRouteInfo (asCrowFlies: String, DrivingDistance: String, DrivingTime: String)
-    func showGoldRouteInfo (Pay: String, Expense: String, Earning: String)
-    func clearRouteInfo()
-}
+//protocol showRouteInfoDelegate {
+//    func showRouteInfo (asCrowFlies: String, DrivingDistance: String, DrivingTime: String)
+//    func showGoldRouteInfo (Pay: String, Expense: String, Earning: String)
+//    func clearRouteInfo()
+//}
 
 class MAPSCREEN_VC: UIViewController, MKMapViewDelegate {
     
     //MARK: - Properties
     let myDataModel = shepDataModel()
-    var myshowRouteInfoDelegate: showRouteInfoDelegate?  // wouldn't let me make this a "weak" variable.  Why?
+    //var myshowRouteInfoDelegate: showRouteInfoDelegate?  // wouldn't let me make this a "weak" variable.  Why?
     var twirlMenuIsUntwirled: Bool = false
     var searchDistanceCircle:MKCircle!
     var doTheSearchAgain = true
@@ -68,12 +68,12 @@ class MAPSCREEN_VC: UIViewController, MKMapViewDelegate {
         myDataModel.whichRouteStyle = ""
         shepDataModel.theMASTERAnnotationsArray.removeAll()
         shepDataModel.MASTERAnnotationsArrayUpdated = true
-        myshowRouteInfoDelegate?.clearRouteInfo()
+        //clearRouteInfo()
     }
     
     @IBAction func btnClearRoute(_ sender: Any) {
         myMapView.removeOverlays(myMapView.overlays)
-        myshowRouteInfoDelegate?.clearRouteInfo()
+        //clearRouteInfo()
     }
     
     @IBAction func btnTempButton(_ sender: Any) {
@@ -93,17 +93,17 @@ class MAPSCREEN_VC: UIViewController, MKMapViewDelegate {
             myDataModel.whichRouteStyle = "route"
             //print ("thisisCrowFliesDistanceInMiles:  \(myRouteData.thisisCrowFliesDistanceInMiles)")
             myDataModel.howManyRouteInfosCompleted = 0
-            myDataModel.getRouteInfoVia2Annotations(source: shepDataModel.theMASTERAnnotationsArray[sourceAnnotation], destination: shepDataModel.theMASTERAnnotationsArray[destinationItem])
+            myDataModel.getRouteInfoFromAppleVia2Annotations(source: shepDataModel.theMASTERAnnotationsArray[sourceAnnotation], destination: shepDataModel.theMASTERAnnotationsArray[destinationItem])
             //myMAPSCREENRouteInfo = .Route
-            if (myshowRouteInfoDelegate) != nil {
+//            if (myshowRouteInfoDelegate) != nil {
                 let thisRoute = myDataModel.currentRoute
                 let drivingDistance = meters2miles(meters: (thisRoute.distance)) // response distance in meters
                 let drivingTime = ((thisRoute.expectedTravelTime) / 60)  //expectedTravelTime is in secs
                 let crowFlies = "As crow flies: \(String(format: "%.02f", myDataModel.crowFliesDistance)) miles"
                 let theDrivingDistance = "Driving distance: \(String(format: "%.02f", drivingDistance)) miles"
                 let theDrivingTime = "Driving time: \(String(format: "%.02f", drivingTime)) minutes"
-                myshowRouteInfoDelegate?.showRouteInfo(asCrowFlies: crowFlies, DrivingDistance: theDrivingDistance, DrivingTime: theDrivingTime)
-            }
+                //showRouteInfo(asCrowFlies: crowFlies, DrivingDistance: theDrivingDistance, DrivingTime: theDrivingTime)
+//            }
         } else { print ("\n source and destination are the same \n") }
     }
  
@@ -128,9 +128,9 @@ class MAPSCREEN_VC: UIViewController, MKMapViewDelegate {
         let routeExpense : Double = (myDrivingDistance)! * Double(myDataModel.centsPerMileExpense)/100
         let myGoldRouteScore = myChosenGoldAnnotation?.routeProfit
         let thePay = "PAY:           \(String(describing: myTitle!))"
-        let theExpense = "EXPENSE:  \(shepCurrencyFromDouble(shepNumber: routeExpense))      (60¢ / mile)"
-        let theEarning = "EARNING: \(shepCurrencyFromDouble(shepNumber: myGoldRouteScore!))"
-        myshowRouteInfoDelegate?.showGoldRouteInfo(Pay: thePay, Expense: theExpense, Earning: theEarning)
+        let theExpense = "EXPENSE:  \(myDataModel.shepCurrencyFromDouble(shepNumber: routeExpense))      (60¢ / mile)"
+        let theEarning = "EARNING: \(myDataModel.shepCurrencyFromDouble(shepNumber: myGoldRouteScore!))"
+        //showGoldRouteInfo(Pay: thePay, Expense: theExpense, Earning: theEarning)
         
     }
     
@@ -163,29 +163,30 @@ class MAPSCREEN_VC: UIViewController, MKMapViewDelegate {
     
     @IBAction func btnGigwalkClick(_ sender: AnyObject) {
         myGigSource = GigSource.GigWalk
-        myDataModel.buildMASTERAnnotationsArrayViaAppleLocalSearch (searchString: "McDonalds")
-        myDataModel.buildMASTERAnnotationsArrayViaAppleLocalSearch (searchString: "Burger King")
-        resetTwirlButtons()
-    }
-    
-    @IBAction func btnEasyShiftClick(_ sender: AnyObject) {
-        myGigSource = GigSource.EasyShift
         myDataModel.buildMASTERAnnotationsArrayViaAppleLocalSearch (searchString: "Target")
         myDataModel.buildMASTERAnnotationsArrayViaAppleLocalSearch (searchString: "Walmart")
         resetTwirlButtons()
     }
     
+    @IBAction func btnEasyShiftClick(_ sender: AnyObject) {
+        myGigSource = GigSource.EasyShift
+        myDataModel.buildMASTERAnnotationsArrayViaAppleLocalSearch (searchString: "McDonalds")
+        myDataModel.buildMASTERAnnotationsArrayViaAppleLocalSearch (searchString: "Burger King")
+        resetTwirlButtons()
+    }
+    
     @IBAction func btnFieldAgentClick(_ sender: AnyObject) {
         myGigSource = GigSource.FieldAgent
-        myDataModel.buildMASTERAnnotationsArrayViaAppleLocalSearch (searchString: "gas station")
-        myDataModel.buildMASTERAnnotationsArrayViaAppleLocalSearch (searchString: "market")
+        myDataModel.buildMASTERAnnotationsArrayViaAppleLocalSearch (searchString: "Pub")
+        myDataModel.buildMASTERAnnotationsArrayViaAppleLocalSearch (searchString: "Restaurant")
+       
         resetTwirlButtons()
     }
     
     @IBAction func btnSafariClick(_ sender: AnyObject) {
         myGigSource = GigSource.Safari
-        myDataModel.buildMASTERAnnotationsArrayViaAppleLocalSearch (searchString: "Pub")
-        myDataModel.buildMASTERAnnotationsArrayViaAppleLocalSearch (searchString: "Diner")
+        myDataModel.buildMASTERAnnotationsArrayViaAppleLocalSearch (searchString: "gas station")
+        myDataModel.buildMASTERAnnotationsArrayViaAppleLocalSearch (searchString: "market")
         resetTwirlButtons()
     }
     
@@ -200,6 +201,7 @@ class MAPSCREEN_VC: UIViewController, MKMapViewDelegate {
         myGigSource = GigSource.TaskRabbit
         myDataModel.buildMASTERAnnotationsArrayViaAppleLocalSearch (searchString: "pizza")
         myDataModel.buildMASTERAnnotationsArrayViaAppleLocalSearch (searchString: "bbq")
+
         resetTwirlButtons()
     }
     
@@ -217,7 +219,7 @@ class MAPSCREEN_VC: UIViewController, MKMapViewDelegate {
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         // DOESN'T SEEM TO BE GETTING CALLED??
         let currentLocation = locations.last as! CLLocation
-        myUserLocation = currentLocation
+        shepDataModel.myUserLocation = currentLocation
         //myUserLocation = CLLocation(latitude: THOMPSON_GPS.latitude, longitude: THOMPSON_GPS.longitude)
     }
     
@@ -253,10 +255,11 @@ class MAPSCREEN_VC: UIViewController, MKMapViewDelegate {
     ////////////////////////////////////////
     // When a view controller is loaded from a storyboard, the system instantiates the view hierarchy and assigns the appropriate values to all the view controller’s outlets. By the time the view controller’s viewDidLoad() method is called, the system has assigned valid values to all of the controller’s outlets, and you can safely access their contents.
     
-    //MARK: - viewDidLoad()
+    //MARK: - viewController lifecycle
     // When a view controller is loaded from a storyboard, the system instantiates the view hierarchy and assigns the appropriate values to all the view controller’s outlets. By the time the view controller’s viewDidLoad() method is called, the system has assigned valid values to all of the controller’s outlets, and you can safely access their contents.
     override func viewDidLoad() {
         super.viewDidLoad()
+        print ("MAPSCREEN_VC viewDidLoad")
         myDataModel.myDataModelMapScreenDelegate = self
         //Comparing to the callback way, Delegation pattern is easier to reuse across the app: you can create a base class that conforms to the protocol delegate and avoid code redundancy. However, delegation is harder to implement: you need to create a protocol, set the protocol methods, create Delegate property, assign Delegate to ViewController, and make this ViewController conform to the protocol. Also, the Delegate has to implement every method of the protocol by default.
         
@@ -272,7 +275,7 @@ class MAPSCREEN_VC: UIViewController, MKMapViewDelegate {
         
         setupUserTrackingButtonAndScaleView()
         registerAnnotationViewClasses()
-        centerMapOnLocation(location: myUserLocation)
+        centerMapOnLocation(location: shepDataModel.myUserLocation)
         
 //        btnGigWalk.layer.cornerRadius = 10
 //        btnEasyShift.layer.cornerRadius = 10
@@ -282,8 +285,8 @@ class MAPSCREEN_VC: UIViewController, MKMapViewDelegate {
 //        btnMobee.layer.cornerRadius = 10
 //        btnSafari.layer.cornerRadius = 10
         
-        DisplayDistanceSlider.value = Float(initialDisplay)
-        print ("initialDisplay is: \(initialDisplay)")
+        DisplayDistanceSlider.value = Float(shepDataModel.initialDisplay)
+        print ("initialDisplay is: \(shepDataModel.initialDisplay)")
 
         GigIconsBackdrop.alpha = 0.0
         

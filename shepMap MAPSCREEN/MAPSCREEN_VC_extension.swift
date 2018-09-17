@@ -77,7 +77,7 @@ extension MAPSCREEN_VC : DataModelMapScreenDelegate, UIPopoverPresentationContro
         clearSearchDistanceCircle()
         //if searchDistanceCircle != nil {myMapView.remove(searchDistanceCircle)}
         myDataModel.currentSearchDistance = searchDistance
-        searchDistanceCircle = MKCircle(center: myUserLocation.coordinate, radius:CLLocationDistance(myDataModel.currentSearchDistance))
+        searchDistanceCircle = MKCircle(center: shepDataModel.myUserLocation.coordinate, radius:CLLocationDistance(myDataModel.currentSearchDistance))
         //print ("in drawSearchDistance, myDataModel.currentSearchDistance: \(myDataModel.currentSearchDistance) \n")
         myMapView.add(searchDistanceCircle)
     }
@@ -122,7 +122,7 @@ extension MAPSCREEN_VC : DataModelMapScreenDelegate, UIPopoverPresentationContro
     // Updating the Map View based on User Movement
     func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
         myMapView.centerCoordinate = userLocation.location!.coordinate
-        myUserLocation = myMapView.userLocation.location!
+        shepDataModel.myUserLocation = myMapView.userLocation.location!
     }
     
     //func mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view NS_AVAILABLE(10_9, 4_0);

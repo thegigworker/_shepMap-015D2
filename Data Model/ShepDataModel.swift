@@ -9,38 +9,17 @@
 import Foundation
 import MapKit
 
-var myUserLocation: CLLocation = CLLocation()
-
 /// THREE SLASHES above a custom method puts that comment into the Xcode quickhelp
-func miles2meters (miles: Double) -> Double {
-    let meters = miles * 1609.34
-    return meters
-}
 
 func meters2miles (meters: Double) -> Double {
     let miles = meters * 0.00062137
     return miles
 }
 
-func shepCurrencyFromDouble(shepNumber : Double) -> String  {
-    let buckaroos = shepNumber as NSNumber
-    let formatter = NumberFormatter()
-    formatter.numberStyle = .currency
-    // formatter.locale = NSLocale.currentLocale() // This is the default
-    return formatter.string(from: buckaroos)!
+func miles2meters (miles: Double) -> Double {
+    let meters = miles * 1609.34
+    return meters
 }
-
-let initialSearch: Double = 15
-let initialDisplay: Double = 25
-//let initialDisplayDistance = CLLocationDistance(miles2meters(miles: initialDisplay))
-//var currentSearchDistanceX = CLLocationDistance(miles2meters(miles: initialSearch))
-
-
-//enum whichRouteInfo: String {
-//    case Route
-//    case GoldRoute
-//    case None
-//}
 
 
 //The class keyword in the Swift protocol definition limits protocol adoption to class types (and not structures or enums). This is important if we want to use a weak reference to the delegate. We need be sure we do not create a retain cycle between the delegate and the delegating objects, so we use a weak reference to delegate (see below).
@@ -54,10 +33,14 @@ protocol DataModelMapScreenDelegate: class {
 class shepDataModel: NSObject {
     //We need be sure we do not create a retain cycle between the delegate and the delegating objects, so we use a weak reference to delegate.
     weak var myDataModelMapScreenDelegate: DataModelMapScreenDelegate!
-
+    
+    static var theMASTERAnnotationsArray = [ShepSingleAnnotation]()
+    static var MASTERAnnotationsArrayUpdated: Bool = false // if true then TableView will need redraw
+    static let initialSearch: Double = 15
+    static let initialDisplay: Double = 25
+    static var myUserLocation: CLLocation = CLLocation()
     let centsPerMileExpense: Int = 60
     var currentTransportType = MKDirectionsTransportType.automobile
-    static var theMASTERAnnotationsArray = [ShepSingleAnnotation]()
     var validSearchResultsArray = [ShepSingleAnnotation]()
     var howManySearchItemsFound = 0
     var currentSearchDistance = CLLocationDistance(miles2meters(miles: initialSearch))
@@ -66,7 +49,7 @@ class shepDataModel: NSObject {
     var crowFliesDistance : Double = 1.0
     var howManyRouteInfosCompleted: Int = 0
     var whichRouteStyle : String = ""
-    static var MASTERAnnotationsArrayUpdated: Bool = false // if true then TableView will need redraw
+    
     
 //    class func buildSingleTableArray() -> [ShepSingleAnnotation] {
 //        return theMASTERAnnotationsArray
@@ -116,83 +99,7 @@ class shepDataModel: NSObject {
        return myAnnotationsArray[0]
     }
 
-    
-//    func getRouteInfoFromAppleViaLocation (sourceLocation: CLLocation, destinationAnnotation: ShepSingleAnnotation) {
-//
-//        let destinationAnnotation_location = CLLocation(latitude: destinationAnnotation.coordinate.latitude, longitude: destinationAnnotation.coordinate.longitude)
-//        let destinationAnnotation_placemark = MKPlacemark(coordinate: destinationAnnotation_location.coordinate, addressDictionary: nil)
-//        let sourceLocation_placemark = MKPlacemark(coordinate: CLLocationCoordinate2DMake(sourceLocation.coordinate.latitude, sourceLocation.coordinate.longitude), addressDictionary: nil)
-//
-//        let directionsRequest = MKDirectionsRequest()
-//        directionsRequest.source = MKMapItem(placemark: sourceLocation_placemark)
-//        directionsRequest.destination = MKMapItem(placemark: destinationAnnotation_placemark)
-//        directionsRequest.transportType = MKDirectionsTransportType.automobile
-//        //  Set the transportation type to .Automobile for this particular scenario. (.Walking and .Any are also valid MKDirectionsTransportTypes.)
-//        //  Set requestsAlternateRoutes to true to fetch all the reasonable routes from the source to sourceLocation.
-//
-//        let myCount = validSearchResultsArray.index(of: destinationAnnotation)! + 1
-//        print ("in getRouteInfoFromAppleViaLocation, myCount -- \(String(describing: myCount))")
-//
-//        let directions = MKDirections(request: directionsRequest)
-//
-//        directions.calculate(completionHandler: {(response, error) in
-//            // response has an array of MKRoutes
-//            if error != nil {
-//                print ("Directions Retreival Error: \(String(describing: error))")
-//            } else {
-//                //self.myMapView.removeOverlays(self.myMapView.overlays)
-//                self.currentLinkedRoute = response!.routes[0] as MKRoute
-//                self.howManyRouteInfosCompleted = self.howManyRouteInfosCompleted + 1
-//                let myRoute = self.currentLinkedRoute!
-//                print ("INSIDE getRouteInfoFromAppleViaLocation COMPLETION HANDLER")
-//                print ("this is myRoute: \(String(describing: myRoute))")
-//
-//                destinationAnnotation.currentLinkedRoute = myRoute
-//
-//                self.crowFliesDistance = sourceLocation.distance(from: destinationAnnotation_location) // result is in meters
-//                self.crowFliesDistance = meters2miles(meters: self.crowFliesDistance)
-//                let myCount = self.theMASTERAnnotationsArray.index(of: destinationAnnotation)! + 1
-//                print ("Array.index + 1 =       \(String(describing: myCount))")
-//                print ("howManyRouteInfosCompleted: \(String(describing: self.howManyRouteInfosCompleted))")
-//                let theIndex = self.theMASTERAnnotationsArray.index(of: destinationAnnotation)!
-//                let myAnnotation = self.theMASTERAnnotationsArray[theIndex]
-//                myAnnotation.currentLinkedRoute = myRoute
-//                myAnnotation.crowFliesDistance = self.crowFliesDistance
-//                let myDrivingDistance = myAnnotation.routeDrivingDistance
-//                let myTitle = myAnnotation.title
-//                print ("       --------------\n myTitle            \(String(describing: myTitle!))")
-//                //let mySubTitle = myAnnotation.subtitle
-//                //print ("mySubTitle          \(String(describing: mySubTitle!))")
-//                let routeExpense : Double = myDrivingDistance * Double(self.centsPerMileExpense)/100
-//                print ("routeExpense is     \(shepCurrencyFromDouble(shepNumber: routeExpense))")
-//                let mytheChosenRouteScore = myAnnotation.goldRouteScore
-//                print ("-mytheChosenRouteScore \(shepCurrencyFromDouble(shepNumber: mytheChosenRouteScore))\n        --------------")
-//                print ("crowFliesDistance: \(String(format: "%.02f", myAnnotation.crowFliesDistance)) miles")
-//                //let myDrivingDistance = myAnnotation.routeDrivingDistance
-//                print ("DrivingDistance is: \(String(format: "%.02f", myDrivingDistance)) miles")
-//                let myDrivingTime = myAnnotation.drivingTime
-//                let lineBreak = "\n-------------------------------------------------------------------------"
-//                print ("drivingTime is:    \(String(format: "%.02f", myDrivingTime)) minutes \(lineBreak)")
-//                //                let mytheChosenRouteScore = myAnnotation.goldRouteScore
-//                //                print ("mytheChosenRouteScore \(shepCurrencyFromDouble(shepNumber: mytheChosenRouteScore)) \n")
-//
-//                //IF ALL THE ROUTES REQUESTED FROM APPLE HAVE BEEN RECEIVED
-//                if self.validSearchResultsArray.count <= self.howManyRouteInfosCompleted {
-//                    print("\n ALL THE ROUTES REQUESTED FROM APPLE HAVE BEEN RECEIVED \n")
-//                   // self.delegate?.entireSearchDirectionsLoopSuccessful(myAnnotationsArray: self.theMASTERAnnotationsArray)
-//                   // self.choosetheChosenRoute()
-//                    // self.triggerMethodInDataModel()
-//                    //self.choosetheChosenRoute()
-//                    //self.justShowMASTERAnnotationsArray()
-//                }
-//
-//                // THIS IS THE END OF getRouteInfoFromApple COMPLETION HANDLER
-//            }
-//        })
-//    }
-    
-
-    func getRouteInfoVia2Annotations (source: ShepSingleAnnotation, destination: ShepSingleAnnotation) -> () {
+    func getRouteInfoFromAppleVia2Annotations (source: ShepSingleAnnotation, destination: ShepSingleAnnotation) -> () {
         let sourceAnnotation = MKPointAnnotation()
         let destinationAnnotation = MKPointAnnotation()
         destinationAnnotation.coordinate = CLLocationCoordinate2DMake(destination.coordinate.latitude, destination.coordinate.longitude)
@@ -251,9 +158,9 @@ class shepDataModel: NSObject {
                 //let mySubTitle = myAnnotation.subtitle
                 //print ("mySubTitle          \(String(describing: mySubTitle!))")
                 let routeExpense : Double = myDrivingDistance * Double(self.centsPerMileExpense)/100
-                print ("routeExpense is     \(shepCurrencyFromDouble(shepNumber: routeExpense))")
+                print ("routeExpense is     \(self.shepCurrencyFromDouble(shepNumber: routeExpense))")
                 let myGoldRouteScore = myAnnotation.routeProfit
-                print ("-mytheGoldRouteScore \(shepCurrencyFromDouble(shepNumber: myGoldRouteScore))\n        --------------")
+                print ("-mytheGoldRouteScore \(self.shepCurrencyFromDouble(shepNumber: myGoldRouteScore))\n        --------------")
                 print ("crowFliesDistance: \(String(format: "%.02f", myAnnotation.crowFliesDistance)) miles")
                 //let myDrivingDistance = myAnnotation.routeDrivingDistance
                 print ("DrivingDistance is: \(String(format: "%.02f", myDrivingDistance)) miles")
@@ -285,7 +192,7 @@ class shepDataModel: NSObject {
         request.naturalLanguageQuery = searchString
         validSearchResultsArray = [ShepSingleAnnotation]()
         /////////  CONVERSION FROM COORDINATES INTO MKMAPITEM
-        let homeLocationCoord = myUserLocation.coordinate
+        let homeLocationCoord = shepDataModel.myUserLocation.coordinate
         let homeLocationPlacemark = MKPlacemark(coordinate: CLLocationCoordinate2DMake(homeLocationCoord.latitude, homeLocationCoord.longitude), addressDictionary: nil)
         let homeLocationMapItem = MKMapItem(placemark: homeLocationPlacemark)
         /////////  THEN MAKE ANNOTATION FROM MKMAPITEM
@@ -294,7 +201,7 @@ class shepDataModel: NSObject {
         // 搜索当前区域
         // print ("in performLocalSearch searchRegion search distance: \(meters2miles(meters: self.currentSearchDistanceX))")
        // let temp = CLLocationCoordinate2DMake(THOMPSON_GPS.latitude, THOMPSON_GPS.longitude)
-        let searchRegion1 = MKCoordinateRegionMakeWithDistance(myUserLocation.coordinate, currentSearchDistance, currentSearchDistance)
+        let searchRegion1 = MKCoordinateRegionMakeWithDistance(shepDataModel.myUserLocation.coordinate, currentSearchDistance, currentSearchDistance)
         request.region = searchRegion1
         //request.region = myMapView.region
         // a MKLocalSearch object initiates a search operation and will deliver the results back into an array of MKMapItems. This will contain the name, latitude and longitude of the current POI.
@@ -322,7 +229,7 @@ class shepDataModel: NSObject {
                     let searchResultCoordinates = item.placemark.coordinate
                     let searchResultLocation = CLLocation(latitude: searchResultCoordinates.latitude, longitude: searchResultCoordinates.longitude)
                     // a source locations are userLocation, currently Thompson
-                    let sourceLocation = myUserLocation
+                    let sourceLocation = shepDataModel.myUserLocation
                     let mapItemDistance = sourceLocation.distance(from: searchResultLocation) // result is in meters
                     //let distanceInMiles = meters2miles(meters: mapItemDistance)
                     print ("Current search distance: \(meters2miles(meters: self.currentSearchDistance)) and this distance: \(meters2miles(meters: mapItemDistance))")
@@ -343,7 +250,7 @@ class shepDataModel: NSObject {
                         self.validSearchResultsArray.append(validResult)
                         print ("We just found a valid search result, validSearchResultsArray.count = \(self.validSearchResultsArray.count)")
                         print ("We just found a valid search result, now calling getRouteInfoVia2Annotations")
-                        self.getRouteInfoVia2Annotations(source: homeLocationAnnotation, destination: validResult)
+                        self.getRouteInfoFromAppleVia2Annotations(source: homeLocationAnnotation, destination: validResult)
                         //self.getRouteInfoFromAppleViaLocation(sourceLocation: sourceLocation, destinationAnnotation: validResult)
                     }
                     print ("still inside shepSearchResultLoop, theMASTERAnnotationsArray count is \(shepDataModel.theMASTERAnnotationsArray.count)")
@@ -362,6 +269,15 @@ class shepDataModel: NSObject {
             }
         })
         print ("OPENING GAMBIT, theMASTERAnnotationsArray count is \(shepDataModel.theMASTERAnnotationsArray.count) \n")
+    }
+    
+    // MARK = utility methods
+    func shepCurrencyFromDouble(shepNumber : Double) -> String  {
+        let buckaroos = shepNumber as NSNumber
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        // formatter.locale = NSLocale.currentLocale() // This is the default
+        return formatter.string(from: buckaroos)!
     }
 }
 

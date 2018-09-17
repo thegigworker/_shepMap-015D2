@@ -9,8 +9,13 @@ import UIKit
 
 class LoginViewController : UIViewController {
     override func viewDidLoad() {
+        //print ("LoginViewController viewDidLoad")
         super.viewDidLoad()
     }
+    
+//    override func viewWillAppear(_ animated: Bool) {
+//       print ("LoginViewController ViewWillAppear \n")
+//    }
     
     @IBAction func loginTapped(_ sender: Any) {
        

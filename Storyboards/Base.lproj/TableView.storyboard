@@ -11,7 +11,7 @@
         <!--shepTest TVC-->
         <scene sceneID="YEn-DC-GsO">
             <objects>
-                <tableViewController id="WR6-dm-NuN" userLabel="shepTest TVC" customClass="shepMapTableViewController" customModule="shepMap_019" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="WR6-dm-NuN" userLabel="shepTest TVC" customClass="shepTableViewController" customModule="shepMap_019" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="59" sectionHeaderHeight="13" sectionFooterHeight="13" id="ea7-3y-PQr">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -198,7 +198,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="DAJ-hK-7MU" userLabel="my Detail View">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="648"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="1030"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="default" translatesAutoresizingMaskIntoConstraints="NO" id="2ZP-dy-iS4" userLabel="The Image View" customClass="UIImageViewX" customModule="shepMap_019" customModuleProvider="target">
@@ -299,8 +299,7 @@
                                     <rect key="frame" x="13" y="344" width="315" height="105"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
-                                    <string key="text">     Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.
-     Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                    <mutableString key="text">     Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
                                     <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="13"/>
                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     <dataDetectorType key="dataDetectorTypes" lookupSuggestion="YES"/>
@@ -309,6 +308,9 @@
                                     <rect key="frame" x="12" y="459" width="351" height="49"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
+                                    <accessibility key="accessibilityConfiguration">
+                                        <accessibilityTraits key="traits" notEnabled="YES"/>
+                                    </accessibility>
                                     <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</string>
                                     <color key="textColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="15"/>
@@ -406,6 +408,13 @@
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.65000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="We could have lots more stuff on this job ..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xtl-k6-m1j">
+                                    <rect key="frame" x="6" y="597" width="363" height="265"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" name="GillSans-Bold" family="Gill Sans" pointSize="30"/>
+                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                             </subviews>
                         </view>
                         <sections/>
@@ -424,6 +433,7 @@
                         <outlet property="lblDriveTime2" destination="8Yt-Dy-jiI" id="oEA-kL-gSi"/>
                         <outlet property="lblExpense" destination="6Cg-jP-KhB" id="tRF-Qy-JUF"/>
                         <outlet property="lblExpenseCents" destination="1KN-zP-iX3" id="WHW-Rv-fb1"/>
+                        <outlet property="lblForBelow" destination="Xtl-k6-m1j" id="84t-5J-6qP"/>
                         <outlet property="lblPay" destination="Z9d-pV-936" id="hzD-5j-YuW"/>
                         <outlet property="lblPayCents" destination="ahu-8v-nRs" id="8uW-Jq-kmL"/>
                         <outlet property="lblProfit" destination="Utl-e0-gLc" id="Vb0-ei-nE3"/>

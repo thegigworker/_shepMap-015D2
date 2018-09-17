@@ -31,7 +31,7 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
         self.myMapItem = myMapItem
         self.currentLinkedRoute = currentLinkedRoute
         //self.currentLinkedRoute = currentLinkedRoute
-        self.shepStringTitle = shepCurrencyFromDouble(shepNumber: self.shepDollarValue)
+        self.forStringTitle = myDataModel.shepCurrencyFromDouble(shepNumber: self.shepDollarValue)
         //        self.shepsVariable = Double(arc4random_uniform(25) + 1)
         //        self.shepStringData = shepCurrencyFromDouble(shepNumber: self.shepsVariable)
         let latitude = myMapItem.placemark.coordinate.latitude
@@ -45,7 +45,7 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
     let myDataModel = shepDataModel()
     let mapItem_Name: String?
     let shepDollarValue: Double
-    let shepStringTitle: String
+    let forStringTitle: String
     var myMapItem: MKMapItem
     var currentLinkedRoute: MKRoute
     var crowFliesDistance: Double = 0.0
@@ -58,7 +58,11 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
     var title: String? {
         let temp: String?
         temp = self.mapItem_Name
-        return shepStringTitle + " -- " + temp!
+        return forStringTitle + " -- " + temp!
+    }
+    
+    var jobTitle : String? {
+        return self.mapItem_Name
     }
     
     var subtitle: String? {

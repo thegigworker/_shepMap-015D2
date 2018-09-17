@@ -43,17 +43,20 @@ class searchRadiusViewController: UIViewController, UIPopoverPresentationControl
     
     override func viewDidLoad() {
         super.viewDidLoad()
+         //print ("searchRadiusViewController viewDidAppear")
         // Do any additional setup after loading the view, typically from a nib.
-       // SearchDistanceSlider.value = Float(meters2miles(meters: (myDataModel.currentSearchDistance)))
         SearchDistanceSlider.value = openingSearchDistanceSliderValue
         print ("in ViewDidLoad, myDataModel.currentSearchDistance: \(openingSearchDistanceSliderValue))")
         let value = SearchDistanceSlider.value
-        //print ("In viewDidLoad, UIPopover SearchDistanceSlider.value: \(value)")
         mySearchDistanceSliderDelegate.drawSearchDistanceCircle(searchDistance: miles2meters(miles: Double(value)))
         SearchRadiusText.text = String(format: "%.01f", value) + " mi."
-        
+       
     }
-
+    
+//    override func viewWillAppear(_ animated: Bool) {
+//        print ("searchRadiusViewController ViewWillAppear \n")
+//    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

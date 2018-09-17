@@ -130,6 +130,7 @@ class sortingHatPopover: UIViewController, UIPopoverPresentationControllerDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
+         print ("sortingHatPopover viewDidLoad")
         
         clearCheckMarks()
         
@@ -153,6 +154,10 @@ class sortingHatPopover: UIViewController, UIPopoverPresentationControllerDelega
         }
         
         print ("sortingHatPopover viewDidLoad")
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        print ("sortingHatPopover viewWillAppear")
     }
     
     override func didReceiveMemoryWarning() {

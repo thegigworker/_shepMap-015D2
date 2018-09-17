@@ -24,12 +24,11 @@ struct allTheSectionsOfData4TVC_struct {
         print("theMASTERAnnotationsArray.count =  \(shepDataModel.theMASTERAnnotationsArray.count)")
         print ("mySingleArray.count =  \(mySingleArray.count)")
         
-        
         var myBigKahunaSectionedArray = [allTheSectionsOfData4TVC_struct]()
         
         switch mySort { // mySort.rawValue = String of mySort
         case .JobTitle :
-            let sortedSingleArray = mySingleArray.sorted(by: { $0.title! < $1.title! })
+            let sortedSingleArray = mySingleArray.sorted(by: { $0.jobTitle! < $1.jobTitle! })
             myBigKahunaSectionedArray = doOneSection(sortedSingleArray: sortedSingleArray, whichSort: mySort.rawValue)
         case .JobPay :
             let sortedSingleArray = mySingleArray.sorted(by: { $0.shepDollarValue > $1.shepDollarValue })

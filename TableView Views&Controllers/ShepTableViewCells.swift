@@ -41,6 +41,8 @@ class shepOrigProductTVCell: UITableViewCell {
 
 class ShepTableViewCell: UITableViewCell {
     
+    let myDataModel = shepDataModel()
+    
     //MARK: Properties
     @IBOutlet weak var lblCity: UILabel!
     @IBOutlet weak var UNKNOWN_label2: UILabel!
@@ -57,7 +59,7 @@ class ShepTableViewCell: UITableViewCell {
     
     //MARK: - Functions
     func setupCell(_ myShepSingleAnnotation: ShepSingleAnnotation) {
-        let shepCurrency = shepCurrencyFromDouble(shepNumber : myShepSingleAnnotation.shepDollarValue)
+        let shepCurrency = myDataModel.shepCurrencyFromDouble(shepNumber : myShepSingleAnnotation.shepDollarValue)
         lblDollars.text = String(shepCurrency.dropLast(3)) // justTheDollars
         lblCents.text = String(shepCurrency.suffix(2)) // justTheCents
         DriveDistanceLbl.text = String(format: "%.02f", myShepSingleAnnotation.routeDrivingDistance)

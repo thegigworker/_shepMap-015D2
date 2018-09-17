@@ -8,6 +8,8 @@ import UIKit
 
 class MainTabController : UITabBarController, UITabBarControllerDelegate {
     
+static var transitionDirectionLeft: Bool = false
+    
 //    let myDropDownBounceTransitionAnimControl = dropDownBounce_AnimTrnsition()
 //    let myShrinkDownTransitionAnimControl = shrinkDown_AnimTransition()
 //    let myCrossFade_AnimTransition = CrossFade_AnimTransition()
@@ -17,27 +19,29 @@ class MainTabController : UITabBarController, UITabBarControllerDelegate {
     let myUpFromBottom_AnimTrnsition = upFromBottom_AnimTrnsition()
     
     func tabBarController(_ tabBarController: UITabBarController, animationControllerForTransitionFrom fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        
         let fromVCIndex = tabBarController.childViewControllers.index(of: fromVC)!
         let toVCIndex = tabBarController.childViewControllers.index(of: toVC)!
-        print ("TRANSITION fromVCIndex = \(fromVCIndex) and toVCIndex = \(toVCIndex)")
         
         if fromVCIndex == 3 { // if coming from Debug screen, transition LEFT, exit
-            transitionDirectionLeft = true
+            MainTabController.transitionDirectionLeft = true
             return myInverseRotatingCUBE_AnimTransition
         }
         
         if toVCIndex == 0 { // to MAPSCREEN
-            transitionDirectionLeft = true
+            MainTabController.transitionDirectionLeft = true
         } else if toVCIndex == 1 { // to TableView
             if fromVCIndex == 0 { // test where transition coming FROM
-                transitionDirectionLeft = false
+                MainTabController.transitionDirectionLeft = false
             } else { // from either Charts or Debug ViewController
-                transitionDirectionLeft = true
+                MainTabController.transitionDirectionLeft = true
             }
         } else if toVCIndex == 2 { // to Charts
-            transitionDirectionLeft = false
+            MainTabController.transitionDirectionLeft = false
         } else if toVCIndex == 3 { // to DEBUG screen
             return myUpFromBottom_AnimTrnsition
+//            let mySearchRadiusViewController: searchRadiusViewController = segue.destination as! searchRadiusViewController
+//            mySearchRadiusViewController.mySearchDistanceSliderDelegate = self
         }
         
         //return myOtherSlideDownFromCorner_AnimTransition
@@ -50,9 +54,14 @@ class MainTabController : UITabBarController, UITabBarControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //print ("MainTabController viewDidLoad")
         self.delegate = self
         // Do any additional setup after loading the view.
     }
+    
+//    override func viewWillAppear(_ animated: Bool) {
+//        print ("MainTabController ViewWillAppear \n")
+//    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

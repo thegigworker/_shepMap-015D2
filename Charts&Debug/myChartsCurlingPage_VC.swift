@@ -37,7 +37,12 @@ class myPageViewControllerClass: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+         print ("myPageViewControllerClass viewDidLoad")
         pageControl.addTarget(self, action: #selector(myPageViewControllerClass.didChangePageControlValue), for: .valueChanged)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        print ("myPageViewControllerClass ViewWillAppear \n")
     }
 }
 
@@ -130,6 +135,7 @@ class myChartsCurlingPageVC: UIPageViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print ("myChartsCurlingPageVC viewDidLoad")
         
         dataSource = self
         delegate = self
@@ -139,6 +145,10 @@ class myChartsCurlingPageVC: UIPageViewController {
         }
         
         myCurlingPageDelegate?.curlingPageViewController(self, didUpdatePageCount: orderedViewControllers.count)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        print ("myChartsCurlingPageVC ViewWillAppear \n")
     }
 }
 

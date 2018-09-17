@@ -34,6 +34,7 @@ class shepDetailScreenVC: UITableViewController, UITextFieldDelegate, UITextView
     @IBOutlet weak var lblDriveDistance2: UILabel!
     @IBOutlet weak var lblDriveTime: UILabel!
     @IBOutlet weak var lblDriveTime2: UILabel!
+    @IBOutlet weak var lblForBelow: UILabel!
     
     
     // MARK: - UITextFieldDelegate
@@ -69,20 +70,21 @@ class shepDetailScreenVC: UITableViewController, UITextFieldDelegate, UITextView
         myImage5.image = UIImage(named: (mySingleAnnotation?.switchGigIcon())!)
         myImage6.image = UIImage(named: (mySingleAnnotation?.switchGigIcon())!)
 
-        var tempCurrency = shepCurrencyFromDouble(shepNumber : (mySingleAnnotation?.shepDollarValue)!)
+        var tempCurrency = myDataModel.shepCurrencyFromDouble(shepNumber : (mySingleAnnotation?.shepDollarValue)!)
         lblPay.text = String(tempCurrency.dropLast(3)) // justTheDollars
         lblPayCents.text = String(tempCurrency.suffix(2)) // justTheCents
         lbTitle.text = mySingleAnnotation?.mapItem_Name
+        lblForBelow.text = "This Detail Screen, about the job at " +  (mySingleAnnotation?.mapItem_Name)! + ", can have LOTS more stuff on it ..."
         
         let myDrivingDistance = mySingleAnnotation!.routeDrivingDistance
         
         let routeExpense : Double = myDrivingDistance * Double(myDataModel.centsPerMileExpense)/100
-        tempCurrency = shepCurrencyFromDouble(shepNumber: routeExpense)
+        tempCurrency = myDataModel.shepCurrencyFromDouble(shepNumber: routeExpense)
         lblExpense.text = String(tempCurrency.dropLast(3)) // justTheDollars
         lblExpenseCents.text = String(tempCurrency.suffix(2)) // justTheCents
         
         let myGoldRouteScore = mySingleAnnotation!.routeProfit
-        tempCurrency = shepCurrencyFromDouble(shepNumber: myGoldRouteScore)
+        tempCurrency = myDataModel.shepCurrencyFromDouble(shepNumber: myGoldRouteScore)
         lblProfit.text = String(tempCurrency.dropLast(3)) // justTheDollars
         lblProfitCents.text = String(tempCurrency.suffix(2)) // justTheCents
   

@@ -37,8 +37,6 @@
 
 import UIKit
 
-var transitionDirectionLeft: Bool = false
-
 class inverseRotatingCUBE_AnimTransition: NSObject, UIViewControllerAnimatedTransitioning {
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) { // inverseRotatingCUBE_AnimTransition
@@ -47,7 +45,7 @@ class inverseRotatingCUBE_AnimTransition: NSObject, UIViewControllerAnimatedTran
         let fromViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from)!
         let toView = toViewController.view
         let fromView = fromViewController.view
-        let direction: CGFloat = transitionDirectionLeft ? -1 : 1
+        let direction: CGFloat = MainTabController.transitionDirectionLeft ? -1 : 1
         let const: CGFloat = -0.005
         
         toView?.layer.anchorPoint = CGPoint(x: direction == 1 ? 0 : 1, y: 0.5)
