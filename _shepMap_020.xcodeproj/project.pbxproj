@@ -176,11 +176,11 @@
 		A1F5D76F210A4CC6002B960F /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				A101E6CC214B56C6006CD4CD /* LaunchScreen.storyboard */,
 				A19C14C021089E850070A4B3 /* Main.storyboard */,
 				9F7038321EA835EB00DA5564 /* MAPSCREEN.storyboard */,
 				A19C14CA21089E860070A4B3 /* TableView.storyboard */,
 				A19C14C621089E860070A4B3 /* PageViewCharts.storyboard */,
-				A101E6CC214B56C6006CD4CD /* LaunchScreen.storyboard */,
 				A19C14C421089E850070A4B3 /* DebugStuff.storyboard */,
 				A1FD9157214C120800B44A17 /* DesignableX */,
 			);
@@ -247,7 +247,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 9F7038261EA835EB00DA5564 /* Build configuration list for PBXProject "_shepMap_0191" */;
+			buildConfigurationList = 9F7038261EA835EB00DA5564 /* Build configuration list for PBXProject "_shepMap_020" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -521,7 +521,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		9F7038261EA835EB00DA5564 /* Build configuration list for PBXProject "_shepMap_0191" */ = {
+		9F7038261EA835EB00DA5564 /* Build configuration list for PBXProject "_shepMap_020" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9F70383B1EA835EB00DA5564 /* Debug */,
