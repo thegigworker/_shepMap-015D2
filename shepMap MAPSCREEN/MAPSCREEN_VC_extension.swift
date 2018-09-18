@@ -54,7 +54,11 @@ extension MAPSCREEN_VC : DataModelMapScreenDelegate, UIPopoverPresentationContro
         print ("\n drawNewRoute.thisRoute:  \(String(describing: myDataModel.currentRoute))\n")
         myMapView.removeOverlays(myMapView.overlays)
         drawPolyline(theRoute: myDataModel.currentRoute)
-        //myMAPSCREENRouteInfo = .Route
+        let drivingDistance = meters2miles(meters: (thisRoute.distance)) // response distance in meters
+        let drivingTime = ((thisRoute.expectedTravelTime) / 60)  //expectedTravelTime is in secs
+        labelInfo_struct.lblCrowFlies = "As crow flies :        \(String(format: "%.02f", myDataModel.crowFliesDistance)) miles"
+        labelInfo_struct.lblDrivingDistance = "Driving distance :   \(String(format: "%.02f", drivingDistance)) miles"
+        labelInfo_struct.lblDrivingTime = "Driving time :         \(String(format: "%.02f", drivingTime)) minutes"
     }
     
     //MARK: - popoverPresentationController DELEGATE

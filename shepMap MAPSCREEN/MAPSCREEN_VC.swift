@@ -24,12 +24,6 @@ import os.log
 //For more information on the unified logging system, see Logging Reference.
 
 
-//protocol showRouteInfoDelegate {
-//    func showRouteInfo (asCrowFlies: String, DrivingDistance: String, DrivingTime: String)
-//    func showGoldRouteInfo (Pay: String, Expense: String, Earning: String)
-//    func clearRouteInfo()
-//}
-
 class MAPSCREEN_VC: UIViewController, MKMapViewDelegate {
     
     //MARK: - Properties
@@ -68,12 +62,12 @@ class MAPSCREEN_VC: UIViewController, MKMapViewDelegate {
         myDataModel.whichRouteStyle = ""
         shepDataModel.theMASTERAnnotationsArray.removeAll()
         shepDataModel.MASTERAnnotationsArrayUpdated = true
-        //clearRouteInfo()
+        labelInfo_struct.myDataView = .None
     }
     
     @IBAction func btnClearRoute(_ sender: Any) {
         myMapView.removeOverlays(myMapView.overlays)
-        //clearRouteInfo()
+        labelInfo_struct.myDataView = .None
     }
     
     @IBAction func btnTempGenericButton(_ sender: Any) {
@@ -94,16 +88,7 @@ class MAPSCREEN_VC: UIViewController, MKMapViewDelegate {
             //print ("thisisCrowFliesDistanceInMiles:  \(myRouteData.thisisCrowFliesDistanceInMiles)")
             myDataModel.howManyRouteInfosCompleted = 0
             myDataModel.getRouteInfoFromAppleVia2Annotations(source: shepDataModel.theMASTERAnnotationsArray[sourceAnnotation], destination: shepDataModel.theMASTERAnnotationsArray[destinationItem])
-            //myMAPSCREENRouteInfo = .Route
-//            if (myshowRouteInfoDelegate) != nil {
-                let thisRoute = myDataModel.currentRoute
-                let drivingDistance = meters2miles(meters: (thisRoute.distance)) // response distance in meters
-                let drivingTime = ((thisRoute.expectedTravelTime) / 60)  //expectedTravelTime is in secs
-                let crowFlies = "As crow flies: \(String(format: "%.02f", myDataModel.crowFliesDistance)) miles"
-                let theDrivingDistance = "Driving distance: \(String(format: "%.02f", drivingDistance)) miles"
-                let theDrivingTime = "Driving time: \(String(format: "%.02f", drivingTime)) minutes"
-                //showRouteInfo(asCrowFlies: crowFlies, DrivingDistance: theDrivingDistance, DrivingTime: theDrivingTime)
-//            }
+            labelInfo_struct.myDataView = .RouteInfo
         } else { print ("\n source and destination are the same \n") }
     }
  
@@ -127,11 +112,11 @@ class MAPSCREEN_VC: UIViewController, MKMapViewDelegate {
         let myDrivingDistance = myChosenGoldAnnotation?.routeDrivingDistance
         let routeExpense : Double = (myDrivingDistance)! * Double(myDataModel.centsPerMileExpense)/100
         let myGoldRouteScore = myChosenGoldAnnotation?.routeProfit
-        let thePay = "PAY:           \(String(describing: myTitle!))"
-        let theExpense = "EXPENSE:  \(myDataModel.shepCurrencyFromDouble(shepNumber: routeExpense))      (60¢ / mile)"
-        let theEarning = "EARNING: \(myDataModel.shepCurrencyFromDouble(shepNumber: myGoldRouteScore!))"
-        //showGoldRouteInfo(Pay: thePay, Expense: theExpense, Earning: theEarning)
-        
+
+        labelInfo_struct.lblPay = "GROSS PAY:         \(String(describing: myTitle!))"
+        labelInfo_struct.lblExpense = "EXPENSE:             \(myDataModel.shepCurrencyFromDouble(shepNumber: routeExpense))  (60¢ / mile)"
+        labelInfo_struct.lblEarning = "NET EARNING:    \(myDataModel.shepCurrencyFromDouble(shepNumber: myGoldRouteScore!))"
+        labelInfo_struct.myDataView = .GoldRouteInfo
     }
     
     //MARK: - @IBActions re twirl button
