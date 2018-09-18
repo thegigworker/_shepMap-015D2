@@ -17,10 +17,6 @@ class shepDetailScreenVC: UITableViewController, UITextFieldDelegate, UITextView
     @IBOutlet weak var myDescriptionTextView: UITextView!
     @IBOutlet weak var myImage1: UIImageView!
     @IBOutlet weak var myImage2: UIImageView!
-    @IBOutlet weak var myImage3: UIImageView!
-    @IBOutlet weak var myImage4: UIImageView!
-    @IBOutlet weak var myImage5: UIImageView!
-    @IBOutlet weak var myImage6: UIImageView!
     @IBOutlet weak var lbTitle: UILabel!
     @IBOutlet weak var lblStreetAddress: UILabel!
     @IBOutlet weak var lblPay: UILabel!
@@ -71,18 +67,18 @@ class shepDetailScreenVC: UITableViewController, UITextFieldDelegate, UITextView
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Detail View"
-        myImage1.image = UIImage(named: (mySingleAnnotation?.switchGigIcon())!)
+       // myImage1.image = UIImage(named: (mySingleAnnotation?.switchGigIcon())!)
         myImage2.image = UIImage(named: (mySingleAnnotation?.switchGigIcon())!)
-        myImage3.image = UIImage(named: (mySingleAnnotation?.switchGigIcon())!)
-        myImage4.image = UIImage(named: (mySingleAnnotation?.switchGigIcon())!)
-        myImage5.image = UIImage(named: (mySingleAnnotation?.switchGigIcon())!)
-        myImage6.image = UIImage(named: (mySingleAnnotation?.switchGigIcon())!)
+        myImage1.image = UIImage(named: (mySingleAnnotation?.switchGigIcon())!)
+//        myImage4.image = UIImage(named: (mySingleAnnotation?.switchGigIcon())!)
+//        myImage5.image = UIImage(named: (mySingleAnnotation?.switchGigIcon())!)
+//        myImage6.image = UIImage(named: (mySingleAnnotation?.switchGigIcon())!)
 
         var tempCurrency = myDataModel.shepCurrencyFromDouble(shepNumber : (mySingleAnnotation?.shepDollarValue)!)
         lblPay.text = String(tempCurrency.dropLast(3)) // justTheDollars
         lblPayCents.text = String(tempCurrency.suffix(2)) // justTheCents
         lbTitle.text = mySingleAnnotation?.mapItem_Name
-        lblForBelow.text = "This Detail Screen, about the job at " +  (mySingleAnnotation?.mapItem_Name)! + ", can have LOTS more stuff on it ..."
+        lblForBelow.text = "This same Detail Screen about the job at " +  (mySingleAnnotation?.mapItem_Name)! + " can have lots more stuff in it ..."
         
         let myDrivingDistance = mySingleAnnotation!.routeDrivingDistance
         
@@ -97,12 +93,12 @@ class shepDetailScreenVC: UITableViewController, UITextFieldDelegate, UITextView
         lblProfitCents.text = String(tempCurrency.suffix(2)) // justTheCents
   
         var temp = mySingleAnnotation!.crowFliesDistance
-        lblCrowFlies.text = "As Crow Flies:"
+        //lblCrowFlies.text = "As Crow Flies:"
         lblCrowFlies2.text = "\(String(format: "%.02f", temp)) miles"
         temp = mySingleAnnotation!.drivingTime
-        lblDriveTime.text = "Drive Time:"
+        //lblDriveTime.text = "Drive Time:"
         lblDriveTime2.text = "\(String(format: "%.02f", temp)) minutes"
-        lblDriveDistance.text = "Drive Distance:"
+        //lblDriveDistance.text = "Drive Distance:"
         lblDriveDistance2.text = "\(String(format: "%.02f", myDrivingDistance)) miles"
         lblStreetAddress.text = mySingleAnnotation?.formattedFullAddress
         myDescriptionTextView.text = mySingleAnnotation!.description
