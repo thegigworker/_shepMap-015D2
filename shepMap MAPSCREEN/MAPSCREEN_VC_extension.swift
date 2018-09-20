@@ -44,7 +44,7 @@ extension MAPSCREEN_VC : DataModelMapScreenDelegate, UIPopoverPresentationContro
         } else {
             doTheSearchAgain = true
             //myMapView.addAnnotations(validSearchResults)
-            myMapView.showAnnotations(shepDataModel.theMASTERAnnotationsArray, animated: true)
+            shepMapView.showAnnotations(shepDataModel.theMASTERAnnotationsArray, animated: true)
         }
     }
     
@@ -52,7 +52,7 @@ extension MAPSCREEN_VC : DataModelMapScreenDelegate, UIPopoverPresentationContro
         //print("drawNewRoute: \(thisRoute)")
         myDataModel.currentRoute = thisRoute
         print ("\n drawNewRoute.thisRoute:  \(String(describing: myDataModel.currentRoute))\n")
-        myMapView.removeOverlays(myMapView.overlays)
+        shepMapView.removeOverlays(shepMapView.overlays)
         drawPolyline(theRoute: myDataModel.currentRoute)
         let drivingDistance = meters2miles(meters: (thisRoute.distance)) // response distance in meters
         let drivingTime = ((thisRoute.expectedTravelTime) / 60)  //expectedTravelTime is in secs
@@ -83,11 +83,11 @@ extension MAPSCREEN_VC : DataModelMapScreenDelegate, UIPopoverPresentationContro
         myDataModel.currentSearchDistance = searchDistance
         searchDistanceCircle = MKCircle(center: shepDataModel.myUserLocation.coordinate, radius:CLLocationDistance(myDataModel.currentSearchDistance))
         //print ("in drawSearchDistance, myDataModel.currentSearchDistance: \(myDataModel.currentSearchDistance) \n")
-        myMapView.add(searchDistanceCircle)
+        shepMapView.add(searchDistanceCircle)
     }
     
     func clearSearchDistanceCircle() {
-        if searchDistanceCircle != nil {myMapView.remove(searchDistanceCircle)}
+        if searchDistanceCircle != nil {shepMapView.remove(searchDistanceCircle)}
     }
     
     
@@ -120,13 +120,13 @@ extension MAPSCREEN_VC : DataModelMapScreenDelegate, UIPopoverPresentationContro
         let launchOptions = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving]
         // Note: Explore the MKMapItem documentation to see other launch option dictionary keys,
         // and the openMaps(with:launchOptions:) method that lets you pass an array of MKMapItem objects.
-        location.mapItem().openInMaps(launchOptions: launchOptions)
+        location.sendMapItemToAppleMaps().openInMaps(launchOptions: launchOptions)
     }
     
     // Updating the Map View based on User Movement
     func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
-        myMapView.centerCoordinate = userLocation.location!.coordinate
-        shepDataModel.myUserLocation = myMapView.userLocation.location!
+        shepMapView.centerCoordinate = userLocation.location!.coordinate
+        shepDataModel.myUserLocation = shepMapView.userLocation.location!
     }
     
     //func mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view NS_AVAILABLE(10_9, 4_0);
@@ -166,8 +166,8 @@ extension MAPSCREEN_VC : DataModelMapScreenDelegate, UIPopoverPresentationContro
     }
     
     func setupUserTrackingButtonAndScaleView() {
-        myMapView.showsUserLocation = true
-        let button = MKUserTrackingButton(mapView: myMapView)
+        shepMapView.showsUserLocation = true
+        let button = MKUserTrackingButton(mapView: shepMapView)
         button.layer.backgroundColor = UIColor(white: 1, alpha: 0.8).cgColor
         button.layer.borderColor = UIColor.white.cgColor
         button.layer.borderWidth = 1
@@ -175,7 +175,7 @@ extension MAPSCREEN_VC : DataModelMapScreenDelegate, UIPopoverPresentationContro
         button.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(button)
         
-        let scale = MKScaleView(mapView: myMapView)
+        let scale = MKScaleView(mapView: shepMapView)
         // scale.legendAlignment = .trailing
         scale.legendAlignment = .leading
         scale.translatesAutoresizingMaskIntoConstraints = false
@@ -218,14 +218,14 @@ extension MAPSCREEN_VC : DataModelMapScreenDelegate, UIPopoverPresentationContro
     //MARK: - Helper functions
     func registerAnnotationViewClasses() {
         //myMapView.register(BikeView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
-        myMapView.register(SingleAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
+        shepMapView.register(SingleAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
     }
     
     func drawPolyline (theRoute: MKRoute) {
-        self.myMapView.add(theRoute.polyline, level: MKOverlayLevel.aboveRoads)
+        self.shepMapView.add(theRoute.polyline, level: MKOverlayLevel.aboveRoads)
         // self.myMapView.add(theRoute.polyline)
         let myMKMapRect = theRoute.polyline.boundingMapRect
-        self.myMapView.setVisibleMapRect(myMKMapRect, edgePadding: UIEdgeInsetsMake(18.0, 18.0, 18.0, 18.0), animated: true)
+        self.shepMapView.setVisibleMapRect(myMKMapRect, edgePadding: UIEdgeInsetsMake(18.0, 18.0, 18.0, 18.0), animated: true)
     }
     /*
      func plotPolyline(route: MKRoute) {
@@ -252,9 +252,12 @@ extension MAPSCREEN_VC : DataModelMapScreenDelegate, UIPopoverPresentationContro
      If the plotted route is not the first, set the map's visible area to the union of the new and old visible map areas with 10 extra points of padding.
      */
     
+    //MARK: - MAPSCREEN_DetailScreenDelegate function
     func centerMapOnLocation(location: CLLocation) {
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, myDataModel.currentDisplayDistance * 2, myDataModel.currentDisplayDistance * 2)
-        myMapView.setRegion(coordinateRegion, animated: true)
+        if let myMapView = shepMapView {
+            myMapView.setRegion(coordinateRegion, animated: true)
+        }
     }
     
     // ????

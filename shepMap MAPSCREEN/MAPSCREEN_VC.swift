@@ -24,15 +24,14 @@ import os.log
 //For more information on the unified logging system, see Logging Reference.
 
 
-class MAPSCREEN_VC: UIViewController, MKMapViewDelegate {
+class MAPSCREEN_VC: UIViewController, MKMapViewDelegate, MAPSCREEN_DetailScreenDelegate {
     
     //MARK: - Properties
     let myDataModel = shepDataModel()
-    //var myshowRouteInfoDelegate: showRouteInfoDelegate?  // wouldn't let me make this a "weak" variable.  Why?
+    
     var twirlMenuIsUntwirled: Bool = false
     var searchDistanceCircle:MKCircle!
     var doTheSearchAgain = true
-    //var myMAPSCREENRouteInfo : whichRouteInfo = .Route
     var myChosenGoldAnnotation : ShepSingleAnnotation?
     
     //MARK: - @IBActions
@@ -41,23 +40,23 @@ class MAPSCREEN_VC: UIViewController, MKMapViewDelegate {
         // Get Float value from Slider when it is moved.
         let value = DisplayDistanceSlider.value * 2
         myDataModel.currentDisplayDistance = miles2meters(miles: Double(value))
-        let mapRegion1 = MKCoordinateRegionMakeWithDistance(myMapView.centerCoordinate, myDataModel.currentDisplayDistance, myDataModel.currentDisplayDistance)
-        myMapView.setRegion(mapRegion1, animated: true)
+        let mapRegion1 = MKCoordinateRegionMakeWithDistance(shepMapView.centerCoordinate, myDataModel.currentDisplayDistance, myDataModel.currentDisplayDistance)
+        shepMapView.setRegion(mapRegion1, animated: true)
     }
     
     @IBAction func btnToggleMapType(_ sender: UIButton) {
-        let whichMapTypeValue = myMapView.mapType.rawValue
+        let whichMapTypeValue = shepMapView.mapType.rawValue
         //whichMapTypeValue == 0 == myMapView.mapType.standard
         if whichMapTypeValue != 0 {
-            myMapView.mapType = .standard
+            shepMapView.mapType = .standard
         } else {
-            myMapView.mapType = .hybrid
+            shepMapView.mapType = .hybrid
         }
     }
     
     @IBAction func btnClearMap(_ sender: UIButton) {
-        myMapView.removeOverlays(myMapView.overlays)
-        myMapView.removeAnnotations(myMapView.annotations)
+        shepMapView.removeOverlays(shepMapView.overlays)
+        shepMapView.removeAnnotations(shepMapView.annotations)
         //myMAPSCREENRouteInfo = .None
         myDataModel.whichRouteStyle = ""
         shepDataModel.theMASTERAnnotationsArray.removeAll()
@@ -66,7 +65,7 @@ class MAPSCREEN_VC: UIViewController, MKMapViewDelegate {
     }
     
     @IBAction func btnClearRoute(_ sender: Any) {
-        myMapView.removeOverlays(myMapView.overlays)
+        shepMapView.removeOverlays(shepMapView.overlays)
         labelInfo_struct.myDataView = .None
     }
     
@@ -246,11 +245,12 @@ class MAPSCREEN_VC: UIViewController, MKMapViewDelegate {
         super.viewDidLoad()
         print ("MAPSCREEN_VC viewDidLoad")
         myDataModel.myDataModelMapScreenDelegate = self
+        
         //Comparing to the callback way, Delegation pattern is easier to reuse across the app: you can create a base class that conforms to the protocol delegate and avoid code redundancy. However, delegation is harder to implement: you need to create a protocol, set the protocol methods, create Delegate property, assign Delegate to ViewController, and make this ViewController conform to the protocol. Also, the Delegate has to implement every method of the protocol by default.
         
         // A DELEGATE is an object that acts on behalf of, or in coordination with, another object. The delegating object—in this case, the text field—keeps a reference to the other object—the delegate—and at the appropriate time, the delegating object sends a message to the delegate. The message tells the delegate about an event that the delegating object is about to handle or has just handled.
         // "Setting ViewController as the delegate of the map view.  You can do this in Main.storyboard, but I prefer to do it in code, where it’s more visible."
-        myMapView.delegate = self
+        shepMapView.delegate = self
         
         //        print ("in **viewDidLoad** theMASTERAnnotationsArray count is \(myDataModel.theMASTERAnnotationsArray.count) \n")
         //        print ("in ***viewDidLoad BEFORE SEARCH Current search distance: \(meters2miles(meters: myDataModel.currentSearchDistance))")
@@ -283,7 +283,7 @@ class MAPSCREEN_VC: UIViewController, MKMapViewDelegate {
     }
     
     //MARK: - @IBOutlets
-    @IBOutlet weak var myMapView: MKMapView!
+    @IBOutlet weak var shepMapView: MKMapView!
     //    @IBOutlet weak var myMapView: MKMapView! {
     //        didSet {
     //            myMapView.mapType = .hybrid

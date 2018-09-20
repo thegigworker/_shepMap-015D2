@@ -6,13 +6,20 @@
 //
 
 import UIKit
+import MapKit
 
-class shepDetailScreenVC: UITableViewController, UITextFieldDelegate, UITextViewDelegate, UINavigationControllerDelegate {
+protocol MAPSCREEN_DetailScreenDelegate: class {
+    func centerMapOnLocation(location: CLLocation)
+}
+
+class shepDetailScreenVC: UITableViewController, UITextFieldDelegate, UITextViewDelegate {
 
     // Model:
     var mySingleAnnotation: ShepSingleAnnotation?
     let myDataModel = shepDataModel()
+    let myMAPSCREEN = MAPSCREEN_VC()
     let mySlideInBounce_AnimTransition = slideInBounce_AnimTransition()
+    weak var myMAPSCREEN_DetailScreenDelegate: MAPSCREEN_DetailScreenDelegate!
 
     @IBOutlet weak var myDescriptionTextView: UITextView!
     @IBOutlet weak var myImage1: UIImageView!
@@ -34,11 +41,21 @@ class shepDetailScreenVC: UITableViewController, UITextFieldDelegate, UITextView
     @IBOutlet weak var lblForBelow: UILabel!
     
     @IBAction func doDirections(_ sender: Any) {
-        print ("doDirections tapped")
+        if let location = mySingleAnnotation {
+        let launchOptions = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving]
+//        // Note: Explore the MKMapItem documentation to see other launch option dictionary keys,
+//        // and the openMaps(with:launchOptions:) method that lets you pass an array of MKMapItem objects.
+        location.sendMapItemToAppleMaps().openInMaps(launchOptions: launchOptions)
+        }
     }
     
-    @IBAction func goToMap(_ sender: Any) {
-        print ("goToMap tapped")
+    @IBAction func goToMAPSCREEN_centerOnPin(_ sender: Any) {
+        self.tabBarController!.selectedIndex = 0
+        if let thisSingleAnnotation =  mySingleAnnotation, let delegate = myMAPSCREEN_DetailScreenDelegate {
+            let location = CLLocation(latitude: (thisSingleAnnotation.coordinate.latitude), longitude: (thisSingleAnnotation.coordinate.longitude))
+            //myMAPSCREEN.centerMapOnLocation(location: location)
+            delegate.centerMapOnLocation(location: location)
+        }
     }
     
     // MARK: - UITextFieldDelegate
@@ -78,7 +95,7 @@ class shepDetailScreenVC: UITableViewController, UITextFieldDelegate, UITextView
         lblPay.text = String(tempCurrency.dropLast(3)) // justTheDollars
         lblPayCents.text = String(tempCurrency.suffix(2)) // justTheCents
         lbTitle.text = mySingleAnnotation?.mapItem_Name
-        lblForBelow.text = "This same Detail Screen about the job at " +  (mySingleAnnotation?.mapItem_Name)! + " can have lots more stuff in it ..."
+        lblForBelow.text = "This scrolling screen about the job at " +  (mySingleAnnotation?.mapItem_Name)! + " could have lots more stuff ..."
         
         let myDrivingDistance = mySingleAnnotation!.routeDrivingDistance
         

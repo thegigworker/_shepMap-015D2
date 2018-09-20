@@ -110,7 +110,7 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
     
     // Annotation right callout accessory opens this mapItem in Maps app
     // Here you create an MKMapItem from an MKPlacemark. The Maps app is able to read this MKMapItem, and display the correct thing.
-    func mapItem() -> MKMapItem {
+    func sendMapItemToAppleMaps() -> MKMapItem {
         let addressDict = [CNPostalAddressStreetKey: subtitle!]
         let placemark = MKPlacemark(coordinate: coordinate, addressDictionary: addressDict)
         //var placemark = MKPlacemark(coordinate: coordinate, addressDictionary: addressDict)

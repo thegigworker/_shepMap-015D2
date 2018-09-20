@@ -9,7 +9,7 @@ import UIKit
 class MainTabController : UITabBarController, UITabBarControllerDelegate {
     
 static var tabBarTransitionDirectionLeft: Bool = false
-static var tableviewDirectionLeft: Bool = true
+static var tableviewDirectionLeft: Bool = false
     
 //    let myDropDownBounceTransitionAnimControl = dropDownBounce_AnimTrnsition()
 //    let myShrinkDownTransitionAnimControl = shrinkDown_AnimTransition()

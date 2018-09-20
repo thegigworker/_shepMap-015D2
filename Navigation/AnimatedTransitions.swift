@@ -64,7 +64,9 @@ class inverseRotatingCube_AnimTransition: NSObject, UIViewControllerAnimatedTran
         toView?.layer.transform = viewToTransform
         containerView.addSubview(toView!)
         
-        UIView.animate(withDuration: transitionDuration(using: transitionContext), animations: {
+        // UIView.animate(withDuration: transitionDuration(using: transitionContext), animations: {
+        // UIView.animate(withDuration: transitionDuration(using: transitionContext), delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.0, options: .curveLinear, animations: {
+        UIView.animate(withDuration: transitionDuration(using: transitionContext), delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.0, animations: {
             containerView.transform = CGAffineTransform(translationX: -direction * containerView.frame.size.width / 2.0, y: 0)
             fromView?.layer.transform = viewFromTransform
             toView?.layer.transform = CATransform3DIdentity
@@ -86,7 +88,7 @@ class inverseRotatingCube_AnimTransition: NSObject, UIViewControllerAnimatedTran
     }
     
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return 0.8
+        return 1.1
     }
     
 }
@@ -140,7 +142,7 @@ class slideInBounce_AnimTransition: NSObject, UIViewControllerAnimatedTransition
         //toViewController.view.frame = finalFrameForVC.offsetBy(dx: 0, dy: bounds.size.height) // this makes it rise from the bottom
         containerView.addSubview(toViewController.view)
         
-        UIView.animate(withDuration: transitionDuration(using: transitionContext), delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.0, options: .curveLinear, animations: {
+        UIView.animate(withDuration: transitionDuration(using: transitionContext), delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.0, animations: {
             fromViewController.view.alpha = 0.5
             toViewController.view.frame = finalFrameForVC
         }, completion: {

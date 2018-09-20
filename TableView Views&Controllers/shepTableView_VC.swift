@@ -278,20 +278,16 @@ class shepTableViewController: UITableViewController, UIPopoverPresentationContr
     }
     
     func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        print (MainTabController.tableviewDirectionLeft)
         MainTabController.tableviewDirectionLeft = !MainTabController.tableviewDirectionLeft
-        print (MainTabController.tableviewDirectionLeft)
-        print ("\n")
-        //return myOrigRotatingCUBE_AnimTransition
         return mySlideInBounce_AnimTransition
     }
     
 //    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-//        return mySlideDownFromCorner_AnimTransition
+//        return mySlideInBounce_AnimTransition
 //    }
 //    
 //    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-//        return mySlideDownFromCorner_AnimTransition
+//        return mySlideInBounce_AnimTransition
 //    }
     
     
@@ -371,6 +367,7 @@ class shepTableViewController: UITableViewController, UIPopoverPresentationContr
         // editButtonItem only available w UITableViewController
         // actual edit funtionality in func:  commit editingStyle: UITableViewCellEditingStyle
         
+        navigationController?.delegate = self
         navigationItem.rightBarButtonItem = editButtonItem
         
         //        // Make the row height dynamic
