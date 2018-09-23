@@ -46,6 +46,8 @@ class shepTableViewController: UITableViewController, UIPopoverPresentationContr
     let myDataModel = shepDataModel()
     let mySlideInBounce_AnimTransition = slideInBounce_AnimTransition()
     
+    @IBOutlet weak var lblFooter: UILabel!
+    
     lazy var BigKahunaSectionedArray: [allTheSectionsOfData4TVC_struct] = {
         print("I think I'm first building BigKahunaSectionedArray")
         
@@ -108,9 +110,6 @@ class shepTableViewController: UITableViewController, UIPopoverPresentationContr
         if editingStyle == UITableViewCellEditingStyle.delete {
             var mySectionOfData = BigKahunaSectionedArray[indexPath.section]
             mySectionOfData.oneSectionOfData.remove(at: indexPath.row)
-            
-            //            // tell the table view to update with new data source
-            //            // tableView.reloadData()    Bad way!
             
             tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
             //            // Note that there are many other types of UITableViewRowAnimation possible
@@ -177,7 +176,7 @@ class shepTableViewController: UITableViewController, UIPopoverPresentationContr
         print("DELEGATE CALLED  willDisplay cell, forRowAt indexPath: \(indexPath)")
         let view = cell.contentView
         view.layer.opacity = 0.4
-        print ("TRiGGERING ANIMATION")
+        //print ("TRiGGERING ANIMATION")
         view.layer.transform = shepTableViewController.cellLoadTransform(cell.layer)
         UIView.animate(withDuration: 0.5, animations: {
             view.layer.transform = CATransform3DIdentity
@@ -376,7 +375,7 @@ class shepTableViewController: UITableViewController, UIPopoverPresentationContr
         //        tableView.rowHeight = UITableViewAutomaticDimension
         tableView.contentSize.height = 150
         
-        navigationItem.title = "Shep's TableView"
+        //navigationItem.title = "JOB LIST VIEW"
         if #available(iOS 11.0, *) {
             navigationController?.navigationBar.prefersLargeTitles = true
         } else {
@@ -400,7 +399,7 @@ class shepTableViewController: UITableViewController, UIPopoverPresentationContr
             redrawTableView()
             shepDataModel.MASTERAnnotationsArrayUpdated = false
         }
-        //print ("TableView ViewWillAppear \n")
+        self.lblFooter.text = shepDataModel.theMASTERAnnotationsArray.isEmpty ? "EMPTY LIST" : "JOB LIST FOOTER (TEMP)"
     }
 }
 
@@ -410,7 +409,7 @@ extension shepTableViewController : TableViewSortingHatDelegate {
     
     func redrawTableView() {
         BigKahunaSectionedArray = allTheSectionsOfData4TVC_struct.handleAllTheSections(whichSort: mySort.rawValue)
-
+        self.lblFooter.text = "(TEMP) JOB LIST FOOTER"
         tableView.reloadData()  // Reloads everything from scratch. Redisplays visible rows. Note that this will cause any existing drop placeholder rows to be removed.
         /*
          The UITableView's reloadData() method is explicitly a force reload of the entire tableView. It works well, but is usually jarring and a bad user experience if you're going to do that with a tableview that the user is currently looking at.

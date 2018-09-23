@@ -8,18 +8,13 @@
 import UIKit
 import MapKit
 
-protocol MAPSCREEN_DetailScreenDelegate: class {
-    func centerMapOnLocation(location: CLLocation)
-}
-
 class shepDetailScreenVC: UITableViewController, UITextFieldDelegate, UITextViewDelegate {
 
     // Model:
     var mySingleAnnotation: ShepSingleAnnotation?
     let myDataModel = shepDataModel()
-    let myMAPSCREEN = MAPSCREEN_VC()
     let mySlideInBounce_AnimTransition = slideInBounce_AnimTransition()
-    weak var myMAPSCREEN_DetailScreenDelegate: MAPSCREEN_DetailScreenDelegate!
+
 
     @IBOutlet weak var myDescriptionTextView: UITextView!
     @IBOutlet weak var myImage1: UIImageView!
@@ -39,23 +34,25 @@ class shepDetailScreenVC: UITableViewController, UITextFieldDelegate, UITextView
     @IBOutlet weak var lblDriveTime: UILabel!
     @IBOutlet weak var lblDriveTime2: UILabel!
     @IBOutlet weak var lblForBelow: UILabel!
+    @IBOutlet weak var myIndex: UILabel!
     
     @IBAction func doDirections(_ sender: Any) {
-        if let location = mySingleAnnotation {
+        if let thisLocation = mySingleAnnotation {
         let launchOptions = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving]
 //        // Note: Explore the MKMapItem documentation to see other launch option dictionary keys,
 //        // and the openMaps(with:launchOptions:) method that lets you pass an array of MKMapItem objects.
-        location.sendMapItemToAppleMaps().openInMaps(launchOptions: launchOptions)
+        thisLocation.sendMapItemToAppleMaps().openInMaps(launchOptions: launchOptions)
         }
     }
     
     @IBAction func goToMAPSCREEN_centerOnPin(_ sender: Any) {
+        let location = CLLocation(latitude: (mySingleAnnotation!.coordinate.latitude), longitude: (mySingleAnnotation!.coordinate.longitude))
+        annotationToCenterOn.myLocation = location
+        annotationToCenterOn.myIndex = mySingleAnnotation?.myOrigIndex
+        print ("in goToMAPSCREEN, myOrigIndex = \(mySingleAnnotation?.myOrigIndex ?? 0)")
         self.tabBarController!.selectedIndex = 0
-        if let thisSingleAnnotation =  mySingleAnnotation, let delegate = myMAPSCREEN_DetailScreenDelegate {
-            let location = CLLocation(latitude: (thisSingleAnnotation.coordinate.latitude), longitude: (thisSingleAnnotation.coordinate.longitude))
-            //myMAPSCREEN.centerMapOnLocation(location: location)
-            delegate.centerMapOnLocation(location: location)
-        }
+        //annotationToCenterOn.myLocation = nil
+        //annotationToCenterOn.myIndex = nil
     }
     
     // MARK: - UITextFieldDelegate
@@ -83,13 +80,9 @@ class shepDetailScreenVC: UITableViewController, UITextFieldDelegate, UITextView
     // MARK: - VC Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Detail View"
-       // myImage1.image = UIImage(named: (mySingleAnnotation?.switchGigIcon())!)
-        myImage2.image = UIImage(named: (mySingleAnnotation?.switchGigIcon())!)
+        title = "JOB DETAIL VIEW"
         myImage1.image = UIImage(named: (mySingleAnnotation?.switchGigIcon())!)
-//        myImage4.image = UIImage(named: (mySingleAnnotation?.switchGigIcon())!)
-//        myImage5.image = UIImage(named: (mySingleAnnotation?.switchGigIcon())!)
-//        myImage6.image = UIImage(named: (mySingleAnnotation?.switchGigIcon())!)
+        myImage2.image = UIImage(named: (mySingleAnnotation?.switchGigIcon())!)
 
         var tempCurrency = myDataModel.shepCurrencyFromDouble(shepNumber : (mySingleAnnotation?.shepDollarValue)!)
         lblPay.text = String(tempCurrency.dropLast(3)) // justTheDollars
@@ -108,17 +101,15 @@ class shepDetailScreenVC: UITableViewController, UITextFieldDelegate, UITextView
         tempCurrency = myDataModel.shepCurrencyFromDouble(shepNumber: myGoldRouteScore)
         lblProfit.text = String(tempCurrency.dropLast(3)) // justTheDollars
         lblProfitCents.text = String(tempCurrency.suffix(2)) // justTheCents
-  
         var temp = mySingleAnnotation!.crowFliesDistance
-        //lblCrowFlies.text = "As Crow Flies:"
         lblCrowFlies2.text = "\(String(format: "%.02f", temp)) miles"
         temp = mySingleAnnotation!.drivingTime
-        //lblDriveTime.text = "Drive Time:"
         lblDriveTime2.text = "\(String(format: "%.02f", temp)) minutes"
         //lblDriveDistance.text = "Drive Distance:"
         lblDriveDistance2.text = "\(String(format: "%.02f", myDrivingDistance)) miles"
         lblStreetAddress.text = mySingleAnnotation?.formattedFullAddress
         myDescriptionTextView.text = mySingleAnnotation!.description
+        myIndex.text = "\(mySingleAnnotation?.myOrigIndex ?? 0)"
         if #available(iOS 11.0, *) {
             self.navigationItem.largeTitleDisplayMode = .never
         } else {
@@ -126,11 +117,13 @@ class shepDetailScreenVC: UITableViewController, UITextFieldDelegate, UITextView
         }
     }
     
-    //    override func viewWillDisappear(_ animated: Bool) {
-    //        shepProductDetail?.title = productTitleLabel.text!
-    //        shepProductDetail?.description = productDescriptionTextView.text
-    //        shepProductDetail?.image = productImageView.image!
-    //    }
+    override func viewWillAppear(_ animated: Bool) {
+        if shepDataModel.MASTERAnnotationsArrayUpdated == true {
+            self.navigationController?.popViewController(animated: true)
+            MainTabController.tableviewDirectionLeft = false
+        }
+    }
+    
 }
 
 

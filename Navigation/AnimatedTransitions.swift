@@ -102,11 +102,11 @@ class upFromBottom_AnimTrnsition: NSObject, UIViewControllerAnimatedTransitionin
         let finalFrameForVC = transitionContext.finalFrame(for: toViewController)
         let containerView = transitionContext.containerView
         let bounds = UIScreen.main.bounds
-        //toViewController.view.frame = finalFrameForVC.offsetBy(dx: 0, dy: -bounds.size.height)  // this makes it drop down
-        toViewController.view.frame = finalFrameForVC.offsetBy(dx: 0, dy: bounds.size.height) // this makes it rise from the bottom
+        toViewController.view.frame = finalFrameForVC.offsetBy(dx: 0, dy: -bounds.size.height)  // this makes it drop down
+        //toViewController.view.frame = finalFrameForVC.offsetBy(dx: 0, dy: bounds.size.height) // this makes it rise from the bottom
         containerView.addSubview(toViewController.view)
         
-        UIView.animate(withDuration: transitionDuration(using: transitionContext), delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 0.0, options: .curveLinear, animations: {
+        UIView.animate(withDuration: transitionDuration(using: transitionContext), delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.0, animations: {
             fromViewController.view.alpha = 0.5
             toViewController.view.frame = finalFrameForVC
         }, completion: {
@@ -117,7 +117,7 @@ class upFromBottom_AnimTrnsition: NSObject, UIViewControllerAnimatedTransitionin
     }
     
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return 0.5
+        return 1.0
     }
 }
 

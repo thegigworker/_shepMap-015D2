@@ -42,6 +42,7 @@ extension MAPSCREEN_VC : DataModelMapScreenDelegate, UIPopoverPresentationContro
         if doTheSearchAgain == true && shepDataModel.theMASTERAnnotationsArray.count > 0 { // do two searches before showAnnotations
             doTheSearchAgain = false
         } else {
+            //doTheSearchAgain = false
             doTheSearchAgain = true
             //myMapView.addAnnotations(validSearchResults)
             shepMapView.showAnnotations(shepDataModel.theMASTERAnnotationsArray, animated: true)
@@ -159,9 +160,6 @@ extension MAPSCREEN_VC : DataModelMapScreenDelegate, UIPopoverPresentationContro
             self.twirlMenuIsUntwirled = false
         }, completion: nil)
         
-//        RouteDataView.alpha = 0.0
-//        theGoldRouteView.alpha = 0.0
-        
         GigIconsBackdrop.alpha = 0.0
     }
     
@@ -252,12 +250,15 @@ extension MAPSCREEN_VC : DataModelMapScreenDelegate, UIPopoverPresentationContro
      If the plotted route is not the first, set the map's visible area to the union of the new and old visible map areas with 10 extra points of padding.
      */
     
-    //MARK: - MAPSCREEN_DetailScreenDelegate function
     func centerMapOnLocation(location: CLLocation) {
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, myDataModel.currentDisplayDistance * 2, myDataModel.currentDisplayDistance * 2)
         if let myMapView = shepMapView {
             myMapView.setRegion(coordinateRegion, animated: true)
+//            if myMapView.annotations.isEmpty == false {
+//                myMapView.selectAnnotation(myMapView.annotations[1], animated: true)
+//            }
         }
+        
     }
     
     // ????

@@ -23,16 +23,27 @@ import os.log
 //However, the unified logging system gives you more control over when messages appear and how they are saved.
 //For more information on the unified logging system, see Logging Reference.
 
+struct annotationToCenterOn {
+    static var myLocation: CLLocation?
+    static var myIndex: Int?
+}
 
-class MAPSCREEN_VC: UIViewController, MKMapViewDelegate, MAPSCREEN_DetailScreenDelegate {
+class MAPSCREEN_VC: UIViewController, MKMapViewDelegate {
     
     //MARK: - Properties
     let myDataModel = shepDataModel()
-    
     var twirlMenuIsUntwirled: Bool = false
     var searchDistanceCircle:MKCircle!
     var doTheSearchAgain = true
+    //var doTheSearchAgain = false
     var myChosenGoldAnnotation : ShepSingleAnnotation?
+    //static var locationToCenter: CLLocation? = nil
+    //static var annotationIndex: Int? = nil
+    
+//    struct locationToCenter {
+//        static var myLocation: CLLocation?
+//        static var myIndex: Int?
+//    }
     
     //MARK: - @IBActions
     
@@ -148,7 +159,7 @@ class MAPSCREEN_VC: UIViewController, MKMapViewDelegate, MAPSCREEN_DetailScreenD
     @IBAction func btnGigwalkClick(_ sender: AnyObject) {
         myGigSource = GigSource.GigWalk
         myDataModel.buildMASTERAnnotationsArrayViaAppleLocalSearch (searchString: "Target")
-        myDataModel.buildMASTERAnnotationsArrayViaAppleLocalSearch (searchString: "Walmart")
+       myDataModel.buildMASTERAnnotationsArrayViaAppleLocalSearch (searchString: "Walmart")
         resetTwirlButtons()
     }
     
@@ -184,7 +195,7 @@ class MAPSCREEN_VC: UIViewController, MKMapViewDelegate, MAPSCREEN_DetailScreenD
     @IBAction func btnTaskRabbit(_ sender: AnyObject) {
         myGigSource = GigSource.TaskRabbit
         myDataModel.buildMASTERAnnotationsArrayViaAppleLocalSearch (searchString: "pizza")
-        myDataModel.buildMASTERAnnotationsArrayViaAppleLocalSearch (searchString: "bbq")
+       myDataModel.buildMASTERAnnotationsArrayViaAppleLocalSearch (searchString: "bbq")
 
         resetTwirlButtons()
     }
@@ -252,24 +263,9 @@ class MAPSCREEN_VC: UIViewController, MKMapViewDelegate, MAPSCREEN_DetailScreenD
         // "Setting ViewController as the delegate of the map view.  You can do this in Main.storyboard, but I prefer to do it in code, where it’s more visible."
         shepMapView.delegate = self
         
-        //        print ("in **viewDidLoad** theMASTERAnnotationsArray count is \(myDataModel.theMASTERAnnotationsArray.count) \n")
-        //        print ("in ***viewDidLoad BEFORE SEARCH Current search distance: \(meters2miles(meters: myDataModel.currentSearchDistance))")
-       // myDataModel.buildMASTERAnnotationsArrayViaAppleLocalSearch(searchString: "park")
-        //        print ("in viewDidLoad AFTER SEARCH theMASTERAnnotationsArray count is \(myDataModel.theMASTERAnnotationsArray.count)")
-        //        print ("in ***viewDidLoad AFTER SEARCH Current search distance: \(meters2miles(meters: myDataModel.currentSearchDistance))")
-        
         setupUserTrackingButtonAndScaleView()
         registerAnnotationViewClasses()
         centerMapOnLocation(location: shepDataModel.myUserLocation)
-        
-//        btnGigWalk.layer.cornerRadius = 10
-//        btnEasyShift.layer.cornerRadius = 10
-//        btnTaskRabbit.layer.cornerRadius = 10
-//        btnFieldAgent.layer.cornerRadius = 10
-//        btnTwirlMenu.layer.cornerRadius = 10
-//        btnMobee.layer.cornerRadius = 10
-//        btnSafari.layer.cornerRadius = 10
-        
         DisplayDistanceSlider.value = Float(shepDataModel.initialDisplay)
         print ("initialDisplay is: \(shepDataModel.initialDisplay)")
 
@@ -282,15 +278,24 @@ class MAPSCREEN_VC: UIViewController, MKMapViewDelegate, MAPSCREEN_DetailScreenD
         }, completion: nil)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        if let myLocationToCenter = annotationToCenterOn.myLocation {
+            centerMapOnLocation(location: myLocationToCenter)
+            print ("In viewWillAppear myIndextoCenterOn: \(annotationToCenterOn.myIndex!)")
+            annotationToCenterOn.myLocation = nil
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+//        if let myAnnotationIndex = annotationToCenterOn.myIndex {
+//            shepMapView.selectAnnotation(shepMapView.annotations[myAnnotationIndex], animated: true)
+//            print ("In viewDidAppear myIndextoCenterOn: \(annotationToCenterOn.myIndex!)")
+//            annotationToCenterOn.myIndex = nil
+//        }
+    }
+    
     //MARK: - @IBOutlets
     @IBOutlet weak var shepMapView: MKMapView!
-    //    @IBOutlet weak var myMapView: MKMapView! {
-    //        didSet {
-    //            myMapView.mapType = .hybrid
-    //            myMapView.delegate = self
-    //        }
-    //    }
-    
     @IBOutlet weak var GigIconsBackdrop: UIView!
     @IBOutlet weak var btnGigWalk: UIButton!
     @IBOutlet weak var lblGigwalk: UILabel!

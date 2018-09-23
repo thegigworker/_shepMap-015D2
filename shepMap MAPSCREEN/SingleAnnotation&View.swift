@@ -24,7 +24,7 @@ enum GigSource: String {
 //To create your own annotations, you create a class that conforms to the MKAnnotation protocol, add the annotation to the map,
 //and inform the map how the annotation should be displayed.
 class ShepSingleAnnotation: NSObject, MKAnnotation {
-    init(myMapItem: MKMapItem, currentLinkedRoute: MKRoute, shepDollarValue: Double, myGigSource: GigSource) {
+    init(myMapItem: MKMapItem, currentLinkedRoute: MKRoute, shepDollarValue: Double, myGigSource: GigSource, myOrigIndex: Int) {
         self.mapItem_Name = myMapItem.name ?? "No Title"
         //self.locationName = myMapItem.name! //searchResult.description
         self.shepDollarValue = shepDollarValue
@@ -38,6 +38,7 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
         let longitude = myMapItem.placemark.coordinate.longitude
         self.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         self.myGigSource = myGigSource
+        self.myOrigIndex = myOrigIndex
         super.init()
     }
     
@@ -50,6 +51,7 @@ class ShepSingleAnnotation: NSObject, MKAnnotation {
     var currentLinkedRoute: MKRoute
     var crowFliesDistance: Double = 0.0
     var myGigSource : GigSource
+    let myOrigIndex : Int
     
     //   The MKAnnotation protocol requires the coordinate property. If you want your annotation view to display a title and subtitle when the user taps a pin,
     //   your class also needs properties named title and subtitle.

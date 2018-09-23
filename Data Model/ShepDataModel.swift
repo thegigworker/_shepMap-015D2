@@ -43,6 +43,7 @@ class shepDataModel: NSObject {
     var currentTransportType = MKDirectionsTransportType.automobile
     var validSearchResultsArray = [ShepSingleAnnotation]()
     var howManySearchItemsFound = 0
+    var myOrigIndex = 0
     var currentSearchDistance = CLLocationDistance(miles2meters(miles: initialSearch))
     var currentDisplayDistance = CLLocationDistance(miles2meters(miles: initialDisplay))
     var currentRoute = MKRoute()
@@ -191,16 +192,19 @@ class shepDataModel: NSObject {
         let request = MKLocalSearchRequest()
         request.naturalLanguageQuery = searchString
         validSearchResultsArray = [ShepSingleAnnotation]()
+        myOrigIndex = shepDataModel.theMASTERAnnotationsArray.count
+        print ("myOrigIndex starts out = \(self.myOrigIndex)")
         /////////  CONVERSION FROM COORDINATES INTO MKMAPITEM
         let homeLocationCoord = shepDataModel.myUserLocation.coordinate
         let homeLocationPlacemark = MKPlacemark(coordinate: CLLocationCoordinate2DMake(homeLocationCoord.latitude, homeLocationCoord.longitude), addressDictionary: nil)
         let homeLocationMapItem = MKMapItem(placemark: homeLocationPlacemark)
         /////////  THEN MAKE ANNOTATION FROM MKMAPITEM
-        let homeLocationAnnotation = ShepSingleAnnotation(myMapItem: homeLocationMapItem, currentLinkedRoute: MKRoute(), shepDollarValue: 0.0, myGigSource: myGigSource!)
+        let homeLocationAnnotation = ShepSingleAnnotation(myMapItem: homeLocationMapItem, currentLinkedRoute: MKRoute(), shepDollarValue: 0.0, myGigSource: myGigSource!, myOrigIndex: 0)
+        print ("Inside buildMASTERAnnotationsArray_1, myOrigIndex = \(myOrigIndex)")
+        myOrigIndex += 1
         
         // 搜索当前区域
         // print ("in performLocalSearch searchRegion search distance: \(meters2miles(meters: self.currentSearchDistanceX))")
-       // let temp = CLLocationCoordinate2DMake(THOMPSON_GPS.latitude, THOMPSON_GPS.longitude)
         let searchRegion1 = MKCoordinateRegionMakeWithDistance(shepDataModel.myUserLocation.coordinate, currentSearchDistance, currentSearchDistance)
         request.region = searchRegion1
         //request.region = myMapView.region
@@ -245,11 +249,12 @@ class shepDataModel: NSObject {
                     } else {
                         self.howManySearchItemsFound += 1
                         let shepDollarValue = Double(arc4random_uniform(100) + 1)
-                        let validResult = ShepSingleAnnotation(myMapItem: item, currentLinkedRoute: MKRoute(), shepDollarValue: shepDollarValue, myGigSource: myGigSource!)
-                        //print ("The validSearchResultsArray.count = \(self.validSearchResultsArray.count)")
+                        let validResult = ShepSingleAnnotation(myMapItem: item, currentLinkedRoute: MKRoute(), shepDollarValue: shepDollarValue, myGigSource: myGigSource!, myOrigIndex: self.myOrigIndex)
+                        print ("Inside buildMASTERAnnotationsArray_2, myOrigIndex = \(self.myOrigIndex)")
+                        self.myOrigIndex += 1
                         self.validSearchResultsArray.append(validResult)
                         print ("We just found a valid search result, validSearchResultsArray.count = \(self.validSearchResultsArray.count)")
-                        print ("We just found a valid search result, now calling getRouteInfoVia2Annotations")
+                        //print ("We just found a valid search result, now calling getRouteInfoVia2Annotations")
                         self.getRouteInfoFromAppleVia2Annotations(source: homeLocationAnnotation, destination: validResult)
                         //self.getRouteInfoFromAppleViaLocation(sourceLocation: sourceLocation, destinationAnnotation: validResult)
                     }

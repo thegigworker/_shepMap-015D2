@@ -69,6 +69,22 @@ Note the class modifier in front of func. Of course, this means you can't access
  */
 
 
+// CONVERT INT TO STRING
+//to convert an Int to String:
+//      let text = "\(myInt)"
+//to convert OPTIONAL Integers to Strings:
+//      String(describing:YourInteger ?? 0)
+
+
+
+//TIME INTERVAL
+//let start = Date()
+//[code]
+//let end = Date()
+//print(“Elapsed Time: \(end.timeIntervalSince(start))”)
+
+
+
 /* TERNARY CONDITIONAL OPERATORS are a shorthand way of making something equal one thing or another based on a true or false condition
      something =  condition ? expression : expression
  
