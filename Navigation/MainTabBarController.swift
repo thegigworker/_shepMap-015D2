@@ -10,6 +10,7 @@ class MainTabController : UITabBarController, UITabBarControllerDelegate {
     
 static var tabBarTransitionDirectionLeft: Bool = false
 static var tableviewDirectionLeft: Bool = false
+static var debugScreenDirectionLeft: Bool = false
     
 //    let myDropDownBounceTransitionAnimControl = dropDownBounce_AnimTrnsition()
 //    let myShrinkDownTransitionAnimControl = shrinkDown_AnimTransition()
@@ -18,16 +19,17 @@ static var tableviewDirectionLeft: Bool = false
 //    let mySlideDownFromCorner_AnimTransition = SlideDownFromCorner_AnimTransition()
     let myInverseRotatingCUBE_AnimTransition = inverseRotatingCube_AnimTransition()
     let myUpFromBottom_AnimTransition = upFromBottom_AnimTrnsition()
-    //let mySlideInBounce_AnimTransition = slideInBounce_AnimTransition()
+    let mySlideInBounce_AnimTransition2 = slideInBounce_AnimTransition2()
     
     func tabBarController(_ tabBarController: UITabBarController, animationControllerForTransitionFrom fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         
         let fromVCIndex = tabBarController.childViewControllers.index(of: fromVC)!
         let toVCIndex = tabBarController.childViewControllers.index(of: toVC)!
         
-        if fromVCIndex == 3 { // if coming from Debug screen, transition LEFT, exit
-            MainTabController.tabBarTransitionDirectionLeft = true
-            return myInverseRotatingCUBE_AnimTransition
+        if fromVCIndex == 3 { // if coming from Debug screen, slide LEFT, exit
+            //MainTabController.tabBarTransitionDirectionLeft = true
+            MainTabController.debugScreenDirectionLeft = !MainTabController.debugScreenDirectionLeft
+            return mySlideInBounce_AnimTransition2
         }
         
         if toVCIndex == 0 { // to MAPSCREEN
@@ -41,9 +43,8 @@ static var tableviewDirectionLeft: Bool = false
         } else if toVCIndex == 2 { // to Charts
             MainTabController.tabBarTransitionDirectionLeft = false
         } else if toVCIndex == 3 { // to DEBUG screen
-            return myUpFromBottom_AnimTransition
-//            let mySearchRadiusViewController: searchRadiusViewController = segue.destination as! searchRadiusViewController
-//            mySearchRadiusViewController.mySearchDistanceSliderDelegate = self
+            MainTabController.debugScreenDirectionLeft = !MainTabController.debugScreenDirectionLeft
+            return mySlideInBounce_AnimTransition2
         }
         
         //return myOtherSlideDownFromCorner_AnimTransition

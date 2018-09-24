@@ -16,7 +16,7 @@ class searchRadiusViewController: UIViewController, UIPopoverPresentationControl
     //let myMAPSCREEN_VC = MAPSCREEN_VC()
     //let myDataModel = shepDataModel()
     weak var mySearchDistanceSliderDelegate : SearchDistanceSliderDelegate!
-    var openingSearchDistanceSliderValue: Float = 0.0
+    static var openingSearchDistanceSliderValue: Float = 0.0
 
     @IBOutlet weak var SearchDistanceSlider: UISlider!
     @IBOutlet weak var SearchRadiusText: UILabel!
@@ -45,8 +45,8 @@ class searchRadiusViewController: UIViewController, UIPopoverPresentationControl
         super.viewDidLoad()
          //print ("searchRadiusViewController viewDidAppear")
         // Do any additional setup after loading the view, typically from a nib.
-        SearchDistanceSlider.value = openingSearchDistanceSliderValue
-        print ("in ViewDidLoad, myDataModel.currentSearchDistance: \(openingSearchDistanceSliderValue))")
+        SearchDistanceSlider.value = searchRadiusViewController.openingSearchDistanceSliderValue
+        print ("in ViewDidLoad, myDataModel.currentSearchDistance: \(searchRadiusViewController.openingSearchDistanceSliderValue))")
         let value = SearchDistanceSlider.value
         mySearchDistanceSliderDelegate.drawSearchDistanceCircle(searchDistance: miles2meters(miles: Double(value)))
         SearchRadiusText.text = String(format: "%.01f", value) + " mi."

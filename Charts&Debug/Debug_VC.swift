@@ -34,6 +34,15 @@ class DebugViewController : UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func changeCentsPerMile(_ sender: Any) {
+        let myCentsPerMile: String = txtCentsPerMile.text!
+        if myCentsPerMile.count > 3 {
+            //let twoDigits = String(myCentsPerMile.prefix(2))
+            txtCentsPerMile.text = String(myCentsPerMile.prefix(3))
+        }
+    }
+    
+    @IBOutlet weak var txtCentsPerMile: UITextField!
     @IBOutlet weak var RouteDataView: UIView!
     @IBOutlet weak var theGoldRouteView: UIView!
     @IBOutlet weak var lblCrowFlies: UILabel!

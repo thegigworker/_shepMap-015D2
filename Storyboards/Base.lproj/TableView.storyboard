@@ -587,13 +587,6 @@
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </view>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Index" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kb7-9B-jZv" userLabel="Index">
-                                    <rect key="frame" x="342" y="568" width="32" height="39"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="alfred_e 1024" translatesAutoresizingMaskIntoConstraints="NO" id="zYt-Kf-EDF" userLabel="Alfred E pict" customClass="UIImageViewX" customModule="shepMap_020" customModuleProvider="target">
                                     <rect key="frame" x="280" y="654" width="36" height="36"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -631,7 +624,6 @@
                         <outlet property="myDescriptionTextView" destination="Wlb-ii-G4L" id="LOn-ov-Ihk"/>
                         <outlet property="myImage1" destination="2ZP-dy-iS4" id="YBk-tm-fib"/>
                         <outlet property="myImage2" destination="dUv-Pc-8EU" id="QDP-dC-2eF"/>
-                        <outlet property="myIndex" destination="Kb7-9B-jZv" id="05e-9s-sf6"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0q6-Y1-goN" userLabel="First Responder" sceneMemberID="firstResponder"/>

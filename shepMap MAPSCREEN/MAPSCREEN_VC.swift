@@ -32,11 +32,11 @@ class MAPSCREEN_VC: UIViewController, MKMapViewDelegate {
     
     //MARK: - Properties
     let myDataModel = shepDataModel()
-    var twirlMenuIsUntwirled: Bool = false
-    var searchDistanceCircle:MKCircle!
-    var doTheSearchAgain = true
+    static var twirlMenuIsUntwirled: Bool = false
+    static var searchDistanceCircle:MKCircle!
+    static var doTheSearchAgain = true
     //var doTheSearchAgain = false
-    var myChosenGoldAnnotation : ShepSingleAnnotation?
+    static var myChosenGoldAnnotation : ShepSingleAnnotation?
     //static var locationToCenter: CLLocation? = nil
     //static var annotationIndex: Int? = nil
     
@@ -50,8 +50,8 @@ class MAPSCREEN_VC: UIViewController, MKMapViewDelegate {
     @IBAction func DisplayDistanceSliderMoved(_ sender: UISlider) {
         // Get Float value from Slider when it is moved.
         let value = DisplayDistanceSlider.value * 2
-        myDataModel.currentDisplayDistance = miles2meters(miles: Double(value))
-        let mapRegion1 = MKCoordinateRegionMakeWithDistance(shepMapView.centerCoordinate, myDataModel.currentDisplayDistance, myDataModel.currentDisplayDistance)
+        shepDataModel.currentDisplayDistance = miles2meters(miles: Double(value))
+        let mapRegion1 = MKCoordinateRegionMakeWithDistance(shepMapView.centerCoordinate, shepDataModel.currentDisplayDistance, shepDataModel.currentDisplayDistance)
         shepMapView.setRegion(mapRegion1, animated: true)
     }
     
@@ -69,7 +69,7 @@ class MAPSCREEN_VC: UIViewController, MKMapViewDelegate {
         shepMapView.removeOverlays(shepMapView.overlays)
         shepMapView.removeAnnotations(shepMapView.annotations)
         //myMAPSCREENRouteInfo = .None
-        myDataModel.whichRouteStyle = ""
+        shepDataModel.whichRouteStyle = ""
         shepDataModel.theMASTERAnnotationsArray.removeAll()
         shepDataModel.MASTERAnnotationsArrayUpdated = true
         labelInfo_struct.myDataView = .None
@@ -94,9 +94,9 @@ class MAPSCREEN_VC: UIViewController, MKMapViewDelegate {
         let sourceAnnotation = Int(arc4random_uniform(howMany))
         let destinationItem = Int(arc4random_uniform(howMany))
         if sourceAnnotation != destinationItem {
-            myDataModel.whichRouteStyle = "route"
+            shepDataModel.whichRouteStyle = "route"
             //print ("thisisCrowFliesDistanceInMiles:  \(myRouteData.thisisCrowFliesDistanceInMiles)")
-            myDataModel.howManyRouteInfosCompleted = 0
+           shepDataModel.howManyRouteInfosCompleted = 0
             myDataModel.getRouteInfoFromAppleVia2Annotations(source: shepDataModel.theMASTERAnnotationsArray[sourceAnnotation], destination: shepDataModel.theMASTERAnnotationsArray[destinationItem])
             labelInfo_struct.myDataView = .RouteInfo
         } else { print ("\n source and destination are the same \n") }
@@ -114,14 +114,14 @@ class MAPSCREEN_VC: UIViewController, MKMapViewDelegate {
             return
         }
         
-        myChosenGoldAnnotation = myDataModel.choosetheGoldRoute()
-        myDataModel.whichRouteStyle = "gold"
-        drawNewRoute(thisRoute: (myChosenGoldAnnotation?.currentLinkedRoute)!)
+        MAPSCREEN_VC.myChosenGoldAnnotation = myDataModel.choosetheGoldRoute()
+        shepDataModel.whichRouteStyle = "gold"
+        drawNewRoute(thisRoute: (MAPSCREEN_VC.myChosenGoldAnnotation?.currentLinkedRoute)!)
         
-        let myTitle = myChosenGoldAnnotation?.title
-        let myDrivingDistance = myChosenGoldAnnotation?.routeDrivingDistance
-        let routeExpense : Double = (myDrivingDistance)! * Double(myDataModel.centsPerMileExpense)/100
-        let myGoldRouteScore = myChosenGoldAnnotation?.routeProfit
+        let myTitle = MAPSCREEN_VC.myChosenGoldAnnotation?.title
+        let myDrivingDistance = MAPSCREEN_VC.myChosenGoldAnnotation?.routeDrivingDistance
+        let routeExpense : Double = (myDrivingDistance)! * Double(shepDataModel.centsPerMileExpense)/100
+        let myGoldRouteScore = MAPSCREEN_VC.myChosenGoldAnnotation?.routeProfit
 
         labelInfo_struct.lblPay = "GROSS PAY:         \(String(describing: myTitle!))"
         labelInfo_struct.lblExpense = "EXPENSE:             \(myDataModel.shepCurrencyFromDouble(shepNumber: routeExpense))  (60¢ / mile)"
@@ -131,7 +131,7 @@ class MAPSCREEN_VC: UIViewController, MKMapViewDelegate {
     
     //MARK: - @IBActions re twirl button
     @IBAction func twirlButtonTapped(_ sender: AnyObject) {
-        if twirlMenuIsUntwirled == false {
+        if MAPSCREEN_VC.twirlMenuIsUntwirled == false {
         
         UIView.animate(withDuration: 0.1, delay: 0.05, options: UIViewAnimationOptions.curveEaseOut, animations: {
             self.btnTwirlMenu.transform = CGAffineTransform(rotationAngle: 0)
@@ -148,7 +148,7 @@ class MAPSCREEN_VC: UIViewController, MKMapViewDelegate {
             self.btnTaskRabbit.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: 160, y: 275))
             self.btnMobee.alpha = 1.0
             self.btnMobee.transform = CGAffineTransform(scaleX: 1.5, y: 1.5).concatenating(CGAffineTransform(translationX: 260, y: 275))
-            self.twirlMenuIsUntwirled = true
+            MAPSCREEN_VC.twirlMenuIsUntwirled = true
         }, completion: nil)
             self.GigIconsBackdrop.alpha = 0.8
         } else {
@@ -281,8 +281,8 @@ class MAPSCREEN_VC: UIViewController, MKMapViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         // if there's an annotationToCenterOn.myLocation, then zoom the map to there
         if let myLocationToCenter = annotationToCenterOn.myLocation {
-            myDataModel.currentDisplayDistance = miles2meters(miles: Double(1))
-            let getClose = myDataModel.currentDisplayDistance
+            shepDataModel.currentDisplayDistance = miles2meters(miles: Double(1))
+            let getClose = shepDataModel.currentDisplayDistance
             let mapRegion1 = MKCoordinateRegionMakeWithDistance(shepMapView.centerCoordinate, getClose, getClose)
             shepMapView.setRegion(mapRegion1, animated: true)
             centerMapOnLocation(location: myLocationToCenter)

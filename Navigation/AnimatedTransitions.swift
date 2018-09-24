@@ -157,6 +157,43 @@ class slideInBounce_AnimTransition: NSObject, UIViewControllerAnimatedTransition
     }
 }
 
+class slideInBounce_AnimTransition2: NSObject, UIViewControllerAnimatedTransitioning {
+    // NOTE: Line of code change below to make this rise from the bottom w bounce
+    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+        
+        let fromViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from)!
+        let toViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to)!
+        let finalFrameForVC = transitionContext.finalFrame(for: toViewController)
+        let containerView = transitionContext.containerView
+        let bounds = UIScreen.main.bounds
+        //static var transitionDirectionLeft: Bool = false
+        if MainTabController.debugScreenDirectionLeft == false {
+            //toViewController.view.frame = finalFrameForVC.offsetBy(dx: 0, dy: -bounds.size.height)  // this makes it drop down
+            toViewController.view.frame = finalFrameForVC.offsetBy(dx: -bounds.size.width, dy: 0)
+        } else {
+            //toViewController.view.frame = finalFrameForVC.offsetBy(dx: 0, dy: bounds.size.height) // this makes it rise from the bottom
+            toViewController.view.frame = finalFrameForVC.offsetBy(dx: bounds.size.width, dy: 0)
+        }
+        //toViewController.view.frame = finalFrameForVC.offsetBy(dx: 0, dy: -bounds.size.height)  // this makes it drop down
+        //toViewController.view.frame = finalFrameForVC.offsetBy(dx: 0, dy: bounds.size.height) // this makes it rise from the bottom
+        containerView.addSubview(toViewController.view)
+        
+        UIView.animate(withDuration: transitionDuration(using: transitionContext), delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.0, animations: {
+            fromViewController.view.alpha = 0.5
+            toViewController.view.frame = finalFrameForVC
+        }, completion: {
+            finished in
+            transitionContext.completeTransition(true)
+            fromViewController.view.alpha = 1.0
+        })
+    }
+    
+    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
+        return 1.0
+    }
+}
+
+
 //class dropDownBounce_AnimTrnsition: NSObject, UIViewControllerAnimatedTransitioning {
 //    // NOTE: Line of code change below to make this rise from the bottom w bounce
 //    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {

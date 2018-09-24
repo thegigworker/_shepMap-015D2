@@ -88,7 +88,7 @@ class shepDetailScreenVC: UITableViewController, UITextFieldDelegate, UITextView
         
         let myDrivingDistance = mySingleAnnotation!.routeDrivingDistance
         
-        let routeExpense : Double = myDrivingDistance * Double(myDataModel.centsPerMileExpense)/100
+        let routeExpense : Double = myDrivingDistance * Double(shepDataModel.centsPerMileExpense)/100
         tempCurrency = myDataModel.shepCurrencyFromDouble(shepNumber: routeExpense)
         lblExpense.text = String(tempCurrency.dropLast(3)) // justTheDollars
         lblExpenseCents.text = String(tempCurrency.suffix(2)) // justTheCents
@@ -105,7 +105,7 @@ class shepDetailScreenVC: UITableViewController, UITextFieldDelegate, UITextView
         lblDriveDistance2.text = "\(String(format: "%.02f", myDrivingDistance)) miles"
         lblStreetAddress.text = mySingleAnnotation?.formattedFullAddress
         myDescriptionTextView.text = mySingleAnnotation!.description
-        myIndex.text = "\(mySingleAnnotation?.myOrigIndex ?? 0)"
+        //myIndex.text = "\(mySingleAnnotation?.myOrigIndex ?? 0)"
         if #available(iOS 11.0, *) {
             self.navigationItem.largeTitleDisplayMode = .never
         } else {

@@ -37,13 +37,13 @@ extension MAPSCREEN_VC : DataModelMapScreenDelegate, UIPopoverPresentationContro
         print ("In showValidSearchResults, showValidSearchResults count was: \(validSearchResults.count)")
         print ("In showValidSearchResults, myDataModel.theMASTERAnnotationsArray count was: \(shepDataModel.theMASTERAnnotationsArray.count)")
         //myMapView.addAnnotations(validSearchResults)
-        print ("in showValidSearchResults and doTheSearchAgain == \(doTheSearchAgain)")
+        print ("in showValidSearchResults and doTheSearchAgain == \(MAPSCREEN_VC.doTheSearchAgain)")
         print ("in showValidSearchResults and myDataModel.theMASTERAnnotationsArray.count == \(shepDataModel.theMASTERAnnotationsArray.count) \n")
-        if doTheSearchAgain == true && shepDataModel.theMASTERAnnotationsArray.count > 0 { // do two searches before showAnnotations
-            doTheSearchAgain = false
+        if MAPSCREEN_VC.doTheSearchAgain == true && shepDataModel.theMASTERAnnotationsArray.count > 0 { // do two searches before showAnnotations
+            MAPSCREEN_VC.doTheSearchAgain = false
         } else {
             //doTheSearchAgain = false
-            doTheSearchAgain = true
+            MAPSCREEN_VC.doTheSearchAgain = true
             //myMapView.addAnnotations(validSearchResults)
             shepMapView.showAnnotations(shepDataModel.theMASTERAnnotationsArray, animated: true)
         }
@@ -51,13 +51,13 @@ extension MAPSCREEN_VC : DataModelMapScreenDelegate, UIPopoverPresentationContro
     
     func drawNewRoute(thisRoute: MKRoute) {
         //print("drawNewRoute: \(thisRoute)")
-        myDataModel.currentRoute = thisRoute
-        print ("\n drawNewRoute.thisRoute:  \(String(describing: myDataModel.currentRoute))\n")
+        shepDataModel.currentRoute = thisRoute
+        print ("\n drawNewRoute.thisRoute:  \(String(describing: shepDataModel.currentRoute))\n")
         shepMapView.removeOverlays(shepMapView.overlays)
-        drawPolyline(theRoute: myDataModel.currentRoute)
+        drawPolyline(theRoute: shepDataModel.currentRoute)
         let drivingDistance = meters2miles(meters: (thisRoute.distance)) // response distance in meters
         let drivingTime = ((thisRoute.expectedTravelTime) / 60)  //expectedTravelTime is in secs
-        labelInfo_struct.lblCrowFlies = "As crow flies :        \(String(format: "%.02f", myDataModel.crowFliesDistance)) miles"
+        labelInfo_struct.lblCrowFlies = "As crow flies :        \(String(format: "%.02f", shepDataModel.crowFliesDistance)) miles"
         labelInfo_struct.lblDrivingDistance = "Driving distance :   \(String(format: "%.02f", drivingDistance)) miles"
         labelInfo_struct.lblDrivingTime = "Driving time :        \(String(format: "%.02f", drivingTime)) minutes"
     }
@@ -81,14 +81,14 @@ extension MAPSCREEN_VC : DataModelMapScreenDelegate, UIPopoverPresentationContro
     func drawSearchDistanceCircle(searchDistance: Double) {
         clearSearchDistanceCircle()
         //if searchDistanceCircle != nil {myMapView.remove(searchDistanceCircle)}
-        myDataModel.currentSearchDistance = searchDistance
-        searchDistanceCircle = MKCircle(center: shepDataModel.myUserLocation.coordinate, radius:CLLocationDistance(myDataModel.currentSearchDistance))
+        shepDataModel.currentSearchDistance = searchDistance
+        MAPSCREEN_VC.searchDistanceCircle = MKCircle(center: shepDataModel.myUserLocation.coordinate, radius:CLLocationDistance(shepDataModel.currentSearchDistance))
         //print ("in drawSearchDistance, myDataModel.currentSearchDistance: \(myDataModel.currentSearchDistance) \n")
-        shepMapView.add(searchDistanceCircle)
+        shepMapView.add(MAPSCREEN_VC.searchDistanceCircle)
     }
     
     func clearSearchDistanceCircle() {
-        if searchDistanceCircle != nil {shepMapView.remove(searchDistanceCircle)}
+        if MAPSCREEN_VC.searchDistanceCircle != nil {shepMapView.remove(MAPSCREEN_VC.searchDistanceCircle)}
     }
     
     
@@ -104,8 +104,8 @@ extension MAPSCREEN_VC : DataModelMapScreenDelegate, UIPopoverPresentationContro
             return circleRenderer
         }
         // not a circle, therefore is MKPolylineRenderer
-        let myLineRenderer = MKPolylineRenderer(polyline: myDataModel.currentRoute.polyline)
-        if myDataModel.whichRouteStyle == "route" {
+        let myLineRenderer = MKPolylineRenderer(polyline: shepDataModel.currentRoute.polyline)
+        if shepDataModel.whichRouteStyle == "route" {
             myLineRenderer.lineWidth = 5
             myLineRenderer.strokeColor = .blue
         } else { // "gold" or anything else right now
@@ -157,7 +157,7 @@ extension MAPSCREEN_VC : DataModelMapScreenDelegate, UIPopoverPresentationContro
             self.btnMobee.transform = CGAffineTransform(scaleX: 1, y: 1).concatenating(CGAffineTransform(translationX: 0, y: 0))
             self.btnSafari.alpha = 0.0
             self.btnSafari.transform = CGAffineTransform(scaleX: 1, y: 1).concatenating(CGAffineTransform(translationX: 0, y: 0))
-            self.twirlMenuIsUntwirled = false
+            MAPSCREEN_VC.twirlMenuIsUntwirled = false
         }, completion: nil)
         
         GigIconsBackdrop.alpha = 0.0
@@ -196,7 +196,7 @@ extension MAPSCREEN_VC : DataModelMapScreenDelegate, UIPopoverPresentationContro
         if segue.identifier == "popoverViewSegue" {
             let mySearchRadiusViewController: searchRadiusViewController = segue.destination as! searchRadiusViewController
             mySearchRadiusViewController.mySearchDistanceSliderDelegate = self
-            mySearchRadiusViewController.openingSearchDistanceSliderValue = Float(meters2miles(meters: (myDataModel.currentSearchDistance)))
+            searchRadiusViewController.openingSearchDistanceSliderValue = Float(meters2miles(meters: (shepDataModel.currentSearchDistance)))
         }
     }
     
@@ -251,7 +251,7 @@ extension MAPSCREEN_VC : DataModelMapScreenDelegate, UIPopoverPresentationContro
      */
     
     func centerMapOnLocation(location: CLLocation) {
-        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, myDataModel.currentDisplayDistance * 2, myDataModel.currentDisplayDistance * 2)
+        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, shepDataModel.currentDisplayDistance * 2, shepDataModel.currentDisplayDistance * 2)
         if let myMapView = shepMapView {
             myMapView.setRegion(coordinateRegion, animated: true)
 //            if myMapView.annotations.isEmpty == false {
