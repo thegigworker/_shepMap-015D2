@@ -279,19 +279,15 @@ class MAPSCREEN_VC: UIViewController, MKMapViewDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        // if there's an annotationToCenterOn.myLocation, then zoom the map to there
         if let myLocationToCenter = annotationToCenterOn.myLocation {
+            myDataModel.currentDisplayDistance = miles2meters(miles: Double(1))
+            let getClose = myDataModel.currentDisplayDistance
+            let mapRegion1 = MKCoordinateRegionMakeWithDistance(shepMapView.centerCoordinate, getClose, getClose)
+            shepMapView.setRegion(mapRegion1, animated: true)
             centerMapOnLocation(location: myLocationToCenter)
-            print ("In viewWillAppear myIndextoCenterOn: \(annotationToCenterOn.myIndex!)")
             annotationToCenterOn.myLocation = nil
         }
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-//        if let myAnnotationIndex = annotationToCenterOn.myIndex {
-//            shepMapView.selectAnnotation(shepMapView.annotations[myAnnotationIndex], animated: true)
-//            print ("In viewDidAppear myIndextoCenterOn: \(annotationToCenterOn.myIndex!)")
-//            annotationToCenterOn.myIndex = nil
-//        }
     }
     
     //MARK: - @IBOutlets

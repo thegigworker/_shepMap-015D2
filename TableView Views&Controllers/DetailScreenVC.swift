@@ -48,11 +48,7 @@ class shepDetailScreenVC: UITableViewController, UITextFieldDelegate, UITextView
     @IBAction func goToMAPSCREEN_centerOnPin(_ sender: Any) {
         let location = CLLocation(latitude: (mySingleAnnotation!.coordinate.latitude), longitude: (mySingleAnnotation!.coordinate.longitude))
         annotationToCenterOn.myLocation = location
-        annotationToCenterOn.myIndex = mySingleAnnotation?.myOrigIndex
-        print ("in goToMAPSCREEN, myOrigIndex = \(mySingleAnnotation?.myOrigIndex ?? 0)")
         self.tabBarController!.selectedIndex = 0
-        //annotationToCenterOn.myLocation = nil
-        //annotationToCenterOn.myIndex = nil
     }
     
     // MARK: - UITextFieldDelegate
