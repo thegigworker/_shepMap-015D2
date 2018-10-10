@@ -61,17 +61,17 @@ class sortingHatPopover: UIViewController, UIPopoverPresentationControllerDelega
         myTableViewSortingHatDelegate.redrawTableView()
     }
     
-    @IBAction func selected_DrivingDistance(_ sender: UIButton) {
+    @IBAction func selected_JobProfit(_ sender: UIButton) {
         clearCheckMarks()
-        mySort = whichSort_enum.DrivingDistance
+        mySort = whichSort_enum.JobProfit
         checkmark2.isHidden = false
         print ("whichSort tapped: \(mySort)")
         myTableViewSortingHatDelegate.redrawTableView()
     }
     
-    @IBAction func selected_JobProfit(_ sender: UIButton) {
+    @IBAction func selected_DrivingDistance(_ sender: UIButton) {
         clearCheckMarks()
-        mySort = whichSort_enum.JobProfit
+        mySort = whichSort_enum.DrivingDistance
         checkmark3.isHidden = false
         print ("whichSort tapped: \(mySort)")
         myTableViewSortingHatDelegate.redrawTableView()
@@ -139,9 +139,9 @@ class sortingHatPopover: UIViewController, UIPopoverPresentationControllerDelega
             checkmark0.isHidden = false
         case .JobPay :
             checkmark1.isHidden = false
-        case .DrivingDistance :
-            checkmark2.isHidden = false
         case .JobProfit :
+            checkmark2.isHidden = false
+        case .DrivingDistance :
             checkmark3.isHidden = false
         case .CrowFliesDistance :
             checkmark4.isHidden = false
