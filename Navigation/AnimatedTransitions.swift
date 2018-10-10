@@ -45,7 +45,8 @@ class inverseRotatingCube_AnimTransition: NSObject, UIViewControllerAnimatedTran
         let fromViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from)!
         let toView = toViewController.view
         let fromView = fromViewController.view
-        let direction: CGFloat = MainTabController.tabBarTransitionDirectionLeft ? -1 : 1
+        //let direction: CGFloat = MainTabController.tabBarTransitionDirectionLeft ? -1 : 1
+        let direction: CGFloat = 1  // I killed MainTabController.tabBarTransitionDirectionLeft, NEED NEW REVERSE METHOD
         let const: CGFloat = -0.005
         
         toView?.layer.anchorPoint = CGPoint(x: direction == 1 ? 0 : 1, y: 0.5)

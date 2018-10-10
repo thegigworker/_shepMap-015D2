@@ -48,12 +48,12 @@ class shepTableViewController: UITableViewController, UIPopoverPresentationContr
     
     @IBOutlet weak var lblFooter: UILabel!
     
-    lazy var BigKahunaSectionedArray: [allTheSectionsOfData4TVC_struct] = {
+    lazy var BigKahunaSectionedArray: [manipulateAllSectionsOfData4TableView_struct] = {
         print("I think I'm first building BigKahunaSectionedArray")
         
         // Line above declares as an array of sectionOfProducts_class
         // then in line below, populates this array by using allSectionsOfData4TVC_class.getAllTheSections method
-        return allTheSectionsOfData4TVC_struct.handleAllTheSections(whichSort: mySort.rawValue)
+        return manipulateAllSectionsOfData4TableView_struct.handleAllTheSections(whichSort: mySort.rawValue)
         //case "distance" : // SINGLE SECTION 1
         //case "title" : // SINGLE SECTION 2
         //case "dollars" : // SINGLE SECTION 3
@@ -399,7 +399,7 @@ class shepTableViewController: UITableViewController, UIPopoverPresentationContr
             redrawTableView()
             shepDataModel.MASTERAnnotationsArrayUpdated = false
         }
-        self.lblFooter.text = shepDataModel.theMASTERAnnotationsArray.isEmpty ? "EMPTY LIST" : "JOB LIST FOOTER (TEMP)"
+        self.lblFooter.text = shepDataModel.theMASTERAnnotationsArray.isEmpty ? "EMPTY LIST" : "JOB LIST FOOTER_temp"
     }
 }
 
@@ -408,8 +408,8 @@ class shepTableViewController: UITableViewController, UIPopoverPresentationContr
 extension shepTableViewController : TableViewSortingHatDelegate {
     
     func redrawTableView() {
-        BigKahunaSectionedArray = allTheSectionsOfData4TVC_struct.handleAllTheSections(whichSort: mySort.rawValue)
-        self.lblFooter.text = "(TEMP) JOB LIST FOOTER"
+        BigKahunaSectionedArray = manipulateAllSectionsOfData4TableView_struct.handleAllTheSections(whichSort: mySort.rawValue)
+        self.lblFooter.text = "JOB LIST FOOTER_temp"
         tableView.reloadData()  // Reloads everything from scratch. Redisplays visible rows. Note that this will cause any existing drop placeholder rows to be removed.
         /*
          The UITableView's reloadData() method is explicitly a force reload of the entire tableView. It works well, but is usually jarring and a bad user experience if you're going to do that with a tableview that the user is currently looking at.

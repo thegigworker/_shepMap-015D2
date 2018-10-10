@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct allTheSectionsOfData4TVC_struct {
+struct manipulateAllSectionsOfData4TableView_struct {
     
     var sectionName: String            // name of the product line
     var oneSectionOfData : [ShepSingleAnnotation]
@@ -18,13 +18,13 @@ struct allTheSectionsOfData4TVC_struct {
         oneSectionOfData = includeItems
     }
     
-    static func handleAllTheSections(whichSort: String) -> [allTheSectionsOfData4TVC_struct] {
+    static func handleAllTheSections(whichSort: String) -> [manipulateAllSectionsOfData4TableView_struct] {
         //let mySingleArray = fakeAnnotationsSingleArray_class.buildSingleTableArray()
         let mySingleArray = shepDataModel.theMASTERAnnotationsArray
         print("theMASTERAnnotationsArray.count =  \(shepDataModel.theMASTERAnnotationsArray.count)")
         print ("mySingleArray.count =  \(mySingleArray.count)")
         
-        var myBigKahunaSectionedArray = [allTheSectionsOfData4TVC_struct]()
+        var myBigKahunaSectionedArray = [manipulateAllSectionsOfData4TableView_struct]()
         
         switch mySort { // mySort.rawValue = String of mySort
         case .JobTitle :
@@ -88,16 +88,16 @@ struct allTheSectionsOfData4TVC_struct {
         return myBigKahunaSectionedArray
     }
     
-    static func doOneSection(sortedSingleArray: [ShepSingleAnnotation], whichSort: String) -> [allTheSectionsOfData4TVC_struct] {
-        var tempBigKahunaSectionedArray = [allTheSectionsOfData4TVC_struct]()
+    static func doOneSection(sortedSingleArray: [ShepSingleAnnotation], whichSort: String) -> [manipulateAllSectionsOfData4TableView_struct] {
+        var tempBigKahunaSectionedArray = [manipulateAllSectionsOfData4TableView_struct]()
         //tempBigKahunaSectionedArray.append (allSectionsOfData4TVC_NEW(named: "ALL ONE SECTION", includeItems: sortedTempSingleArray))
-        tempBigKahunaSectionedArray.append (allTheSectionsOfData4TVC_struct(named: whichSort, includeItems: sortedSingleArray))
+        tempBigKahunaSectionedArray.append (manipulateAllSectionsOfData4TableView_struct(named: whichSort, includeItems: sortedSingleArray))
         print("****  I'm in doOneSection w sort \(whichSort)")
         return tempBigKahunaSectionedArray
     }
     
-    static func doMultipleSections(sortedSingleArray: [ShepSingleAnnotation], whichSort: String) -> [allTheSectionsOfData4TVC_struct] {
-        var tempBigKahunaSectionedArray = [allTheSectionsOfData4TVC_struct]()
+    static func doMultipleSections(sortedSingleArray: [ShepSingleAnnotation], whichSort: String) -> [manipulateAllSectionsOfData4TableView_struct] {
+        var tempBigKahunaSectionedArray = [manipulateAllSectionsOfData4TableView_struct]()
         var oneSectionOfData = [ShepSingleAnnotation]()
         var currentSectionName = ""
         var loopCount = 0
@@ -119,7 +119,7 @@ struct allTheSectionsOfData4TVC_struct {
                 } else { // is new category/section
                     // so append to myBigKahunaSectionedArray and start clean oneSectionOfData
                     //SORT ONE SECTION AT A TIME -- if needed???
-                    tempBigKahunaSectionedArray.append (allTheSectionsOfData4TVC_struct(named: currentSectionName, includeItems: oneSectionOfData))
+                    tempBigKahunaSectionedArray.append (manipulateAllSectionsOfData4TableView_struct(named: currentSectionName, includeItems: oneSectionOfData))
                     oneSectionOfData.removeAll()
                     currentSectionName = thisItemSectionName
                     oneSectionOfData.append(item)
@@ -127,7 +127,7 @@ struct allTheSectionsOfData4TVC_struct {
             }
             if loopCount == sortedSingleArray.count {  // last iteration
                 //SORT ONE SECTION AT A TIME -- if needed???
-                tempBigKahunaSectionedArray.append (allTheSectionsOfData4TVC_struct(named: currentSectionName, includeItems: oneSectionOfData))
+                tempBigKahunaSectionedArray.append (manipulateAllSectionsOfData4TableView_struct(named: currentSectionName, includeItems: oneSectionOfData))
             }
         }
         return tempBigKahunaSectionedArray
