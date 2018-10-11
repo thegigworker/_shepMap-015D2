@@ -50,7 +50,7 @@
 		0270C6DD49C3D9C47D41A7F1 /* Pods-shepMapTARGET.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-shepMapTARGET.release.xcconfig"; path = "Pods/Target Support Files/Pods-shepMapTARGET/Pods-shepMapTARGET.release.xcconfig"; sourceTree = "<group>"; };
 		0DD970DA669F84B850130C3C /* Pods_shepMapTARGET.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_shepMapTARGET.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9424C67FA74FD93F5DA082B2 /* Pods-shepMapTARGET.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-shepMapTARGET.debug.xcconfig"; path = "Pods/Target Support Files/Pods-shepMapTARGET/Pods-shepMapTARGET.debug.xcconfig"; sourceTree = "<group>"; };
-		9F70382B1EA835EB00DA5564 /* shepMap 020.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "shepMap 020.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9F70382B1EA835EB00DA5564 /* shepMap 021.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "shepMap 021.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F7038331EA835EB00DA5564 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MAPSCREEN.storyboard; sourceTree = "<group>"; };
 		9F7038351EA835EB00DA5564 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A101E6CD214B56C6006CD4CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -134,7 +134,7 @@
 		9F70382C1EA835EB00DA5564 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9F70382B1EA835EB00DA5564 /* shepMap 020.app */,
+				9F70382B1EA835EB00DA5564 /* shepMap 021.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -248,7 +248,7 @@
 			);
 			name = shepMapTARGET;
 			productName = Tandm;
-			productReference = 9F70382B1EA835EB00DA5564 /* shepMap 020.app */;
+			productReference = 9F70382B1EA835EB00DA5564 /* shepMap 021.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -568,7 +568,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.tamler.$(PRODUCT_BUNDLE_IDENTIFIER)";
-				PRODUCT_NAME = "shepMap 020";
+				PRODUCT_NAME = "shepMap 021";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
@@ -587,7 +587,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.tamler.$(PRODUCT_BUNDLE_IDENTIFIER)";
-				PRODUCT_NAME = "shepMap 020";
+				PRODUCT_NAME = "shepMap 021";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;

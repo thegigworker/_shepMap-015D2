@@ -278,7 +278,7 @@ class MAPSCREEN_VC: UIViewController, MKMapViewDelegate {
         }, completion: nil)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         // if there's an annotationToCenterOn.myLocation, then zoom the map to there
         if let myLocationToCenter = annotationToCenterOn.myLocation {
             shepDataModel.currentDisplayDistance = miles2meters(miles: Double(1))

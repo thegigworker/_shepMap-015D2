@@ -18,8 +18,8 @@ class MainTabController : UITabBarController, UITabBarControllerDelegate {
     //    let myCrossFade_AnimTransition = CrossFade_AnimTransition()
     //    let myCircularTransition = CircularTransition()
     //    let mySlideDownFromCorner_AnimTransition = SlideDownFromCorner_AnimTransition()
-    let myInverseRotatingCUBE_AnimTransition = inverseRotatingCube_AnimTransition()
-    let myUpFromBottom_AnimTransition = upFromBottom_AnimTrnsition()
+    //let myInverseRotatingCUBE_AnimTransition = inverseRotatingCube_AnimTransition()
+    //let myUpFromBottom_AnimTransition = upFromBottom_AnimTrnsition()
     let mySlideInBounce_AnimTransition2 = slideInBounce_AnimTransition2()
     let myMapFold_AnimTransition = CEFoldAnimationController()
     
