@@ -34,7 +34,7 @@ class shepDetailScreenVC: UITableViewController, UITextFieldDelegate, UITextView
     @IBOutlet weak var lblDriveTime: UILabel!
     @IBOutlet weak var lblDriveTime2: UILabel!
     @IBOutlet weak var lblForBelow: UILabel!
-    @IBOutlet weak var myIndex: UILabel!
+    //@IBOutlet weak var myIndex: UILabel!
     
     @IBAction func doDirections(_ sender: Any) {
         if let thisLocation = mySingleAnnotation {
@@ -77,9 +77,23 @@ class shepDetailScreenVC: UITableViewController, UITextFieldDelegate, UITextView
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "JOB DETAIL VIEW"
+        
+        if #available(iOS 11.0, *) {
+            self.navigationItem.largeTitleDisplayMode = .never
+        } else {
+            // Fallback on earlier versions
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if shepDataModel.MASTERAnnotationsArrayUpdated == true {
+            self.navigationController?.popViewController(animated: true)
+            MainTabController.tableviewDirectionLeft = false
+        }
+        
         myImage1.image = UIImage(named: (mySingleAnnotation?.switchGigIcon())!)
         myImage2.image = UIImage(named: (mySingleAnnotation?.switchGigIcon())!)
-
+        
         var tempCurrency = myDataModel.shepCurrencyFromDouble(shepNumber : (mySingleAnnotation?.shepDollarValue)!)
         lblPay.text = String(tempCurrency.dropLast(3)) // justTheDollars
         lblPayCents.text = String(tempCurrency.suffix(2)) // justTheCents
@@ -101,23 +115,9 @@ class shepDetailScreenVC: UITableViewController, UITextFieldDelegate, UITextView
         lblCrowFlies2.text = "\(String(format: "%.02f", temp)) miles"
         temp = mySingleAnnotation!.drivingTime
         lblDriveTime2.text = "\(String(format: "%.02f", temp)) minutes"
-        //lblDriveDistance.text = "Drive Distance:"
         lblDriveDistance2.text = "\(String(format: "%.02f", myDrivingDistance)) miles"
         lblStreetAddress.text = mySingleAnnotation?.formattedFullAddress
         myDescriptionTextView.text = mySingleAnnotation!.description
-        //myIndex.text = "\(mySingleAnnotation?.myOrigIndex ?? 0)"
-        if #available(iOS 11.0, *) {
-            self.navigationItem.largeTitleDisplayMode = .never
-        } else {
-            // Fallback on earlier versions
-        }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        if shepDataModel.MASTERAnnotationsArrayUpdated == true {
-            self.navigationController?.popViewController(animated: true)
-            MainTabController.tableviewDirectionLeft = false
-        }
     }
     
 }

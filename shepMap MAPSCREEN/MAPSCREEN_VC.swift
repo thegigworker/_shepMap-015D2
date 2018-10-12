@@ -25,10 +25,10 @@ import os.log
 
 struct annotationToCenterOn {
     static var myLocation: CLLocation?
-    static var myIndex: Int?
+    //static var myIndex: Int?
 }
 
-class MAPSCREEN_VC: UIViewController, MKMapViewDelegate {
+class MAPSCREEN_VC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
     //MARK: - Properties
     let myDataModel = shepDataModel()
@@ -37,13 +37,7 @@ class MAPSCREEN_VC: UIViewController, MKMapViewDelegate {
     static var doTheSearchAgain = true
     //var doTheSearchAgain = false
     static var myChosenGoldAnnotation : ShepSingleAnnotation?
-    //static var locationToCenter: CLLocation? = nil
-    //static var annotationIndex: Int? = nil
-    
-//    struct locationToCenter {
-//        static var myLocation: CLLocation?
-//        static var myIndex: Int?
-//    }
+    static var doCenterMapOnUserLocation: Bool = true
     
     //MARK: - @IBActions
     
@@ -211,8 +205,9 @@ class MAPSCREEN_VC: UIViewController, MKMapViewDelegate {
     }()
     
     //    You have to override CLLocationManager.didUpdateLocations (part of CLLocationManagerDelegate) to get notified when the location manager retrieves the current location:
-    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+   func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         // DOESN'T SEEM TO BE GETTING CALLED??
+    //   I BELIEVE THIS IS AN ALTERNATIVE METHOD TO DETECT LOCATION UPDATES, BUT WE'RE USING MAPVIEW.DIDUPDATE INSTEAD
         let currentLocation = locations.last as! CLLocation
         shepDataModel.myUserLocation = currentLocation
         //myUserLocation = CLLocation(latitude: THOMPSON_GPS.latitude, longitude: THOMPSON_GPS.longitude)

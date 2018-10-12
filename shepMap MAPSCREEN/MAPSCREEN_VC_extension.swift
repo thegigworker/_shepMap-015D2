@@ -126,8 +126,12 @@ extension MAPSCREEN_VC : DataModelMapScreenDelegate, UIPopoverPresentationContro
     
     // Updating the Map View based on User Movement
     func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
-        shepMapView.centerCoordinate = userLocation.location!.coordinate
+        if MAPSCREEN_VC.doCenterMapOnUserLocation == true {  // first time through, center map on userlocation, but DON'T center map on userlocation later
+            shepMapView.centerCoordinate = userLocation.location!.coordinate
+            MAPSCREEN_VC.doCenterMapOnUserLocation = false
+        }
         shepDataModel.myUserLocation = shepMapView.userLocation.location!
+        print ("didUpdate userLocation \(shepMapView.userLocation.location!)")
     }
     
     //func mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view NS_AVAILABLE(10_9, 4_0);
